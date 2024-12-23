@@ -4,13 +4,13 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as Splitit from "../../../index";
+import * as Surge from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Messages {
     interface Options {
-        environment?: core.Supplier<environments.SplititEnvironment | string>;
+        environment?: core.Supplier<environments.SurgeEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         /** Override the Surge-Account header */
         surgeAccount?: core.Supplier<string | undefined>;
@@ -37,7 +37,7 @@ export class Messages {
     /**
      * Sends a Message.
      *
-     * @param {Splitit.MessageRequest} request
+     * @param {Surge.MessageRequest} request
      * @param {Messages.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -58,14 +58,14 @@ export class Messages {
      *     })
      */
     public create(
-        request: Splitit.MessageRequest,
+        request: Surge.MessageRequest,
         requestOptions?: Messages.RequestOptions
-    ): core.APIPromise<Splitit.MessageResponse> {
+    ): core.APIPromise<Surge.MessageResponse> {
         return core.APIPromise.from(
             (async () => {
                 const _response = await (this._options.fetcher ?? core.fetcher)({
                     url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SplititEnvironment.Default,
+                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
                         "messages"
                     ),
                     method: "POST",
@@ -94,26 +94,26 @@ export class Messages {
                 if (_response.ok) {
                     return {
                         ok: _response.ok,
-                        body: _response.body as Splitit.MessageResponse,
+                        body: _response.body as Surge.MessageResponse,
                         headers: _response.headers,
                     };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.SplititError({
+                    throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
                 }
                 switch (_response.error.reason) {
                     case "non-json":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             statusCode: _response.error.statusCode,
                             body: _response.error.rawBody,
                         });
                     case "timeout":
-                        throw new errors.SplititTimeoutError("Timeout exceeded when calling POST /messages.");
+                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /messages.");
                     case "unknown":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             message: _response.error.errorMessage,
                         });
                 }

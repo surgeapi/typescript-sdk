@@ -4,13 +4,13 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as Splitit from "../../../index";
+import * as Surge from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Contacts {
     interface Options {
-        environment?: core.Supplier<environments.SplititEnvironment | string>;
+        environment?: core.Supplier<environments.SurgeEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         /** Override the Surge-Account header */
         surgeAccount?: core.Supplier<string | undefined>;
@@ -37,7 +37,7 @@ export class Contacts {
     /**
      * Creates a new Contact object.
      *
-     * @param {Splitit.ContactRequest} request
+     * @param {Surge.ContactRequest} request
      * @param {Contacts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -48,14 +48,14 @@ export class Contacts {
      *     })
      */
     public create(
-        request: Splitit.ContactRequest,
+        request: Surge.ContactRequest,
         requestOptions?: Contacts.RequestOptions
-    ): core.APIPromise<Splitit.ContactResponse> {
+    ): core.APIPromise<Surge.ContactResponse> {
         return core.APIPromise.from(
             (async () => {
                 const _response = await (this._options.fetcher ?? core.fetcher)({
                     url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SplititEnvironment.Default,
+                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
                         "contacts"
                     ),
                     method: "POST",
@@ -84,26 +84,26 @@ export class Contacts {
                 if (_response.ok) {
                     return {
                         ok: _response.ok,
-                        body: _response.body as Splitit.ContactResponse,
+                        body: _response.body as Surge.ContactResponse,
                         headers: _response.headers,
                     };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.SplititError({
+                    throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
                 }
                 switch (_response.error.reason) {
                     case "non-json":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             statusCode: _response.error.statusCode,
                             body: _response.error.rawBody,
                         });
                     case "timeout":
-                        throw new errors.SplititTimeoutError("Timeout exceeded when calling POST /contacts.");
+                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /contacts.");
                     case "unknown":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             message: _response.error.errorMessage,
                         });
                 }
@@ -120,12 +120,12 @@ export class Contacts {
      * @example
      *     await client.contacts.show("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf")
      */
-    public show(id: string, requestOptions?: Contacts.RequestOptions): core.APIPromise<Splitit.ContactResponse> {
+    public show(id: string, requestOptions?: Contacts.RequestOptions): core.APIPromise<Surge.ContactResponse> {
         return core.APIPromise.from(
             (async () => {
                 const _response = await (this._options.fetcher ?? core.fetcher)({
                     url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SplititEnvironment.Default,
+                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
                         `contacts/${encodeURIComponent(id)}`
                     ),
                     method: "GET",
@@ -153,26 +153,26 @@ export class Contacts {
                 if (_response.ok) {
                     return {
                         ok: _response.ok,
-                        body: _response.body as Splitit.ContactResponse,
+                        body: _response.body as Surge.ContactResponse,
                         headers: _response.headers,
                     };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.SplititError({
+                    throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
                 }
                 switch (_response.error.reason) {
                     case "non-json":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             statusCode: _response.error.statusCode,
                             body: _response.error.rawBody,
                         });
                     case "timeout":
-                        throw new errors.SplititTimeoutError("Timeout exceeded when calling GET /contacts/{id}.");
+                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling GET /contacts/{id}.");
                     case "unknown":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             message: _response.error.errorMessage,
                         });
                 }
@@ -189,12 +189,12 @@ export class Contacts {
      * @example
      *     await client.contacts.update("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf")
      */
-    public update(id: string, requestOptions?: Contacts.RequestOptions): core.APIPromise<Splitit.ContactResponse> {
+    public update(id: string, requestOptions?: Contacts.RequestOptions): core.APIPromise<Surge.ContactResponse> {
         return core.APIPromise.from(
             (async () => {
                 const _response = await (this._options.fetcher ?? core.fetcher)({
                     url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SplititEnvironment.Default,
+                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
                         `contacts/${encodeURIComponent(id)}`
                     ),
                     method: "PUT",
@@ -222,26 +222,26 @@ export class Contacts {
                 if (_response.ok) {
                     return {
                         ok: _response.ok,
-                        body: _response.body as Splitit.ContactResponse,
+                        body: _response.body as Surge.ContactResponse,
                         headers: _response.headers,
                     };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.SplititError({
+                    throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
                 }
                 switch (_response.error.reason) {
                     case "non-json":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             statusCode: _response.error.statusCode,
                             body: _response.error.rawBody,
                         });
                     case "timeout":
-                        throw new errors.SplititTimeoutError("Timeout exceeded when calling PUT /contacts/{id}.");
+                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling PUT /contacts/{id}.");
                     case "unknown":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             message: _response.error.errorMessage,
                         });
                 }

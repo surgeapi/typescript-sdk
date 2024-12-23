@@ -1,4 +1,4 @@
-export * as Splitit from "./api";
-export { SplititClient } from "./Client";
-export { SplititEnvironment } from "./environments";
-export { SplititError, SplititTimeoutError } from "./errors";
+export * as Surge from "./api";
+export { SurgeClient } from "./Client";
+export { SurgeEnvironment } from "./environments";
+export { SurgeError, SurgeTimeoutError } from "./errors";

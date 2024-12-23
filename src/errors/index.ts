@@ -1,2 +1,2 @@
-export { SplititError } from "./SplititError";
-export { SplititTimeoutError } from "./SplititTimeoutError";
+export { SurgeError } from "./SurgeError";
+export { SurgeTimeoutError } from "./SurgeTimeoutError";

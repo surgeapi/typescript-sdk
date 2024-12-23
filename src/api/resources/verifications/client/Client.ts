@@ -4,13 +4,13 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as Splitit from "../../../index";
+import * as Surge from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Verifications {
     interface Options {
-        environment?: core.Supplier<environments.SplititEnvironment | string>;
+        environment?: core.Supplier<environments.SurgeEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         /** Override the Surge-Account header */
         surgeAccount?: core.Supplier<string | undefined>;
@@ -37,7 +37,7 @@ export class Verifications {
     /**
      * Creates a new Verification and sends the code to the given phone number.
      *
-     * @param {Splitit.VerificationRequest} request
+     * @param {Surge.VerificationRequest} request
      * @param {Verifications.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -46,14 +46,14 @@ export class Verifications {
      *     })
      */
     public create(
-        request: Splitit.VerificationRequest,
+        request: Surge.VerificationRequest,
         requestOptions?: Verifications.RequestOptions
-    ): core.APIPromise<Splitit.Verification> {
+    ): core.APIPromise<Surge.Verification> {
         return core.APIPromise.from(
             (async () => {
                 const _response = await (this._options.fetcher ?? core.fetcher)({
                     url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SplititEnvironment.Default,
+                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
                         "verifications"
                     ),
                     method: "POST",
@@ -82,26 +82,26 @@ export class Verifications {
                 if (_response.ok) {
                     return {
                         ok: _response.ok,
-                        body: _response.body as Splitit.Verification,
+                        body: _response.body as Surge.Verification,
                         headers: _response.headers,
                     };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.SplititError({
+                    throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
                 }
                 switch (_response.error.reason) {
                     case "non-json":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             statusCode: _response.error.statusCode,
                             body: _response.error.rawBody,
                         });
                     case "timeout":
-                        throw new errors.SplititTimeoutError("Timeout exceeded when calling POST /verifications.");
+                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /verifications.");
                     case "unknown":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             message: _response.error.errorMessage,
                         });
                 }
@@ -113,7 +113,7 @@ export class Verifications {
      * Checks the code against a verification.
      *
      * @param {string} id -
-     * @param {Splitit.VerificationCheckRequest} request
+     * @param {Surge.VerificationCheckRequest} request
      * @param {Verifications.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -123,14 +123,14 @@ export class Verifications {
      */
     public check(
         id: string,
-        request: Splitit.VerificationCheckRequest,
+        request: Surge.VerificationCheckRequest,
         requestOptions?: Verifications.RequestOptions
-    ): core.APIPromise<Splitit.VerificationCheckResponse> {
+    ): core.APIPromise<Surge.VerificationCheckResponse> {
         return core.APIPromise.from(
             (async () => {
                 const _response = await (this._options.fetcher ?? core.fetcher)({
                     url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SplititEnvironment.Default,
+                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
                         `verifications/${encodeURIComponent(id)}/checks`
                     ),
                     method: "POST",
@@ -159,28 +159,28 @@ export class Verifications {
                 if (_response.ok) {
                     return {
                         ok: _response.ok,
-                        body: _response.body as Splitit.VerificationCheckResponse,
+                        body: _response.body as Surge.VerificationCheckResponse,
                         headers: _response.headers,
                     };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.SplititError({
+                    throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
                 }
                 switch (_response.error.reason) {
                     case "non-json":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             statusCode: _response.error.statusCode,
                             body: _response.error.rawBody,
                         });
                     case "timeout":
-                        throw new errors.SplititTimeoutError(
+                        throw new errors.SurgeTimeoutError(
                             "Timeout exceeded when calling POST /verifications/{id}/checks."
                         );
                     case "unknown":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             message: _response.error.errorMessage,
                         });
                 }

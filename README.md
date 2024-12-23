@@ -20,9 +20,9 @@ A full reference for this library is available [here](./reference.md).
 Instantiate and use the client with the following:
 
 ```typescript
-import { SplititClient } from "surge";
+import { SurgeClient } from "surge";
 
-const client = new SplititClient({ token: "YOUR_TOKEN", surgeAccount: "YOUR_SURGE_ACCOUNT" });
+const client = new SurgeClient({ token: "YOUR_TOKEN", surgeAccount: "YOUR_SURGE_ACCOUNT" });
 await client.contacts.create({
     first_name: "Dominic",
     last_name: "Toretto",
@@ -36,9 +36,9 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { Splitit } from "surge";
+import { Surge } from "surge";
 
-const request: Splitit.ContactRequest = {
+const request: Surge.ContactRequest = {
     ...
 };
 ```
@@ -49,12 +49,12 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { SplititError } from "surge";
+import { SurgeError } from "surge";
 
 try {
     await client.contacts.create(...);
 } catch (err) {
-    if (err instanceof SplititError) {
+    if (err instanceof SurgeError) {
         console.log(err.statusCode);
         console.log(err.message);
         console.log(err.body);
@@ -148,9 +148,9 @@ The SDK provides a way for your to customize the underlying HTTP client / Fetch 
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { SplititClient } from "surge";
+import { SurgeClient } from "surge";
 
-const client = new SplititClient({
+const client = new SurgeClient({
     ...
     fetcher: // provide your implementation here
 });

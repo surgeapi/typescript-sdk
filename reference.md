@@ -2,7 +2,7 @@
 
 ## Contacts
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">create</a>({ ...params }) -> Splitit.ContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">create</a>({ ...params }) -> Surge.ContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -50,7 +50,7 @@ await client.contacts.create({
 <dl>
 <dd>
 
-**request:** `Splitit.ContactRequest`
+**request:** `Surge.ContactRequest`
 
 </dd>
 </dl>
@@ -69,7 +69,7 @@ await client.contacts.create({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">show</a>(id) -> Splitit.ContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">show</a>(id) -> Surge.ContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -132,7 +132,7 @@ await client.contacts.show("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">update</a>(id) -> Splitit.ContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">update</a>(id) -> Surge.ContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -197,7 +197,7 @@ await client.contacts.update("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
 
 ## Messages
 
-<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">create</a>({ ...params }) -> Splitit.MessageResponse</code></summary>
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">create</a>({ ...params }) -> Surge.MessageResponse</code></summary>
 <dl>
 <dd>
 
@@ -257,7 +257,7 @@ await client.messages.create({
 <dl>
 <dd>
 
-**request:** `Splitit.MessageRequest`
+**request:** `Surge.MessageRequest`
 
 </dd>
 </dl>
@@ -278,7 +278,7 @@ await client.messages.create({
 
 ## Users
 
-<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">create</a>({ ...params }) -> Splitit.UserResponse</code></summary>
+<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">create</a>({ ...params }) -> Surge.UserResponse</code></summary>
 <dl>
 <dd>
 
@@ -330,7 +330,7 @@ await client.users.create({
 <dl>
 <dd>
 
-**request:** `Splitit.UserRequest`
+**request:** `Surge.UserRequest`
 
 </dd>
 </dl>
@@ -349,7 +349,7 @@ await client.users.create({
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">show</a>(id) -> Splitit.UserResponse</code></summary>
+<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">show</a>(id) -> Surge.UserResponse</code></summary>
 <dl>
 <dd>
 
@@ -414,7 +414,7 @@ await client.users.show("usr_01j9dwavghe1ttppewekjjkfrx");
 
 ## Verifications
 
-<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">create</a>({ ...params }) -> Splitit.Verification</code></summary>
+<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">create</a>({ ...params }) -> Surge.Verification</code></summary>
 <dl>
 <dd>
 
@@ -460,7 +460,7 @@ await client.verifications.create({
 <dl>
 <dd>
 
-**request:** `Splitit.VerificationRequest`
+**request:** `Surge.VerificationRequest`
 
 </dd>
 </dl>
@@ -479,7 +479,7 @@ await client.verifications.create({
 </dl>
 </details>
 
-<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">check</a>(id, { ...params }) -> Splitit.VerificationCheckResponse</code></summary>
+<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">check</a>(id, { ...params }) -> Surge.VerificationCheckResponse</code></summary>
 <dl>
 <dd>
 
@@ -533,7 +533,7 @@ await client.verifications.check("vfn_01jayh15c2f2xamftg0xpyq1nj", {
 <dl>
 <dd>
 
-**request:** `Splitit.VerificationCheckRequest`
+**request:** `Surge.VerificationCheckRequest`
 
 </dd>
 </dl>

@@ -4,13 +4,13 @@
 
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
-import * as Splitit from "../../../index";
+import * as Surge from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Users {
     interface Options {
-        environment?: core.Supplier<environments.SplititEnvironment | string>;
+        environment?: core.Supplier<environments.SurgeEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         /** Override the Surge-Account header */
         surgeAccount?: core.Supplier<string | undefined>;
@@ -37,7 +37,7 @@ export class Users {
     /**
      * Creates a new User object.
      *
-     * @param {Splitit.UserRequest} request
+     * @param {Surge.UserRequest} request
      * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -52,14 +52,14 @@ export class Users {
      *     })
      */
     public create(
-        request: Splitit.UserRequest,
+        request: Surge.UserRequest,
         requestOptions?: Users.RequestOptions
-    ): core.APIPromise<Splitit.UserResponse> {
+    ): core.APIPromise<Surge.UserResponse> {
         return core.APIPromise.from(
             (async () => {
                 const _response = await (this._options.fetcher ?? core.fetcher)({
                     url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SplititEnvironment.Default,
+                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
                         "users"
                     ),
                     method: "POST",
@@ -88,26 +88,26 @@ export class Users {
                 if (_response.ok) {
                     return {
                         ok: _response.ok,
-                        body: _response.body as Splitit.UserResponse,
+                        body: _response.body as Surge.UserResponse,
                         headers: _response.headers,
                     };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.SplititError({
+                    throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
                 }
                 switch (_response.error.reason) {
                     case "non-json":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             statusCode: _response.error.statusCode,
                             body: _response.error.rawBody,
                         });
                     case "timeout":
-                        throw new errors.SplititTimeoutError("Timeout exceeded when calling POST /users.");
+                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /users.");
                     case "unknown":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             message: _response.error.errorMessage,
                         });
                 }
@@ -124,12 +124,12 @@ export class Users {
      * @example
      *     await client.users.show("usr_01j9dwavghe1ttppewekjjkfrx")
      */
-    public show(id: string, requestOptions?: Users.RequestOptions): core.APIPromise<Splitit.UserResponse> {
+    public show(id: string, requestOptions?: Users.RequestOptions): core.APIPromise<Surge.UserResponse> {
         return core.APIPromise.from(
             (async () => {
                 const _response = await (this._options.fetcher ?? core.fetcher)({
                     url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SplititEnvironment.Default,
+                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
                         `users/${encodeURIComponent(id)}`
                     ),
                     method: "GET",
@@ -157,26 +157,26 @@ export class Users {
                 if (_response.ok) {
                     return {
                         ok: _response.ok,
-                        body: _response.body as Splitit.UserResponse,
+                        body: _response.body as Surge.UserResponse,
                         headers: _response.headers,
                     };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.SplititError({
+                    throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
                 }
                 switch (_response.error.reason) {
                     case "non-json":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             statusCode: _response.error.statusCode,
                             body: _response.error.rawBody,
                         });
                     case "timeout":
-                        throw new errors.SplititTimeoutError("Timeout exceeded when calling GET /users/{id}.");
+                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling GET /users/{id}.");
                     case "unknown":
-                        throw new errors.SplititError({
+                        throw new errors.SurgeError({
                             message: _response.error.errorMessage,
                         });
                 }

@@ -9,9 +9,9 @@ import { Messages } from "./api/resources/messages/client/Client";
 import { Users } from "./api/resources/users/client/Client";
 import { Verifications } from "./api/resources/verifications/client/Client";
 
-export declare namespace SplititClient {
+export declare namespace SurgeClient {
     interface Options {
-        environment?: core.Supplier<environments.SplititEnvironment | string>;
+        environment?: core.Supplier<environments.SurgeEnvironment | string>;
         token: core.Supplier<core.BearerToken>;
         /** Override the Surge-Account header */
         surgeAccount?: core.Supplier<string | undefined>;
@@ -32,8 +32,8 @@ export declare namespace SplititClient {
     }
 }
 
-export class SplititClient {
-    constructor(protected readonly _options: SplititClient.Options) {}
+export class SurgeClient {
+    constructor(protected readonly _options: SurgeClient.Options) {}
 
     protected _contacts: Contacts | undefined;
 
