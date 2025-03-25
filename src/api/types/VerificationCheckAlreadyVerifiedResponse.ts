@@ -7,8 +7,8 @@ import * as Surge from "../index";
 /**
  * The response returned from checking a Verification code
  */
-export interface VerificationCheckResponse {
+export interface VerificationCheckAlreadyVerifiedResponse {
     /** The result of the code check. */
-    result?: Surge.VerificationCheckResponseResult;
+    result?: Surge.VerificationCheckAlreadyVerifiedResponseResult;
     verification?: Surge.Verification;
 }

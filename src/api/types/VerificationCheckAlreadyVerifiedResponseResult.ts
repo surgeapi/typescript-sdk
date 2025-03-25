@@ -5,9 +5,13 @@
 /**
  * The result of the code check.
  */
-export type VerificationCheckResponseResult = "ok" | "incorrect" | "exhausted" | "expired" | "already_verified";
-
-export const VerificationCheckResponseResult = {
+export type VerificationCheckAlreadyVerifiedResponseResult =
+    | "ok"
+    | "incorrect"
+    | "exhausted"
+    | "expired"
+    | "already_verified";
+export const VerificationCheckAlreadyVerifiedResponseResult = {
     Ok: "ok",
     Incorrect: "incorrect",
     Exhausted: "exhausted",

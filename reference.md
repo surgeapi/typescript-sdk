@@ -1,8 +1,92 @@
 # Reference
 
+## Blasts
+
+<details><summary><code>client.blasts.<a href="/src/api/resources/blasts/client/Client.ts">send</a>(accountId, { ...params }) -> Surge.BlastResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a Blast.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.blasts.send("acct_01j9a43avnfqzbjfch6pygv1td", {
+    attachments: [
+        {
+            url: "https://example.com/image.jpg",
+        },
+    ],
+    body: "Join us for our grand opening!",
+    contacts: ["ctc_01j9dy8mdzfn3r0e8x1tbdrdrf"],
+    name: "Grand Opening Announcement",
+    segments: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf"],
+    send_at: "2024-02-01T15:00:00Z",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**accountId:** `string` — The account for which the blast should be sent.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Surge.BlastRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Blasts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Contacts
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">create</a>({ ...params }) -> Surge.ContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">create</a>(accountId, { ...params }) -> Surge.ContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -30,9 +114,13 @@ Creates a new Contact object.
 <dd>
 
 ```typescript
-await client.contacts.create({
+await client.contacts.create("acct_01j9a43avnfqzbjfch6pygv1td", {
+    email: "dom@toretto.family",
     first_name: "Dominic",
     last_name: "Toretto",
+    metadata: {
+        car: "1970 Dodge Charger R/T",
+    },
     phone_number: "+18015551234",
 });
 ```
@@ -46,6 +134,14 @@ await client.contacts.create({
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**accountId:** `string` — The account for which the contact should be created.
+
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -69,7 +165,7 @@ await client.contacts.create({
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">show</a>(id) -> Surge.ContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">surgeWebContactControllerShow</a>(id) -> Surge.ContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -97,7 +193,7 @@ Retrieves a Contact object.
 <dd>
 
 ```typescript
-await client.contacts.show("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
+await client.contacts.surgeWebContactControllerShow("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
 ```
 
 </dd>
@@ -132,7 +228,7 @@ await client.contacts.show("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">update</a>(id) -> Surge.ContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">update</a>(id, { ...params }) -> Surge.ContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -160,7 +256,15 @@ Updates the specified contact by setting the values of the parameters passed. An
 <dd>
 
 ```typescript
-await client.contacts.update("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
+await client.contacts.update("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", {
+    email: "dom@toretto.family",
+    first_name: "Dominic",
+    last_name: "Toretto",
+    metadata: {
+        car: "1970 Dodge Charger R/T",
+    },
+    phone_number: "+18015551234",
+});
 ```
 
 </dd>
@@ -184,6 +288,14 @@ await client.contacts.update("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
 <dl>
 <dd>
 
+**request:** `Surge.ContactRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **requestOptions:** `Contacts.RequestOptions`
 
 </dd>
@@ -197,7 +309,7 @@ await client.contacts.update("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
 
 ## Messages
 
-<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">create</a>({ ...params }) -> Surge.MessageResponse</code></summary>
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">send</a>(accountId, { ...params }) -> Surge.MessageResponse</code></summary>
 <dl>
 <dd>
 
@@ -225,7 +337,7 @@ Sends a Message.
 <dd>
 
 ```typescript
-await client.messages.create({
+await client.messages.send("acct_01j9a43avnfqzbjfch6pygv1td", {
     attachments: [
         {
             url: "https://toretto.family/coronas.gif",
@@ -257,6 +369,14 @@ await client.messages.create({
 <dl>
 <dd>
 
+**accountId:** `string` — The account for which the message should be sent.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request:** `Surge.MessageRequest`
 
 </dd>
@@ -278,7 +398,7 @@ await client.messages.create({
 
 ## Users
 
-<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">create</a>({ ...params }) -> Surge.UserResponse</code></summary>
+<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">create</a>(accountId, { ...params }) -> Surge.UserResponse</code></summary>
 <dl>
 <dd>
 
@@ -306,7 +426,7 @@ Creates a new User object.
 <dd>
 
 ```typescript
-await client.users.create({
+await client.users.create("acct_01j9a43avnfqzbjfch6pygv1td", {
     first_name: "Brian",
     last_name: "O'Conner",
     metadata: {
@@ -330,6 +450,14 @@ await client.users.create({
 <dl>
 <dd>
 
+**accountId:** `string` — The account for which the user should be created.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request:** `Surge.UserRequest`
 
 </dd>
@@ -349,7 +477,7 @@ await client.users.create({
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">show</a>(id) -> Surge.UserResponse</code></summary>
+<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">surgeWebUserControllerShow</a>(id) -> Surge.UserResponse</code></summary>
 <dl>
 <dd>
 
@@ -377,7 +505,7 @@ Retrieves a User object.
 <dd>
 
 ```typescript
-await client.users.show("usr_01j9dwavghe1ttppewekjjkfrx");
+await client.users.surgeWebUserControllerShow("usr_01j9dwavghe1ttppewekjjkfrx");
 ```
 
 </dd>
@@ -479,7 +607,7 @@ await client.verifications.create({
 </dl>
 </details>
 
-<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">check</a>(id, { ...params }) -> Surge.VerificationCheckResponse</code></summary>
+<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">check</a>(id, { ...params }) -> Surge.VerificationCheckOkResponse</code></summary>
 <dl>
 <dd>
 

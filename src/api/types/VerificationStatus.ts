@@ -6,7 +6,6 @@
  * The current status of the verification.
  */
 export type VerificationStatus = "pending" | "verified" | "exhausted" | "expired";
-
 export const VerificationStatus = {
     Pending: "pending",
     Verified: "verified",

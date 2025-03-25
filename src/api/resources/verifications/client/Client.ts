@@ -9,23 +9,21 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Verifications {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.SurgeEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         token: core.Supplier<core.BearerToken>;
-        /** Override the Surge-Account header */
-        surgeAccount?: core.Supplier<string | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
-        /** Override the Surge-Account header */
-        surgeAccount?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
@@ -45,68 +43,59 @@ export class Verifications {
      *         phone_number: "+18015551234"
      *     })
      */
-    public create(
+    public async create(
         request: Surge.VerificationRequest,
-        requestOptions?: Verifications.RequestOptions
-    ): core.APIPromise<Surge.Verification> {
-        return core.APIPromise.from(
-            (async () => {
-                const _response = await (this._options.fetcher ?? core.fetcher)({
-                    url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
-                        "verifications"
-                    ),
-                    method: "POST",
-                    headers: {
-                        Authorization: await this._getAuthorizationHeader(),
-                        "Surge-Account":
-                            (await core.Supplier.get(this._options.surgeAccount)) != null
-                                ? await core.Supplier.get(this._options.surgeAccount)
-                                : undefined,
-                        "X-Fern-Language": "JavaScript",
-                        "X-Fern-SDK-Name": "surge",
-                        "X-Fern-SDK-Version": "0.24.7",
-                        "User-Agent": "surge/0.24.7",
-                        "X-Fern-Runtime": core.RUNTIME.type,
-                        "X-Fern-Runtime-Version": core.RUNTIME.version,
-                        ...requestOptions?.headers,
-                    },
-                    contentType: "application/json",
-                    requestType: "json",
-                    body: request,
-                    timeoutMs:
-                        requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-                    maxRetries: requestOptions?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
+        requestOptions?: Verifications.RequestOptions,
+    ): Promise<Surge.Verification> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.SurgeEnvironment.Default,
+                "verifications",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@surgeapi/node",
+                "X-Fern-SDK-Version": "0.25.2",
+                "User-Agent": "@surgeapi/node/0.25.2",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as Surge.Verification;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.SurgeError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SurgeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
                 });
-                if (_response.ok) {
-                    return {
-                        ok: _response.ok,
-                        body: _response.body as Surge.Verification,
-                        headers: _response.headers,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
-                    throw new errors.SurgeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-                }
-                switch (_response.error.reason) {
-                    case "non-json":
-                        throw new errors.SurgeError({
-                            statusCode: _response.error.statusCode,
-                            body: _response.error.rawBody,
-                        });
-                    case "timeout":
-                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /verifications.");
-                    case "unknown":
-                        throw new errors.SurgeError({
-                            message: _response.error.errorMessage,
-                        });
-                }
-            })()
-        );
+            case "timeout":
+                throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /verifications.");
+            case "unknown":
+                throw new errors.SurgeError({
+                    message: _response.error.errorMessage,
+                });
+        }
     }
 
     /**
@@ -116,76 +105,79 @@ export class Verifications {
      * @param {Surge.VerificationCheckRequest} request
      * @param {Verifications.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Surge.ConflictError}
+     * @throws {@link Surge.UnprocessableEntityError}
+     *
      * @example
      *     await client.verifications.check("vfn_01jayh15c2f2xamftg0xpyq1nj", {
      *         code: "123456"
      *     })
      */
-    public check(
+    public async check(
         id: string,
         request: Surge.VerificationCheckRequest,
-        requestOptions?: Verifications.RequestOptions
-    ): core.APIPromise<Surge.VerificationCheckResponse> {
-        return core.APIPromise.from(
-            (async () => {
-                const _response = await (this._options.fetcher ?? core.fetcher)({
-                    url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
-                        `verifications/${encodeURIComponent(id)}/checks`
-                    ),
-                    method: "POST",
-                    headers: {
-                        Authorization: await this._getAuthorizationHeader(),
-                        "Surge-Account":
-                            (await core.Supplier.get(this._options.surgeAccount)) != null
-                                ? await core.Supplier.get(this._options.surgeAccount)
-                                : undefined,
-                        "X-Fern-Language": "JavaScript",
-                        "X-Fern-SDK-Name": "surge",
-                        "X-Fern-SDK-Version": "0.24.7",
-                        "User-Agent": "surge/0.24.7",
-                        "X-Fern-Runtime": core.RUNTIME.type,
-                        "X-Fern-Runtime-Version": core.RUNTIME.version,
-                        ...requestOptions?.headers,
-                    },
-                    contentType: "application/json",
-                    requestType: "json",
-                    body: request,
-                    timeoutMs:
-                        requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-                    maxRetries: requestOptions?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
-                });
-                if (_response.ok) {
-                    return {
-                        ok: _response.ok,
-                        body: _response.body as Surge.VerificationCheckResponse,
-                        headers: _response.headers,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
+        requestOptions?: Verifications.RequestOptions,
+    ): Promise<Surge.VerificationCheckOkResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.SurgeEnvironment.Default,
+                `verifications/${encodeURIComponent(id)}/checks`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@surgeapi/node",
+                "X-Fern-SDK-Version": "0.25.2",
+                "User-Agent": "@surgeapi/node/0.25.2",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as Surge.VerificationCheckOkResponse;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 409:
+                    throw new Surge.ConflictError(
+                        _response.error.body as Surge.VerificationCheckAlreadyVerifiedResponse,
+                    );
+                case 422:
+                    throw new Surge.UnprocessableEntityError(
+                        _response.error.body as Surge.VerificationCheckIncorrectResponse,
+                    );
+                default:
                     throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                     });
-                }
-                switch (_response.error.reason) {
-                    case "non-json":
-                        throw new errors.SurgeError({
-                            statusCode: _response.error.statusCode,
-                            body: _response.error.rawBody,
-                        });
-                    case "timeout":
-                        throw new errors.SurgeTimeoutError(
-                            "Timeout exceeded when calling POST /verifications/{id}/checks."
-                        );
-                    case "unknown":
-                        throw new errors.SurgeError({
-                            message: _response.error.errorMessage,
-                        });
-                }
-            })()
-        );
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SurgeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /verifications/{id}/checks.");
+            case "unknown":
+                throw new errors.SurgeError({
+                    message: _response.error.errorMessage,
+                });
+        }
     }
 
     protected async _getAuthorizationHeader(): Promise<string> {

@@ -8,7 +8,7 @@ import * as Surge from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
-export declare namespace Messages {
+export declare namespace Blasts {
     export interface Options {
         environment?: core.Supplier<environments.SurgeEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
@@ -29,44 +29,39 @@ export declare namespace Messages {
     }
 }
 
-export class Messages {
-    constructor(protected readonly _options: Messages.Options) {}
+export class Blasts {
+    constructor(protected readonly _options: Blasts.Options) {}
 
     /**
-     * Sends a Message.
+     * Sends a Blast.
      *
-     * @param {string} accountId - The account for which the message should be sent.
-     * @param {Surge.MessageRequest} request
-     * @param {Messages.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} accountId - The account for which the blast should be sent.
+     * @param {Surge.BlastRequest} request
+     * @param {Blasts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.messages.send("acct_01j9a43avnfqzbjfch6pygv1td", {
+     *     await client.blasts.send("acct_01j9a43avnfqzbjfch6pygv1td", {
      *         attachments: [{
-     *                 url: "https://toretto.family/coronas.gif"
+     *                 url: "https://example.com/image.jpg"
      *             }],
-     *         body: "Thought you could leave without saying goodbye?",
-     *         conversation: {
-     *             contact: {
-     *                 first_name: "Dominic",
-     *                 id: "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
-     *                 last_name: "Toretto",
-     *                 phone_number: "+18015551234"
-     *             },
-     *             id: "cnv_01j9e0dgmdfkj86c877ws0znae"
-     *         }
+     *         body: "Join us for our grand opening!",
+     *         contacts: ["ctc_01j9dy8mdzfn3r0e8x1tbdrdrf"],
+     *         name: "Grand Opening Announcement",
+     *         segments: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf"],
+     *         send_at: "2024-02-01T15:00:00Z"
      *     })
      */
     public async send(
         accountId: string,
-        request: Surge.MessageRequest,
-        requestOptions?: Messages.RequestOptions,
-    ): Promise<Surge.MessageResponse> {
+        request: Surge.BlastRequest = {},
+        requestOptions?: Blasts.RequestOptions,
+    ): Promise<Surge.BlastResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.SurgeEnvironment.Default,
-                `accounts/${encodeURIComponent(accountId)}/messages`,
+                `accounts/${encodeURIComponent(accountId)}/blasts`,
             ),
             method: "POST",
             headers: {
@@ -87,7 +82,7 @@ export class Messages {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.MessageResponse;
+            return _response.body as Surge.BlastResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -104,9 +99,7 @@ export class Messages {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.SurgeTimeoutError(
-                    "Timeout exceeded when calling POST /accounts/{account_id}/messages.",
-                );
+                throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /accounts/{account_id}/blasts.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,

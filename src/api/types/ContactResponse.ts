@@ -6,12 +6,16 @@
  * Response schema for single contact
  */
 export interface ContactResponse {
+    /** The contact's email address. */
+    email?: string;
     /** The contact's first name. */
     first_name?: string;
     /** Unique identifier for the object. */
     id?: string;
     /** The contact's last name. */
     last_name?: string;
+    /** Additional metadata about the contact. */
+    metadata?: Record<string, unknown>;
     /** The contact's phone number in E.164 format. */
     phone_number?: string;
 }

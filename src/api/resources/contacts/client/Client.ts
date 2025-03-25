@@ -9,23 +9,21 @@ import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Contacts {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.SurgeEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         token: core.Supplier<core.BearerToken>;
-        /** Override the Surge-Account header */
-        surgeAccount?: core.Supplier<string | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
-        /** Override the Surge-Account header */
-        surgeAccount?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
@@ -37,78 +35,77 @@ export class Contacts {
     /**
      * Creates a new Contact object.
      *
+     * @param {string} accountId - The account for which the contact should be created.
      * @param {Surge.ContactRequest} request
      * @param {Contacts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.contacts.create({
+     *     await client.contacts.create("acct_01j9a43avnfqzbjfch6pygv1td", {
+     *         email: "dom@toretto.family",
      *         first_name: "Dominic",
      *         last_name: "Toretto",
+     *         metadata: {
+     *             "car": "1970 Dodge Charger R/T"
+     *         },
      *         phone_number: "+18015551234"
      *     })
      */
-    public create(
+    public async create(
+        accountId: string,
         request: Surge.ContactRequest,
-        requestOptions?: Contacts.RequestOptions
-    ): core.APIPromise<Surge.ContactResponse> {
-        return core.APIPromise.from(
-            (async () => {
-                const _response = await (this._options.fetcher ?? core.fetcher)({
-                    url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
-                        "contacts"
-                    ),
-                    method: "POST",
-                    headers: {
-                        Authorization: await this._getAuthorizationHeader(),
-                        "Surge-Account":
-                            (await core.Supplier.get(this._options.surgeAccount)) != null
-                                ? await core.Supplier.get(this._options.surgeAccount)
-                                : undefined,
-                        "X-Fern-Language": "JavaScript",
-                        "X-Fern-SDK-Name": "surge",
-                        "X-Fern-SDK-Version": "0.24.7",
-                        "User-Agent": "surge/0.24.7",
-                        "X-Fern-Runtime": core.RUNTIME.type,
-                        "X-Fern-Runtime-Version": core.RUNTIME.version,
-                        ...requestOptions?.headers,
-                    },
-                    contentType: "application/json",
-                    requestType: "json",
-                    body: request,
-                    timeoutMs:
-                        requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-                    maxRetries: requestOptions?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
+        requestOptions?: Contacts.RequestOptions,
+    ): Promise<Surge.ContactResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.SurgeEnvironment.Default,
+                `accounts/${encodeURIComponent(accountId)}/contacts`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@surgeapi/node",
+                "X-Fern-SDK-Version": "0.25.2",
+                "User-Agent": "@surgeapi/node/0.25.2",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as Surge.ContactResponse;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.SurgeError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SurgeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
                 });
-                if (_response.ok) {
-                    return {
-                        ok: _response.ok,
-                        body: _response.body as Surge.ContactResponse,
-                        headers: _response.headers,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
-                    throw new errors.SurgeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-                }
-                switch (_response.error.reason) {
-                    case "non-json":
-                        throw new errors.SurgeError({
-                            statusCode: _response.error.statusCode,
-                            body: _response.error.rawBody,
-                        });
-                    case "timeout":
-                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /contacts.");
-                    case "unknown":
-                        throw new errors.SurgeError({
-                            message: _response.error.errorMessage,
-                        });
-                }
-            })()
-        );
+            case "timeout":
+                throw new errors.SurgeTimeoutError(
+                    "Timeout exceeded when calling POST /accounts/{account_id}/contacts.",
+                );
+            case "unknown":
+                throw new errors.SurgeError({
+                    message: _response.error.errorMessage,
+                });
+        }
     }
 
     /**
@@ -118,135 +115,134 @@ export class Contacts {
      * @param {Contacts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.contacts.show("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf")
+     *     await client.contacts.surgeWebContactControllerShow("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf")
      */
-    public show(id: string, requestOptions?: Contacts.RequestOptions): core.APIPromise<Surge.ContactResponse> {
-        return core.APIPromise.from(
-            (async () => {
-                const _response = await (this._options.fetcher ?? core.fetcher)({
-                    url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
-                        `contacts/${encodeURIComponent(id)}`
-                    ),
-                    method: "GET",
-                    headers: {
-                        Authorization: await this._getAuthorizationHeader(),
-                        "Surge-Account":
-                            (await core.Supplier.get(this._options.surgeAccount)) != null
-                                ? await core.Supplier.get(this._options.surgeAccount)
-                                : undefined,
-                        "X-Fern-Language": "JavaScript",
-                        "X-Fern-SDK-Name": "surge",
-                        "X-Fern-SDK-Version": "0.24.7",
-                        "User-Agent": "surge/0.24.7",
-                        "X-Fern-Runtime": core.RUNTIME.type,
-                        "X-Fern-Runtime-Version": core.RUNTIME.version,
-                        ...requestOptions?.headers,
-                    },
-                    contentType: "application/json",
-                    requestType: "json",
-                    timeoutMs:
-                        requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-                    maxRetries: requestOptions?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
+    public async surgeWebContactControllerShow(
+        id: string,
+        requestOptions?: Contacts.RequestOptions,
+    ): Promise<Surge.ContactResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.SurgeEnvironment.Default,
+                `contacts/${encodeURIComponent(id)}`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@surgeapi/node",
+                "X-Fern-SDK-Version": "0.25.2",
+                "User-Agent": "@surgeapi/node/0.25.2",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as Surge.ContactResponse;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.SurgeError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SurgeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
                 });
-                if (_response.ok) {
-                    return {
-                        ok: _response.ok,
-                        body: _response.body as Surge.ContactResponse,
-                        headers: _response.headers,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
-                    throw new errors.SurgeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-                }
-                switch (_response.error.reason) {
-                    case "non-json":
-                        throw new errors.SurgeError({
-                            statusCode: _response.error.statusCode,
-                            body: _response.error.rawBody,
-                        });
-                    case "timeout":
-                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling GET /contacts/{id}.");
-                    case "unknown":
-                        throw new errors.SurgeError({
-                            message: _response.error.errorMessage,
-                        });
-                }
-            })()
-        );
+            case "timeout":
+                throw new errors.SurgeTimeoutError("Timeout exceeded when calling GET /contacts/{id}.");
+            case "unknown":
+                throw new errors.SurgeError({
+                    message: _response.error.errorMessage,
+                });
+        }
     }
 
     /**
      * Updates the specified contact by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
      *
      * @param {string} id -
+     * @param {Surge.ContactRequest} request
      * @param {Contacts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.contacts.update("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf")
+     *     await client.contacts.update("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", {
+     *         email: "dom@toretto.family",
+     *         first_name: "Dominic",
+     *         last_name: "Toretto",
+     *         metadata: {
+     *             "car": "1970 Dodge Charger R/T"
+     *         },
+     *         phone_number: "+18015551234"
+     *     })
      */
-    public update(id: string, requestOptions?: Contacts.RequestOptions): core.APIPromise<Surge.ContactResponse> {
-        return core.APIPromise.from(
-            (async () => {
-                const _response = await (this._options.fetcher ?? core.fetcher)({
-                    url: urlJoin(
-                        (await core.Supplier.get(this._options.environment)) ?? environments.SurgeEnvironment.Default,
-                        `contacts/${encodeURIComponent(id)}`
-                    ),
-                    method: "PUT",
-                    headers: {
-                        Authorization: await this._getAuthorizationHeader(),
-                        "Surge-Account":
-                            (await core.Supplier.get(this._options.surgeAccount)) != null
-                                ? await core.Supplier.get(this._options.surgeAccount)
-                                : undefined,
-                        "X-Fern-Language": "JavaScript",
-                        "X-Fern-SDK-Name": "surge",
-                        "X-Fern-SDK-Version": "0.24.7",
-                        "User-Agent": "surge/0.24.7",
-                        "X-Fern-Runtime": core.RUNTIME.type,
-                        "X-Fern-Runtime-Version": core.RUNTIME.version,
-                        ...requestOptions?.headers,
-                    },
-                    contentType: "application/json",
-                    requestType: "json",
-                    timeoutMs:
-                        requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-                    maxRetries: requestOptions?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
+    public async update(
+        id: string,
+        request: Surge.ContactRequest,
+        requestOptions?: Contacts.RequestOptions,
+    ): Promise<Surge.ContactResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.SurgeEnvironment.Default,
+                `contacts/${encodeURIComponent(id)}`,
+            ),
+            method: "PUT",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "@surgeapi/node",
+                "X-Fern-SDK-Version": "0.25.2",
+                "User-Agent": "@surgeapi/node/0.25.2",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: request,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body as Surge.ContactResponse;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.SurgeError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SurgeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
                 });
-                if (_response.ok) {
-                    return {
-                        ok: _response.ok,
-                        body: _response.body as Surge.ContactResponse,
-                        headers: _response.headers,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
-                    throw new errors.SurgeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-                }
-                switch (_response.error.reason) {
-                    case "non-json":
-                        throw new errors.SurgeError({
-                            statusCode: _response.error.statusCode,
-                            body: _response.error.rawBody,
-                        });
-                    case "timeout":
-                        throw new errors.SurgeTimeoutError("Timeout exceeded when calling PUT /contacts/{id}.");
-                    case "unknown":
-                        throw new errors.SurgeError({
-                            message: _response.error.errorMessage,
-                        });
-                }
-            })()
-        );
+            case "timeout":
+                throw new errors.SurgeTimeoutError("Timeout exceeded when calling PUT /contacts/{id}.");
+            case "unknown":
+                throw new errors.SurgeError({
+                    message: _response.error.errorMessage,
+                });
+        }
     }
 
     protected async _getAuthorizationHeader(): Promise<string> {

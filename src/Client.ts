@@ -4,56 +4,57 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
+import { Blasts } from "./api/resources/blasts/client/Client";
 import { Contacts } from "./api/resources/contacts/client/Client";
 import { Messages } from "./api/resources/messages/client/Client";
 import { Users } from "./api/resources/users/client/Client";
 import { Verifications } from "./api/resources/verifications/client/Client";
 
 export declare namespace SurgeClient {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.SurgeEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         token: core.Supplier<core.BearerToken>;
-        /** Override the Surge-Account header */
-        surgeAccount?: core.Supplier<string | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
-        /** Override the Surge-Account header */
-        surgeAccount?: string | undefined;
         /** Additional headers to include in the request. */
         headers?: Record<string, string>;
     }
 }
 
 export class SurgeClient {
+    protected _blasts: Blasts | undefined;
+    protected _contacts: Contacts | undefined;
+    protected _messages: Messages | undefined;
+    protected _users: Users | undefined;
+    protected _verifications: Verifications | undefined;
+
     constructor(protected readonly _options: SurgeClient.Options) {}
 
-    protected _contacts: Contacts | undefined;
+    public get blasts(): Blasts {
+        return (this._blasts ??= new Blasts(this._options));
+    }
 
     public get contacts(): Contacts {
         return (this._contacts ??= new Contacts(this._options));
     }
 
-    protected _messages: Messages | undefined;
-
     public get messages(): Messages {
         return (this._messages ??= new Messages(this._options));
     }
 
-    protected _users: Users | undefined;
-
     public get users(): Users {
         return (this._users ??= new Users(this._options));
     }
-
-    protected _verifications: Verifications | undefined;
 
     public get verifications(): Verifications {
         return (this._verifications ??= new Verifications(this._options));

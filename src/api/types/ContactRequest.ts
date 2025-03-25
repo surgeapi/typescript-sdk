@@ -3,18 +3,17 @@
  */
 
 /**
- * @example
- *     {
- *         first_name: "Dominic",
- *         last_name: "Toretto",
- *         phone_number: "+18015551234"
- *     }
+ * POST body for creating a contact
  */
 export interface ContactRequest {
+    /** The contact's email address. */
+    email?: string;
     /** The contact's first name. */
     first_name?: string;
     /** The contact's last name. */
     last_name?: string;
+    /** Additional metadata about the contact. */
+    metadata?: Record<string, unknown>;
     /** The contact's phone number in E.164 format. */
     phone_number: string;
 }

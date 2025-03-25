@@ -1,14 +1,18 @@
 # Surge TypeScript Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Ffern-demo%2Fsurge-typescript-sdk)
-[![npm shield](https://img.shields.io/npm/v/surge)](https://www.npmjs.com/package/surge)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fsurgemsg%2Ftypescript-sdk)
+[![npm shield](https://img.shields.io/npm/v/@surgeapi/node)](https://www.npmjs.com/package/@surgeapi/node)
 
 The Surge TypeScript library provides convenient access to the Surge API from TypeScript.
+
+## Documentation
+
+API reference documentation is available [here](https://surge.app).
 
 ## Installation
 
 ```sh
-npm i -s surge
+npm i -s @surgeapi/node
 ```
 
 ## Reference
@@ -20,13 +24,25 @@ A full reference for this library is available [here](./reference.md).
 Instantiate and use the client with the following:
 
 ```typescript
-import { SurgeClient } from "surge";
+import { SurgeClient } from "@surgeapi/node";
 
-const client = new SurgeClient({ token: "YOUR_TOKEN", surgeAccount: "YOUR_SURGE_ACCOUNT" });
-await client.contacts.create({
-    first_name: "Dominic",
-    last_name: "Toretto",
-    phone_number: "+18015551234",
+const client = new SurgeClient({ token: "YOUR_TOKEN" });
+await client.messages.send("acct_01j9a43avnfqzbjfch6pygv1td", {
+    attachments: [
+        {
+            url: "https://toretto.family/coronas.gif",
+        },
+    ],
+    body: "Thought you could leave without saying goodbye?",
+    conversation: {
+        contact: {
+            first_name: "Dominic",
+            id: "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
+            last_name: "Toretto",
+            phone_number: "+18015551234",
+        },
+        id: "cnv_01j9e0dgmdfkj86c877ws0znae",
+    },
 });
 ```
 
@@ -36,9 +52,9 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { Surge } from "surge";
+import { Surge } from "@surgeapi/node";
 
-const request: Surge.ContactRequest = {
+const request: Surge.BlastRequest = {
     ...
 };
 ```
@@ -49,10 +65,10 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { SurgeError } from "surge";
+import { SurgeError } from "@surgeapi/node";
 
 try {
-    await client.contacts.create(...);
+    await client.messages.send(...);
 } catch (err) {
     if (err instanceof SurgeError) {
         console.log(err.statusCode);
@@ -64,24 +80,12 @@ try {
 
 ## Advanced
 
-### Raw Responses
-
-The SDK provides access to raw response data, including headers, through the `.asRaw()` method. When using `.asRaw()`,
-the parsed response body will be available in the `body` field, along with the response headers:
-
-```typescript
-const response = await client.contacts.create(...).asRaw();
-
-console.log(response.headers['X-My-Header']);
-console.log(response.body);
-```
-
 ### Additional Headers
 
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-const response = await client.contacts.create(..., {
+const response = await client.messages.send(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -91,19 +95,19 @@ const response = await client.contacts.create(..., {
 ### Retries
 
 The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
-as the request is deemed retriable and the number of retry attempts has not grown larger than the configured
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
 retry limit (default: 2).
 
-A request is deemed retriable when any of the following HTTP status codes is returned:
+A request is deemed retryable when any of the following HTTP status codes is returned:
 
--   [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
--   [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
--   [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
 
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.contacts.create(..., {
+const response = await client.messages.send(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -113,7 +117,7 @@ const response = await client.contacts.create(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.contacts.create(..., {
+const response = await client.messages.send(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -124,7 +128,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.contacts.create(..., {
+const response = await client.messages.send(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -135,12 +139,12 @@ controller.abort(); // aborts the request
 The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK works in the following
 runtimes:
 
--   Node.js 18+
--   Vercel
--   Cloudflare Workers
--   Deno v1.25+
--   Bun 1.0+
--   React Native
+- Node.js 18+
+- Vercel
+- Cloudflare Workers
+- Deno v1.25+
+- Bun 1.0+
+- React Native
 
 ### Customizing Fetch Client
 
@@ -148,7 +152,7 @@ The SDK provides a way for your to customize the underlying HTTP client / Fetch 
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { SurgeClient } from "surge";
+import { SurgeClient } from "@surgeapi/node";
 
 const client = new SurgeClient({
     ...
