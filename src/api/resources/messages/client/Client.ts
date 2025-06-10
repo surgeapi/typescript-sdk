@@ -48,11 +48,9 @@ export class Messages {
      *         conversation: {
      *             contact: {
      *                 first_name: "Dominic",
-     *                 id: "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
      *                 last_name: "Toretto",
      *                 phone_number: "+18015551234"
-     *             },
-     *             id: "cnv_01j9e0dgmdfkj86c877ws0znae"
+     *             }
      *         }
      *     })
      */
@@ -73,8 +71,8 @@ export class Messages {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.3",
-                "User-Agent": "@surgeapi/node/0.25.3",
+                "X-Fern-SDK-Version": "0.25.4",
+                "User-Agent": "@surgeapi/node/0.25.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

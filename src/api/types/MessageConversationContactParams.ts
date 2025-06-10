@@ -8,8 +8,6 @@
 export interface MessageConversationContactParams {
     /** The contact's first name in case a new contact is created. */
     first_name?: string;
-    /** The unique identifier for an existing contact. */
-    id?: string;
     /** The message's last name in case a new contact is created. */
     last_name?: string;
     /** The contact's phone number in E.164 format. */

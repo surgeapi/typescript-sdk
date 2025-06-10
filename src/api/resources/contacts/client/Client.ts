@@ -67,8 +67,8 @@ export class Contacts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.3",
-                "User-Agent": "@surgeapi/node/0.25.3",
+                "X-Fern-SDK-Version": "0.25.4",
+                "User-Agent": "@surgeapi/node/0.25.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -115,12 +115,9 @@ export class Contacts {
      * @param {Contacts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.contacts.surgeWebContactControllerShow("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf")
+     *     await client.contacts.getContact("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf")
      */
-    public async surgeWebContactControllerShow(
-        id: string,
-        requestOptions?: Contacts.RequestOptions,
-    ): Promise<Surge.ContactResponse> {
+    public async getContact(id: string, requestOptions?: Contacts.RequestOptions): Promise<Surge.ContactResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -133,8 +130,8 @@ export class Contacts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.3",
-                "User-Agent": "@surgeapi/node/0.25.3",
+                "X-Fern-SDK-Version": "0.25.4",
+                "User-Agent": "@surgeapi/node/0.25.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -201,13 +198,13 @@ export class Contacts {
                     environments.SurgeEnvironment.Default,
                 `contacts/${encodeURIComponent(id)}`,
             ),
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.3",
-                "User-Agent": "@surgeapi/node/0.25.3",
+                "X-Fern-SDK-Version": "0.25.4",
+                "User-Agent": "@surgeapi/node/0.25.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -237,7 +234,7 @@ export class Contacts {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.SurgeTimeoutError("Timeout exceeded when calling PUT /contacts/{id}.");
+                throw new errors.SurgeTimeoutError("Timeout exceeded when calling PATCH /contacts/{id}.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,

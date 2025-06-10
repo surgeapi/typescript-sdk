@@ -8,7 +8,7 @@ import * as Surge from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
-export declare namespace Users {
+export declare namespace Accounts {
     export interface Options {
         environment?: core.Supplier<environments.SurgeEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
@@ -29,38 +29,31 @@ export declare namespace Users {
     }
 }
 
-export class Users {
-    constructor(protected readonly _options: Users.Options) {}
+export class Accounts {
+    constructor(protected readonly _options: Accounts.Options) {}
 
     /**
-     * Creates a new User object.
+     * Creates a new Account within the calling Platform.
      *
-     * @param {string} accountId - The account for which the user should be created.
-     * @param {Surge.UserRequest} request
-     * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Surge.CreateAccountRequest} request
+     * @param {Accounts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.users.create("acct_01j9a43avnfqzbjfch6pygv1td", {
-     *         first_name: "Brian",
-     *         last_name: "O'Conner",
-     *         metadata: {
-     *             "email": "boconner@toretti.family",
-     *             "user_id": 1234
-     *         },
-     *         photo_url: "https://toretti.family/people/brian.jpg"
+     *     await client.accounts.create({
+     *         name: "D\u00B7T Precision Auto Shop",
+     *         time_zone: "America/Los_Angeles"
      *     })
      */
     public async create(
-        accountId: string,
-        request: Surge.UserRequest,
-        requestOptions?: Users.RequestOptions,
-    ): Promise<Surge.UserResponse> {
+        request: Surge.CreateAccountRequest,
+        requestOptions?: Accounts.RequestOptions,
+    ): Promise<Surge.AccountResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.SurgeEnvironment.Default,
-                `accounts/${encodeURIComponent(accountId)}/users`,
+                "accounts",
             ),
             method: "POST",
             headers: {
@@ -81,7 +74,7 @@ export class Users {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.UserResponse;
+            return _response.body as Surge.AccountResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -98,7 +91,7 @@ export class Users {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /accounts/{account_id}/users.");
+                throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /accounts.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
@@ -107,23 +100,31 @@ export class Users {
     }
 
     /**
-     * Retrieves a User object.
+     * Updates an Account
      *
      * @param {string} id -
-     * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Surge.UpdateAccountRequest} request
+     * @param {Accounts.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.users.getUser("usr_01j9dwavghe1ttppewekjjkfrx")
+     *     await client.accounts.update("acct_01jpqjvfg9enpt7pyxd60pcmxj", {
+     *         name: "D\u00B7T Precision Auto Shop",
+     *         time_zone: "America/Los_Angeles"
+     *     })
      */
-    public async getUser(id: string, requestOptions?: Users.RequestOptions): Promise<Surge.UserResponse> {
+    public async update(
+        id: string,
+        request: Surge.UpdateAccountRequest = {},
+        requestOptions?: Accounts.RequestOptions,
+    ): Promise<Surge.AccountResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.SurgeEnvironment.Default,
-                `users/${encodeURIComponent(id)}`,
+                `accounts/${encodeURIComponent(id)}`,
             ),
-            method: "GET",
+            method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
@@ -136,12 +137,13 @@ export class Users {
             },
             contentType: "application/json",
             requestType: "json",
+            body: request,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.UserResponse;
+            return _response.body as Surge.AccountResponse;
         }
 
         if (_response.error.reason === "status-code") {
@@ -158,7 +160,7 @@ export class Users {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.SurgeTimeoutError("Timeout exceeded when calling GET /users/{id}.");
+                throw new errors.SurgeTimeoutError("Timeout exceeded when calling PATCH /accounts/{id}.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,

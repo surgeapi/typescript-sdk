@@ -14,11 +14,9 @@ import * as Surge from "../../../../index";
  *         conversation: {
  *             contact: {
  *                 first_name: "Dominic",
- *                 id: "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
  *                 last_name: "Toretto",
  *                 phone_number: "+18015551234"
- *             },
- *             id: "cnv_01j9e0dgmdfkj86c877ws0znae"
+ *             }
  *         }
  *     }
  */
@@ -27,4 +25,6 @@ export interface MessageRequest {
     /** The message body. */
     body?: string;
     conversation: Surge.MessageConversationParams;
+    /** An optional datetime for scheduling message up to a couple of months in the future. */
+    send_at?: string;
 }

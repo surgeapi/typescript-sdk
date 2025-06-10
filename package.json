@@ -1,8 +1,8 @@
 {
     "name": "@surgeapi/node",
-    "version": "0.25.3",
+    "version": "0.25.4",
     "private": false,
-    "repository": "https://github.com/surgemsg/typescript-sdk",
+    "repository": "https://github.com/surgeapi/typescript-sdk",
     "license": "MIT",
     "main": "./index.js",
     "types": "./index.d.ts",

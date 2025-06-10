@@ -8,7 +8,7 @@ import * as Surge from "../index";
  * Params for selecting or creating a new conversation. Either the id or the Contact must be given.
  */
 export interface MessageConversationParams {
-    contact?: Surge.MessageConversationContactParams;
-    /** Unique identifier for the object. */
-    id?: string;
+    contact: Surge.MessageConversationContactParams;
+    /** The phone number from which to send the message. This can be either the phone number itself or its ID in Surge. */
+    phone_number?: string;
 }

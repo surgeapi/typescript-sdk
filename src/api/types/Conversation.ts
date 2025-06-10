@@ -11,4 +11,5 @@ export interface Conversation {
     contact: Surge.Contact;
     /** Unique identifier for the object. */
     id: string;
+    phone_number?: Surge.ConversationPhoneNumber;
 }

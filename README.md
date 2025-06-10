@@ -1,6 +1,6 @@
 # Surge TypeScript Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fsurgemsg%2Ftypescript-sdk)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fsurgeapi%2Ftypescript-sdk)
 [![npm shield](https://img.shields.io/npm/v/@surgeapi/node)](https://www.npmjs.com/package/@surgeapi/node)
 
 The Surge TypeScript library provides convenient access to the Surge API from TypeScript.
@@ -17,7 +17,7 @@ npm i -s @surgeapi/node
 
 ## Reference
 
-A full reference for this library is available [here](./reference.md).
+A full reference for this library is available [here](https://github.com/surgeapi/typescript-sdk/blob/HEAD/./reference.md).
 
 ## Usage
 
@@ -37,11 +37,9 @@ await client.messages.send("acct_01j9a43avnfqzbjfch6pygv1td", {
     conversation: {
         contact: {
             first_name: "Dominic",
-            id: "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
             last_name: "Toretto",
             phone_number: "+18015551234",
         },
-        id: "cnv_01j9e0dgmdfkj86c877ws0znae",
     },
 });
 ```
@@ -54,7 +52,7 @@ following namespace:
 ```typescript
 import { Surge } from "@surgeapi/node";
 
-const request: Surge.BlastRequest = {
+const request: Surge.CreateAccountRequest = {
     ...
 };
 ```

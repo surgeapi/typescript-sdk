@@ -8,7 +8,7 @@ import * as Surge from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
-export declare namespace Blasts {
+export declare namespace PhoneNumbers {
     export interface Options {
         environment?: core.Supplier<environments.SurgeEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
@@ -29,39 +29,33 @@ export declare namespace Blasts {
     }
 }
 
-export class Blasts {
-    constructor(protected readonly _options: Blasts.Options) {}
+export class PhoneNumbers {
+    constructor(protected readonly _options: PhoneNumbers.Options) {}
 
     /**
-     * Sends a Blast.
+     * Create a new phone number for the account.
      *
-     * @param {string} accountId - The account for which the blast should be sent.
-     * @param {Surge.BlastRequest} request
-     * @param {Blasts.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} accountId - The account for which the phone number should be created.
+     * @param {Surge.CreatePhoneNumberRequest} request
+     * @param {PhoneNumbers.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.blasts.send("acct_01j9a43avnfqzbjfch6pygv1td", {
-     *         attachments: [{
-     *                 url: "https://example.com/image.jpg"
-     *             }],
-     *         body: "Join us for our grand opening!",
-     *         contacts: ["ctc_01j9dy8mdzfn3r0e8x1tbdrdrf"],
-     *         name: "Grand Opening Announcement",
-     *         segments: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf"],
-     *         send_at: "2024-02-01T15:00:00Z"
+     *     await client.phoneNumbers.create("acct_01j9a43avnfqzbjfch6pygv1td", {
+     *         area_code: "801",
+     *         type: "local"
      *     })
      */
-    public async send(
+    public async create(
         accountId: string,
-        request: Surge.BlastRequest = {},
-        requestOptions?: Blasts.RequestOptions,
-    ): Promise<Surge.BlastResponse> {
+        request: Surge.CreatePhoneNumberRequest,
+        requestOptions?: PhoneNumbers.RequestOptions,
+    ): Promise<Surge.PhoneNumber> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.SurgeEnvironment.Default,
-                `accounts/${encodeURIComponent(accountId)}/blasts`,
+                `accounts/${encodeURIComponent(accountId)}/phone_numbers`,
             ),
             method: "POST",
             headers: {
@@ -82,7 +76,7 @@ export class Blasts {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.BlastResponse;
+            return _response.body as Surge.PhoneNumber;
         }
 
         if (_response.error.reason === "status-code") {
@@ -99,7 +93,9 @@ export class Blasts {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /accounts/{account_id}/blasts.");
+                throw new errors.SurgeTimeoutError(
+                    "Timeout exceeded when calling POST /accounts/{account_id}/phone_numbers.",
+                );
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,

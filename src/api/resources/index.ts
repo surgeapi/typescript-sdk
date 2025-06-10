@@ -1,9 +1,14 @@
+export * as phoneNumbers from "./phoneNumbers";
+export * from "./phoneNumbers/types";
+export * as accounts from "./accounts";
 export * as blasts from "./blasts";
 export * as contacts from "./contacts";
 export * as messages from "./messages";
 export * as users from "./users";
 export * as verifications from "./verifications";
+export * from "./accounts/client/requests";
 export * from "./blasts/client/requests";
 export * from "./messages/client/requests";
+export * from "./phoneNumbers/client/requests";
 export * from "./users/client/requests";
 export * from "./verifications/client/requests";

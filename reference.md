@@ -1,5 +1,147 @@
 # Reference
 
+## Accounts
+
+<details><summary><code>client.accounts.<a href="/src/api/resources/accounts/client/Client.ts">create</a>({ ...params }) -> Surge.AccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new Account within the calling Platform.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.create({
+    name: "D\u00B7T Precision Auto Shop",
+    time_zone: "America/Los_Angeles",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Surge.CreateAccountRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Accounts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.accounts.<a href="/src/api/resources/accounts/client/Client.ts">update</a>(id, { ...params }) -> Surge.AccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates an Account
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.update("acct_01jpqjvfg9enpt7pyxd60pcmxj", {
+    name: "D\u00B7T Precision Auto Shop",
+    time_zone: "America/Los_Angeles",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` —
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Surge.UpdateAccountRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Accounts.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Blasts
 
 <details><summary><code>client.blasts.<a href="/src/api/resources/blasts/client/Client.ts">send</a>(accountId, { ...params }) -> Surge.BlastResponse</code></summary>
@@ -165,7 +307,7 @@ await client.contacts.create("acct_01j9a43avnfqzbjfch6pygv1td", {
 </dl>
 </details>
 
-<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">surgeWebContactControllerShow</a>(id) -> Surge.ContactResponse</code></summary>
+<details><summary><code>client.contacts.<a href="/src/api/resources/contacts/client/Client.ts">getContact</a>(id) -> Surge.ContactResponse</code></summary>
 <dl>
 <dd>
 
@@ -193,7 +335,7 @@ Retrieves a Contact object.
 <dd>
 
 ```typescript
-await client.contacts.surgeWebContactControllerShow("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
+await client.contacts.getContact("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf");
 ```
 
 </dd>
@@ -347,11 +489,9 @@ await client.messages.send("acct_01j9a43avnfqzbjfch6pygv1td", {
     conversation: {
         contact: {
             first_name: "Dominic",
-            id: "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
             last_name: "Toretto",
             phone_number: "+18015551234",
         },
-        id: "cnv_01j9e0dgmdfkj86c877ws0znae",
     },
 });
 ```
@@ -386,6 +526,82 @@ await client.messages.send("acct_01j9a43avnfqzbjfch6pygv1td", {
 <dd>
 
 **requestOptions:** `Messages.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## PhoneNumbers
+
+<details><summary><code>client.phoneNumbers.<a href="/src/api/resources/phoneNumbers/client/Client.ts">create</a>(accountId, { ...params }) -> Surge.PhoneNumber</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new phone number for the account.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.phoneNumbers.create("acct_01j9a43avnfqzbjfch6pygv1td", {
+    area_code: "801",
+    type: "local",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**accountId:** `string` — The account for which the phone number should be created.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Surge.CreatePhoneNumberRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbers.RequestOptions`
 
 </dd>
 </dl>
@@ -477,7 +693,7 @@ await client.users.create("acct_01j9a43avnfqzbjfch6pygv1td", {
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">surgeWebUserControllerShow</a>(id) -> Surge.UserResponse</code></summary>
+<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">getUser</a>(id) -> Surge.UserResponse</code></summary>
 <dl>
 <dd>
 
@@ -505,7 +721,7 @@ Retrieves a User object.
 <dd>
 
 ```typescript
-await client.users.surgeWebUserControllerShow("usr_01j9dwavghe1ttppewekjjkfrx");
+await client.users.getUser("usr_01j9dwavghe1ttppewekjjkfrx");
 ```
 
 </dd>

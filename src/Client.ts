@@ -4,9 +4,11 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
+import { Accounts } from "./api/resources/accounts/client/Client";
 import { Blasts } from "./api/resources/blasts/client/Client";
 import { Contacts } from "./api/resources/contacts/client/Client";
 import { Messages } from "./api/resources/messages/client/Client";
+import { PhoneNumbers } from "./api/resources/phoneNumbers/client/Client";
 import { Users } from "./api/resources/users/client/Client";
 import { Verifications } from "./api/resources/verifications/client/Client";
 
@@ -32,13 +34,19 @@ export declare namespace SurgeClient {
 }
 
 export class SurgeClient {
+    protected _accounts: Accounts | undefined;
     protected _blasts: Blasts | undefined;
     protected _contacts: Contacts | undefined;
     protected _messages: Messages | undefined;
+    protected _phoneNumbers: PhoneNumbers | undefined;
     protected _users: Users | undefined;
     protected _verifications: Verifications | undefined;
 
     constructor(protected readonly _options: SurgeClient.Options) {}
+
+    public get accounts(): Accounts {
+        return (this._accounts ??= new Accounts(this._options));
+    }
 
     public get blasts(): Blasts {
         return (this._blasts ??= new Blasts(this._options));
@@ -50,6 +58,10 @@ export class SurgeClient {
 
     public get messages(): Messages {
         return (this._messages ??= new Messages(this._options));
+    }
+
+    public get phoneNumbers(): PhoneNumbers {
+        return (this._phoneNumbers ??= new PhoneNumbers(this._options));
     }
 
     public get users(): Users {
