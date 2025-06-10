@@ -43,10 +43,17 @@ export class Verifications {
      *         phone_number: "+18015551234"
      *     })
      */
-    public async create(
+    public create(
         request: Surge.VerificationRequest,
         requestOptions?: Verifications.RequestOptions,
-    ): Promise<Surge.Verification> {
+    ): core.HttpResponsePromise<Surge.Verification> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    }
+
+    private async __create(
+        request: Surge.VerificationRequest,
+        requestOptions?: Verifications.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.Verification>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -59,8 +66,8 @@ export class Verifications {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -73,13 +80,14 @@ export class Verifications {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.Verification;
+            return { data: _response.body as Surge.Verification, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.SurgeError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -88,12 +96,14 @@ export class Verifications {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /verifications.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -113,11 +123,19 @@ export class Verifications {
      *         code: "123456"
      *     })
      */
-    public async check(
+    public check(
         id: string,
         request: Surge.VerificationCheckRequest,
         requestOptions?: Verifications.RequestOptions,
-    ): Promise<Surge.VerificationCheckOkResponse> {
+    ): core.HttpResponsePromise<Surge.VerificationCheckOkResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__check(id, request, requestOptions));
+    }
+
+    private async __check(
+        id: string,
+        request: Surge.VerificationCheckRequest,
+        requestOptions?: Verifications.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.VerificationCheckOkResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -130,8 +148,8 @@ export class Verifications {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -144,7 +162,7 @@ export class Verifications {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.VerificationCheckOkResponse;
+            return { data: _response.body as Surge.VerificationCheckOkResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -152,15 +170,18 @@ export class Verifications {
                 case 409:
                     throw new Surge.ConflictError(
                         _response.error.body as Surge.VerificationCheckAlreadyVerifiedResponse,
+                        _response.rawResponse,
                     );
                 case 422:
                     throw new Surge.UnprocessableEntityError(
                         _response.error.body as Surge.VerificationCheckIncorrectResponse,
+                        _response.rawResponse,
                     );
                 default:
                     throw new errors.SurgeError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
+                        rawResponse: _response.rawResponse,
                     });
             }
         }
@@ -170,12 +191,14 @@ export class Verifications {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /verifications/{id}/checks.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

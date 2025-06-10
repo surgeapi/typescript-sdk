@@ -50,11 +50,19 @@ export class Users {
      *         photo_url: "https://toretti.family/people/brian.jpg"
      *     })
      */
-    public async create(
+    public create(
         accountId: string,
         request: Surge.UserRequest,
         requestOptions?: Users.RequestOptions,
-    ): Promise<Surge.UserResponse> {
+    ): core.HttpResponsePromise<Surge.UserResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__create(accountId, request, requestOptions));
+    }
+
+    private async __create(
+        accountId: string,
+        request: Surge.UserRequest,
+        requestOptions?: Users.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.UserResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -67,8 +75,8 @@ export class Users {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -81,13 +89,14 @@ export class Users {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.UserResponse;
+            return { data: _response.body as Surge.UserResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.SurgeError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -96,12 +105,14 @@ export class Users {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /accounts/{account_id}/users.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -115,7 +126,14 @@ export class Users {
      * @example
      *     await client.users.getUser("usr_01j9dwavghe1ttppewekjjkfrx")
      */
-    public async getUser(id: string, requestOptions?: Users.RequestOptions): Promise<Surge.UserResponse> {
+    public getUser(id: string, requestOptions?: Users.RequestOptions): core.HttpResponsePromise<Surge.UserResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getUser(id, requestOptions));
+    }
+
+    private async __getUser(
+        id: string,
+        requestOptions?: Users.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.UserResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -128,8 +146,8 @@ export class Users {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -141,13 +159,14 @@ export class Users {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.UserResponse;
+            return { data: _response.body as Surge.UserResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.SurgeError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -156,12 +175,14 @@ export class Users {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError("Timeout exceeded when calling GET /users/{id}.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

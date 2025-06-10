@@ -1,6 +1,6 @@
 {
     "name": "@surgeapi/node",
-    "version": "0.25.5",
+    "version": "0.25.6",
     "private": false,
     "repository": "https://github.com/surgeapi/typescript-sdk",
     "license": "MIT",
@@ -40,5 +40,6 @@
         "fs": false,
         "os": false,
         "path": false
-    }
+    },
+    "packageManager": "yarn@1.22.22"
 }

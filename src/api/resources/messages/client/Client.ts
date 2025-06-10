@@ -54,11 +54,19 @@ export class Messages {
      *         }
      *     })
      */
-    public async send(
+    public send(
         accountId: string,
         request: Surge.MessageRequest,
         requestOptions?: Messages.RequestOptions,
-    ): Promise<Surge.MessageResponse> {
+    ): core.HttpResponsePromise<Surge.MessageResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__send(accountId, request, requestOptions));
+    }
+
+    private async __send(
+        accountId: string,
+        request: Surge.MessageRequest,
+        requestOptions?: Messages.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.MessageResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -71,8 +79,8 @@ export class Messages {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -85,13 +93,14 @@ export class Messages {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.MessageResponse;
+            return { data: _response.body as Surge.MessageResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.SurgeError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -100,6 +109,7 @@ export class Messages {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError(
@@ -108,6 +118,7 @@ export class Messages {
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

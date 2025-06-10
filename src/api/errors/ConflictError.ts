@@ -4,13 +4,15 @@
 
 import * as errors from "../../errors/index";
 import * as Surge from "../index";
+import * as core from "../../core";
 
 export class ConflictError extends errors.SurgeError {
-    constructor(body: Surge.VerificationCheckAlreadyVerifiedResponse) {
+    constructor(body: Surge.VerificationCheckAlreadyVerifiedResponse, rawResponse?: core.RawResponse) {
         super({
             message: "ConflictError",
             statusCode: 409,
             body: body,
+            rawResponse: rawResponse,
         });
         Object.setPrototypeOf(this, ConflictError.prototype);
     }

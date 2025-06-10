@@ -51,11 +51,19 @@ export class Blasts {
      *         send_at: "2024-02-01T15:00:00Z"
      *     })
      */
-    public async send(
+    public send(
         accountId: string,
         request: Surge.BlastRequest = {},
         requestOptions?: Blasts.RequestOptions,
-    ): Promise<Surge.BlastResponse> {
+    ): core.HttpResponsePromise<Surge.BlastResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__send(accountId, request, requestOptions));
+    }
+
+    private async __send(
+        accountId: string,
+        request: Surge.BlastRequest = {},
+        requestOptions?: Blasts.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.BlastResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -68,8 +76,8 @@ export class Blasts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -82,13 +90,14 @@ export class Blasts {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.BlastResponse;
+            return { data: _response.body as Surge.BlastResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.SurgeError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -97,12 +106,14 @@ export class Blasts {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError("Timeout exceeded when calling POST /accounts/{account_id}/blasts.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

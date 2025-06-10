@@ -50,11 +50,19 @@ export class Contacts {
      *         phone_number: "+18015551234"
      *     })
      */
-    public async create(
+    public create(
         accountId: string,
         request: Surge.ContactRequest,
         requestOptions?: Contacts.RequestOptions,
-    ): Promise<Surge.ContactResponse> {
+    ): core.HttpResponsePromise<Surge.ContactResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__create(accountId, request, requestOptions));
+    }
+
+    private async __create(
+        accountId: string,
+        request: Surge.ContactRequest,
+        requestOptions?: Contacts.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.ContactResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -67,8 +75,8 @@ export class Contacts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -81,13 +89,14 @@ export class Contacts {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.ContactResponse;
+            return { data: _response.body as Surge.ContactResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.SurgeError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -96,6 +105,7 @@ export class Contacts {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError(
@@ -104,6 +114,7 @@ export class Contacts {
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -117,7 +128,17 @@ export class Contacts {
      * @example
      *     await client.contacts.getContact("ctc_01j9dy8mdzfn3r0e8x1tbdrdrf")
      */
-    public async getContact(id: string, requestOptions?: Contacts.RequestOptions): Promise<Surge.ContactResponse> {
+    public getContact(
+        id: string,
+        requestOptions?: Contacts.RequestOptions,
+    ): core.HttpResponsePromise<Surge.ContactResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getContact(id, requestOptions));
+    }
+
+    private async __getContact(
+        id: string,
+        requestOptions?: Contacts.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.ContactResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -130,8 +151,8 @@ export class Contacts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -143,13 +164,14 @@ export class Contacts {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.ContactResponse;
+            return { data: _response.body as Surge.ContactResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.SurgeError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -158,12 +180,14 @@ export class Contacts {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError("Timeout exceeded when calling GET /contacts/{id}.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }
@@ -186,11 +210,19 @@ export class Contacts {
      *         phone_number: "+18015551234"
      *     })
      */
-    public async update(
+    public update(
         id: string,
         request: Surge.ContactRequest,
         requestOptions?: Contacts.RequestOptions,
-    ): Promise<Surge.ContactResponse> {
+    ): core.HttpResponsePromise<Surge.ContactResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(id, request, requestOptions));
+    }
+
+    private async __update(
+        id: string,
+        request: Surge.ContactRequest,
+        requestOptions?: Contacts.RequestOptions,
+    ): Promise<core.WithRawResponse<Surge.ContactResponse>> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -203,8 +235,8 @@ export class Contacts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.5",
-                "User-Agent": "@surgeapi/node/0.25.5",
+                "X-Fern-SDK-Version": "0.25.6",
+                "User-Agent": "@surgeapi/node/0.25.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -217,13 +249,14 @@ export class Contacts {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Surge.ContactResponse;
+            return { data: _response.body as Surge.ContactResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             throw new errors.SurgeError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
+                rawResponse: _response.rawResponse,
             });
         }
 
@@ -232,12 +265,14 @@ export class Contacts {
                 throw new errors.SurgeError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
                 });
             case "timeout":
                 throw new errors.SurgeTimeoutError("Timeout exceeded when calling PATCH /contacts/{id}.");
             case "unknown":
                 throw new errors.SurgeError({
                     message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
                 });
         }
     }

@@ -4,13 +4,15 @@
 
 import * as errors from "../../errors/index";
 import * as Surge from "../index";
+import * as core from "../../core";
 
 export class UnprocessableEntityError extends errors.SurgeError {
-    constructor(body: Surge.VerificationCheckIncorrectResponse) {
+    constructor(body: Surge.VerificationCheckIncorrectResponse, rawResponse?: core.RawResponse) {
         super({
             message: "UnprocessableEntityError",
             statusCode: 422,
             body: body,
+            rawResponse: rawResponse,
         });
         Object.setPrototypeOf(this, UnprocessableEntityError.prototype);
     }
