@@ -1,6 +1,6 @@
 {
     "name": "@surgeapi/node",
-    "version": "0.25.4",
+    "version": "0.25.5",
     "private": false,
     "repository": "https://github.com/surgeapi/typescript-sdk",
     "license": "MIT",
