@@ -11,22 +11,23 @@ import * as Surge from "../../../../index";
  *                 url: "https://example.com/image.jpg"
  *             }],
  *         body: "Join us for our grand opening!",
- *         contacts: ["ctc_01j9dy8mdzfn3r0e8x1tbdrdrf"],
  *         name: "Grand Opening Announcement",
- *         segments: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf"],
- *         send_at: "2024-02-01T15:00:00Z"
+ *         send_at: "2024-02-01T15:00:00Z",
+ *         to: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"]
  *     }
  */
 export interface BlastRequest {
     attachments?: Surge.AttachmentParams[];
     /** The message body. */
     body?: string;
-    /** List of contact IDs to send the blast to. */
+    /** Deprecated. Use `to` instead. */
     contacts?: string[];
     /** Optional name for the blast. */
     name?: string;
-    /** List of segment IDs to send the blast to. */
+    /** Deprecated. Use `to` instead. */
     segments?: string[];
     /** When to send the blast. If not provided, sends immediately. */
     send_at?: string;
+    /** List of recipients to whom the blast should be sent. This can be a combination of contact IDs, segment IDs, and phone numbers. */
+    to?: string[];
 }

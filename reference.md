@@ -179,10 +179,9 @@ await client.blasts.send("acct_01j9a43avnfqzbjfch6pygv1td", {
         },
     ],
     body: "Join us for our grand opening!",
-    contacts: ["ctc_01j9dy8mdzfn3r0e8x1tbdrdrf"],
     name: "Grand Opening Announcement",
-    segments: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf"],
     send_at: "2024-02-01T15:00:00Z",
+    to: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
 });
 ```
 

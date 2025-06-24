@@ -9,6 +9,6 @@ import * as Surge from "../index";
  */
 export interface MessageConversationParams {
     contact: Surge.MessageConversationContactParams;
-    /** The phone number from which to send the message. This can be either the phone number itself or its ID in Surge. */
+    /** The phone number from which to send the message. This can be either the phone number in E.164 format or a Surge phone number id. */
     phone_number?: string;
 }

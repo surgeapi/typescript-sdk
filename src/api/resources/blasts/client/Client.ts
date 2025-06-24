@@ -45,10 +45,9 @@ export class Blasts {
      *                 url: "https://example.com/image.jpg"
      *             }],
      *         body: "Join us for our grand opening!",
-     *         contacts: ["ctc_01j9dy8mdzfn3r0e8x1tbdrdrf"],
      *         name: "Grand Opening Announcement",
-     *         segments: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf"],
-     *         send_at: "2024-02-01T15:00:00Z"
+     *         send_at: "2024-02-01T15:00:00Z",
+     *         to: ["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"]
      *     })
      */
     public send(
@@ -76,8 +75,8 @@ export class Blasts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@surgeapi/node",
-                "X-Fern-SDK-Version": "0.25.6",
-                "User-Agent": "@surgeapi/node/0.25.6",
+                "X-Fern-SDK-Version": "0.25.7",
+                "User-Agent": "@surgeapi/node/0.25.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
