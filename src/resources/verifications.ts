@@ -66,6 +66,16 @@ export interface Verification {
 }
 
 /**
+ * Parameters for creating a Verification
+ */
+export interface VerificationParams {
+  /**
+   * The phone number to be verified. In E.164 format.
+   */
+  phone_number: string;
+}
+
+/**
  * The response returned from checking a Verification code
  */
 export interface VerificationCheckResponse {
@@ -105,6 +115,7 @@ export interface VerificationCheckParams {
 export declare namespace Verifications {
   export {
     type Verification as Verification,
+    type VerificationParams as VerificationParams,
     type VerificationCheckResponse as VerificationCheckResponse,
     type VerificationCreateParams as VerificationCreateParams,
     type VerificationCheckParams as VerificationCheckParams,

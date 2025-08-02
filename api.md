@@ -3,7 +3,9 @@
 Types:
 
 - <code><a href="./src/resources/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountParams</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountStatus</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountUpdateParams</a></code>
 
 Methods:
 
@@ -16,6 +18,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/blasts.ts">Blast</a></code>
+- <code><a href="./src/resources/blasts.ts">BlastParams</a></code>
 
 Methods:
 
@@ -26,6 +29,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/campaigns.ts">Campaign</a></code>
+- <code><a href="./src/resources/campaigns.ts">CampaignParams</a></code>
 
 Methods:
 
@@ -36,6 +40,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/contacts.ts">Contact</a></code>
+- <code><a href="./src/resources/contacts.ts">ContactParams</a></code>
 
 Methods:
 
@@ -48,6 +53,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/messages.ts">Message</a></code>
+- <code><a href="./src/resources/messages.ts">MessageParams</a></code>
 
 Methods:
 
@@ -61,23 +67,25 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">create</a>(accountID, { ...params }) -> PhoneNumber</code>
+- <code title="post /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">purchase</a>(accountID, { ...params }) -> PhoneNumber</code>
 
 # Tokens
 
 Types:
 
-- <code><a href="./src/resources/tokens.ts">TokenCreateTokenResponse</a></code>
+- <code><a href="./src/resources/tokens.ts">TokenParams</a></code>
+- <code><a href="./src/resources/tokens.ts">TokenResponse</a></code>
 
 Methods:
 
-- <code title="post /users/{user_id}/tokens">client.tokens.<a href="./src/resources/tokens.ts">createToken</a>(userID, { ...params }) -> TokenCreateTokenResponse</code>
+- <code title="post /users/{user_id}/tokens">client.tokens.<a href="./src/resources/tokens.ts">createToken</a>(userID, { ...params }) -> TokenResponse</code>
 
 # Users
 
 Types:
 
 - <code><a href="./src/resources/users.ts">User</a></code>
+- <code><a href="./src/resources/users.ts">UserParams</a></code>
 
 Methods:
 
@@ -90,6 +98,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/verifications.ts">Verification</a></code>
+- <code><a href="./src/resources/verifications.ts">VerificationParams</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationCheckResponse</a></code>
 
 Methods:

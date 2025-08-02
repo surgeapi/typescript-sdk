@@ -81,6 +81,31 @@ export interface User {
   photo_url?: string;
 }
 
+/**
+ * POST body for creating a user
+ */
+export interface UserParams {
+  /**
+   * The user's first name.
+   */
+  first_name: string;
+
+  /**
+   * The user's last name.
+   */
+  last_name?: string;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * URL of a photo to be used as the user's avatar.
+   */
+  photo_url?: string;
+}
+
 export interface UserUpdateParams {
   /**
    * The user's first name.
@@ -128,6 +153,7 @@ export interface UserUsersParams {
 export declare namespace Users {
   export {
     type User as User,
+    type UserParams as UserParams,
     type UserUpdateParams as UserUpdateParams,
     type UserUsersParams as UserUsersParams,
   };

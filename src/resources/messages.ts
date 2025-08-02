@@ -137,6 +137,111 @@ export namespace Message {
   }
 }
 
+/**
+ * Payload for creating a message. Either an attachment or the body must be given.
+ * You can specify the recipient either using the 'conversation' parameter or the
+ * 'to'/'from' parameters, but not both.
+ */
+export type MessageParams = MessageParams.UnionMember0 | MessageParams.UnionMember1;
+
+export namespace MessageParams {
+  /**
+   * Create a message while including parameters for the conversation in which the
+   * message should be sent.
+   */
+  export interface UnionMember0 {
+    /**
+     * Params for selecting or creating a new conversation. Either the id or the
+     * Contact must be given.
+     */
+    conversation: UnionMember0.Conversation;
+
+    attachments?: Array<UnionMember0.Attachment>;
+
+    /**
+     * The message body.
+     */
+    body?: string;
+
+    /**
+     * An optional datetime for scheduling message up to a couple of months in the
+     * future.
+     */
+    send_at?: string;
+  }
+
+  export namespace UnionMember0 {
+    /**
+     * Params for selecting or creating a new conversation. Either the id or the
+     * Contact must be given.
+     */
+    export interface Conversation {
+      /**
+       * Parameters for creating a contact
+       */
+      contact: ContactsAPI.ContactParams;
+
+      /**
+       * The phone number from which to send the message. This can be either the phone
+       * number in E.164 format or a Surge phone number id.
+       */
+      phone_number?: string;
+    }
+
+    /**
+     * Params for creating an attachment
+     */
+    export interface Attachment {
+      /**
+       * The URL of the attachment.
+       */
+      url: string;
+    }
+  }
+
+  /**
+   * Create a basic message by specifying just the to/from phone numbers.
+   */
+  export interface UnionMember1 {
+    /**
+     * The recipient's phone number in E.164 format. Cannot be used together with
+     * 'conversation'.
+     */
+    to: string;
+
+    attachments?: Array<UnionMember1.Attachment>;
+
+    /**
+     * The message body.
+     */
+    body?: string;
+
+    /**
+     * The sender's phone number in E.164 format or phone number ID. If omitted, uses
+     * the account's default phone number. Cannot be used together with 'conversation'.
+     */
+    from?: string;
+
+    /**
+     * An optional datetime for scheduling message up to a couple of months in the
+     * future.
+     */
+    send_at?: string;
+  }
+
+  export namespace UnionMember1 {
+    /**
+     * Params for creating an attachment
+     */
+    export interface Attachment {
+      /**
+       * The URL of the attachment.
+       */
+      url: string;
+    }
+  }
+}
+
 export type MessageSendParams = MessageSendParams.Variant0 | MessageSendParams.Variant1;
 
 export declare namespace MessageSendParams {
@@ -170,45 +275,13 @@ export declare namespace MessageSendParams {
       /**
        * Parameters for creating a contact
        */
-      contact: Conversation.Contact;
+      contact: ContactsAPI.ContactParams;
 
       /**
        * The phone number from which to send the message. This can be either the phone
        * number in E.164 format or a Surge phone number id.
        */
       phone_number?: string;
-    }
-
-    export namespace Conversation {
-      /**
-       * Parameters for creating a contact
-       */
-      export interface Contact {
-        /**
-         * The contact's phone number in E.164 format.
-         */
-        phone_number: string;
-
-        /**
-         * The contact's email address.
-         */
-        email?: string;
-
-        /**
-         * The contact's first name.
-         */
-        first_name?: string;
-
-        /**
-         * The contact's last name.
-         */
-        last_name?: string;
-
-        /**
-         * Set of key-value pairs that will be stored with the object.
-         */
-        metadata?: { [key: string]: string };
-      }
     }
 
     /**
@@ -263,5 +336,9 @@ export declare namespace MessageSendParams {
 }
 
 export declare namespace Messages {
-  export { type Message as Message, type MessageSendParams as MessageSendParams };
+  export {
+    type Message as Message,
+    type MessageParams as MessageParams,
+    type MessageSendParams as MessageSendParams,
+  };
 }

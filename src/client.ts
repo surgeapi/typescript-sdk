@@ -21,22 +21,30 @@ import {
   Account,
   AccountCheckStatusParams,
   AccountCreateParams,
+  AccountParams,
   AccountStatus,
   AccountUpdateParams,
   Accounts,
 } from './resources/accounts';
-import { Blast, BlastBlastsParams, Blasts } from './resources/blasts';
-import { Campaign, CampaignCampaignsParams, Campaigns } from './resources/campaigns';
-import { Contact, ContactCreateParams, ContactUpdateParams, Contacts } from './resources/contacts';
-import { Message, MessageSendParams, Messages } from './resources/messages';
-import { PhoneNumber, PhoneNumberCreateParams, PhoneNumbers } from './resources/phone-numbers';
-import { TokenCreateTokenParams, TokenCreateTokenResponse, Tokens } from './resources/tokens';
-import { User, UserUpdateParams, UserUsersParams, Users } from './resources/users';
+import { Blast, BlastBlastsParams, BlastParams, Blasts } from './resources/blasts';
+import { Campaign, CampaignCampaignsParams, CampaignParams, Campaigns } from './resources/campaigns';
+import {
+  Contact,
+  ContactCreateParams,
+  ContactParams,
+  ContactUpdateParams,
+  Contacts,
+} from './resources/contacts';
+import { Message, MessageParams, MessageSendParams, Messages } from './resources/messages';
+import { PhoneNumber, PhoneNumberPurchaseParams, PhoneNumbers } from './resources/phone-numbers';
+import { TokenCreateTokenParams, TokenParams, TokenResponse, Tokens } from './resources/tokens';
+import { User, UserParams, UserUpdateParams, UserUsersParams, Users } from './resources/users';
 import {
   Verification,
   VerificationCheckParams,
   VerificationCheckResponse,
   VerificationCreateParams,
+  VerificationParams,
   Verifications,
 } from './resources/verifications';
 import { type Fetch } from './internal/builtin-types';
@@ -745,44 +753,59 @@ export declare namespace Surge {
   export {
     Accounts as Accounts,
     type Account as Account,
+    type AccountParams as AccountParams,
     type AccountStatus as AccountStatus,
-    type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
+    type AccountCreateParams as AccountCreateParams,
     type AccountCheckStatusParams as AccountCheckStatusParams,
   };
 
-  export { Blasts as Blasts, type Blast as Blast, type BlastBlastsParams as BlastBlastsParams };
+  export {
+    Blasts as Blasts,
+    type Blast as Blast,
+    type BlastParams as BlastParams,
+    type BlastBlastsParams as BlastBlastsParams,
+  };
 
   export {
     Campaigns as Campaigns,
     type Campaign as Campaign,
+    type CampaignParams as CampaignParams,
     type CampaignCampaignsParams as CampaignCampaignsParams,
   };
 
   export {
     Contacts as Contacts,
     type Contact as Contact,
+    type ContactParams as ContactParams,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
   };
 
-  export { Messages as Messages, type Message as Message, type MessageSendParams as MessageSendParams };
+  export {
+    Messages as Messages,
+    type Message as Message,
+    type MessageParams as MessageParams,
+    type MessageSendParams as MessageSendParams,
+  };
 
   export {
     PhoneNumbers as PhoneNumbers,
     type PhoneNumber as PhoneNumber,
-    type PhoneNumberCreateParams as PhoneNumberCreateParams,
+    type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
 
   export {
     Tokens as Tokens,
-    type TokenCreateTokenResponse as TokenCreateTokenResponse,
+    type TokenParams as TokenParams,
+    type TokenResponse as TokenResponse,
     type TokenCreateTokenParams as TokenCreateTokenParams,
   };
 
   export {
     Users as Users,
     type User as User,
+    type UserParams as UserParams,
     type UserUpdateParams as UserUpdateParams,
     type UserUsersParams as UserUsersParams,
   };
@@ -790,6 +813,7 @@ export declare namespace Surge {
   export {
     Verifications as Verifications,
     type Verification as Verification,
+    type VerificationParams as VerificationParams,
     type VerificationCheckResponse as VerificationCheckResponse,
     type VerificationCreateParams as VerificationCreateParams,
     type VerificationCheckParams as VerificationCheckParams,

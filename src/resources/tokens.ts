@@ -12,7 +12,7 @@ export class Tokens extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.tokens.createToken(
+   * const tokenResponse = await client.tokens.createToken(
    *   'usr_01jymgdfrpec2asc5m0z3a6fr9',
    * );
    * ```
@@ -21,15 +21,25 @@ export class Tokens extends APIResource {
     userID: string,
     body: TokenCreateTokenParams,
     options?: RequestOptions,
-  ): APIPromise<TokenCreateTokenResponse> {
+  ): APIPromise<TokenResponse> {
     return this._client.post(path`/users/${userID}/tokens`, { body, ...options });
   }
 }
 
 /**
+ * A request to create a token
+ */
+export interface TokenParams {
+  /**
+   * For how many seconds the token should be accepted. Defaults to 15 minutes.
+   */
+  duration_seconds?: number;
+}
+
+/**
  * Response when token has been created successfully
  */
-export interface TokenCreateTokenResponse {
+export interface TokenResponse {
   /**
    * The created token.
    */
@@ -45,7 +55,8 @@ export interface TokenCreateTokenParams {
 
 export declare namespace Tokens {
   export {
-    type TokenCreateTokenResponse as TokenCreateTokenResponse,
+    type TokenParams as TokenParams,
+    type TokenResponse as TokenResponse,
     type TokenCreateTokenParams as TokenCreateTokenParams,
   };
 }

@@ -11,15 +11,15 @@ export class PhoneNumbers extends APIResource {
    *
    * @example
    * ```ts
-   * const phoneNumber = await client.phoneNumbers.create(
+   * const phoneNumber = await client.phoneNumbers.purchase(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    *   { type: 'local' },
    * );
    * ```
    */
-  create(
+  purchase(
     accountID: string,
-    body: PhoneNumberCreateParams,
+    body: PhoneNumberPurchaseParams,
     options?: RequestOptions,
   ): APIPromise<PhoneNumber> {
     return this._client.post(path`/accounts/${accountID}/phone_numbers`, { body, ...options });
@@ -46,7 +46,7 @@ export interface PhoneNumber {
   type: 'local' | 'toll_free';
 }
 
-export interface PhoneNumberCreateParams {
+export interface PhoneNumberPurchaseParams {
   /**
    * Whether the phone number is local or toll-free
    */
@@ -59,5 +59,5 @@ export interface PhoneNumberCreateParams {
 }
 
 export declare namespace PhoneNumbers {
-  export { type PhoneNumber as PhoneNumber, type PhoneNumberCreateParams as PhoneNumberCreateParams };
+  export { type PhoneNumber as PhoneNumber, type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams };
 }

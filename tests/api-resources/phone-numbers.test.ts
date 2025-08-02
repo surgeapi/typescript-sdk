@@ -9,8 +9,10 @@ const client = new Surge({
 
 describe('resource phoneNumbers', () => {
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.phoneNumbers.create('acct_01j9a43avnfqzbjfch6pygv1td', { type: 'local' });
+  test.skip('purchase: only required params', async () => {
+    const responsePromise = client.phoneNumbers.purchase('acct_01j9a43avnfqzbjfch6pygv1td', {
+      type: 'local',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +23,8 @@ describe('resource phoneNumbers', () => {
   });
 
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('create: required and optional params', async () => {
-    const response = await client.phoneNumbers.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+  test.skip('purchase: required and optional params', async () => {
+    const response = await client.phoneNumbers.purchase('acct_01j9a43avnfqzbjfch6pygv1td', {
       type: 'local',
       area_code: '801',
     });
