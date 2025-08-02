@@ -1,3 +1,11 @@
+# Shared
+
+Types:
+
+- <code><a href="./src/resources/shared.ts">AttachmentParams</a></code>
+- <code><a href="./src/resources/shared.ts">Contact</a></code>
+- <code><a href="./src/resources/shared.ts">ContactParams</a></code>
+
 # Accounts
 
 Types:
@@ -6,6 +14,8 @@ Types:
 - <code><a href="./src/resources/accounts.ts">AccountParams</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountStatus</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountUpdateParams</a></code>
+- <code><a href="./src/resources/accounts.ts">Organization</a></code>
+- <code><a href="./src/resources/accounts.ts">OrganizationParams</a></code>
 
 Methods:
 
@@ -36,11 +46,6 @@ Methods:
 - <code title="post /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">campaigns</a>(accountID, { ...params }) -> Campaign</code>
 
 # Contacts
-
-Types:
-
-- <code><a href="./src/resources/contacts.ts">Contact</a></code>
-- <code><a href="./src/resources/contacts.ts">ContactParams</a></code>
 
 Methods:
 

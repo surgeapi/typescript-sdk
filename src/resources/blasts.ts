@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -61,7 +62,7 @@ export namespace Blast {
  * Parameters for creating a Blast
  */
 export interface BlastParams {
-  attachments?: Array<BlastParams.Attachment>;
+  attachments?: Array<Shared.AttachmentParams>;
 
   /**
    * The message body.
@@ -93,22 +94,10 @@ export interface BlastParams {
    * of contact IDs, segment IDs, and phone numbers.
    */
   to?: Array<string>;
-}
-
-export namespace BlastParams {
-  /**
-   * Params for creating an attachment
-   */
-  export interface Attachment {
-    /**
-     * The URL of the attachment.
-     */
-    url: string;
-  }
 }
 
 export interface BlastBlastsParams {
-  attachments?: Array<BlastBlastsParams.Attachment>;
+  attachments?: Array<Shared.AttachmentParams>;
 
   /**
    * The message body.
@@ -140,18 +129,6 @@ export interface BlastBlastsParams {
    * of contact IDs, segment IDs, and phone numbers.
    */
   to?: Array<string>;
-}
-
-export namespace BlastBlastsParams {
-  /**
-   * Params for creating an attachment
-   */
-  export interface Attachment {
-    /**
-     * The URL of the attachment.
-     */
-    url: string;
-  }
 }
 
 export declare namespace Blasts {

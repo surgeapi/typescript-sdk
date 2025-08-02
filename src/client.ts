@@ -25,16 +25,12 @@ import {
   AccountStatus,
   AccountUpdateParams,
   Accounts,
+  Organization,
+  OrganizationParams,
 } from './resources/accounts';
 import { Blast, BlastBlastsParams, BlastParams, Blasts } from './resources/blasts';
 import { Campaign, CampaignCampaignsParams, CampaignParams, Campaigns } from './resources/campaigns';
-import {
-  Contact,
-  ContactCreateParams,
-  ContactParams,
-  ContactUpdateParams,
-  Contacts,
-} from './resources/contacts';
+import { ContactCreateParams, ContactUpdateParams, Contacts } from './resources/contacts';
 import { Message, MessageParams, MessageSendParams, Messages } from './resources/messages';
 import { PhoneNumber, PhoneNumberPurchaseParams, PhoneNumbers } from './resources/phone-numbers';
 import { TokenCreateTokenParams, TokenParams, TokenResponse, Tokens } from './resources/tokens';
@@ -756,6 +752,8 @@ export declare namespace Surge {
     type AccountParams as AccountParams,
     type AccountStatus as AccountStatus,
     type AccountUpdateParams as AccountUpdateParams,
+    type Organization as Organization,
+    type OrganizationParams as OrganizationParams,
     type AccountCreateParams as AccountCreateParams,
     type AccountCheckStatusParams as AccountCheckStatusParams,
   };
@@ -776,8 +774,6 @@ export declare namespace Surge {
 
   export {
     Contacts as Contacts,
-    type Contact as Contact,
-    type ContactParams as ContactParams,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
   };
@@ -818,4 +814,8 @@ export declare namespace Surge {
     type VerificationCreateParams as VerificationCreateParams,
     type VerificationCheckParams as VerificationCheckParams,
   };
+
+  export type AttachmentParams = API.AttachmentParams;
+  export type Contact = API.Contact;
+  export type ContactParams = API.ContactParams;
 }

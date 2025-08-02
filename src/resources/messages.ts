@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as ContactsAPI from './contacts';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -106,7 +106,7 @@ export namespace Message {
     /**
      * A contact who has consented to receive messages
      */
-    contact: ContactsAPI.Contact;
+    contact: Shared.Contact;
 
     /**
      * This is the phone number tied to the Surge account.
@@ -156,7 +156,7 @@ export namespace MessageParams {
      */
     conversation: MessageParamsWithConversation.Conversation;
 
-    attachments?: Array<MessageParamsWithConversation.Attachment>;
+    attachments?: Array<Shared.AttachmentParams>;
 
     /**
      * The message body.
@@ -179,23 +179,13 @@ export namespace MessageParams {
       /**
        * Parameters for creating a contact
        */
-      contact: ContactsAPI.ContactParams;
+      contact: Shared.ContactParams;
 
       /**
        * The phone number from which to send the message. This can be either the phone
        * number in E.164 format or a Surge phone number id.
        */
       phone_number?: string;
-    }
-
-    /**
-     * Params for creating an attachment
-     */
-    export interface Attachment {
-      /**
-       * The URL of the attachment.
-       */
-      url: string;
     }
   }
 
@@ -209,7 +199,7 @@ export namespace MessageParams {
      */
     to: string;
 
-    attachments?: Array<SimpleMessageParams.Attachment>;
+    attachments?: Array<Shared.AttachmentParams>;
 
     /**
      * The message body.
@@ -227,18 +217,6 @@ export namespace MessageParams {
      * future.
      */
     send_at?: string;
-  }
-
-  export namespace SimpleMessageParams {
-    /**
-     * Params for creating an attachment
-     */
-    export interface Attachment {
-      /**
-       * The URL of the attachment.
-       */
-      url: string;
-    }
   }
 }
 
@@ -254,7 +232,7 @@ export declare namespace MessageSendParams {
      */
     conversation: MessageParamsWithConversation.Conversation;
 
-    attachments?: Array<MessageParamsWithConversation.Attachment>;
+    attachments?: Array<Shared.AttachmentParams>;
 
     /**
      * The message body.
@@ -277,23 +255,13 @@ export declare namespace MessageSendParams {
       /**
        * Parameters for creating a contact
        */
-      contact: ContactsAPI.ContactParams;
+      contact: Shared.ContactParams;
 
       /**
        * The phone number from which to send the message. This can be either the phone
        * number in E.164 format or a Surge phone number id.
        */
       phone_number?: string;
-    }
-
-    /**
-     * Params for creating an attachment
-     */
-    export interface Attachment {
-      /**
-       * The URL of the attachment.
-       */
-      url: string;
     }
   }
 
@@ -304,7 +272,7 @@ export declare namespace MessageSendParams {
      */
     to: string;
 
-    attachments?: Array<SimpleMessageParams.Attachment>;
+    attachments?: Array<Shared.AttachmentParams>;
 
     /**
      * The message body.
@@ -322,18 +290,6 @@ export declare namespace MessageSendParams {
      * future.
      */
     send_at?: string;
-  }
-
-  export namespace SimpleMessageParams {
-    /**
-     * Params for creating an attachment
-     */
-    export interface Attachment {
-      /**
-       * The URL of the attachment.
-       */
-      url: string;
-    }
   }
 }
 

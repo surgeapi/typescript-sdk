@@ -30,7 +30,7 @@ const client = new Surge({
 });
 
 const message = await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', {
-  conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } },
+  conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
   attachments: [{ url: 'https://toretto.family/coronas.gif' }],
   body: 'Thought you could leave without saying goodbye?',
 });
@@ -51,7 +51,7 @@ const client = new Surge({
 });
 
 const params: Surge.MessageSendParams = {
-  conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } },
+  conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
   attachments: [{ url: 'https://toretto.family/coronas.gif' }],
   body: 'Thought you could leave without saying goodbye?',
 };
@@ -70,7 +70,7 @@ a subclass of `APIError` will be thrown:
 ```ts
 const message = await client.messages
   .send('acct_01j9a43avnfqzbjfch6pygv1td', {
-    conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } },
+    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
   })
@@ -114,7 +114,7 @@ const client = new Surge({
 });
 
 // Or, configure per-request:
-await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
+await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
   maxRetries: 5,
 });
 ```
@@ -131,7 +131,7 @@ const client = new Surge({
 });
 
 // Override per-request:
-await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
+await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -156,7 +156,7 @@ const client = new Surge();
 
 const response = await client.messages
   .send('acct_01j9a43avnfqzbjfch6pygv1td', {
-    conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } },
+    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
   })
@@ -166,7 +166,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: message, response: raw } = await client.messages
   .send('acct_01j9a43avnfqzbjfch6pygv1td', {
-    conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } },
+    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
   })
