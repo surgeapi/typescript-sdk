@@ -818,4 +818,5 @@ export declare namespace Surge {
   export type AttachmentParams = API.AttachmentParams;
   export type Contact = API.Contact;
   export type ContactParams = API.ContactParams;
+  export type Error = API.Error;
 }

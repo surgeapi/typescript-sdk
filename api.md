@@ -5,6 +5,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">AttachmentParams</a></code>
 - <code><a href="./src/resources/shared.ts">Contact</a></code>
 - <code><a href="./src/resources/shared.ts">ContactParams</a></code>
+- <code><a href="./src/resources/shared.ts">Error</a></code>
 
 # Accounts
 
