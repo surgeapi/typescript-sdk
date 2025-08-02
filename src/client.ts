@@ -18,36 +18,20 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  Account,
   AccountCheckStatusParams,
   AccountCreateParams,
-  AccountCreateResponse,
   AccountStatus,
   AccountUpdateParams,
-  AccountUpdateResponse,
   Accounts,
 } from './resources/accounts';
-import { BlastBlastsParams, BlastBlastsResponse, Blasts } from './resources/blasts';
+import { Blast, BlastBlastsParams, Blasts } from './resources/blasts';
 import { Campaign, CampaignCampaignsParams, Campaigns } from './resources/campaigns';
-import {
-  Contact,
-  ContactCreateParams,
-  ContactCreateResponse,
-  ContactRetrieveResponse,
-  ContactUpdateParams,
-  ContactUpdateResponse,
-  Contacts,
-} from './resources/contacts';
-import { MessageSendParams, MessageSendResponse, Messages } from './resources/messages';
+import { Contact, ContactCreateParams, ContactUpdateParams, Contacts } from './resources/contacts';
+import { Message, MessageSendParams, Messages } from './resources/messages';
 import { PhoneNumber, PhoneNumberCreateParams, PhoneNumbers } from './resources/phone-numbers';
 import { TokenCreateTokenParams, TokenCreateTokenResponse, Tokens } from './resources/tokens';
-import {
-  UserRetrieveResponse,
-  UserUpdateParams,
-  UserUpdateResponse,
-  UserUsersParams,
-  UserUsersResponse,
-  Users,
-} from './resources/users';
+import { User, UserUpdateParams, UserUsersParams, Users } from './resources/users';
 import {
   Verification,
   VerificationCheckParams,
@@ -760,19 +744,14 @@ export declare namespace Surge {
 
   export {
     Accounts as Accounts,
+    type Account as Account,
     type AccountStatus as AccountStatus,
-    type AccountCreateResponse as AccountCreateResponse,
-    type AccountUpdateResponse as AccountUpdateResponse,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
     type AccountCheckStatusParams as AccountCheckStatusParams,
   };
 
-  export {
-    Blasts as Blasts,
-    type BlastBlastsResponse as BlastBlastsResponse,
-    type BlastBlastsParams as BlastBlastsParams,
-  };
+  export { Blasts as Blasts, type Blast as Blast, type BlastBlastsParams as BlastBlastsParams };
 
   export {
     Campaigns as Campaigns,
@@ -783,18 +762,11 @@ export declare namespace Surge {
   export {
     Contacts as Contacts,
     type Contact as Contact,
-    type ContactCreateResponse as ContactCreateResponse,
-    type ContactRetrieveResponse as ContactRetrieveResponse,
-    type ContactUpdateResponse as ContactUpdateResponse,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
   };
 
-  export {
-    Messages as Messages,
-    type MessageSendResponse as MessageSendResponse,
-    type MessageSendParams as MessageSendParams,
-  };
+  export { Messages as Messages, type Message as Message, type MessageSendParams as MessageSendParams };
 
   export {
     PhoneNumbers as PhoneNumbers,
@@ -810,9 +782,7 @@ export declare namespace Surge {
 
   export {
     Users as Users,
-    type UserRetrieveResponse as UserRetrieveResponse,
-    type UserUpdateResponse as UserUpdateResponse,
-    type UserUsersResponse as UserUsersResponse,
+    type User as User,
     type UserUpdateParams as UserUpdateParams,
     type UserUsersParams as UserUsersParams,
   };

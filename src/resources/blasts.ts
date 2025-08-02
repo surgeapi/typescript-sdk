@@ -11,30 +11,26 @@ export class Blasts extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.blasts.blasts(
+   * const blast = await client.blasts.blasts(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    * );
    * ```
    */
-  blasts(
-    accountID: string,
-    body: BlastBlastsParams,
-    options?: RequestOptions,
-  ): APIPromise<BlastBlastsResponse> {
+  blasts(accountID: string, body: BlastBlastsParams, options?: RequestOptions): APIPromise<Blast> {
     return this._client.post(path`/accounts/${accountID}/blasts`, { body, ...options });
   }
 }
 
 /**
- * Response schema for single blast
+ * A Blast is a message sent to multiple recipients at once.
  */
-export interface BlastBlastsResponse {
+export interface Blast {
   /**
    * Unique identifier for the object.
    */
   id?: string;
 
-  attachments?: Array<BlastBlastsResponse.Attachment>;
+  attachments?: Array<Blast.Attachment>;
 
   /**
    * The message body.
@@ -52,7 +48,7 @@ export interface BlastBlastsResponse {
   send_at?: string;
 }
 
-export namespace BlastBlastsResponse {
+export namespace Blast {
   export interface Attachment {
     /**
      * The URL of the attachment.
@@ -109,5 +105,5 @@ export namespace BlastBlastsParams {
 }
 
 export declare namespace Blasts {
-  export { type BlastBlastsResponse as BlastBlastsResponse, type BlastBlastsParams as BlastBlastsParams };
+  export { type Blast as Blast, type BlastBlastsParams as BlastBlastsParams };
 }

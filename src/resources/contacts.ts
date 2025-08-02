@@ -17,11 +17,7 @@ export class Contacts extends APIResource {
    * );
    * ```
    */
-  create(
-    accountID: string,
-    body: ContactCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<ContactCreateResponse> {
+  create(accountID: string, body: ContactCreateParams, options?: RequestOptions): APIPromise<Contact> {
     return this._client.post(path`/accounts/${accountID}/contacts`, { body, ...options });
   }
 
@@ -35,7 +31,7 @@ export class Contacts extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<ContactRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Contact> {
     return this._client.get(path`/contacts/${id}`, options);
   }
 
@@ -51,7 +47,7 @@ export class Contacts extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: ContactUpdateParams, options?: RequestOptions): APIPromise<ContactUpdateResponse> {
+  update(id: string, body: ContactUpdateParams, options?: RequestOptions): APIPromise<Contact> {
     return this._client.patch(path`/contacts/${id}`, { body, ...options });
   }
 }
@@ -71,26 +67,6 @@ export interface Contact {
   phone_number: string;
 
   /**
-   * The contact's first name.
-   */
-  first_name?: string;
-
-  /**
-   * The contact's last name.
-   */
-  last_name?: string;
-}
-
-/**
- * Response schema for single contact
- */
-export interface ContactCreateResponse {
-  /**
-   * Unique identifier for the object.
-   */
-  id?: string;
-
-  /**
    * The contact's email address.
    */
   email?: string;
@@ -109,81 +85,6 @@ export interface ContactCreateResponse {
    * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
-
-  /**
-   * The contact's phone number in E.164 format.
-   */
-  phone_number?: string;
-}
-
-/**
- * Response schema for single contact
- */
-export interface ContactRetrieveResponse {
-  /**
-   * Unique identifier for the object.
-   */
-  id?: string;
-
-  /**
-   * The contact's email address.
-   */
-  email?: string;
-
-  /**
-   * The contact's first name.
-   */
-  first_name?: string;
-
-  /**
-   * The contact's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * The contact's phone number in E.164 format.
-   */
-  phone_number?: string;
-}
-
-/**
- * Response schema for single contact
- */
-export interface ContactUpdateResponse {
-  /**
-   * Unique identifier for the object.
-   */
-  id?: string;
-
-  /**
-   * The contact's email address.
-   */
-  email?: string;
-
-  /**
-   * The contact's first name.
-   */
-  first_name?: string;
-
-  /**
-   * The contact's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * The contact's phone number in E.164 format.
-   */
-  phone_number?: string;
 }
 
 export interface ContactCreateParams {
@@ -243,9 +144,6 @@ export interface ContactUpdateParams {
 export declare namespace Contacts {
   export {
     type Contact as Contact,
-    type ContactCreateResponse as ContactCreateResponse,
-    type ContactRetrieveResponse as ContactRetrieveResponse,
-    type ContactUpdateResponse as ContactUpdateResponse,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
   };

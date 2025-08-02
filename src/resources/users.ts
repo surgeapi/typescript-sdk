@@ -16,7 +16,7 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<UserRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<User> {
     return this._client.get(path`/users/${id}`, options);
   }
 
@@ -31,7 +31,7 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: UserUpdateParams, options?: RequestOptions): APIPromise<UserUpdateResponse> {
+  update(id: string, body: UserUpdateParams, options?: RequestOptions): APIPromise<User> {
     return this._client.patch(path`/users/${id}`, { body, ...options });
   }
 
@@ -40,90 +40,30 @@ export class Users extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.users.users(
+   * const user = await client.users.users(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    *   { first_name: 'Brian' },
    * );
    * ```
    */
-  users(accountID: string, body: UserUsersParams, options?: RequestOptions): APIPromise<UserUsersResponse> {
+  users(accountID: string, body: UserUsersParams, options?: RequestOptions): APIPromise<User> {
     return this._client.post(path`/accounts/${accountID}/users`, { body, ...options });
   }
 }
 
 /**
- * Response schema for single user
+ * A user of the app
  */
-export interface UserRetrieveResponse {
+export interface User {
+  /**
+   * The user's first name.
+   */
+  first_name: string;
+
   /**
    * Unique identifier for the object.
    */
   id?: string;
-
-  /**
-   * The user's first name.
-   */
-  first_name?: string;
-
-  /**
-   * The user's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * URL of a photo to be used as the user's avatar.
-   */
-  photo_url?: string;
-}
-
-/**
- * Response schema for single user
- */
-export interface UserUpdateResponse {
-  /**
-   * Unique identifier for the object.
-   */
-  id?: string;
-
-  /**
-   * The user's first name.
-   */
-  first_name?: string;
-
-  /**
-   * The user's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * URL of a photo to be used as the user's avatar.
-   */
-  photo_url?: string;
-}
-
-/**
- * Response schema for single user
- */
-export interface UserUsersResponse {
-  /**
-   * Unique identifier for the object.
-   */
-  id?: string;
-
-  /**
-   * The user's first name.
-   */
-  first_name?: string;
 
   /**
    * The user's last name.
@@ -187,9 +127,7 @@ export interface UserUsersParams {
 
 export declare namespace Users {
   export {
-    type UserRetrieveResponse as UserRetrieveResponse,
-    type UserUpdateResponse as UserUpdateResponse,
-    type UserUsersResponse as UserUsersResponse,
+    type User as User,
     type UserUpdateParams as UserUpdateParams,
     type UserUsersParams as UserUsersParams,
   };

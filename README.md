@@ -29,13 +29,13 @@ const client = new Surge({
   bearerToken: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
 
-const response = await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', {
+const message = await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', {
   conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } },
   attachments: [{ url: 'https://toretto.family/coronas.gif' }],
   body: 'Thought you could leave without saying goodbye?',
 });
 
-console.log(response.id);
+console.log(message.id);
 ```
 
 ### Request & Response types
@@ -50,11 +50,8 @@ const client = new Surge({
   bearerToken: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
 
-const params: Surge.MessageSendParams = { conversation: { contact: {} } };
-const response: Surge.MessageSendResponse = await client.messages.send(
-  'acct_01j9a43avnfqzbjfch6pygv1td',
-  params,
-);
+const params: Surge.MessageSendParams = { conversation: { contact: { phone_number: '+18015551234' } } };
+const message: Surge.Message = await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -67,8 +64,8 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.messages
-  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } })
+const message = await client.messages
+  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { phone_number: '+18015551234' } } })
   .catch(async (err) => {
     if (err instanceof Surge.APIError) {
       console.log(err.status); // 400
@@ -109,7 +106,7 @@ const client = new Surge({
 });
 
 // Or, configure per-request:
-await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } }, {
+await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { phone_number: '+18015551234' } } }, {
   maxRetries: 5,
 });
 ```
@@ -126,7 +123,7 @@ const client = new Surge({
 });
 
 // Override per-request:
-await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } }, {
+await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { phone_number: '+18015551234' } } }, {
   timeout: 5 * 1000,
 });
 ```
@@ -150,16 +147,16 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new Surge();
 
 const response = await client.messages
-  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } })
+  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { phone_number: '+18015551234' } } })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.messages
-  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } })
+const { data: message, response: raw } = await client.messages
+  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { phone_number: '+18015551234' } } })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.id);
+console.log(message.id);
 ```
 
 ### Logging

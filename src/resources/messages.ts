@@ -36,31 +36,31 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.messages.send(
+   * const message = await client.messages.send(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
-   *   { conversation: { contact: {} } },
+   *   {
+   *     conversation: {
+   *       contact: { phone_number: '+18015551234' },
+   *     },
+   *   },
    * );
    * ```
    */
-  send(
-    accountID: string,
-    body: MessageSendParams,
-    options?: RequestOptions,
-  ): APIPromise<MessageSendResponse> {
+  send(accountID: string, body: MessageSendParams, options?: RequestOptions): APIPromise<Message> {
     return this._client.post(path`/accounts/${accountID}/messages`, { body, ...options });
   }
 }
 
 /**
- * Response schema for single message
+ * A Message is a communication sent to a Contact.
  */
-export interface MessageSendResponse {
+export interface Message {
   /**
    * Unique identifier for the object.
    */
   id?: string;
 
-  attachments?: Array<MessageSendResponse.Attachment>;
+  attachments?: Array<Message.Attachment>;
 
   /**
    * The message body.
@@ -70,12 +70,12 @@ export interface MessageSendResponse {
   /**
    * A conversation with a Contact
    */
-  conversation?: MessageSendResponse.Conversation;
+  conversation?: Message.Conversation;
 }
 
-export namespace MessageSendResponse {
+export namespace Message {
   /**
-   * Response schema for single attachment
+   * An Attachment is a file that can be sent with a message.
    */
   export interface Attachment {
     /**
@@ -168,8 +168,7 @@ export declare namespace MessageSendParams {
      */
     export interface Conversation {
       /**
-       * Params for selecting or creating a new contact for sending a message. Either the
-       * id or the phone number must be given.
+       * Parameters for creating a contact
        */
       contact: Conversation.Contact;
 
@@ -182,24 +181,33 @@ export declare namespace MessageSendParams {
 
     export namespace Conversation {
       /**
-       * Params for selecting or creating a new contact for sending a message. Either the
-       * id or the phone number must be given.
+       * Parameters for creating a contact
        */
       export interface Contact {
         /**
-         * The contact's first name in case a new contact is created.
+         * The contact's phone number in E.164 format.
+         */
+        phone_number: string;
+
+        /**
+         * The contact's email address.
+         */
+        email?: string;
+
+        /**
+         * The contact's first name.
          */
         first_name?: string;
 
         /**
-         * The message's last name in case a new contact is created.
+         * The contact's last name.
          */
         last_name?: string;
 
         /**
-         * The contact's phone number in E.164 format.
+         * Set of key-value pairs that will be stored with the object.
          */
-        phone_number?: string;
+        metadata?: { [key: string]: string };
       }
     }
 
@@ -255,5 +263,5 @@ export declare namespace MessageSendParams {
 }
 
 export declare namespace Messages {
-  export { type MessageSendResponse as MessageSendResponse, type MessageSendParams as MessageSendParams };
+  export { type Message as Message, type MessageSendParams as MessageSendParams };
 }

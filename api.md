@@ -2,25 +2,24 @@
 
 Types:
 
+- <code><a href="./src/resources/accounts.ts">Account</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountStatus</a></code>
-- <code><a href="./src/resources/accounts.ts">AccountCreateResponse</a></code>
-- <code><a href="./src/resources/accounts.ts">AccountUpdateResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> AccountCreateResponse</code>
-- <code title="patch /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(id, { ...params }) -> AccountUpdateResponse</code>
+- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> Account</code>
+- <code title="patch /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(id, { ...params }) -> Account</code>
 - <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/resources/accounts.ts">checkStatus</a>(accountID, { ...params }) -> AccountStatus</code>
 
 # Blasts
 
 Types:
 
-- <code><a href="./src/resources/blasts.ts">BlastBlastsResponse</a></code>
+- <code><a href="./src/resources/blasts.ts">Blast</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/blasts">client.blasts.<a href="./src/resources/blasts.ts">blasts</a>(accountID, { ...params }) -> BlastBlastsResponse</code>
+- <code title="post /accounts/{account_id}/blasts">client.blasts.<a href="./src/resources/blasts.ts">blasts</a>(accountID, { ...params }) -> Blast</code>
 
 # Campaigns
 
@@ -37,25 +36,22 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/contacts.ts">Contact</a></code>
-- <code><a href="./src/resources/contacts.ts">ContactCreateResponse</a></code>
-- <code><a href="./src/resources/contacts.ts">ContactRetrieveResponse</a></code>
-- <code><a href="./src/resources/contacts.ts">ContactUpdateResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/resources/contacts.ts">create</a>(accountID, { ...params }) -> ContactCreateResponse</code>
-- <code title="get /contacts/{id}">client.contacts.<a href="./src/resources/contacts.ts">retrieve</a>(id) -> ContactRetrieveResponse</code>
-- <code title="patch /contacts/{id}">client.contacts.<a href="./src/resources/contacts.ts">update</a>(id, { ...params }) -> ContactUpdateResponse</code>
+- <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/resources/contacts.ts">create</a>(accountID, { ...params }) -> Contact</code>
+- <code title="get /contacts/{id}">client.contacts.<a href="./src/resources/contacts.ts">retrieve</a>(id) -> Contact</code>
+- <code title="patch /contacts/{id}">client.contacts.<a href="./src/resources/contacts.ts">update</a>(id, { ...params }) -> Contact</code>
 
 # Messages
 
 Types:
 
-- <code><a href="./src/resources/messages.ts">MessageSendResponse</a></code>
+- <code><a href="./src/resources/messages.ts">Message</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/resources/messages.ts">send</a>(accountID, { ...params }) -> MessageSendResponse</code>
+- <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/resources/messages.ts">send</a>(accountID, { ...params }) -> Message</code>
 
 # PhoneNumbers
 
@@ -81,15 +77,13 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/users.ts">UserRetrieveResponse</a></code>
-- <code><a href="./src/resources/users.ts">UserUpdateResponse</a></code>
-- <code><a href="./src/resources/users.ts">UserUsersResponse</a></code>
+- <code><a href="./src/resources/users.ts">User</a></code>
 
 Methods:
 
-- <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id) -> UserRetrieveResponse</code>
-- <code title="patch /users/{id}">client.users.<a href="./src/resources/users.ts">update</a>(id, { ...params }) -> UserUpdateResponse</code>
-- <code title="post /accounts/{account_id}/users">client.users.<a href="./src/resources/users.ts">users</a>(accountID, { ...params }) -> UserUsersResponse</code>
+- <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id) -> User</code>
+- <code title="patch /users/{id}">client.users.<a href="./src/resources/users.ts">update</a>(id, { ...params }) -> User</code>
+- <code title="post /accounts/{account_id}/users">client.users.<a href="./src/resources/users.ts">users</a>(accountID, { ...params }) -> User</code>
 
 # Verifications
 
