@@ -18,39 +18,34 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
-  AccountBlastsParams,
-  AccountBlastsResponse,
-  AccountCampaignsParams,
-  AccountCampaignsResponse,
-  AccountContactsParams,
-  AccountContactsResponse,
+  AccountCheckStatusParams,
   AccountCreateParams,
   AccountCreateResponse,
-  AccountMessagesParams,
-  AccountMessagesResponse,
-  AccountPhoneNumbersParams,
-  AccountPhoneNumbersResponse,
-  AccountRetrieveStatusParams,
-  AccountRetrieveStatusResponse,
+  AccountStatus,
   AccountUpdateParams,
   AccountUpdateResponse,
-  AccountUsersParams,
-  AccountUsersResponse,
   Accounts,
-  AttachmentParams,
 } from './resources/accounts';
+import { BlastBlastsParams, BlastBlastsResponse, Blasts } from './resources/blasts';
+import { Campaign, CampaignCampaignsParams, Campaigns } from './resources/campaigns';
 import {
+  Contact,
+  ContactCreateParams,
+  ContactCreateResponse,
   ContactRetrieveResponse,
   ContactUpdateParams,
   ContactUpdateResponse,
   Contacts,
 } from './resources/contacts';
+import { MessageSendParams, MessageSendResponse, Messages } from './resources/messages';
+import { PhoneNumber, PhoneNumberCreateParams, PhoneNumbers } from './resources/phone-numbers';
+import { TokenCreateTokenParams, TokenCreateTokenResponse, Tokens } from './resources/tokens';
 import {
-  UserCreateTokenParams,
-  UserCreateTokenResponse,
   UserRetrieveResponse,
   UserUpdateParams,
   UserUpdateResponse,
+  UserUsersParams,
+  UserUsersResponse,
   Users,
 } from './resources/users';
 import {
@@ -75,7 +70,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['SURGE_BEARER_TOKEN'].
+   * Defaults to process.env['SURGE_API_KEY'].
    */
   bearerToken?: string | undefined;
 
@@ -169,7 +164,7 @@ export class Surge {
   /**
    * API Client for interfacing with the Surge API.
    *
-   * @param {string | undefined} [opts.bearerToken=process.env['SURGE_BEARER_TOKEN'] ?? undefined]
+   * @param {string | undefined} [opts.bearerToken=process.env['SURGE_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['SURGE_BASE_URL'] ?? https://api.surge.app] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -180,12 +175,12 @@ export class Surge {
    */
   constructor({
     baseURL = readEnv('SURGE_BASE_URL'),
-    bearerToken = readEnv('SURGE_BEARER_TOKEN'),
+    bearerToken = readEnv('SURGE_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (bearerToken === undefined) {
       throw new Errors.SurgeError(
-        "The SURGE_BEARER_TOKEN environment variable is missing or empty; either provide it, or instantiate the Surge client with an bearerToken option, like new Surge({ bearerToken: 'My Bearer Token' }).",
+        "The SURGE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Surge client with an bearerToken option, like new Surge({ bearerToken: 'My Bearer Token' }).",
       );
     }
 
@@ -742,12 +737,22 @@ export class Surge {
   static toFile = Uploads.toFile;
 
   accounts: API.Accounts = new API.Accounts(this);
+  blasts: API.Blasts = new API.Blasts(this);
+  campaigns: API.Campaigns = new API.Campaigns(this);
   contacts: API.Contacts = new API.Contacts(this);
+  messages: API.Messages = new API.Messages(this);
+  phoneNumbers: API.PhoneNumbers = new API.PhoneNumbers(this);
+  tokens: API.Tokens = new API.Tokens(this);
   users: API.Users = new API.Users(this);
   verifications: API.Verifications = new API.Verifications(this);
 }
 Surge.Accounts = Accounts;
+Surge.Blasts = Blasts;
+Surge.Campaigns = Campaigns;
 Surge.Contacts = Contacts;
+Surge.Messages = Messages;
+Surge.PhoneNumbers = PhoneNumbers;
+Surge.Tokens = Tokens;
 Surge.Users = Users;
 Surge.Verifications = Verifications;
 export declare namespace Surge {
@@ -755,41 +760,61 @@ export declare namespace Surge {
 
   export {
     Accounts as Accounts,
-    type AttachmentParams as AttachmentParams,
+    type AccountStatus as AccountStatus,
     type AccountCreateResponse as AccountCreateResponse,
     type AccountUpdateResponse as AccountUpdateResponse,
-    type AccountBlastsResponse as AccountBlastsResponse,
-    type AccountCampaignsResponse as AccountCampaignsResponse,
-    type AccountContactsResponse as AccountContactsResponse,
-    type AccountMessagesResponse as AccountMessagesResponse,
-    type AccountPhoneNumbersResponse as AccountPhoneNumbersResponse,
-    type AccountRetrieveStatusResponse as AccountRetrieveStatusResponse,
-    type AccountUsersResponse as AccountUsersResponse,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
-    type AccountBlastsParams as AccountBlastsParams,
-    type AccountCampaignsParams as AccountCampaignsParams,
-    type AccountContactsParams as AccountContactsParams,
-    type AccountMessagesParams as AccountMessagesParams,
-    type AccountPhoneNumbersParams as AccountPhoneNumbersParams,
-    type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
-    type AccountUsersParams as AccountUsersParams,
+    type AccountCheckStatusParams as AccountCheckStatusParams,
+  };
+
+  export {
+    Blasts as Blasts,
+    type BlastBlastsResponse as BlastBlastsResponse,
+    type BlastBlastsParams as BlastBlastsParams,
+  };
+
+  export {
+    Campaigns as Campaigns,
+    type Campaign as Campaign,
+    type CampaignCampaignsParams as CampaignCampaignsParams,
   };
 
   export {
     Contacts as Contacts,
+    type Contact as Contact,
+    type ContactCreateResponse as ContactCreateResponse,
     type ContactRetrieveResponse as ContactRetrieveResponse,
     type ContactUpdateResponse as ContactUpdateResponse,
+    type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
+  };
+
+  export {
+    Messages as Messages,
+    type MessageSendResponse as MessageSendResponse,
+    type MessageSendParams as MessageSendParams,
+  };
+
+  export {
+    PhoneNumbers as PhoneNumbers,
+    type PhoneNumber as PhoneNumber,
+    type PhoneNumberCreateParams as PhoneNumberCreateParams,
+  };
+
+  export {
+    Tokens as Tokens,
+    type TokenCreateTokenResponse as TokenCreateTokenResponse,
+    type TokenCreateTokenParams as TokenCreateTokenParams,
   };
 
   export {
     Users as Users,
     type UserRetrieveResponse as UserRetrieveResponse,
     type UserUpdateResponse as UserUpdateResponse,
-    type UserCreateTokenResponse as UserCreateTokenResponse,
+    type UserUsersResponse as UserUsersResponse,
     type UserUpdateParams as UserUpdateParams,
-    type UserCreateTokenParams as UserCreateTokenParams,
+    type UserUsersParams as UserUsersParams,
   };
 
   export {

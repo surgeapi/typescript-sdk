@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from 'surge/internal/to-file';
-import { toFile } from 'surge/core/uploads';
+import type { ResponseLike } from '@surgeapi/node/internal/to-file';
+import { toFile } from '@surgeapi/node/core/uploads';
 import { File } from 'node:buffer';
 
 class MyClass {
@@ -97,7 +97,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('surge/core/uploads');
+    const uploads = await import('@surgeapi/node/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(

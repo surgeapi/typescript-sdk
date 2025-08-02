@@ -1,10 +1,10 @@
 # Surge TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/surge.svg?label=npm%20(stable)>)](https://npmjs.org/package/surge) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/surge)
+[![NPM version](<https://img.shields.io/npm/v/@surgeapi/node.svg?label=npm%20(stable)>)](https://npmjs.org/package/@surgeapi/node) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@surgeapi/node)
 
 This library provides convenient access to the Surge REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.surge.app](https://docs.surge.app). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -15,7 +15,7 @@ npm install git+ssh://git@github.com:stainless-sdks/surge-typescript.git
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install surge`
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install @surgeapi/node`
 
 ## Usage
 
@@ -23,15 +23,19 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Surge from 'surge';
+import Surge from '@surgeapi/node';
 
 const client = new Surge({
-  bearerToken: process.env['SURGE_BEARER_TOKEN'], // This is the default and can be omitted
+  bearerToken: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
 
-const account = await client.accounts.create({ name: 'Account #2840 - DT Precision Auto' });
+const response = await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', {
+  conversation: { contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' } },
+  attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+  body: 'Thought you could leave without saying goodbye?',
+});
 
-console.log(account.id);
+console.log(response.id);
 ```
 
 ### Request & Response types
@@ -40,14 +44,17 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Surge from 'surge';
+import Surge from '@surgeapi/node';
 
 const client = new Surge({
-  bearerToken: process.env['SURGE_BEARER_TOKEN'], // This is the default and can be omitted
+  bearerToken: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
 
-const params: Surge.AccountCreateParams = { name: 'Account #2840 - DT Precision Auto' };
-const account: Surge.AccountCreateResponse = await client.accounts.create(params);
+const params: Surge.MessageSendParams = { conversation: { contact: {} } };
+const response: Surge.MessageSendResponse = await client.messages.send(
+  'acct_01j9a43avnfqzbjfch6pygv1td',
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -60,8 +67,8 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const account = await client.accounts
-  .create({ name: 'Account #2840 - DT Precision Auto' })
+const response = await client.messages
+  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } })
   .catch(async (err) => {
     if (err instanceof Surge.APIError) {
       console.log(err.status); // 400
@@ -102,7 +109,7 @@ const client = new Surge({
 });
 
 // Or, configure per-request:
-await client.accounts.create({ name: 'Account #2840 - DT Precision Auto' }, {
+await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } }, {
   maxRetries: 5,
 });
 ```
@@ -119,7 +126,7 @@ const client = new Surge({
 });
 
 // Override per-request:
-await client.accounts.create({ name: 'Account #2840 - DT Precision Auto' }, {
+await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } }, {
   timeout: 5 * 1000,
 });
 ```
@@ -142,15 +149,17 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Surge();
 
-const response = await client.accounts.create({ name: 'Account #2840 - DT Precision Auto' }).asResponse();
+const response = await client.messages
+  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: account, response: raw } = await client.accounts
-  .create({ name: 'Account #2840 - DT Precision Auto' })
+const { data: response, response: raw } = await client.messages
+  .send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: {} } })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(account.id);
+console.log(response.id);
 ```
 
 ### Logging
@@ -167,7 +176,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Surge from 'surge';
+import Surge from '@surgeapi/node';
 
 const client = new Surge({
   logLevel: 'debug', // Show all log messages
@@ -195,7 +204,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Surge from 'surge';
+import Surge from '@surgeapi/node';
 import pino from 'pino';
 
 const logger = pino();
@@ -230,7 +239,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.accounts.create({
+client.messages.send({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
@@ -264,7 +273,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Surge from 'surge';
+import Surge from '@surgeapi/node';
 import fetch from 'my-fetch';
 
 const client = new Surge({ fetch });
@@ -275,7 +284,7 @@ const client = new Surge({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Surge from 'surge';
+import Surge from '@surgeapi/node';
 
 const client = new Surge({
   fetchOptions: {
@@ -292,7 +301,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Surge from 'surge';
+import Surge from '@surgeapi/node';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -306,7 +315,7 @@ const client = new Surge({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Surge from 'surge';
+import Surge from '@surgeapi/node';
 
 const client = new Surge({
   fetchOptions: {
@@ -318,7 +327,7 @@ const client = new Surge({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Surge from 'npm:surge';
+import Surge from 'npm:@surgeapi/node';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new Surge({

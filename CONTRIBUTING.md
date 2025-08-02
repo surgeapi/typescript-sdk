@@ -55,12 +55,12 @@ $ cd surge-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link surge
+$ yarn link @surgeapi/node
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global surge
+$ pnpm link -—global @surgeapi/node
 ```
 
 ## Running tests

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'surge/core/api-promise';
+import { APIPromise } from '@surgeapi/node/core/api-promise';
 
 import util from 'node:util';
-import Surge from 'surge';
-import { APIUserAbortError } from 'surge';
+import Surge from '@surgeapi/node';
+import { APIUserAbortError } from '@surgeapi/node';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
@@ -431,14 +431,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['SURGE_BEARER_TOKEN'] = 'My Bearer Token';
+    process.env['SURGE_API_KEY'] = 'My Bearer Token';
     const client = new Surge();
     expect(client.bearerToken).toBe('My Bearer Token');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['SURGE_BEARER_TOKEN'] = 'another My Bearer Token';
+    process.env['SURGE_API_KEY'] = 'another My Bearer Token';
     const client = new Surge({ bearerToken: 'My Bearer Token' });
     expect(client.bearerToken).toBe('My Bearer Token');
   });

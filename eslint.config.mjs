@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^surge(/.*)?',
+              regex: '^@surgeapi/node(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

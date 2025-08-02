@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Surge } from 'surge';
+import { Surge } from '@surgeapi/node';
 
 const { stringifyQuery } = Surge.prototype as any;
 

@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
-import { stringify } from 'surge/internal/qs';
-import { encode } from 'surge/internal/qs/utils';
-import { StringifyOptions } from 'surge/internal/qs/types';
+import { stringify } from '@surgeapi/node/internal/qs';
+import { encode } from '@surgeapi/node/internal/qs/utils';
+import { StringifyOptions } from '@surgeapi/node/internal/qs/types';
 import { empty_test_cases } from './empty-keys-cases';
 import assert from 'assert';
 

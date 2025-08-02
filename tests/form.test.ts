@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'surge/internal/uploads';
-import { toFile } from 'surge/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@surgeapi/node/internal/uploads';
+import { toFile } from '@surgeapi/node/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

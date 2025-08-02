@@ -2,39 +2,34 @@
 
 export {
   Accounts,
-  type AttachmentParams,
+  type AccountStatus,
   type AccountCreateResponse,
   type AccountUpdateResponse,
-  type AccountBlastsResponse,
-  type AccountCampaignsResponse,
-  type AccountContactsResponse,
-  type AccountMessagesResponse,
-  type AccountPhoneNumbersResponse,
-  type AccountRetrieveStatusResponse,
-  type AccountUsersResponse,
   type AccountCreateParams,
   type AccountUpdateParams,
-  type AccountBlastsParams,
-  type AccountCampaignsParams,
-  type AccountContactsParams,
-  type AccountMessagesParams,
-  type AccountPhoneNumbersParams,
-  type AccountRetrieveStatusParams,
-  type AccountUsersParams,
+  type AccountCheckStatusParams,
 } from './accounts';
+export { Blasts, type BlastBlastsResponse, type BlastBlastsParams } from './blasts';
+export { Campaigns, type Campaign, type CampaignCampaignsParams } from './campaigns';
 export {
   Contacts,
+  type Contact,
+  type ContactCreateResponse,
   type ContactRetrieveResponse,
   type ContactUpdateResponse,
+  type ContactCreateParams,
   type ContactUpdateParams,
 } from './contacts';
+export { Messages, type MessageSendResponse, type MessageSendParams } from './messages';
+export { PhoneNumbers, type PhoneNumber, type PhoneNumberCreateParams } from './phone-numbers';
+export { Tokens, type TokenCreateTokenResponse, type TokenCreateTokenParams } from './tokens';
 export {
   Users,
   type UserRetrieveResponse,
   type UserUpdateResponse,
-  type UserCreateTokenResponse,
+  type UserUsersResponse,
   type UserUpdateParams,
-  type UserCreateTokenParams,
+  type UserUsersParams,
 } from './users';
 export {
   Verifications,

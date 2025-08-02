@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^surge$': '<rootDir>/src/index.ts',
-    '^surge/(.*)$': '<rootDir>/src/$1',
+    '^@surgeapi/node$': '<rootDir>/src/index.ts',
+    '^@surgeapi/node/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

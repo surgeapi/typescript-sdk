@@ -9,8 +9,8 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "surge/*": ["src/*"],
-      "surge": ["src/index.ts"]
+      "@surgeapi/node/*": ["src/*"],
+      "@surgeapi/node": ["src/index.ts"]
     },
     "noEmit": true,
 
