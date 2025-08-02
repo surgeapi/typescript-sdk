@@ -2,8 +2,9 @@
 
 Types:
 
-- <code><a href="./src/resources/accounts.ts">AccountResponse</a></code>
 - <code><a href="./src/resources/accounts.ts">AttachmentParams</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountCreateResponse</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountUpdateResponse</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountBlastsResponse</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountCampaignsResponse</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountContactsResponse</a></code>
@@ -14,8 +15,8 @@ Types:
 
 Methods:
 
-- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> AccountResponse</code>
-- <code title="patch /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(id, { ...params }) -> AccountResponse</code>
+- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> AccountCreateResponse</code>
+- <code title="patch /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(id, { ...params }) -> AccountUpdateResponse</code>
 - <code title="post /accounts/{account_id}/blasts">client.accounts.<a href="./src/resources/accounts.ts">blasts</a>(accountID, { ...params }) -> AccountBlastsResponse</code>
 - <code title="post /accounts/{account_id}/campaigns">client.accounts.<a href="./src/resources/accounts.ts">campaigns</a>(accountID, { ...params }) -> AccountCampaignsResponse</code>
 - <code title="post /accounts/{account_id}/contacts">client.accounts.<a href="./src/resources/accounts.ts">contacts</a>(accountID, { ...params }) -> AccountContactsResponse</code>

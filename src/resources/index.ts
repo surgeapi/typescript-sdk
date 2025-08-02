@@ -2,8 +2,9 @@
 
 export {
   Accounts,
-  type AccountResponse,
   type AttachmentParams,
+  type AccountCreateResponse,
+  type AccountUpdateResponse,
   type AccountBlastsResponse,
   type AccountCampaignsResponse,
   type AccountContactsResponse,

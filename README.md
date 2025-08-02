@@ -29,9 +29,9 @@ const client = new Surge({
   bearerToken: process.env['SURGE_BEARER_TOKEN'], // This is the default and can be omitted
 });
 
-const accountResponse = await client.accounts.create({ name: 'Account #2840 - DT Precision Auto' });
+const account = await client.accounts.create({ name: 'Account #2840 - DT Precision Auto' });
 
-console.log(accountResponse.id);
+console.log(account.id);
 ```
 
 ### Request & Response types
@@ -47,7 +47,7 @@ const client = new Surge({
 });
 
 const params: Surge.AccountCreateParams = { name: 'Account #2840 - DT Precision Auto' };
-const accountResponse: Surge.AccountResponse = await client.accounts.create(params);
+const account: Surge.AccountCreateResponse = await client.accounts.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -60,7 +60,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const accountResponse = await client.accounts
+const account = await client.accounts
   .create({ name: 'Account #2840 - DT Precision Auto' })
   .catch(async (err) => {
     if (err instanceof Surge.APIError) {
@@ -146,11 +146,11 @@ const response = await client.accounts.create({ name: 'Account #2840 - DT Precis
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: accountResponse, response: raw } = await client.accounts
+const { data: account, response: raw } = await client.accounts
   .create({ name: 'Account #2840 - DT Precision Auto' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(accountResponse.id);
+console.log(account.id);
 ```
 
 ### Logging
