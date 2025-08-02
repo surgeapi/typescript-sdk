@@ -41,7 +41,7 @@ describe('resource contacts', () => {
       email: 'dom@toretto.family',
       first_name: 'Dominic',
       last_name: 'Toretto',
-      metadata: { car: 'bar' },
+      metadata: { car: '1970 Dodge Charger R/T' },
     });
   });
 });

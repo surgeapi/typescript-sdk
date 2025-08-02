@@ -151,7 +151,7 @@ describe('resource accounts', () => {
       email: 'dom@toretto.family',
       first_name: 'Dominic',
       last_name: 'Toretto',
-      metadata: { car: 'bar' },
+      metadata: { car: '1970 Dodge Charger R/T' },
     });
   });
 
@@ -245,7 +245,7 @@ describe('resource accounts', () => {
     const response = await client.accounts.users('acct_01j9a43avnfqzbjfch6pygv1td', {
       first_name: 'Brian',
       last_name: "O'Conner",
-      metadata: { email: 'boconner@toretti.family', user_id: 1234 },
+      metadata: { email: 'boconner@toretti.family', user_id: 'string' },
       photo_url: 'https://toretti.family/people/brian.jpg',
     });
   });

@@ -80,7 +80,7 @@ export interface UserUpdateParams {
   /**
    * Set of key-value pairs that will be stored with the user.
    */
-  metadata?: unknown;
+  metadata?: { [key: string]: string };
 
   /**
    * URL of a photo to be used as the user's avatar.

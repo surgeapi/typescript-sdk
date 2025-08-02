@@ -523,10 +523,7 @@ export interface ContactRequest {
    */
   last_name?: string;
 
-  /**
-   * Additional metadata about the contact.
-   */
-  metadata?: { [key: string]: unknown };
+  metadata?: unknown;
 }
 
 /**
@@ -553,10 +550,7 @@ export interface ContactResponse {
    */
   last_name?: string;
 
-  /**
-   * Additional metadata about the contact.
-   */
-  metadata?: { [key: string]: unknown };
+  metadata?: unknown;
 
   /**
    * The contact's phone number in E.164 format.
@@ -581,7 +575,7 @@ export interface UserRequest {
   /**
    * Set of key-value pairs that will be stored with the user.
    */
-  metadata?: unknown;
+  metadata?: { [key: string]: string };
 
   /**
    * URL of a photo to be used as the user's avatar.
@@ -611,7 +605,7 @@ export interface UserResponse {
   /**
    * Set of key-value pairs that will be stored with the user.
    */
-  metadata?: unknown;
+  metadata?: { [key: string]: string };
 
   /**
    * URL of a photo to be used as the user's avatar.
@@ -1698,10 +1692,7 @@ export interface AccountContactsParams {
    */
   last_name?: string;
 
-  /**
-   * Additional metadata about the contact.
-   */
-  metadata?: { [key: string]: unknown };
+  metadata?: unknown;
 }
 
 export type AccountMessagesParams = AccountMessagesParams.Variant0 | AccountMessagesParams.Variant1;
@@ -1832,7 +1823,7 @@ export interface AccountUsersParams {
   /**
    * Set of key-value pairs that will be stored with the user.
    */
-  metadata?: unknown;
+  metadata?: { [key: string]: string };
 
   /**
    * URL of a photo to be used as the user's avatar.
