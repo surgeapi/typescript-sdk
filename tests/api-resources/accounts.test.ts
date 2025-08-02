@@ -73,8 +73,8 @@ describe('resource accounts', () => {
   });
 
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('checkStatus', async () => {
-    const responsePromise = client.accounts.checkStatus('acct_01jpqjvfg9enpt7pyxd60pcmxj');
+  test.skip('retrieveStatus', async () => {
+    const responsePromise = client.accounts.retrieveStatus('acct_01jpqjvfg9enpt7pyxd60pcmxj');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,10 +85,10 @@ describe('resource accounts', () => {
   });
 
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('checkStatus: request options and params are passed correctly', async () => {
+  test.skip('retrieveStatus: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.accounts.checkStatus(
+      client.accounts.retrieveStatus(
         'acct_01jpqjvfg9enpt7pyxd60pcmxj',
         { capabilities: ['local_messaging'] },
         { path: '/_stainless_unknown_path' },

@@ -21,7 +21,7 @@ Methods:
 
 - <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> Account</code>
 - <code title="patch /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(id, { ...params }) -> Account</code>
-- <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/resources/accounts.ts">checkStatus</a>(accountID, { ...params }) -> AccountStatus</code>
+- <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/resources/accounts.ts">retrieveStatus</a>(accountID, { ...params }) -> AccountStatus</code>
 
 # Blasts
 

@@ -10,7 +10,7 @@ export {
   type Organization,
   type OrganizationParams,
   type AccountCreateParams,
-  type AccountCheckStatusParams,
+  type AccountRetrieveStatusParams,
 } from './accounts';
 export { Blasts, type Blast, type BlastParams, type BlastBlastsParams } from './blasts';
 export { Campaigns, type Campaign, type CampaignParams, type CampaignCampaignsParams } from './campaigns';

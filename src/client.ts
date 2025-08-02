@@ -19,9 +19,9 @@ import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
   Account,
-  AccountCheckStatusParams,
   AccountCreateParams,
   AccountParams,
+  AccountRetrieveStatusParams,
   AccountStatus,
   AccountUpdateParams,
   Accounts,
@@ -755,7 +755,7 @@ export declare namespace Surge {
     type Organization as Organization,
     type OrganizationParams as OrganizationParams,
     type AccountCreateParams as AccountCreateParams,
-    type AccountCheckStatusParams as AccountCheckStatusParams,
+    type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 
   export {

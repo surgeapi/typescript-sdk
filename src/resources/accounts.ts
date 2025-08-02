@@ -39,14 +39,14 @@ export class Accounts extends APIResource {
    *
    * @example
    * ```ts
-   * const accountStatus = await client.accounts.checkStatus(
+   * const accountStatus = await client.accounts.retrieveStatus(
    *   'acct_01jpqjvfg9enpt7pyxd60pcmxj',
    * );
    * ```
    */
-  checkStatus(
+  retrieveStatus(
     accountID: string,
-    query: AccountCheckStatusParams | null | undefined = {},
+    query: AccountRetrieveStatusParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AccountStatus> {
     return this._client.get(path`/accounts/${accountID}/status`, { query, ...options });
@@ -760,7 +760,7 @@ export interface AccountUpdateParams {
   time_zone?: string | null;
 }
 
-export interface AccountCheckStatusParams {
+export interface AccountRetrieveStatusParams {
   /**
    * capabilities about which to check the status
    */
@@ -776,6 +776,6 @@ export declare namespace Accounts {
     type Organization as Organization,
     type OrganizationParams as OrganizationParams,
     type AccountCreateParams as AccountCreateParams,
-    type AccountCheckStatusParams as AccountCheckStatusParams,
+    type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 }
