@@ -64,6 +64,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/phone-numbers.ts">PhoneNumber</a></code>
+- <code><a href="./src/resources/phone-numbers.ts">PhoneNumberPurchaseParams</a></code>
 
 Methods:
 

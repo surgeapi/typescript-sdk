@@ -46,6 +46,21 @@ export interface PhoneNumber {
   type: 'local' | 'toll_free';
 }
 
+/**
+ * Parameters for purchasing a new phone number
+ */
+export interface PhoneNumberPurchaseParams {
+  /**
+   * Whether the phone number is local or toll-free
+   */
+  type: 'local' | 'toll_free';
+
+  /**
+   * The desired area code for this phone number.
+   */
+  area_code?: string;
+}
+
 export interface PhoneNumberPurchaseParams {
   /**
    * Whether the phone number is local or toll-free

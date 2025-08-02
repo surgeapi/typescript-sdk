@@ -142,21 +142,21 @@ export namespace Message {
  * You can specify the recipient either using the 'conversation' parameter or the
  * 'to'/'from' parameters, but not both.
  */
-export type MessageParams = MessageParams.UnionMember0 | MessageParams.UnionMember1;
+export type MessageParams = MessageParams.MessageParamsWithConversation | MessageParams.SimpleMessageParams;
 
 export namespace MessageParams {
   /**
    * Create a message while including parameters for the conversation in which the
    * message should be sent.
    */
-  export interface UnionMember0 {
+  export interface MessageParamsWithConversation {
     /**
      * Params for selecting or creating a new conversation. Either the id or the
      * Contact must be given.
      */
-    conversation: UnionMember0.Conversation;
+    conversation: MessageParamsWithConversation.Conversation;
 
-    attachments?: Array<UnionMember0.Attachment>;
+    attachments?: Array<MessageParamsWithConversation.Attachment>;
 
     /**
      * The message body.
@@ -170,7 +170,7 @@ export namespace MessageParams {
     send_at?: string;
   }
 
-  export namespace UnionMember0 {
+  export namespace MessageParamsWithConversation {
     /**
      * Params for selecting or creating a new conversation. Either the id or the
      * Contact must be given.
@@ -202,14 +202,14 @@ export namespace MessageParams {
   /**
    * Create a basic message by specifying just the to/from phone numbers.
    */
-  export interface UnionMember1 {
+  export interface SimpleMessageParams {
     /**
      * The recipient's phone number in E.164 format. Cannot be used together with
      * 'conversation'.
      */
     to: string;
 
-    attachments?: Array<UnionMember1.Attachment>;
+    attachments?: Array<SimpleMessageParams.Attachment>;
 
     /**
      * The message body.
@@ -229,7 +229,7 @@ export namespace MessageParams {
     send_at?: string;
   }
 
-  export namespace UnionMember1 {
+  export namespace SimpleMessageParams {
     /**
      * Params for creating an attachment
      */
@@ -242,17 +242,19 @@ export namespace MessageParams {
   }
 }
 
-export type MessageSendParams = MessageSendParams.Variant0 | MessageSendParams.Variant1;
+export type MessageSendParams =
+  | MessageSendParams.MessageParamsWithConversation
+  | MessageSendParams.SimpleMessageParams;
 
 export declare namespace MessageSendParams {
-  export interface Variant0 {
+  export interface MessageParamsWithConversation {
     /**
      * Params for selecting or creating a new conversation. Either the id or the
      * Contact must be given.
      */
-    conversation: Variant0.Conversation;
+    conversation: MessageParamsWithConversation.Conversation;
 
-    attachments?: Array<Variant0.Attachment>;
+    attachments?: Array<MessageParamsWithConversation.Attachment>;
 
     /**
      * The message body.
@@ -266,7 +268,7 @@ export declare namespace MessageSendParams {
     send_at?: string;
   }
 
-  export namespace Variant0 {
+  export namespace MessageParamsWithConversation {
     /**
      * Params for selecting or creating a new conversation. Either the id or the
      * Contact must be given.
@@ -295,14 +297,14 @@ export declare namespace MessageSendParams {
     }
   }
 
-  export interface Variant1 {
+  export interface SimpleMessageParams {
     /**
      * The recipient's phone number in E.164 format. Cannot be used together with
      * 'conversation'.
      */
     to: string;
 
-    attachments?: Array<Variant1.Attachment>;
+    attachments?: Array<SimpleMessageParams.Attachment>;
 
     /**
      * The message body.
@@ -322,7 +324,7 @@ export declare namespace MessageSendParams {
     send_at?: string;
   }
 
-  export namespace Variant1 {
+  export namespace SimpleMessageParams {
     /**
      * Params for creating an attachment
      */
