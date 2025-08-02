@@ -523,7 +523,10 @@ export interface ContactRequest {
    */
   last_name?: string;
 
-  metadata?: unknown;
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
 }
 
 /**
@@ -550,7 +553,10 @@ export interface ContactResponse {
    */
   last_name?: string;
 
-  metadata?: unknown;
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
 
   /**
    * The contact's phone number in E.164 format.
@@ -573,7 +579,7 @@ export interface UserRequest {
   last_name?: string;
 
   /**
-   * Set of key-value pairs that will be stored with the user.
+   * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
 
@@ -603,7 +609,7 @@ export interface UserResponse {
   last_name?: string;
 
   /**
-   * Set of key-value pairs that will be stored with the user.
+   * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
 
@@ -1692,7 +1698,10 @@ export interface AccountContactsParams {
    */
   last_name?: string;
 
-  metadata?: unknown;
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
 }
 
 export type AccountMessagesParams = AccountMessagesParams.Variant0 | AccountMessagesParams.Variant1;
@@ -1821,7 +1830,7 @@ export interface AccountUsersParams {
   last_name?: string;
 
   /**
-   * Set of key-value pairs that will be stored with the user.
+   * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
 

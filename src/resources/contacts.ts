@@ -63,7 +63,10 @@ export interface ContactUpdateParams {
    */
   last_name?: string;
 
-  metadata?: unknown;
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
 }
 
 export declare namespace Contacts {

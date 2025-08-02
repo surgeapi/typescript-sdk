@@ -78,7 +78,7 @@ export interface UserUpdateParams {
   last_name?: string;
 
   /**
-   * Set of key-value pairs that will be stored with the user.
+   * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
 
