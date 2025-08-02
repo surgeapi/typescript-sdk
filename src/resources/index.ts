@@ -4,15 +4,13 @@ export {
   Accounts,
   type AccountResponse,
   type AttachmentParams,
-  type ContactRequest,
-  type ContactResponse,
-  type UserRequest,
-  type UserResponse,
   type AccountBlastsResponse,
   type AccountCampaignsResponse,
+  type AccountContactsResponse,
   type AccountMessagesResponse,
   type AccountPhoneNumbersResponse,
   type AccountRetrieveStatusResponse,
+  type AccountUsersResponse,
   type AccountCreateParams,
   type AccountUpdateParams,
   type AccountBlastsParams,
@@ -23,9 +21,16 @@ export {
   type AccountRetrieveStatusParams,
   type AccountUsersParams,
 } from './accounts';
-export { Contacts, type ContactUpdateParams } from './contacts';
+export {
+  Contacts,
+  type ContactRetrieveResponse,
+  type ContactUpdateResponse,
+  type ContactUpdateParams,
+} from './contacts';
 export {
   Users,
+  type UserRetrieveResponse,
+  type UserUpdateResponse,
   type UserCreateTokenResponse,
   type UserUpdateParams,
   type UserCreateTokenParams,

@@ -93,7 +93,7 @@ export class Accounts extends APIResource {
    *
    * @example
    * ```ts
-   * const contactResponse = await client.accounts.contacts(
+   * const response = await client.accounts.contacts(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    *   { phone_number: '+18015551234' },
    * );
@@ -103,7 +103,7 @@ export class Accounts extends APIResource {
     accountID: string,
     body: AccountContactsParams,
     options?: RequestOptions,
-  ): APIPromise<ContactResponse> {
+  ): APIPromise<AccountContactsResponse> {
     return this._client.post(path`/accounts/${accountID}/contacts`, { body, ...options });
   }
 
@@ -138,7 +138,11 @@ export class Accounts extends APIResource {
    * ```ts
    * const response = await client.accounts.messages(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
-   *   { conversation: { contact: {} } },
+   *   {
+   *     conversation: {
+   *       contact: { phone_number: '+18015551234' },
+   *     },
+   *   },
    * );
    * ```
    */
@@ -192,13 +196,17 @@ export class Accounts extends APIResource {
    *
    * @example
    * ```ts
-   * const userResponse = await client.accounts.users(
+   * const response = await client.accounts.users(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    *   { first_name: 'Brian' },
    * );
    * ```
    */
-  users(accountID: string, body: AccountUsersParams, options?: RequestOptions): APIPromise<UserResponse> {
+  users(
+    accountID: string,
+    body: AccountUsersParams,
+    options?: RequestOptions,
+  ): APIPromise<AccountUsersResponse> {
     return this._client.post(path`/accounts/${accountID}/users`, { body, ...options });
   }
 }
@@ -500,127 +508,7 @@ export interface AttachmentParams {
 }
 
 /**
- * POST body for creating a contact
- */
-export interface ContactRequest {
-  /**
-   * The contact's phone number in E.164 format.
-   */
-  phone_number: string;
-
-  /**
-   * The contact's email address.
-   */
-  email?: string;
-
-  /**
-   * The contact's first name.
-   */
-  first_name?: string;
-
-  /**
-   * The contact's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-}
-
-/**
- * Response schema for single contact
- */
-export interface ContactResponse {
-  /**
-   * Unique identifier for the object.
-   */
-  id?: string;
-
-  /**
-   * The contact's email address.
-   */
-  email?: string;
-
-  /**
-   * The contact's first name.
-   */
-  first_name?: string;
-
-  /**
-   * The contact's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * The contact's phone number in E.164 format.
-   */
-  phone_number?: string;
-}
-
-/**
- * POST body for creating a user
- */
-export interface UserRequest {
-  /**
-   * The user's first name.
-   */
-  first_name: string;
-
-  /**
-   * The user's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * URL of a photo to be used as the user's avatar.
-   */
-  photo_url?: string;
-}
-
-/**
- * Response schema for single user
- */
-export interface UserResponse {
-  /**
-   * Unique identifier for the object.
-   */
-  id?: string;
-
-  /**
-   * The user's first name.
-   */
-  first_name?: string;
-
-  /**
-   * The user's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * URL of a photo to be used as the user's avatar.
-   */
-  photo_url?: string;
-}
-
-/**
- * Response schema for single blast
+ * A Blast is a message sent to multiple recipients at once.
  */
 export interface AccountBlastsResponse {
   /**
@@ -784,7 +672,42 @@ export interface AccountCampaignsResponse {
 }
 
 /**
- * Response schema for single message
+ * A contact who has consented to receive messages
+ */
+export interface AccountContactsResponse {
+  /**
+   * Unique identifier for the object.
+   */
+  id: string;
+
+  /**
+   * The contact's phone number in E.164 format.
+   */
+  phone_number: string;
+
+  /**
+   * The contact's email address.
+   */
+  email?: string;
+
+  /**
+   * The contact's first name.
+   */
+  first_name?: string;
+
+  /**
+   * The contact's last name.
+   */
+  last_name?: string;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
+}
+
+/**
+ * A Message is a communication sent to a Contact.
  */
 export interface AccountMessagesResponse {
   /**
@@ -807,7 +730,7 @@ export interface AccountMessagesResponse {
 
 export namespace AccountMessagesResponse {
   /**
-   * Response schema for single attachment
+   * An Attachment is a file that can be sent with a message.
    */
   export interface Attachment {
     /**
@@ -862,6 +785,11 @@ export namespace AccountMessagesResponse {
       phone_number: string;
 
       /**
+       * The contact's email address.
+       */
+      email?: string;
+
+      /**
        * The contact's first name.
        */
       first_name?: string;
@@ -870,6 +798,11 @@ export namespace AccountMessagesResponse {
        * The contact's last name.
        */
       last_name?: string;
+
+      /**
+       * Set of key-value pairs that will be stored with the object.
+       */
+      metadata?: { [key: string]: string };
     }
 
     /**
@@ -968,6 +901,36 @@ export namespace AccountRetrieveStatusResponse {
   }
 }
 
+/**
+ * A user of the app
+ */
+export interface AccountUsersResponse {
+  /**
+   * The user's first name.
+   */
+  first_name: string;
+
+  /**
+   * Unique identifier for the object.
+   */
+  id?: string;
+
+  /**
+   * The user's last name.
+   */
+  last_name?: string;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * URL of a photo to be used as the user's avatar.
+   */
+  photo_url?: string;
+}
+
 export interface AccountCreateParams {
   /**
    * The name of the account that will be visible for your internal organizational
@@ -985,7 +948,8 @@ export interface AccountCreateParams {
   brand_name?: string | null;
 
   /**
-   * The legal entity on whose behalf the account will be operated.
+   * Parameters describing the legal entity on whose behalf the account will be
+   * operated.
    */
   organization?: AccountCreateParams.Organization;
 
@@ -998,7 +962,8 @@ export interface AccountCreateParams {
 
 export namespace AccountCreateParams {
   /**
-   * The legal entity on whose behalf the account will be operated.
+   * Parameters describing the legal entity on whose behalf the account will be
+   * operated.
    */
   export interface Organization {
     /**
@@ -1263,7 +1228,8 @@ export interface AccountUpdateParams {
   name?: string;
 
   /**
-   * The legal entity on whose behalf the account will be operated.
+   * Parameters describing the legal entity on whose behalf the account will be
+   * operated.
    */
   organization?: AccountUpdateParams.Organization;
 
@@ -1275,7 +1241,8 @@ export interface AccountUpdateParams {
 
 export namespace AccountUpdateParams {
   /**
-   * The legal entity on whose behalf the account will be operated.
+   * Parameters describing the legal entity on whose behalf the account will be
+   * operated.
    */
   export interface Organization {
     /**
@@ -1735,8 +1702,7 @@ export declare namespace AccountMessagesParams {
      */
     export interface Conversation {
       /**
-       * Params for selecting or creating a new contact for sending a message. Either the
-       * id or the phone number must be given.
+       * Parameters for creating a contact
        */
       contact: Conversation.Contact;
 
@@ -1749,24 +1715,33 @@ export declare namespace AccountMessagesParams {
 
     export namespace Conversation {
       /**
-       * Params for selecting or creating a new contact for sending a message. Either the
-       * id or the phone number must be given.
+       * Parameters for creating a contact
        */
       export interface Contact {
         /**
-         * The contact's first name in case a new contact is created.
+         * The contact's phone number in E.164 format.
+         */
+        phone_number: string;
+
+        /**
+         * The contact's email address.
+         */
+        email?: string;
+
+        /**
+         * The contact's first name.
          */
         first_name?: string;
 
         /**
-         * The message's last name in case a new contact is created.
+         * The contact's last name.
          */
         last_name?: string;
 
         /**
-         * The contact's phone number in E.164 format.
+         * Set of key-value pairs that will be stored with the object.
          */
-        phone_number?: string;
+        metadata?: { [key: string]: string };
       }
     }
   }
@@ -1844,15 +1819,13 @@ export declare namespace Accounts {
   export {
     type AccountResponse as AccountResponse,
     type AttachmentParams as AttachmentParams,
-    type ContactRequest as ContactRequest,
-    type ContactResponse as ContactResponse,
-    type UserRequest as UserRequest,
-    type UserResponse as UserResponse,
     type AccountBlastsResponse as AccountBlastsResponse,
     type AccountCampaignsResponse as AccountCampaignsResponse,
+    type AccountContactsResponse as AccountContactsResponse,
     type AccountMessagesResponse as AccountMessagesResponse,
     type AccountPhoneNumbersResponse as AccountPhoneNumbersResponse,
     type AccountRetrieveStatusResponse as AccountRetrieveStatusResponse,
+    type AccountUsersResponse as AccountUsersResponse,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
     type AccountBlastsParams as AccountBlastsParams,

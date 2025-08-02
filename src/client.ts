@@ -23,6 +23,7 @@ import {
   AccountCampaignsParams,
   AccountCampaignsResponse,
   AccountContactsParams,
+  AccountContactsResponse,
   AccountCreateParams,
   AccountMessagesParams,
   AccountMessagesResponse,
@@ -33,15 +34,24 @@ import {
   AccountRetrieveStatusResponse,
   AccountUpdateParams,
   AccountUsersParams,
+  AccountUsersResponse,
   Accounts,
   AttachmentParams,
-  ContactRequest,
-  ContactResponse,
-  UserRequest,
-  UserResponse,
 } from './resources/accounts';
-import { ContactUpdateParams, Contacts } from './resources/contacts';
-import { UserCreateTokenParams, UserCreateTokenResponse, UserUpdateParams, Users } from './resources/users';
+import {
+  ContactRetrieveResponse,
+  ContactUpdateParams,
+  ContactUpdateResponse,
+  Contacts,
+} from './resources/contacts';
+import {
+  UserCreateTokenParams,
+  UserCreateTokenResponse,
+  UserRetrieveResponse,
+  UserUpdateParams,
+  UserUpdateResponse,
+  Users,
+} from './resources/users';
 import {
   Verification,
   VerificationCheckParams,
@@ -746,15 +756,13 @@ export declare namespace Surge {
     Accounts as Accounts,
     type AccountResponse as AccountResponse,
     type AttachmentParams as AttachmentParams,
-    type ContactRequest as ContactRequest,
-    type ContactResponse as ContactResponse,
-    type UserRequest as UserRequest,
-    type UserResponse as UserResponse,
     type AccountBlastsResponse as AccountBlastsResponse,
     type AccountCampaignsResponse as AccountCampaignsResponse,
+    type AccountContactsResponse as AccountContactsResponse,
     type AccountMessagesResponse as AccountMessagesResponse,
     type AccountPhoneNumbersResponse as AccountPhoneNumbersResponse,
     type AccountRetrieveStatusResponse as AccountRetrieveStatusResponse,
+    type AccountUsersResponse as AccountUsersResponse,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
     type AccountBlastsParams as AccountBlastsParams,
@@ -766,10 +774,17 @@ export declare namespace Surge {
     type AccountUsersParams as AccountUsersParams,
   };
 
-  export { Contacts as Contacts, type ContactUpdateParams as ContactUpdateParams };
+  export {
+    Contacts as Contacts,
+    type ContactRetrieveResponse as ContactRetrieveResponse,
+    type ContactUpdateResponse as ContactUpdateResponse,
+    type ContactUpdateParams as ContactUpdateParams,
+  };
 
   export {
     Users as Users,
+    type UserRetrieveResponse as UserRetrieveResponse,
+    type UserUpdateResponse as UserUpdateResponse,
     type UserCreateTokenResponse as UserCreateTokenResponse,
     type UserUpdateParams as UserUpdateParams,
     type UserCreateTokenParams as UserCreateTokenParams,

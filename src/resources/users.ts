@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as AccountsAPI from './accounts';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -12,12 +11,12 @@ export class Users extends APIResource {
    *
    * @example
    * ```ts
-   * const userResponse = await client.users.retrieve(
+   * const user = await client.users.retrieve(
    *   'usr_01j9dwavghe1ttppewekjjkfrx',
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AccountsAPI.UserResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<UserRetrieveResponse> {
     return this._client.get(path`/users/${id}`, options);
   }
 
@@ -26,13 +25,13 @@ export class Users extends APIResource {
    *
    * @example
    * ```ts
-   * const userResponse = await client.users.update(
+   * const user = await client.users.update(
    *   'usr_01j9dwavghe1ttppewekjjkfrx',
    *   { first_name: 'Brian' },
    * );
    * ```
    */
-  update(id: string, body: UserUpdateParams, options?: RequestOptions): APIPromise<AccountsAPI.UserResponse> {
+  update(id: string, body: UserUpdateParams, options?: RequestOptions): APIPromise<UserUpdateResponse> {
     return this._client.patch(path`/users/${id}`, { body, ...options });
   }
 
@@ -54,6 +53,66 @@ export class Users extends APIResource {
   ): APIPromise<UserCreateTokenResponse> {
     return this._client.post(path`/users/${userID}/tokens`, { body, ...options });
   }
+}
+
+/**
+ * A user of the app
+ */
+export interface UserRetrieveResponse {
+  /**
+   * The user's first name.
+   */
+  first_name: string;
+
+  /**
+   * Unique identifier for the object.
+   */
+  id?: string;
+
+  /**
+   * The user's last name.
+   */
+  last_name?: string;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * URL of a photo to be used as the user's avatar.
+   */
+  photo_url?: string;
+}
+
+/**
+ * A user of the app
+ */
+export interface UserUpdateResponse {
+  /**
+   * The user's first name.
+   */
+  first_name: string;
+
+  /**
+   * Unique identifier for the object.
+   */
+  id?: string;
+
+  /**
+   * The user's last name.
+   */
+  last_name?: string;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * URL of a photo to be used as the user's avatar.
+   */
+  photo_url?: string;
 }
 
 /**
@@ -97,6 +156,8 @@ export interface UserCreateTokenParams {
 
 export declare namespace Users {
   export {
+    type UserRetrieveResponse as UserRetrieveResponse,
+    type UserUpdateResponse as UserUpdateResponse,
     type UserCreateTokenResponse as UserCreateTokenResponse,
     type UserUpdateParams as UserUpdateParams,
     type UserCreateTokenParams as UserCreateTokenParams,

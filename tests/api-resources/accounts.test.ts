@@ -158,7 +158,7 @@ describe('resource accounts', () => {
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
   test.skip('messages: only required params', async () => {
     const responsePromise = client.accounts.messages('acct_01j9a43avnfqzbjfch6pygv1td', {
-      conversation: { contact: {} },
+      conversation: { contact: { phone_number: '+18015551234' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -173,7 +173,13 @@ describe('resource accounts', () => {
   test.skip('messages: required and optional params', async () => {
     const response = await client.accounts.messages('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: {
-        contact: { first_name: 'Dominic', last_name: 'Toretto', phone_number: '+18015551234' },
+        contact: {
+          phone_number: '+18015551234',
+          email: 'dev@stainless.com',
+          first_name: 'Dominic',
+          last_name: 'Toretto',
+          metadata: { foo: 'string' },
+        },
         phone_number: '+18015556789',
       },
       attachments: [{ url: 'https://toretto.family/coronas.gif' }],
