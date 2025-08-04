@@ -9,8 +9,8 @@ const client = new Surge({
 
 describe('resource campaigns', () => {
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('campaigns: only required params', async () => {
-    const responsePromise = client.campaigns.campaigns('acct_01j9a43avnfqzbjfch6pygv1td', {
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.campaigns.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       consent_flow:
         'When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.',
       description:
@@ -34,8 +34,8 @@ describe('resource campaigns', () => {
   });
 
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('campaigns: required and optional params', async () => {
-    const response = await client.campaigns.campaigns('acct_01j9a43avnfqzbjfch6pygv1td', {
+  test.skip('create: required and optional params', async () => {
+    const response = await client.campaigns.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       consent_flow:
         'When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.',
       description:

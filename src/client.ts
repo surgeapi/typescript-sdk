@@ -28,17 +28,25 @@ import {
   Organization,
   OrganizationParams,
 } from './resources/accounts';
-import { Blast, BlastBlastsParams, BlastParams, Blasts } from './resources/blasts';
-import { Campaign, CampaignCampaignsParams, CampaignParams, Campaigns } from './resources/campaigns';
+import { Blast, BlastCreateParams, BlastParams, Blasts } from './resources/blasts';
+import { Campaign, CampaignCreateParams, CampaignParams, Campaigns } from './resources/campaigns';
 import { ContactCreateParams, ContactUpdateParams, Contacts } from './resources/contacts';
-import { Message, MessageParams, MessageSendParams, Messages } from './resources/messages';
+import { Message, MessageCreateParams, MessageParams, Messages } from './resources/messages';
 import { PhoneNumber, PhoneNumberPurchaseParams, PhoneNumbers } from './resources/phone-numbers';
-import { TokenCreateTokenParams, TokenParams, TokenResponse, Tokens } from './resources/tokens';
-import { User, UserParams, UserUpdateParams, UserUsersParams, Users } from './resources/users';
+import {
+  User,
+  UserCreateParams,
+  UserCreateTokenParams,
+  UserParams,
+  UserTokenParams,
+  UserTokenResponse,
+  UserUpdateParams,
+  Users,
+} from './resources/users';
 import {
   Verification,
+  VerificationCheck,
   VerificationCheckParams,
-  VerificationCheckResponse,
   VerificationCreateParams,
   VerificationParams,
   Verifications,
@@ -730,7 +738,6 @@ export class Surge {
   contacts: API.Contacts = new API.Contacts(this);
   messages: API.Messages = new API.Messages(this);
   phoneNumbers: API.PhoneNumbers = new API.PhoneNumbers(this);
-  tokens: API.Tokens = new API.Tokens(this);
   users: API.Users = new API.Users(this);
   verifications: API.Verifications = new API.Verifications(this);
 }
@@ -740,7 +747,6 @@ Surge.Campaigns = Campaigns;
 Surge.Contacts = Contacts;
 Surge.Messages = Messages;
 Surge.PhoneNumbers = PhoneNumbers;
-Surge.Tokens = Tokens;
 Surge.Users = Users;
 Surge.Verifications = Verifications;
 export declare namespace Surge {
@@ -762,14 +768,14 @@ export declare namespace Surge {
     Blasts as Blasts,
     type Blast as Blast,
     type BlastParams as BlastParams,
-    type BlastBlastsParams as BlastBlastsParams,
+    type BlastCreateParams as BlastCreateParams,
   };
 
   export {
     Campaigns as Campaigns,
     type Campaign as Campaign,
     type CampaignParams as CampaignParams,
-    type CampaignCampaignsParams as CampaignCampaignsParams,
+    type CampaignCreateParams as CampaignCreateParams,
   };
 
   export {
@@ -782,7 +788,7 @@ export declare namespace Surge {
     Messages as Messages,
     type Message as Message,
     type MessageParams as MessageParams,
-    type MessageSendParams as MessageSendParams,
+    type MessageCreateParams as MessageCreateParams,
   };
 
   export {
@@ -792,27 +798,23 @@ export declare namespace Surge {
   };
 
   export {
-    Tokens as Tokens,
-    type TokenParams as TokenParams,
-    type TokenResponse as TokenResponse,
-    type TokenCreateTokenParams as TokenCreateTokenParams,
-  };
-
-  export {
     Users as Users,
     type User as User,
     type UserParams as UserParams,
+    type UserTokenParams as UserTokenParams,
+    type UserTokenResponse as UserTokenResponse,
+    type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
-    type UserUsersParams as UserUsersParams,
+    type UserCreateTokenParams as UserCreateTokenParams,
   };
 
   export {
     Verifications as Verifications,
     type Verification as Verification,
-    type VerificationParams as VerificationParams,
-    type VerificationCheckResponse as VerificationCheckResponse,
-    type VerificationCreateParams as VerificationCreateParams,
+    type VerificationCheck as VerificationCheck,
     type VerificationCheckParams as VerificationCheckParams,
+    type VerificationParams as VerificationParams,
+    type VerificationCreateParams as VerificationCreateParams,
   };
 
   export type AttachmentParams = API.AttachmentParams;

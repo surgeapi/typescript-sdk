@@ -11,7 +11,7 @@ export class Campaigns extends APIResource {
    *
    * @example
    * ```ts
-   * const campaign = await client.campaigns.campaigns(
+   * const campaign = await client.campaigns.create(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    *   {
    *     consent_flow:
@@ -34,11 +34,7 @@ export class Campaigns extends APIResource {
    * );
    * ```
    */
-  campaigns(
-    accountID: string,
-    body: CampaignCampaignsParams,
-    options?: RequestOptions,
-  ): APIPromise<Campaign> {
+  create(accountID: string, body: CampaignCreateParams, options?: RequestOptions): APIPromise<Campaign> {
     return this._client.post(path`/accounts/${accountID}/campaigns`, { body, ...options });
   }
 }
@@ -293,7 +289,7 @@ export interface CampaignParams {
   terms_and_conditions_url?: string;
 }
 
-export interface CampaignCampaignsParams {
+export interface CampaignCreateParams {
   /**
    * A string explaining the method through which end users will opt in to receive
    * messages from the brand. Typically this should include URLs for opt-in forms or
@@ -416,6 +412,6 @@ export declare namespace Campaigns {
   export {
     type Campaign as Campaign,
     type CampaignParams as CampaignParams,
-    type CampaignCampaignsParams as CampaignCampaignsParams,
+    type CampaignCreateParams as CampaignCreateParams,
   };
 }

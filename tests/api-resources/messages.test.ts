@@ -9,8 +9,8 @@ const client = new Surge({
 
 describe('resource messages', () => {
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('send: only required params', async () => {
-    const responsePromise = client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', {
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: { contact: { phone_number: '+18015551234' } },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -23,8 +23,8 @@ describe('resource messages', () => {
   });
 
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('send: required and optional params', async () => {
-    const response = await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', {
+  test.skip('create: required and optional params', async () => {
+    const response = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: {
         contact: {
           phone_number: '+18015551234',

@@ -25,17 +25,13 @@ export class Verifications extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.verifications.check(
+   * const verificationCheck = await client.verifications.check(
    *   'vfn_01jayh15c2f2xamftg0xpyq1nj',
    *   { code: '123456' },
    * );
    * ```
    */
-  check(
-    id: string,
-    body: VerificationCheckParams,
-    options?: RequestOptions,
-  ): APIPromise<VerificationCheckResponse> {
+  check(id: string, body: VerificationCheckParams, options?: RequestOptions): APIPromise<VerificationCheck> {
     return this._client.post(path`/verifications/${id}/checks`, { body, ...options });
   }
 }
@@ -66,19 +62,9 @@ export interface Verification {
 }
 
 /**
- * Parameters for creating a Verification
- */
-export interface VerificationParams {
-  /**
-   * The phone number to be verified. In E.164 format.
-   */
-  phone_number: string;
-}
-
-/**
  * The result of checking a Verification code
  */
-export interface VerificationCheckResponse {
+export interface VerificationCheck {
   /**
    * The result of the code check.
    */
@@ -88,6 +74,26 @@ export interface VerificationCheckResponse {
    * A phone number verification
    */
   verification?: Verification;
+}
+
+/**
+ * Parameters for checking a Verification code
+ */
+export interface VerificationCheckParams {
+  /**
+   * The Verification code that was received.
+   */
+  code: string;
+}
+
+/**
+ * Parameters for creating a Verification
+ */
+export interface VerificationParams {
+  /**
+   * The phone number to be verified. In E.164 format.
+   */
+  phone_number: string;
 }
 
 export interface VerificationCreateParams {
@@ -107,9 +113,9 @@ export interface VerificationCheckParams {
 export declare namespace Verifications {
   export {
     type Verification as Verification,
-    type VerificationParams as VerificationParams,
-    type VerificationCheckResponse as VerificationCheckResponse,
-    type VerificationCreateParams as VerificationCreateParams,
+    type VerificationCheck as VerificationCheck,
     type VerificationCheckParams as VerificationCheckParams,
+    type VerificationParams as VerificationParams,
+    type VerificationCreateParams as VerificationCreateParams,
   };
 }

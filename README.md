@@ -29,7 +29,7 @@ const client = new Surge({
   bearerToken: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
 
-const message = await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', {
+const message = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
   conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
   attachments: [{ url: 'https://toretto.family/coronas.gif' }],
   body: 'Thought you could leave without saying goodbye?',
@@ -50,12 +50,12 @@ const client = new Surge({
   bearerToken: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
 
-const params: Surge.MessageSendParams = {
+const params: Surge.MessageCreateParams = {
   conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
   attachments: [{ url: 'https://toretto.family/coronas.gif' }],
   body: 'Thought you could leave without saying goodbye?',
 };
-const message: Surge.Message = await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', params);
+const message: Surge.Message = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -69,7 +69,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const message = await client.messages
-  .send('acct_01j9a43avnfqzbjfch6pygv1td', {
+  .create('acct_01j9a43avnfqzbjfch6pygv1td', {
     conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
@@ -114,7 +114,7 @@ const client = new Surge({
 });
 
 // Or, configure per-request:
-await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
+await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
   maxRetries: 5,
 });
 ```
@@ -131,7 +131,7 @@ const client = new Surge({
 });
 
 // Override per-request:
-await client.messages.send('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
+await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -155,7 +155,7 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new Surge();
 
 const response = await client.messages
-  .send('acct_01j9a43avnfqzbjfch6pygv1td', {
+  .create('acct_01j9a43avnfqzbjfch6pygv1td', {
     conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
@@ -165,7 +165,7 @@ console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: message, response: raw } = await client.messages
-  .send('acct_01j9a43avnfqzbjfch6pygv1td', {
+  .create('acct_01j9a43avnfqzbjfch6pygv1td', {
     conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
@@ -252,7 +252,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.messages.send({
+client.messages.create({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

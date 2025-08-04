@@ -33,7 +33,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/blasts">client.blasts.<a href="./src/resources/blasts.ts">blasts</a>(accountID, { ...params }) -> Blast</code>
+- <code title="post /accounts/{account_id}/blasts">client.blasts.<a href="./src/resources/blasts.ts">create</a>(accountID, { ...params }) -> Blast</code>
 
 # Campaigns
 
@@ -44,7 +44,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">campaigns</a>(accountID, { ...params }) -> Campaign</code>
+- <code title="post /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">create</a>(accountID, { ...params }) -> Campaign</code>
 
 # Contacts
 
@@ -63,7 +63,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/resources/messages.ts">send</a>(accountID, { ...params }) -> Message</code>
+- <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/resources/messages.ts">create</a>(accountID, { ...params }) -> Message</code>
 
 # PhoneNumbers
 
@@ -76,39 +76,32 @@ Methods:
 
 - <code title="post /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">purchase</a>(accountID, { ...params }) -> PhoneNumber</code>
 
-# Tokens
-
-Types:
-
-- <code><a href="./src/resources/tokens.ts">TokenParams</a></code>
-- <code><a href="./src/resources/tokens.ts">TokenResponse</a></code>
-
-Methods:
-
-- <code title="post /users/{user_id}/tokens">client.tokens.<a href="./src/resources/tokens.ts">createToken</a>(userID, { ...params }) -> TokenResponse</code>
-
 # Users
 
 Types:
 
 - <code><a href="./src/resources/users.ts">User</a></code>
 - <code><a href="./src/resources/users.ts">UserParams</a></code>
+- <code><a href="./src/resources/users.ts">UserTokenParams</a></code>
+- <code><a href="./src/resources/users.ts">UserTokenResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/users">client.users.<a href="./src/resources/users.ts">create</a>(accountID, { ...params }) -> User</code>
 - <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id) -> User</code>
 - <code title="patch /users/{id}">client.users.<a href="./src/resources/users.ts">update</a>(id, { ...params }) -> User</code>
-- <code title="post /accounts/{account_id}/users">client.users.<a href="./src/resources/users.ts">users</a>(accountID, { ...params }) -> User</code>
+- <code title="post /users/{user_id}/tokens">client.users.<a href="./src/resources/users.ts">createToken</a>(userID, { ...params }) -> UserTokenResponse</code>
 
 # Verifications
 
 Types:
 
 - <code><a href="./src/resources/verifications.ts">Verification</a></code>
+- <code><a href="./src/resources/verifications.ts">VerificationCheck</a></code>
+- <code><a href="./src/resources/verifications.ts">VerificationCheckParams</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationParams</a></code>
-- <code><a href="./src/resources/verifications.ts">VerificationCheckResponse</a></code>
 
 Methods:
 
 - <code title="post /verifications">client.verifications.<a href="./src/resources/verifications.ts">create</a>({ ...params }) -> Verification</code>
-- <code title="post /verifications/{id}/checks">client.verifications.<a href="./src/resources/verifications.ts">check</a>(id, { ...params }) -> VerificationCheckResponse</code>
+- <code title="post /verifications/{id}/checks">client.verifications.<a href="./src/resources/verifications.ts">check</a>(id, { ...params }) -> VerificationCheck</code>

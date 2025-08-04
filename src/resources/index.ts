@@ -12,18 +12,26 @@ export {
   type AccountCreateParams,
   type AccountRetrieveStatusParams,
 } from './accounts';
-export { Blasts, type Blast, type BlastParams, type BlastBlastsParams } from './blasts';
-export { Campaigns, type Campaign, type CampaignParams, type CampaignCampaignsParams } from './campaigns';
+export { Blasts, type Blast, type BlastParams, type BlastCreateParams } from './blasts';
+export { Campaigns, type Campaign, type CampaignParams, type CampaignCreateParams } from './campaigns';
 export { Contacts, type ContactCreateParams, type ContactUpdateParams } from './contacts';
-export { Messages, type Message, type MessageParams, type MessageSendParams } from './messages';
+export { Messages, type Message, type MessageParams, type MessageCreateParams } from './messages';
 export { PhoneNumbers, type PhoneNumber, type PhoneNumberPurchaseParams } from './phone-numbers';
-export { Tokens, type TokenParams, type TokenResponse, type TokenCreateTokenParams } from './tokens';
-export { Users, type User, type UserParams, type UserUpdateParams, type UserUsersParams } from './users';
+export {
+  Users,
+  type User,
+  type UserParams,
+  type UserTokenParams,
+  type UserTokenResponse,
+  type UserCreateParams,
+  type UserUpdateParams,
+  type UserCreateTokenParams,
+} from './users';
 export {
   Verifications,
   type Verification,
-  type VerificationParams,
-  type VerificationCheckResponse,
-  type VerificationCreateParams,
+  type VerificationCheck,
   type VerificationCheckParams,
+  type VerificationParams,
+  type VerificationCreateParams,
 } from './verifications';

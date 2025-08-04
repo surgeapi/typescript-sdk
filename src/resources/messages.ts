@@ -36,7 +36,7 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const message = await client.messages.send(
+   * const message = await client.messages.create(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    *   {
    *     conversation: {
@@ -46,7 +46,7 @@ export class Messages extends APIResource {
    * );
    * ```
    */
-  send(accountID: string, body: MessageSendParams, options?: RequestOptions): APIPromise<Message> {
+  create(accountID: string, body: MessageCreateParams, options?: RequestOptions): APIPromise<Message> {
     return this._client.post(path`/accounts/${accountID}/messages`, { body, ...options });
   }
 }
@@ -220,11 +220,11 @@ export namespace MessageParams {
   }
 }
 
-export type MessageSendParams =
-  | MessageSendParams.MessageParamsWithConversation
-  | MessageSendParams.SimpleMessageParams;
+export type MessageCreateParams =
+  | MessageCreateParams.MessageParamsWithConversation
+  | MessageCreateParams.SimpleMessageParams;
 
-export declare namespace MessageSendParams {
+export declare namespace MessageCreateParams {
   export interface MessageParamsWithConversation {
     /**
      * Params for selecting or creating a new conversation. Either the id or the
@@ -297,6 +297,6 @@ export declare namespace Messages {
   export {
     type Message as Message,
     type MessageParams as MessageParams,
-    type MessageSendParams as MessageSendParams,
+    type MessageCreateParams as MessageCreateParams,
   };
 }

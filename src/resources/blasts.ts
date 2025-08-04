@@ -12,12 +12,12 @@ export class Blasts extends APIResource {
    *
    * @example
    * ```ts
-   * const blast = await client.blasts.blasts(
+   * const blast = await client.blasts.create(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    * );
    * ```
    */
-  blasts(accountID: string, body: BlastBlastsParams, options?: RequestOptions): APIPromise<Blast> {
+  create(accountID: string, body: BlastCreateParams, options?: RequestOptions): APIPromise<Blast> {
     return this._client.post(path`/accounts/${accountID}/blasts`, { body, ...options });
   }
 }
@@ -96,7 +96,7 @@ export interface BlastParams {
   to?: Array<string>;
 }
 
-export interface BlastBlastsParams {
+export interface BlastCreateParams {
   attachments?: Array<Shared.AttachmentParams>;
 
   /**
@@ -135,6 +135,6 @@ export declare namespace Blasts {
   export {
     type Blast as Blast,
     type BlastParams as BlastParams,
-    type BlastBlastsParams as BlastBlastsParams,
+    type BlastCreateParams as BlastCreateParams,
   };
 }

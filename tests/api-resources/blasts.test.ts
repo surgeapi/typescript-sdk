@@ -9,8 +9,8 @@ const client = new Surge({
 
 describe('resource blasts', () => {
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
-  test.skip('blasts', async () => {
-    const responsePromise = client.blasts.blasts('acct_01j9a43avnfqzbjfch6pygv1td', {});
+  test.skip('create', async () => {
+    const responsePromise = client.blasts.create('acct_01j9a43avnfqzbjfch6pygv1td', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
