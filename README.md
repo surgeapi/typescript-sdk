@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import Surge from '@surgeapi/node';
 
 const client = new Surge({
-  bearerToken: process.env['SURGE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
 
 const message = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
@@ -47,7 +47,7 @@ This library includes TypeScript definitions for all request params and response
 import Surge from '@surgeapi/node';
 
 const client = new Surge({
-  bearerToken: process.env['SURGE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
 
 const params: Surge.MessageCreateParams = {

@@ -68,7 +68,7 @@ export interface ClientOptions {
   /**
    * Defaults to process.env['SURGE_API_KEY'].
    */
-  bearerToken?: string | undefined;
+  apiKey?: string | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -143,7 +143,7 @@ export interface ClientOptions {
  * API Client for interfacing with the Surge API.
  */
 export class Surge {
-  bearerToken: string;
+  apiKey: string;
 
   baseURL: string;
   maxRetries: number;
@@ -160,7 +160,7 @@ export class Surge {
   /**
    * API Client for interfacing with the Surge API.
    *
-   * @param {string | undefined} [opts.bearerToken=process.env['SURGE_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['SURGE_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['SURGE_BASE_URL'] ?? https://api.surge.app] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -171,17 +171,17 @@ export class Surge {
    */
   constructor({
     baseURL = readEnv('SURGE_BASE_URL'),
-    bearerToken = readEnv('SURGE_API_KEY'),
+    apiKey = readEnv('SURGE_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
-    if (bearerToken === undefined) {
+    if (apiKey === undefined) {
       throw new Errors.SurgeError(
-        "The SURGE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Surge client with an bearerToken option, like new Surge({ bearerToken: 'My Bearer Token' }).",
+        "The SURGE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Surge client with an apiKey option, like new Surge({ apiKey: 'My API Key' }).",
       );
     }
 
     const options: ClientOptions = {
-      bearerToken,
+      apiKey,
       ...opts,
       baseURL: baseURL || `https://api.surge.app`,
     };
@@ -203,7 +203,7 @@ export class Surge {
 
     this._options = options;
 
-    this.bearerToken = bearerToken;
+    this.apiKey = apiKey;
   }
 
   /**
@@ -219,7 +219,7 @@ export class Surge {
       logLevel: this.logLevel,
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
-      bearerToken: this.bearerToken,
+      apiKey: this.apiKey,
       ...options,
     });
     return client;
@@ -241,7 +241,7 @@ export class Surge {
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ Authorization: `Bearer ${this.bearerToken}` }]);
+    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
