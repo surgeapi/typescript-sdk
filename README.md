@@ -55,7 +55,10 @@ const params: Surge.MessageCreateParams = {
   attachments: [{ url: 'https://toretto.family/coronas.gif' }],
   body: 'Thought you could leave without saying goodbye?',
 };
-const message: Surge.Message = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', params);
+const message: Surge.MessageCreateResponse = await client.messages.create(
+  'acct_01j9a43avnfqzbjfch6pygv1td',
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.

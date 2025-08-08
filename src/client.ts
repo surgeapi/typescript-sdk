@@ -11,44 +11,28 @@ import type { APIResponseProps } from './internal/parse';
 import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
-import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { AccountCreateParams, AccountCreateResponse, Accounts } from './resources/accounts';
+import { BlastCreateParams, BlastCreateResponse, Blasts } from './resources/blasts';
+import { Campaigns } from './resources/campaigns';
 import {
-  Account,
-  AccountCreateParams,
-  AccountParams,
-  AccountRetrieveStatusParams,
-  AccountStatus,
-  AccountUpdateParams,
-  Accounts,
-  Organization,
-  OrganizationParams,
-} from './resources/accounts';
-import { Blast, BlastCreateParams, BlastParams, Blasts } from './resources/blasts';
-import { Campaign, CampaignCreateParams, CampaignParams, Campaigns } from './resources/campaigns';
-import { ContactCreateParams, ContactUpdateParams, Contacts } from './resources/contacts';
-import { Message, MessageCreateParams, MessageParams, Messages } from './resources/messages';
-import { PhoneNumber, PhoneNumberPurchaseParams, PhoneNumbers } from './resources/phone-numbers';
-import {
-  User,
-  UserCreateParams,
-  UserCreateTokenParams,
-  UserParams,
-  UserTokenParams,
-  UserTokenResponse,
-  UserUpdateParams,
-  Users,
-} from './resources/users';
+  ContactCreateParams,
+  ContactCreateResponse,
+  ContactRetrieveResponse,
+  Contacts,
+} from './resources/contacts';
+import { MessageCreateParams, MessageCreateResponse, Messages } from './resources/messages';
+import { PhoneNumbers } from './resources/phone-numbers';
+import { UserCreateParams, UserCreateResponse, UserRetrieveResponse, Users } from './resources/users';
 import {
   Verification,
-  VerificationCheck,
   VerificationCheckParams,
+  VerificationCheckResponse,
   VerificationCreateParams,
-  VerificationParams,
   Verifications,
 } from './resources/verifications';
 import { type Fetch } from './internal/builtin-types';
@@ -244,8 +228,24 @@ export class Surge {
     return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
+  /**
+   * Basic re-implementation of `qs.stringify` for primitive types.
+   */
   protected stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
+    return Object.entries(query)
+      .filter(([_, value]) => typeof value !== 'undefined')
+      .map(([key, value]) => {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+          return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+        }
+        if (value === null) {
+          return `${encodeURIComponent(key)}=`;
+        }
+        throw new Errors.SurgeError(
+          `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
+        );
+      })
+      .join('&');
   }
 
   private getUserAgent(): string {
@@ -754,71 +754,48 @@ export declare namespace Surge {
 
   export {
     Accounts as Accounts,
-    type Account as Account,
-    type AccountParams as AccountParams,
-    type AccountStatus as AccountStatus,
-    type AccountUpdateParams as AccountUpdateParams,
-    type Organization as Organization,
-    type OrganizationParams as OrganizationParams,
+    type AccountCreateResponse as AccountCreateResponse,
     type AccountCreateParams as AccountCreateParams,
-    type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 
   export {
     Blasts as Blasts,
-    type Blast as Blast,
-    type BlastParams as BlastParams,
+    type BlastCreateResponse as BlastCreateResponse,
     type BlastCreateParams as BlastCreateParams,
   };
 
-  export {
-    Campaigns as Campaigns,
-    type Campaign as Campaign,
-    type CampaignParams as CampaignParams,
-    type CampaignCreateParams as CampaignCreateParams,
-  };
+  export { Campaigns as Campaigns };
 
   export {
     Contacts as Contacts,
+    type ContactCreateResponse as ContactCreateResponse,
+    type ContactRetrieveResponse as ContactRetrieveResponse,
     type ContactCreateParams as ContactCreateParams,
-    type ContactUpdateParams as ContactUpdateParams,
   };
 
   export {
     Messages as Messages,
-    type Message as Message,
-    type MessageParams as MessageParams,
+    type MessageCreateResponse as MessageCreateResponse,
     type MessageCreateParams as MessageCreateParams,
   };
 
-  export {
-    PhoneNumbers as PhoneNumbers,
-    type PhoneNumber as PhoneNumber,
-    type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
-  };
+  export { PhoneNumbers as PhoneNumbers };
 
   export {
     Users as Users,
-    type User as User,
-    type UserParams as UserParams,
-    type UserTokenParams as UserTokenParams,
-    type UserTokenResponse as UserTokenResponse,
+    type UserCreateResponse as UserCreateResponse,
+    type UserRetrieveResponse as UserRetrieveResponse,
     type UserCreateParams as UserCreateParams,
-    type UserUpdateParams as UserUpdateParams,
-    type UserCreateTokenParams as UserCreateTokenParams,
   };
 
   export {
     Verifications as Verifications,
     type Verification as Verification,
-    type VerificationCheck as VerificationCheck,
-    type VerificationCheckParams as VerificationCheckParams,
-    type VerificationParams as VerificationParams,
+    type VerificationCheckResponse as VerificationCheckResponse,
     type VerificationCreateParams as VerificationCreateParams,
+    type VerificationCheckParams as VerificationCheckParams,
   };
 
   export type AttachmentParams = API.AttachmentParams;
   export type Contact = API.Contact;
-  export type ContactParams = API.ContactParams;
-  export type Error = API.Error;
 }

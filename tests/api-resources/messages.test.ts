@@ -10,9 +10,7 @@ const client = new Surge({
 describe('resource messages', () => {
   // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
   test.skip('create: only required params', async () => {
-    const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
-      conversation: { contact: { phone_number: '+18015551234' } },
-    });
+    const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,18 +24,16 @@ describe('resource messages', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: {
+        id: 'cnv_01j9e0dgmdfkj86c877ws0znae',
         contact: {
-          phone_number: '+18015551234',
-          email: 'dev@stainless.com',
+          id: 'ctc_01j9dy8mdzfn3r0e8x1tbdrdrf',
           first_name: 'Dominic',
           last_name: 'Toretto',
-          metadata: { foo: 'string' },
+          phone_number: '+18015551234',
         },
-        phone_number: '+18015556789',
       },
       attachments: [{ url: 'https://toretto.family/coronas.gif' }],
-      body: 'body',
-      send_at: '2019-12-27T18:11:19.117Z',
+      body: 'Thought you could leave without saying goodbye?',
     });
   });
 });

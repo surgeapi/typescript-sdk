@@ -17,21 +17,25 @@ export class Blasts extends APIResource {
    * );
    * ```
    */
-  create(accountID: string, body: BlastCreateParams, options?: RequestOptions): APIPromise<Blast> {
+  create(
+    accountID: string,
+    body: BlastCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<BlastCreateResponse> {
     return this._client.post(path`/accounts/${accountID}/blasts`, { body, ...options });
   }
 }
 
 /**
- * A Blast is a message sent to multiple recipients at once.
+ * Response schema for single blast
  */
-export interface Blast {
+export interface BlastCreateResponse {
   /**
    * Unique identifier for the object.
    */
   id?: string;
 
-  attachments?: Array<Blast.Attachment>;
+  attachments?: Array<BlastCreateResponse.Attachment>;
 
   /**
    * The message body.
@@ -49,51 +53,13 @@ export interface Blast {
   send_at?: string;
 }
 
-export namespace Blast {
+export namespace BlastCreateResponse {
   export interface Attachment {
     /**
      * The URL of the attachment.
      */
     url?: string;
   }
-}
-
-/**
- * Parameters for creating a Blast
- */
-export interface BlastParams {
-  attachments?: Array<Shared.AttachmentParams>;
-
-  /**
-   * The message body.
-   */
-  body?: string;
-
-  /**
-   * @deprecated Deprecated. Use `to` instead.
-   */
-  contacts?: Array<string>;
-
-  /**
-   * Optional name for the blast.
-   */
-  name?: string;
-
-  /**
-   * @deprecated Deprecated. Use `to` instead.
-   */
-  segments?: Array<string>;
-
-  /**
-   * When to send the blast. If not provided, sends immediately.
-   */
-  send_at?: string;
-
-  /**
-   * List of recipients to whom the blast should be sent. This can be a combination
-   * of contact IDs, segment IDs, and phone numbers.
-   */
-  to?: Array<string>;
 }
 
 export interface BlastCreateParams {
@@ -105,7 +71,7 @@ export interface BlastCreateParams {
   body?: string;
 
   /**
-   * @deprecated Deprecated. Use `to` instead.
+   * List of contact IDs to send the blast to.
    */
   contacts?: Array<string>;
 
@@ -115,7 +81,7 @@ export interface BlastCreateParams {
   name?: string;
 
   /**
-   * @deprecated Deprecated. Use `to` instead.
+   * List of segment IDs to send the blast to.
    */
   segments?: Array<string>;
 
@@ -123,18 +89,8 @@ export interface BlastCreateParams {
    * When to send the blast. If not provided, sends immediately.
    */
   send_at?: string;
-
-  /**
-   * List of recipients to whom the blast should be sent. This can be a combination
-   * of contact IDs, segment IDs, and phone numbers.
-   */
-  to?: Array<string>;
 }
 
 export declare namespace Blasts {
-  export {
-    type Blast as Blast,
-    type BlastParams as BlastParams,
-    type BlastCreateParams as BlastCreateParams,
-  };
+  export { type BlastCreateResponse as BlastCreateResponse, type BlastCreateParams as BlastCreateParams };
 }

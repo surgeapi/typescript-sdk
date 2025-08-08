@@ -17,7 +17,11 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  create(accountID: string, body: UserCreateParams, options?: RequestOptions): APIPromise<User> {
+  create(
+    accountID: string,
+    body: UserCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<UserCreateResponse> {
     return this._client.post(path`/accounts/${accountID}/users`, { body, ...options });
   }
 
@@ -31,68 +35,34 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<User> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<UserRetrieveResponse> {
     return this._client.get(path`/users/${id}`, options);
-  }
-
-  /**
-   * Updates an existing User object.
-   *
-   * @example
-   * ```ts
-   * const user = await client.users.update(
-   *   'usr_01j9dwavghe1ttppewekjjkfrx',
-   *   { first_name: 'Brian' },
-   * );
-   * ```
-   */
-  update(id: string, body: UserUpdateParams, options?: RequestOptions): APIPromise<User> {
-    return this._client.patch(path`/users/${id}`, { body, ...options });
-  }
-
-  /**
-   * Provides a mechanism for having Surge create a signed token for embeds instead
-   * of signing with your own signing key.
-   *
-   * @example
-   * ```ts
-   * const userTokenResponse = await client.users.createToken(
-   *   'usr_01jymgdfrpec2asc5m0z3a6fr9',
-   * );
-   * ```
-   */
-  createToken(
-    userID: string,
-    body: UserCreateTokenParams,
-    options?: RequestOptions,
-  ): APIPromise<UserTokenResponse> {
-    return this._client.post(path`/users/${userID}/tokens`, { body, ...options });
   }
 }
 
 /**
- * A user of the app
+ * Response schema for single user
  */
-export interface User {
-  /**
-   * The user's first name.
-   */
-  first_name: string;
-
+export interface UserCreateResponse {
   /**
    * Unique identifier for the object.
    */
   id?: string;
 
   /**
+   * The user's first name.
+   */
+  first_name?: string;
+
+  /**
    * The user's last name.
    */
   last_name?: string;
 
   /**
-   * Set of key-value pairs that will be stored with the object.
+   * Set of key-value pairs that will be stored with the user.
    */
-  metadata?: { [key: string]: string };
+  metadata?: unknown;
 
   /**
    * URL of a photo to be used as the user's avatar.
@@ -101,13 +71,18 @@ export interface User {
 }
 
 /**
- * POST body for creating a user
+ * Response schema for single user
  */
-export interface UserParams {
+export interface UserRetrieveResponse {
+  /**
+   * Unique identifier for the object.
+   */
+  id?: string;
+
   /**
    * The user's first name.
    */
-  first_name: string;
+  first_name?: string;
 
   /**
    * The user's last name.
@@ -115,34 +90,14 @@ export interface UserParams {
   last_name?: string;
 
   /**
-   * Set of key-value pairs that will be stored with the object.
+   * Set of key-value pairs that will be stored with the user.
    */
-  metadata?: { [key: string]: string };
+  metadata?: unknown;
 
   /**
    * URL of a photo to be used as the user's avatar.
    */
   photo_url?: string;
-}
-
-/**
- * A request to create a token
- */
-export interface UserTokenParams {
-  /**
-   * For how many seconds the token should be accepted. Defaults to 15 minutes.
-   */
-  duration_seconds?: number;
-}
-
-/**
- * Response when token has been created successfully
- */
-export interface UserTokenResponse {
-  /**
-   * The created token.
-   */
-  token?: string;
 }
 
 export interface UserCreateParams {
@@ -157,53 +112,20 @@ export interface UserCreateParams {
   last_name?: string;
 
   /**
-   * Set of key-value pairs that will be stored with the object.
+   * Set of key-value pairs that will be stored with the user.
    */
-  metadata?: { [key: string]: string };
+  metadata?: unknown;
 
   /**
    * URL of a photo to be used as the user's avatar.
    */
   photo_url?: string;
-}
-
-export interface UserUpdateParams {
-  /**
-   * The user's first name.
-   */
-  first_name: string;
-
-  /**
-   * The user's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * URL of a photo to be used as the user's avatar.
-   */
-  photo_url?: string;
-}
-
-export interface UserCreateTokenParams {
-  /**
-   * For how many seconds the token should be accepted. Defaults to 15 minutes.
-   */
-  duration_seconds?: number;
 }
 
 export declare namespace Users {
   export {
-    type User as User,
-    type UserParams as UserParams,
-    type UserTokenParams as UserTokenParams,
-    type UserTokenResponse as UserTokenResponse,
+    type UserCreateResponse as UserCreateResponse,
+    type UserRetrieveResponse as UserRetrieveResponse,
     type UserCreateParams as UserCreateParams,
-    type UserUpdateParams as UserUpdateParams,
-    type UserCreateTokenParams as UserCreateTokenParams,
   };
 }
