@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource verifications', () => {
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('create: only required params', async () => {
     const responsePromise = client.verifications.create({ phone_number: '+18015551234' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,12 +20,12 @@ describe('resource verifications', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('create: required and optional params', async () => {
     const response = await client.verifications.create({ phone_number: '+18015551234' });
   });
 
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('check: only required params', async () => {
     const responsePromise = client.verifications.check('vfn_01jayh15c2f2xamftg0xpyq1nj', { code: '123456' });
     const rawResponse = await responsePromise.asResponse();
@@ -37,7 +37,7 @@ describe('resource verifications', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('check: required and optional params', async () => {
     const response = await client.verifications.check('vfn_01jayh15c2f2xamftg0xpyq1nj', { code: '123456' });
   });

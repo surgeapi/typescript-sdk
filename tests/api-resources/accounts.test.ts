@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource accounts', () => {
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('create: only required params', async () => {
     const responsePromise = client.accounts.create({ name: 'D·T Precision Auto Shop' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('create: required and optional params', async () => {
     const response = await client.accounts.create({
       name: 'D·T Precision Auto Shop',

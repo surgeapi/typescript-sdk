@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource contacts', () => {
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('create: only required params', async () => {
     const responsePromise = client.contacts.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       phone_number: '+18015551234',
@@ -22,7 +22,7 @@ describe('resource contacts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('create: required and optional params', async () => {
     const response = await client.contacts.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       phone_number: '+18015551234',
@@ -33,7 +33,7 @@ describe('resource contacts', () => {
     });
   });
 
-  // skipped: currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url
+  // Prism doesn't support callbacks yet
   test.skip('retrieve', async () => {
     const responsePromise = client.contacts.retrieve('ctc_01j9dy8mdzfn3r0e8x1tbdrdrf');
     const rawResponse = await responsePromise.asResponse();
