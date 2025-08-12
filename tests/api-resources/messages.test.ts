@@ -10,7 +10,9 @@ const client = new Surge({
 describe('resource messages', () => {
   // Prism doesn't support callbacks yet
   test.skip('create: only required params', async () => {
-    const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: {} });
+    const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+      conversation: { contact: { phone_number: '+18015551234' } },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,16 +26,18 @@ describe('resource messages', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: {
-        id: 'cnv_01j9e0dgmdfkj86c877ws0znae',
         contact: {
-          id: 'ctc_01j9dy8mdzfn3r0e8x1tbdrdrf',
+          phone_number: '+18015551234',
+          email: 'dev@stainless.com',
           first_name: 'Dominic',
           last_name: 'Toretto',
-          phone_number: '+18015551234',
+          metadata: { foo: 'string' },
         },
+        phone_number: '+18015556789',
       },
       attachments: [{ url: 'https://toretto.family/coronas.gif' }],
-      body: 'Thought you could leave without saying goodbye?',
+      body: 'body',
+      send_at: '2019-12-27T18:11:19.117Z',
     });
   });
 });

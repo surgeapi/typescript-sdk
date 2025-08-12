@@ -1,22 +1,37 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
-export { Accounts, type AccountCreateResponse, type AccountCreateParams } from './accounts';
-export { Blasts, type BlastCreateResponse, type BlastCreateParams } from './blasts';
-export { Campaigns } from './campaigns';
 export {
-  Contacts,
-  type ContactCreateResponse,
-  type ContactRetrieveResponse,
-  type ContactCreateParams,
-} from './contacts';
-export { Messages, type MessageCreateResponse, type MessageCreateParams } from './messages';
-export { PhoneNumbers } from './phone-numbers';
-export { Users, type UserCreateResponse, type UserRetrieveResponse, type UserCreateParams } from './users';
+  Accounts,
+  type Account,
+  type AccountParams,
+  type AccountStatus,
+  type AccountUpdateParams,
+  type Organization,
+  type OrganizationParams,
+  type AccountCreateParams,
+  type AccountRetrieveStatusParams,
+} from './accounts';
+export { Blasts, type Blast, type BlastParams, type BlastCreateParams } from './blasts';
+export { Campaigns, type Campaign, type CampaignParams, type CampaignCreateParams } from './campaigns';
+export { Contacts, type ContactCreateParams, type ContactUpdateParams } from './contacts';
+export { Messages, type Message, type MessageParams, type MessageCreateParams } from './messages';
+export { PhoneNumbers, type PhoneNumber, type PhoneNumberPurchaseParams } from './phone-numbers';
+export {
+  Users,
+  type User,
+  type UserParams,
+  type UserTokenParams,
+  type UserTokenResponse,
+  type UserCreateParams,
+  type UserUpdateParams,
+  type UserCreateTokenParams,
+} from './users';
 export {
   Verifications,
   type Verification,
-  type VerificationCheckResponse,
-  type VerificationCreateParams,
+  type VerificationCheck,
   type VerificationCheckParams,
+  type VerificationParams,
+  type VerificationCreateParams,
 } from './verifications';

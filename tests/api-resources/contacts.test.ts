@@ -29,7 +29,7 @@ describe('resource contacts', () => {
       email: 'dom@toretto.family',
       first_name: 'Dominic',
       last_name: 'Toretto',
-      metadata: { car: 'bar' },
+      metadata: { car: '1970 Dodge Charger R/T' },
     });
   });
 
@@ -43,5 +43,30 @@ describe('resource contacts', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism doesn't support callbacks yet
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.contacts.update('ctc_01j9dy8mdzfn3r0e8x1tbdrdrf', {
+      phone_number: '+18015551234',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism doesn't support callbacks yet
+  test.skip('update: required and optional params', async () => {
+    const response = await client.contacts.update('ctc_01j9dy8mdzfn3r0e8x1tbdrdrf', {
+      phone_number: '+18015551234',
+      email: 'dom@toretto.family',
+      first_name: 'Dominic',
+      last_name: 'Toretto',
+      metadata: { car: '1970 Dodge Charger R/T' },
+    });
   });
 });
