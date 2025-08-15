@@ -2,9 +2,6 @@
 
 Types:
 
-- <code><a href="./src/resources/shared.ts">AttachmentParams</a></code>
-- <code><a href="./src/resources/shared.ts">Contact</a></code>
-- <code><a href="./src/resources/shared.ts">ContactParams</a></code>
 - <code><a href="./src/resources/shared.ts">Error</a></code>
 
 # Accounts
@@ -48,6 +45,11 @@ Methods:
 
 # Contacts
 
+Types:
+
+- <code><a href="./src/resources/contacts.ts">Contact</a></code>
+- <code><a href="./src/resources/contacts.ts">ContactParams</a></code>
+
 Methods:
 
 - <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/resources/contacts.ts">create</a>(accountID, { ...params }) -> Contact</code>
@@ -58,6 +60,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/messages.ts">AttachmentParams</a></code>
 - <code><a href="./src/resources/messages.ts">Message</a></code>
 - <code><a href="./src/resources/messages.ts">MessageParams</a></code>
 

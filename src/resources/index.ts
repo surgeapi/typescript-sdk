@@ -14,8 +14,20 @@ export {
 } from './accounts';
 export { Blasts, type Blast, type BlastParams, type BlastCreateParams } from './blasts';
 export { Campaigns, type Campaign, type CampaignParams, type CampaignCreateParams } from './campaigns';
-export { Contacts, type ContactCreateParams, type ContactUpdateParams } from './contacts';
-export { Messages, type Message, type MessageParams, type MessageCreateParams } from './messages';
+export {
+  Contacts,
+  type Contact,
+  type ContactParams,
+  type ContactCreateParams,
+  type ContactUpdateParams,
+} from './contacts';
+export {
+  Messages,
+  type AttachmentParams,
+  type Message,
+  type MessageParams,
+  type MessageCreateParams,
+} from './messages';
 export { PhoneNumbers, type PhoneNumber, type PhoneNumberPurchaseParams } from './phone-numbers';
 export {
   Users,

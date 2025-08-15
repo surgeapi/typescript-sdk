@@ -30,8 +30,20 @@ import {
 } from './resources/accounts';
 import { Blast, BlastCreateParams, BlastParams, Blasts } from './resources/blasts';
 import { Campaign, CampaignCreateParams, CampaignParams, Campaigns } from './resources/campaigns';
-import { ContactCreateParams, ContactUpdateParams, Contacts } from './resources/contacts';
-import { Message, MessageCreateParams, MessageParams, Messages } from './resources/messages';
+import {
+  Contact,
+  ContactCreateParams,
+  ContactParams,
+  ContactUpdateParams,
+  Contacts,
+} from './resources/contacts';
+import {
+  AttachmentParams,
+  Message,
+  MessageCreateParams,
+  MessageParams,
+  Messages,
+} from './resources/messages';
 import { PhoneNumber, PhoneNumberPurchaseParams, PhoneNumbers } from './resources/phone-numbers';
 import {
   User,
@@ -780,12 +792,15 @@ export declare namespace Surge {
 
   export {
     Contacts as Contacts,
+    type Contact as Contact,
+    type ContactParams as ContactParams,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
   };
 
   export {
     Messages as Messages,
+    type AttachmentParams as AttachmentParams,
     type Message as Message,
     type MessageParams as MessageParams,
     type MessageCreateParams as MessageCreateParams,
@@ -817,8 +832,5 @@ export declare namespace Surge {
     type VerificationCreateParams as VerificationCreateParams,
   };
 
-  export type AttachmentParams = API.AttachmentParams;
-  export type Contact = API.Contact;
-  export type ContactParams = API.ContactParams;
   export type Error = API.Error;
 }

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -18,7 +17,7 @@ export class Contacts extends APIResource {
    * );
    * ```
    */
-  create(accountID: string, body: ContactCreateParams, options?: RequestOptions): APIPromise<Shared.Contact> {
+  create(accountID: string, body: ContactCreateParams, options?: RequestOptions): APIPromise<Contact> {
     return this._client.post(path`/accounts/${accountID}/contacts`, { body, ...options });
   }
 
@@ -32,7 +31,7 @@ export class Contacts extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Contact> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Contact> {
     return this._client.get(path`/contacts/${id}`, options);
   }
 
@@ -48,9 +47,74 @@ export class Contacts extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: ContactUpdateParams, options?: RequestOptions): APIPromise<Shared.Contact> {
+  update(id: string, body: ContactUpdateParams, options?: RequestOptions): APIPromise<Contact> {
     return this._client.patch(path`/contacts/${id}`, { body, ...options });
   }
+}
+
+/**
+ * A contact who has consented to receive messages
+ */
+export interface Contact {
+  /**
+   * Unique identifier for the object.
+   */
+  id: string;
+
+  /**
+   * The contact's phone number in E.164 format.
+   */
+  phone_number: string;
+
+  /**
+   * The contact's email address.
+   */
+  email?: string;
+
+  /**
+   * The contact's first name.
+   */
+  first_name?: string;
+
+  /**
+   * The contact's last name.
+   */
+  last_name?: string;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
+}
+
+/**
+ * Parameters for creating a contact
+ */
+export interface ContactParams {
+  /**
+   * The contact's phone number in E.164 format.
+   */
+  phone_number: string;
+
+  /**
+   * The contact's email address.
+   */
+  email?: string;
+
+  /**
+   * The contact's first name.
+   */
+  first_name?: string;
+
+  /**
+   * The contact's last name.
+   */
+  last_name?: string;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
 }
 
 export interface ContactCreateParams {
@@ -108,5 +172,10 @@ export interface ContactUpdateParams {
 }
 
 export declare namespace Contacts {
-  export { type ContactCreateParams as ContactCreateParams, type ContactUpdateParams as ContactUpdateParams };
+  export {
+    type Contact as Contact,
+    type ContactParams as ContactParams,
+    type ContactCreateParams as ContactCreateParams,
+    type ContactUpdateParams as ContactUpdateParams,
+  };
 }

@@ -1,7 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
+import * as MessagesAPI from './messages';
+import * as ContactsAPI from './contacts';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -49,6 +50,16 @@ export class Messages extends APIResource {
   create(accountID: string, body: MessageCreateParams, options?: RequestOptions): APIPromise<Message> {
     return this._client.post(path`/accounts/${accountID}/messages`, { body, ...options });
   }
+}
+
+/**
+ * Params for creating an attachment
+ */
+export interface AttachmentParams {
+  /**
+   * The URL of the attachment.
+   */
+  url: string;
 }
 
 /**
@@ -106,7 +117,7 @@ export namespace Message {
     /**
      * A contact who has consented to receive messages
      */
-    contact: Shared.Contact;
+    contact: ContactsAPI.Contact;
 
     /**
      * This is the phone number tied to the Surge account.
@@ -156,7 +167,7 @@ export namespace MessageParams {
      */
     conversation: MessageParamsWithConversation.Conversation;
 
-    attachments?: Array<Shared.AttachmentParams>;
+    attachments?: Array<MessagesAPI.AttachmentParams>;
 
     /**
      * The message body.
@@ -179,7 +190,7 @@ export namespace MessageParams {
       /**
        * Parameters for creating a contact
        */
-      contact: Shared.ContactParams;
+      contact: ContactsAPI.ContactParams;
 
       /**
        * The phone number from which to send the message. This can be either the phone
@@ -199,7 +210,7 @@ export namespace MessageParams {
      */
     to: string;
 
-    attachments?: Array<Shared.AttachmentParams>;
+    attachments?: Array<MessagesAPI.AttachmentParams>;
 
     /**
      * The message body.
@@ -232,7 +243,7 @@ export declare namespace MessageCreateParams {
      */
     conversation: MessageParamsWithConversation.Conversation;
 
-    attachments?: Array<Shared.AttachmentParams>;
+    attachments?: Array<AttachmentParams>;
 
     /**
      * The message body.
@@ -255,7 +266,7 @@ export declare namespace MessageCreateParams {
       /**
        * Parameters for creating a contact
        */
-      contact: Shared.ContactParams;
+      contact: ContactsAPI.ContactParams;
 
       /**
        * The phone number from which to send the message. This can be either the phone
@@ -272,7 +283,7 @@ export declare namespace MessageCreateParams {
      */
     to: string;
 
-    attachments?: Array<Shared.AttachmentParams>;
+    attachments?: Array<AttachmentParams>;
 
     /**
      * The message body.
@@ -295,6 +306,7 @@ export declare namespace MessageCreateParams {
 
 export declare namespace Messages {
   export {
+    type AttachmentParams as AttachmentParams,
     type Message as Message,
     type MessageParams as MessageParams,
     type MessageCreateParams as MessageCreateParams,

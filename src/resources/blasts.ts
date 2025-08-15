@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
+import * as MessagesAPI from './messages';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -62,7 +62,7 @@ export namespace Blast {
  * Parameters for creating a Blast
  */
 export interface BlastParams {
-  attachments?: Array<Shared.AttachmentParams>;
+  attachments?: Array<MessagesAPI.AttachmentParams>;
 
   /**
    * The message body.
@@ -97,7 +97,7 @@ export interface BlastParams {
 }
 
 export interface BlastCreateParams {
-  attachments?: Array<Shared.AttachmentParams>;
+  attachments?: Array<MessagesAPI.AttachmentParams>;
 
   /**
    * The message body.
