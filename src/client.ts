@@ -753,6 +753,7 @@ export class Surge {
   users: API.Users = new API.Users(this);
   verifications: API.Verifications = new API.Verifications(this);
 }
+
 Surge.Accounts = Accounts;
 Surge.Blasts = Blasts;
 Surge.Campaigns = Campaigns;
@@ -761,6 +762,7 @@ Surge.Messages = Messages;
 Surge.PhoneNumbers = PhoneNumbers;
 Surge.Users = Users;
 Surge.Verifications = Verifications;
+
 export declare namespace Surge {
   export type RequestOptions = Opts.RequestOptions;
 
