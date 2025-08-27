@@ -9,10 +9,8 @@ const client = new Surge({
 
 describe('resource phoneNumbers', () => {
   // Prism doesn't support callbacks yet
-  test.skip('purchase: only required params', async () => {
-    const responsePromise = client.phoneNumbers.purchase('acct_01j9a43avnfqzbjfch6pygv1td', {
-      type: 'local',
-    });
+  test.skip('purchase', async () => {
+    const responsePromise = client.phoneNumbers.purchase('acct_01j9a43avnfqzbjfch6pygv1td', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,13 +18,5 @@ describe('resource phoneNumbers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism doesn't support callbacks yet
-  test.skip('purchase: required and optional params', async () => {
-    const response = await client.phoneNumbers.purchase('acct_01j9a43avnfqzbjfch6pygv1td', {
-      type: 'local',
-      area_code: '801',
-    });
   });
 });
