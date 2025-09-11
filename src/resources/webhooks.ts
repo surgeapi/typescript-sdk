@@ -26,6 +26,11 @@ export interface CallEndedWebhookEvent {
   data: CallEndedWebhookEvent.Data;
 
   /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
    * The type of the event. Always `call.ended` for this event.
    */
   type: 'call.ended';
@@ -88,6 +93,11 @@ export interface CampaignApprovedWebhookEvent {
   data: CampaignApprovedWebhookEvent.Data;
 
   /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
    * The type of the event. Always `campaign.approved` for this event.
    */
   type: 'campaign.approved';
@@ -127,6 +137,11 @@ export interface ConversationCreatedWebhookEvent {
    * The data associated with the event
    */
   data: ConversationCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
 
   /**
    * The type of the event. Always `conversation.created` for this event.
@@ -174,6 +189,11 @@ export interface MessageDeliveredWebhookEvent {
    * The data associated with the event
    */
   data: MessageDeliveredWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
 
   /**
    * The type of the event. Always `message.delivered` for this event.
@@ -266,6 +286,11 @@ export interface MessageFailedWebhookEvent {
    * The data associated with the event
    */
   data: MessageFailedWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
 
   /**
    * The type of the event. Always `message.failed` for this event.
@@ -365,6 +390,11 @@ export interface MessageReceivedWebhookEvent {
   data: MessageReceivedWebhookEvent.Data;
 
   /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
    * The type of the event. Always `message.received` for this event.
    */
   type: 'message.received';
@@ -455,6 +485,11 @@ export interface MessageSentWebhookEvent {
    * The data associated with the event
    */
   data: MessageSentWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
 
   /**
    * The type of the event. Always `message.sent` for this event.
