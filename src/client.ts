@@ -18,13 +18,15 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  Account,
   AccountCreateParams,
-  AccountCreateResponse,
+  AccountParams,
   AccountRetrieveStatusParams,
   AccountStatus,
   AccountUpdateParams,
-  AccountUpdateResponse,
   Accounts,
+  Organization,
+  OrganizationParams,
 } from './resources/accounts';
 import { Blast, BlastCreateParams, BlastParams, Blasts } from './resources/blasts';
 import { Campaign, CampaignCreateParams, CampaignParams, Campaigns } from './resources/campaigns';
@@ -766,11 +768,13 @@ export declare namespace Surge {
 
   export {
     Accounts as Accounts,
+    type Account as Account,
+    type AccountParams as AccountParams,
     type AccountStatus as AccountStatus,
-    type AccountCreateResponse as AccountCreateResponse,
-    type AccountUpdateResponse as AccountUpdateResponse,
-    type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
+    type Organization as Organization,
+    type OrganizationParams as OrganizationParams,
+    type AccountCreateParams as AccountCreateParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 

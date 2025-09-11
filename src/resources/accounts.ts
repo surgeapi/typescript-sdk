@@ -16,7 +16,7 @@ export class Accounts extends APIResource {
    * });
    * ```
    */
-  create(body: AccountCreateParams, options?: RequestOptions): APIPromise<AccountCreateResponse> {
+  create(body: AccountCreateParams, options?: RequestOptions): APIPromise<Account> {
     return this._client.post('/accounts', { body, ...options });
   }
 
@@ -30,7 +30,7 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: AccountUpdateParams, options?: RequestOptions): APIPromise<AccountUpdateResponse> {
+  update(id: string, body: AccountUpdateParams, options?: RequestOptions): APIPromise<Account> {
     return this._client.patch(path`/accounts/${id}`, { body, ...options });
   }
 
@@ -51,6 +51,74 @@ export class Accounts extends APIResource {
   ): APIPromise<AccountStatus> {
     return this._client.get(path`/accounts/${accountID}/status`, { query, ...options });
   }
+}
+
+/**
+ * Response containing account information.
+ */
+export interface Account {
+  /**
+   * The account ID
+   */
+  id: string;
+
+  /**
+   * The name by which the people this account communicates with know it. If not
+   * provided, this will match the name field.
+   */
+  brand_name: string | null;
+
+  /**
+   * The name of the account that will be visible for your internal organizational
+   * purposes. This will also be the default public-facing brand name unless you also
+   * set a `brand_name`, but otherwise the account name will never be displayed
+   * anywhere outside of Surge HQ, and may include your ID for the account or
+   * anything else that may help you.
+   */
+  name: string;
+
+  /**
+   * The legal entity on whose behalf the account will be operated.
+   */
+  organization: Organization;
+
+  /**
+   * This is the time zone in which the account is headquartered. This time zone may
+   * be used for compliance with TCPA restrictions on when messages may be sent.
+   */
+  time_zone: string | null;
+}
+
+/**
+ * Parameters for creating a new account.
+ */
+export interface AccountParams {
+  /**
+   * The name of the account that will be visible for your internal organizational
+   * purposes. This will also be the default public-facing brand name unless you also
+   * set a `brand_name`, but otherwise the account name will never be displayed
+   * anywhere outside of Surge HQ, and may include your ID for the account or
+   * anything else that may help you.
+   */
+  name: string;
+
+  /**
+   * The name by which the people this account communicates with know it. If not
+   * provided, this will match the name field.
+   */
+  brand_name?: string | null;
+
+  /**
+   * Parameters describing the legal entity on whose behalf the account will be
+   * operated.
+   */
+  organization?: OrganizationParams;
+
+  /**
+   * This is the time zone in which the account is headquartered. This time zone may
+   * be used for compliance with TCPA restrictions on when messages may be sent.
+   */
+  time_zone?: string;
 }
 
 /**
@@ -107,17 +175,15 @@ export namespace AccountStatus {
   }
 }
 
-export interface AccountCreateResponse {
-  /**
-   * The account ID
-   */
-  id: string;
-
+/**
+ * Parameters for updating an existing account.
+ */
+export interface AccountUpdateParams {
   /**
    * The name by which the people this account communicates with know it. If not
    * provided, this will match the name field.
    */
-  brand_name: string | null;
+  brand_name?: string;
 
   /**
    * The name of the account that will be visible for your internal organizational
@@ -126,538 +192,514 @@ export interface AccountCreateResponse {
    * anywhere outside of Surge HQ, and may include your ID for the account or
    * anything else that may help you.
    */
-  name: string;
-
-  organization: AccountCreateResponse.Organization;
+  name?: string;
 
   /**
-   * This is the time zone in which the account is headquartered. This time zone may
-   * be used for compliance with TCPA restrictions on when messages may be sent.
+   * Parameters describing the legal entity on whose behalf the account will be
+   * operated.
    */
-  time_zone: string | null;
+  organization?: OrganizationParams;
+
+  /**
+   * The time zone for the account
+   */
+  time_zone?: string | null;
 }
 
-export namespace AccountCreateResponse {
-  export interface Organization {
-    /**
-     * The address of the organization's headquarters.
-     */
-    address: Organization.Address;
+/**
+ * The legal entity on whose behalf the account will be operated.
+ */
+export interface Organization {
+  /**
+   * The address of the organization's headquarters.
+   */
+  address: Organization.Address;
 
-    /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
-     */
-    contact: Organization.Contact;
+  /**
+   * An object representing an individual who can be contacted if the carriers have
+   * any questions about the business.
+   */
+  contact: Organization.Contact;
 
+  /**
+   * The two character ISO 3166 country code for the country in which the
+   * organization is headquartered.
+   */
+  country: string | null;
+
+  /**
+   * For publicly traded companies, an email for a representative of the company to
+   * whom a verification email will be sent. This must be an email on the same domain
+   * as the company's website (e.g. with a website domain of
+   * `https://dtprecisionauto.com`, the email must use the same
+   * `@dtprecisionauto.com`)
+   */
+  email: string | null;
+
+  /**
+   * The value of the identifier whose type is specified in the identifier_type
+   * field. Typically this will be an EIN, and can be formatted with or without the
+   * hyphen.
+   */
+  identifier: string | null;
+
+  /**
+   * The type of identifier being provided for the organization. Support for more
+   * values will be added in the future.
+   */
+  identifier_type: 'ein' | null;
+
+  /**
+   * The industry in which the organization operates.
+   */
+  industry:
+    | 'agriculture'
+    | 'automotive'
+    | 'banking'
+    | 'construction'
+    | 'consumer'
+    | 'education'
+    | 'electronics'
+    | 'energy'
+    | 'engineering'
+    | 'fast_moving_consumer_goods'
+    | 'financial'
+    | 'fintech'
+    | 'food_and_beverage'
+    | 'government'
+    | 'healthcare'
+    | 'hospitality'
+    | 'insurance'
+    | 'jewelry'
+    | 'legal'
+    | 'manufacturing'
+    | 'media'
+    | 'not_for_profit'
+    | 'oil_and_gas'
+    | 'online'
+    | 'professional_services'
+    | 'raw_materials'
+    | 'real_estate'
+    | 'religion'
+    | 'retail'
+    | 'technology'
+    | 'telecommunications'
+    | 'transportation'
+    | 'travel'
+    | null;
+
+  /**
+   * For sole proprietors, this must be a valid US mobile phone number to which a
+   * verification text message will be sent. (E.164 format)
+   */
+  mobile_number: string | null;
+
+  /**
+   * An array of regions in which the organization operates.
+   */
+  regions_of_operation: Array<
+    'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
+  > | null;
+
+  /**
+   * The legal name of the organization as registered with the IRS or other relevant
+   * authorities. For some applications, this will be matched against government
+   * records and should include all punctuation and everything else as well.
+   */
+  registered_name: string | null;
+
+  /**
+   * For publicly traded companies, this is the exchange on which the company's stock
+   * is traded.
+   */
+  stock_exchange:
+    | 'amex'
+    | 'amx'
+    | 'asx'
+    | 'b3'
+    | 'bme'
+    | 'bse'
+    | 'fra'
+    | 'icex'
+    | 'jpx'
+    | 'jse'
+    | 'krx'
+    | 'lon'
+    | 'nasdaq'
+    | 'none'
+    | 'nyse'
+    | 'nse'
+    | 'omx'
+    | 'other'
+    | 'sehk'
+    | 'sgx'
+    | 'sse'
+    | 'sto'
+    | 'swx'
+    | 'szse'
+    | 'tsx'
+    | 'twse'
+    | 'vse'
+    | null;
+
+  /**
+   * For publicly traded companies, the ticker symbol for the company's stock
+   */
+  stock_symbol: string | null;
+
+  /**
+   * The type of organization
+   */
+  type:
+    | 'co_op'
+    | 'government'
+    | 'llc'
+    | 'non_profit'
+    | 'partnership'
+    | 'private_corporation'
+    | 'public_corporation'
+    | 'sole_proprietor'
+    | null;
+
+  /**
+   * The URL of the website for this organization. The website should be publicly
+   * available, clearly reflect the organization's purpose, and the URL should start
+   * with `https://`
+   */
+  website: string | null;
+}
+
+export namespace Organization {
+  /**
+   * The address of the organization's headquarters.
+   */
+  export interface Address {
     /**
-     * The two character ISO 3166 country code for the country in which the
-     * organization is headquartered.
+     * The two character ISO 3166 country code. If none is provided, the organization's
+     * country code will be used.
      */
     country: string | null;
 
     /**
-     * For publicly traded companies, an email for a representative of the company to
-     * whom a verification email will be sent. This must be an email on the same domain
-     * as the company's website (e.g. with a website domain of
-     * `https://dtprecisionauto.com`, the email must use the same
-     * `@dtprecisionauto.com`)
+     * The first line of the address, typically the number and street name
+     */
+    line1: string | null;
+
+    /**
+     * The second line of the address if needed, typically an apartment or suite number
+     */
+    line2: string | null;
+
+    /**
+     * The city or locality
+     */
+    locality: string | null;
+
+    /**
+     * The name to which any mail should be addressed. If none is provided, this will
+     * default to the organization's registered_name
+     */
+    name: string | null;
+
+    /**
+     * The postal code
+     */
+    postal_code: string | null;
+
+    /**
+     * The state or region
+     */
+    region: string | null;
+  }
+
+  /**
+   * An object representing an individual who can be contacted if the carriers have
+   * any questions about the business.
+   */
+  export interface Contact {
+    /**
+     * An email address at which the individual can be reached. Typically an email
+     * using the same domain name as the website URL will be preferred (e.g. with a
+     * website domain of `https://dtprecisionauto.com`, an email like
+     * `dom@dtprecisionauto.com` will be preferred over one like
+     * `dom@anothergarage.com` or `dom.toretto@gmail.com`)
      */
     email: string | null;
 
     /**
-     * The value of the identifier whose type is specified in the identifier_type
-     * field. Typically this will be an EIN, and can be formatted with or without the
-     * hyphen.
+     * The first name (or given name) of the individual
      */
-    identifier: string | null;
+    first_name: string | null;
 
     /**
-     * The type of identifier being provided for the organization. Support for more
-     * values will be added in the future.
+     * The last name (or family name) of the individual
      */
-    identifier_type: 'ein' | null;
+    last_name: string | null;
 
     /**
-     * The industry in which the organization operates.
+     * A phone number at which the individual can be reached (E.164 format)
      */
-    industry:
-      | 'agriculture'
-      | 'automotive'
-      | 'banking'
-      | 'construction'
-      | 'consumer'
-      | 'education'
-      | 'electronics'
-      | 'energy'
-      | 'engineering'
-      | 'fast_moving_consumer_goods'
-      | 'financial'
-      | 'fintech'
-      | 'food_and_beverage'
-      | 'government'
-      | 'healthcare'
-      | 'hospitality'
-      | 'insurance'
-      | 'jewelry'
-      | 'legal'
-      | 'manufacturing'
-      | 'media'
-      | 'not_for_profit'
-      | 'oil_and_gas'
-      | 'online'
-      | 'professional_services'
-      | 'raw_materials'
-      | 'real_estate'
-      | 'religion'
-      | 'retail'
-      | 'technology'
-      | 'telecommunications'
-      | 'transportation'
-      | 'travel'
-      | null;
+    phone_number: string | null;
 
     /**
-     * For sole proprietors, this must be a valid US mobile phone number to which a
-     * verification text message will be sent. (E.164 format)
+     * The job title of the individual.
      */
-    mobile_number: string | null;
+    title: 'ceo' | 'cfo' | 'director' | 'gm' | 'vp' | 'general_counsel' | 'other' | null;
 
     /**
-     * An array of regions in which the organization operates.
+     * If `other` is provided for the `title` field, this field should be used to
+     * provide the title of the individual
      */
-    regions_of_operation: Array<
-      'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
-    > | null;
-
-    /**
-     * The legal name of the organization as registered with the IRS or other relevant
-     * authorities. For some applications, this will be matched against government
-     * records and should include all punctuation and everything else as well.
-     */
-    registered_name: string | null;
-
-    /**
-     * For publicly traded companies, this is the exchange on which the company's stock
-     * is traded.
-     */
-    stock_exchange:
-      | 'amex'
-      | 'amx'
-      | 'asx'
-      | 'b3'
-      | 'bme'
-      | 'bse'
-      | 'fra'
-      | 'icex'
-      | 'jpx'
-      | 'jse'
-      | 'krx'
-      | 'lon'
-      | 'nasdaq'
-      | 'none'
-      | 'nyse'
-      | 'nse'
-      | 'omx'
-      | 'other'
-      | 'sehk'
-      | 'sgx'
-      | 'sse'
-      | 'sto'
-      | 'swx'
-      | 'szse'
-      | 'tsx'
-      | 'twse'
-      | 'vse'
-      | null;
-
-    /**
-     * For publicly traded companies, the ticker symbol for the company's stock
-     */
-    stock_symbol: string | null;
-
-    /**
-     * The type of organization
-     */
-    type:
-      | 'co_op'
-      | 'government'
-      | 'llc'
-      | 'non_profit'
-      | 'partnership'
-      | 'private_corporation'
-      | 'public_corporation'
-      | 'sole_proprietor'
-      | null;
-
-    /**
-     * The URL of the website for this organization. The website should be publicly
-     * available, clearly reflect the organization's purpose, and the URL should start
-     * with `https://`
-     */
-    website: string | null;
-  }
-
-  export namespace Organization {
-    /**
-     * The address of the organization's headquarters.
-     */
-    export interface Address {
-      /**
-       * The two character ISO 3166 country code. If none is provided, the organization's
-       * country code will be used.
-       */
-      country: string | null;
-
-      /**
-       * The first line of the address, typically the number and street name
-       */
-      line1: string | null;
-
-      /**
-       * The second line of the address if needed, typically an apartment or suite number
-       */
-      line2: string | null;
-
-      /**
-       * The city or locality
-       */
-      locality: string | null;
-
-      /**
-       * The name to which any mail should be addressed. If none is provided, this will
-       * default to the organization's registered_name
-       */
-      name: string | null;
-
-      /**
-       * The postal code
-       */
-      postal_code: string | null;
-
-      /**
-       * The state or region
-       */
-      region: string | null;
-    }
-
-    /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
-     */
-    export interface Contact {
-      /**
-       * An email address at which the individual can be reached. Typically an email
-       * using the same domain name as the website URL will be preferred (e.g. with a
-       * website domain of `https://dtprecisionauto.com`, an email like
-       * `dom@dtprecisionauto.com` will be preferred over one like
-       * `dom@anothergarage.com` or `dom.toretto@gmail.com`)
-       */
-      email: string | null;
-
-      /**
-       * The first name (or given name) of the individual
-       */
-      first_name: string | null;
-
-      /**
-       * The last name (or family name) of the individual
-       */
-      last_name: string | null;
-
-      /**
-       * A phone number at which the individual can be reached (E.164 format)
-       */
-      phone_number: string | null;
-
-      /**
-       * The job title of the individual.
-       */
-      title: 'ceo' | 'cfo' | 'director' | 'gm' | 'vp' | 'general_counsel' | 'other' | null;
-
-      /**
-       * If `other` is provided for the `title` field, this field should be used to
-       * provide the title of the individual
-       */
-      title_other: string | null;
-    }
+    title_other: string | null;
   }
 }
 
-export interface AccountUpdateResponse {
+/**
+ * Parameters describing the legal entity on whose behalf the account will be
+ * operated.
+ */
+export interface OrganizationParams {
   /**
-   * The account ID
+   * The address of the organization's headquarters.
    */
-  id: string;
+  address?: OrganizationParams.Address;
 
   /**
-   * The name by which the people this account communicates with know it. If not
-   * provided, this will match the name field.
+   * An object representing an individual who can be contacted if the carriers have
+   * any questions about the business.
    */
-  brand_name: string | null;
+  contact?: OrganizationParams.Contact | null;
 
   /**
-   * The name of the account that will be visible for your internal organizational
-   * purposes. This will also be the default public-facing brand name unless you also
-   * set a `brand_name`, but otherwise the account name will never be displayed
-   * anywhere outside of Surge HQ, and may include your ID for the account or
-   * anything else that may help you.
+   * The two character ISO 3166 country code for the country in which the
+   * organization is headquartered.
    */
-  name: string;
-
-  organization: AccountUpdateResponse.Organization;
+  country?: string | null;
 
   /**
-   * This is the time zone in which the account is headquartered. This time zone may
-   * be used for compliance with TCPA restrictions on when messages may be sent.
+   * For publicly traded companies, an email for a representative of the company to
+   * whom a verification email will be sent. This must be an email on the same domain
+   * as the company's website (e.g. with a website domain of
+   * `https://dtprecisionauto.com`, the email must use the same
+   * `@dtprecisionauto.com`)
    */
-  time_zone: string | null;
+  email?: string | null;
+
+  /**
+   * The value of the identifier whose type is specified in the identifier_type
+   * field. Typically this will be an EIN, and can be formatted with or without the
+   * hyphen.
+   */
+  identifier?: string | null;
+
+  /**
+   * The type of identifier being provided for the organization. Support for more
+   * values will be added in the future.
+   */
+  identifier_type?: 'ein' | null;
+
+  /**
+   * The industry in which the organization operates.
+   */
+  industry?:
+    | 'agriculture'
+    | 'automotive'
+    | 'banking'
+    | 'construction'
+    | 'consumer'
+    | 'education'
+    | 'electronics'
+    | 'energy'
+    | 'engineering'
+    | 'fast_moving_consumer_goods'
+    | 'financial'
+    | 'fintech'
+    | 'food_and_beverage'
+    | 'government'
+    | 'healthcare'
+    | 'hospitality'
+    | 'insurance'
+    | 'jewelry'
+    | 'legal'
+    | 'manufacturing'
+    | 'media'
+    | 'not_for_profit'
+    | 'oil_and_gas'
+    | 'online'
+    | 'professional_services'
+    | 'raw_materials'
+    | 'real_estate'
+    | 'religion'
+    | 'retail'
+    | 'technology'
+    | 'telecommunications'
+    | 'transportation'
+    | 'travel'
+    | null;
+
+  /**
+   * For sole proprietors, this must be a valid US mobile phone number to which a
+   * verification text message will be sent. (E.164 format)
+   */
+  mobile_number?: string | null;
+
+  /**
+   * An array of regions in which the organization operates.
+   */
+  regions_of_operation?: Array<
+    'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
+  > | null;
+
+  /**
+   * The legal name of the organization as registered with the IRS or other relevant
+   * authorities. For some applications, this will be matched against government
+   * records and should include all punctuation and everything else as well.
+   */
+  registered_name?: string | null;
+
+  /**
+   * For publicly traded companies, this is the exchange on which the company's stock
+   * is traded.
+   */
+  stock_exchange?:
+    | 'amex'
+    | 'amx'
+    | 'asx'
+    | 'b3'
+    | 'bme'
+    | 'bse'
+    | 'fra'
+    | 'icex'
+    | 'jpx'
+    | 'jse'
+    | 'krx'
+    | 'lon'
+    | 'nasdaq'
+    | 'none'
+    | 'nyse'
+    | 'nse'
+    | 'omx'
+    | 'other'
+    | 'sehk'
+    | 'sgx'
+    | 'sse'
+    | 'sto'
+    | 'swx'
+    | 'szse'
+    | 'tsx'
+    | 'twse'
+    | 'vse'
+    | null;
+
+  /**
+   * For publicly traded companies, the ticker symbol for the company's stock
+   */
+  stock_symbol?: string | null;
+
+  /**
+   * The type of organization
+   */
+  type?:
+    | 'co_op'
+    | 'government'
+    | 'llc'
+    | 'non_profit'
+    | 'partnership'
+    | 'private_corporation'
+    | 'public_corporation'
+    | 'sole_proprietor'
+    | null;
+
+  /**
+   * The URL of the website for this organization. The website should be publicly
+   * available, clearly reflect the organization's purpose, and the URL should start
+   * with `https://`
+   */
+  website?: string | null;
 }
 
-export namespace AccountUpdateResponse {
-  export interface Organization {
+export namespace OrganizationParams {
+  /**
+   * The address of the organization's headquarters.
+   */
+  export interface Address {
     /**
-     * The address of the organization's headquarters.
+     * The two character ISO 3166 country code. If none is provided, the organization's
+     * country code will be used.
      */
-    address: Organization.Address;
+    country?: string | null;
 
     /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
+     * The first line of the address, typically the number and street name
      */
-    contact: Organization.Contact;
+    line1?: string | null;
 
     /**
-     * The two character ISO 3166 country code for the country in which the
-     * organization is headquartered.
+     * The second line of the address if needed, typically an apartment or suite number
      */
-    country: string | null;
+    line2?: string | null;
 
     /**
-     * For publicly traded companies, an email for a representative of the company to
-     * whom a verification email will be sent. This must be an email on the same domain
-     * as the company's website (e.g. with a website domain of
-     * `https://dtprecisionauto.com`, the email must use the same
-     * `@dtprecisionauto.com`)
+     * The city or locality
      */
-    email: string | null;
+    locality?: string | null;
 
     /**
-     * The value of the identifier whose type is specified in the identifier_type
-     * field. Typically this will be an EIN, and can be formatted with or without the
-     * hyphen.
+     * The name to which any mail should be addressed. If none is provided, this will
+     * default to the organization's registered_name
      */
-    identifier: string | null;
+    name?: string | null;
 
     /**
-     * The type of identifier being provided for the organization. Support for more
-     * values will be added in the future.
+     * The postal code
      */
-    identifier_type: 'ein' | null;
+    postal_code?: string | null;
 
     /**
-     * The industry in which the organization operates.
+     * The state or region
      */
-    industry:
-      | 'agriculture'
-      | 'automotive'
-      | 'banking'
-      | 'construction'
-      | 'consumer'
-      | 'education'
-      | 'electronics'
-      | 'energy'
-      | 'engineering'
-      | 'fast_moving_consumer_goods'
-      | 'financial'
-      | 'fintech'
-      | 'food_and_beverage'
-      | 'government'
-      | 'healthcare'
-      | 'hospitality'
-      | 'insurance'
-      | 'jewelry'
-      | 'legal'
-      | 'manufacturing'
-      | 'media'
-      | 'not_for_profit'
-      | 'oil_and_gas'
-      | 'online'
-      | 'professional_services'
-      | 'raw_materials'
-      | 'real_estate'
-      | 'religion'
-      | 'retail'
-      | 'technology'
-      | 'telecommunications'
-      | 'transportation'
-      | 'travel'
-      | null;
-
-    /**
-     * For sole proprietors, this must be a valid US mobile phone number to which a
-     * verification text message will be sent. (E.164 format)
-     */
-    mobile_number: string | null;
-
-    /**
-     * An array of regions in which the organization operates.
-     */
-    regions_of_operation: Array<
-      'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
-    > | null;
-
-    /**
-     * The legal name of the organization as registered with the IRS or other relevant
-     * authorities. For some applications, this will be matched against government
-     * records and should include all punctuation and everything else as well.
-     */
-    registered_name: string | null;
-
-    /**
-     * For publicly traded companies, this is the exchange on which the company's stock
-     * is traded.
-     */
-    stock_exchange:
-      | 'amex'
-      | 'amx'
-      | 'asx'
-      | 'b3'
-      | 'bme'
-      | 'bse'
-      | 'fra'
-      | 'icex'
-      | 'jpx'
-      | 'jse'
-      | 'krx'
-      | 'lon'
-      | 'nasdaq'
-      | 'none'
-      | 'nyse'
-      | 'nse'
-      | 'omx'
-      | 'other'
-      | 'sehk'
-      | 'sgx'
-      | 'sse'
-      | 'sto'
-      | 'swx'
-      | 'szse'
-      | 'tsx'
-      | 'twse'
-      | 'vse'
-      | null;
-
-    /**
-     * For publicly traded companies, the ticker symbol for the company's stock
-     */
-    stock_symbol: string | null;
-
-    /**
-     * The type of organization
-     */
-    type:
-      | 'co_op'
-      | 'government'
-      | 'llc'
-      | 'non_profit'
-      | 'partnership'
-      | 'private_corporation'
-      | 'public_corporation'
-      | 'sole_proprietor'
-      | null;
-
-    /**
-     * The URL of the website for this organization. The website should be publicly
-     * available, clearly reflect the organization's purpose, and the URL should start
-     * with `https://`
-     */
-    website: string | null;
+    region?: string | null;
   }
 
-  export namespace Organization {
+  /**
+   * An object representing an individual who can be contacted if the carriers have
+   * any questions about the business.
+   */
+  export interface Contact {
     /**
-     * The address of the organization's headquarters.
+     * An email address at which the individual can be reached. Typically an email
+     * using the same domain name as the website URL will be preferred (e.g. with a
+     * website domain of `https://dtprecisionauto.com`, an email like
+     * `dom@dtprecisionauto.com` will be preferred over one like
+     * `dom@anothergarage.com` or `dom.toretto@gmail.com`)
      */
-    export interface Address {
-      /**
-       * The two character ISO 3166 country code. If none is provided, the organization's
-       * country code will be used.
-       */
-      country: string | null;
-
-      /**
-       * The first line of the address, typically the number and street name
-       */
-      line1: string | null;
-
-      /**
-       * The second line of the address if needed, typically an apartment or suite number
-       */
-      line2: string | null;
-
-      /**
-       * The city or locality
-       */
-      locality: string | null;
-
-      /**
-       * The name to which any mail should be addressed. If none is provided, this will
-       * default to the organization's registered_name
-       */
-      name: string | null;
-
-      /**
-       * The postal code
-       */
-      postal_code: string | null;
-
-      /**
-       * The state or region
-       */
-      region: string | null;
-    }
+    email?: string | null;
 
     /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
+     * The first name (or given name) of the individual
      */
-    export interface Contact {
-      /**
-       * An email address at which the individual can be reached. Typically an email
-       * using the same domain name as the website URL will be preferred (e.g. with a
-       * website domain of `https://dtprecisionauto.com`, an email like
-       * `dom@dtprecisionauto.com` will be preferred over one like
-       * `dom@anothergarage.com` or `dom.toretto@gmail.com`)
-       */
-      email: string | null;
+    first_name?: string | null;
 
-      /**
-       * The first name (or given name) of the individual
-       */
-      first_name: string | null;
+    /**
+     * The last name (or family name) of the individual
+     */
+    last_name?: string | null;
 
-      /**
-       * The last name (or family name) of the individual
-       */
-      last_name: string | null;
+    /**
+     * A phone number at which the individual can be reached (E.164 format)
+     */
+    phone_number?: string | null;
 
-      /**
-       * A phone number at which the individual can be reached (E.164 format)
-       */
-      phone_number: string | null;
+    /**
+     * The job title of the individual.
+     */
+    title?: 'ceo' | 'cfo' | 'director' | 'gm' | 'vp' | 'general_counsel' | 'other' | null;
 
-      /**
-       * The job title of the individual.
-       */
-      title: 'ceo' | 'cfo' | 'director' | 'gm' | 'vp' | 'general_counsel' | 'other' | null;
-
-      /**
-       * If `other` is provided for the `title` field, this field should be used to
-       * provide the title of the individual
-       */
-      title_other: string | null;
-    }
+    /**
+     * If `other` is provided for the `title` field, this field should be used to
+     * provide the title of the individual
+     */
+    title_other?: string | null;
   }
 }
 
@@ -677,260 +719,17 @@ export interface AccountCreateParams {
    */
   brand_name?: string | null;
 
-  organization?: AccountCreateParams.Organization;
+  /**
+   * Parameters describing the legal entity on whose behalf the account will be
+   * operated.
+   */
+  organization?: OrganizationParams;
 
   /**
    * This is the time zone in which the account is headquartered. This time zone may
    * be used for compliance with TCPA restrictions on when messages may be sent.
    */
   time_zone?: string;
-}
-
-export namespace AccountCreateParams {
-  export interface Organization {
-    /**
-     * The address of the organization's headquarters.
-     */
-    address?: Organization.Address;
-
-    /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
-     */
-    contact?: Organization.Contact | null;
-
-    /**
-     * The two character ISO 3166 country code for the country in which the
-     * organization is headquartered.
-     */
-    country?: string | null;
-
-    /**
-     * For publicly traded companies, an email for a representative of the company to
-     * whom a verification email will be sent. This must be an email on the same domain
-     * as the company's website (e.g. with a website domain of
-     * `https://dtprecisionauto.com`, the email must use the same
-     * `@dtprecisionauto.com`)
-     */
-    email?: string | null;
-
-    /**
-     * The value of the identifier whose type is specified in the identifier_type
-     * field. Typically this will be an EIN, and can be formatted with or without the
-     * hyphen.
-     */
-    identifier?: string | null;
-
-    /**
-     * The type of identifier being provided for the organization. Support for more
-     * values will be added in the future.
-     */
-    identifier_type?: 'ein' | null;
-
-    /**
-     * The industry in which the organization operates.
-     */
-    industry?:
-      | 'agriculture'
-      | 'automotive'
-      | 'banking'
-      | 'construction'
-      | 'consumer'
-      | 'education'
-      | 'electronics'
-      | 'energy'
-      | 'engineering'
-      | 'fast_moving_consumer_goods'
-      | 'financial'
-      | 'fintech'
-      | 'food_and_beverage'
-      | 'government'
-      | 'healthcare'
-      | 'hospitality'
-      | 'insurance'
-      | 'jewelry'
-      | 'legal'
-      | 'manufacturing'
-      | 'media'
-      | 'not_for_profit'
-      | 'oil_and_gas'
-      | 'online'
-      | 'professional_services'
-      | 'raw_materials'
-      | 'real_estate'
-      | 'religion'
-      | 'retail'
-      | 'technology'
-      | 'telecommunications'
-      | 'transportation'
-      | 'travel'
-      | null;
-
-    /**
-     * For sole proprietors, this must be a valid US mobile phone number to which a
-     * verification text message will be sent. (E.164 format)
-     */
-    mobile_number?: string | null;
-
-    /**
-     * An array of regions in which the organization operates.
-     */
-    regions_of_operation?: Array<
-      'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
-    > | null;
-
-    /**
-     * The legal name of the organization as registered with the IRS or other relevant
-     * authorities. For some applications, this will be matched against government
-     * records and should include all punctuation and everything else as well.
-     */
-    registered_name?: string | null;
-
-    /**
-     * For publicly traded companies, this is the exchange on which the company's stock
-     * is traded.
-     */
-    stock_exchange?:
-      | 'amex'
-      | 'amx'
-      | 'asx'
-      | 'b3'
-      | 'bme'
-      | 'bse'
-      | 'fra'
-      | 'icex'
-      | 'jpx'
-      | 'jse'
-      | 'krx'
-      | 'lon'
-      | 'nasdaq'
-      | 'none'
-      | 'nyse'
-      | 'nse'
-      | 'omx'
-      | 'other'
-      | 'sehk'
-      | 'sgx'
-      | 'sse'
-      | 'sto'
-      | 'swx'
-      | 'szse'
-      | 'tsx'
-      | 'twse'
-      | 'vse'
-      | null;
-
-    /**
-     * For publicly traded companies, the ticker symbol for the company's stock
-     */
-    stock_symbol?: string | null;
-
-    /**
-     * The type of organization
-     */
-    type?:
-      | 'co_op'
-      | 'government'
-      | 'llc'
-      | 'non_profit'
-      | 'partnership'
-      | 'private_corporation'
-      | 'public_corporation'
-      | 'sole_proprietor'
-      | null;
-
-    /**
-     * The URL of the website for this organization. The website should be publicly
-     * available, clearly reflect the organization's purpose, and the URL should start
-     * with `https://`
-     */
-    website?: string | null;
-  }
-
-  export namespace Organization {
-    /**
-     * The address of the organization's headquarters.
-     */
-    export interface Address {
-      /**
-       * The two character ISO 3166 country code. If none is provided, the organization's
-       * country code will be used.
-       */
-      country?: string | null;
-
-      /**
-       * The first line of the address, typically the number and street name
-       */
-      line1?: string | null;
-
-      /**
-       * The second line of the address if needed, typically an apartment or suite number
-       */
-      line2?: string | null;
-
-      /**
-       * The city or locality
-       */
-      locality?: string | null;
-
-      /**
-       * The name to which any mail should be addressed. If none is provided, this will
-       * default to the organization's registered_name
-       */
-      name?: string | null;
-
-      /**
-       * The postal code
-       */
-      postal_code?: string | null;
-
-      /**
-       * The state or region
-       */
-      region?: string | null;
-    }
-
-    /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
-     */
-    export interface Contact {
-      /**
-       * An email address at which the individual can be reached. Typically an email
-       * using the same domain name as the website URL will be preferred (e.g. with a
-       * website domain of `https://dtprecisionauto.com`, an email like
-       * `dom@dtprecisionauto.com` will be preferred over one like
-       * `dom@anothergarage.com` or `dom.toretto@gmail.com`)
-       */
-      email?: string | null;
-
-      /**
-       * The first name (or given name) of the individual
-       */
-      first_name?: string | null;
-
-      /**
-       * The last name (or family name) of the individual
-       */
-      last_name?: string | null;
-
-      /**
-       * A phone number at which the individual can be reached (E.164 format)
-       */
-      phone_number?: string | null;
-
-      /**
-       * The job title of the individual.
-       */
-      title?: 'ceo' | 'cfo' | 'director' | 'gm' | 'vp' | 'general_counsel' | 'other' | null;
-
-      /**
-       * If `other` is provided for the `title` field, this field should be used to
-       * provide the title of the individual
-       */
-      title_other?: string | null;
-    }
-  }
 }
 
 export interface AccountUpdateParams {
@@ -949,259 +748,16 @@ export interface AccountUpdateParams {
    */
   name?: string;
 
-  organization?: AccountUpdateParams.Organization;
+  /**
+   * Parameters describing the legal entity on whose behalf the account will be
+   * operated.
+   */
+  organization?: OrganizationParams;
 
   /**
    * The time zone for the account
    */
   time_zone?: string | null;
-}
-
-export namespace AccountUpdateParams {
-  export interface Organization {
-    /**
-     * The address of the organization's headquarters.
-     */
-    address?: Organization.Address;
-
-    /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
-     */
-    contact?: Organization.Contact | null;
-
-    /**
-     * The two character ISO 3166 country code for the country in which the
-     * organization is headquartered.
-     */
-    country?: string | null;
-
-    /**
-     * For publicly traded companies, an email for a representative of the company to
-     * whom a verification email will be sent. This must be an email on the same domain
-     * as the company's website (e.g. with a website domain of
-     * `https://dtprecisionauto.com`, the email must use the same
-     * `@dtprecisionauto.com`)
-     */
-    email?: string | null;
-
-    /**
-     * The value of the identifier whose type is specified in the identifier_type
-     * field. Typically this will be an EIN, and can be formatted with or without the
-     * hyphen.
-     */
-    identifier?: string | null;
-
-    /**
-     * The type of identifier being provided for the organization. Support for more
-     * values will be added in the future.
-     */
-    identifier_type?: 'ein' | null;
-
-    /**
-     * The industry in which the organization operates.
-     */
-    industry?:
-      | 'agriculture'
-      | 'automotive'
-      | 'banking'
-      | 'construction'
-      | 'consumer'
-      | 'education'
-      | 'electronics'
-      | 'energy'
-      | 'engineering'
-      | 'fast_moving_consumer_goods'
-      | 'financial'
-      | 'fintech'
-      | 'food_and_beverage'
-      | 'government'
-      | 'healthcare'
-      | 'hospitality'
-      | 'insurance'
-      | 'jewelry'
-      | 'legal'
-      | 'manufacturing'
-      | 'media'
-      | 'not_for_profit'
-      | 'oil_and_gas'
-      | 'online'
-      | 'professional_services'
-      | 'raw_materials'
-      | 'real_estate'
-      | 'religion'
-      | 'retail'
-      | 'technology'
-      | 'telecommunications'
-      | 'transportation'
-      | 'travel'
-      | null;
-
-    /**
-     * For sole proprietors, this must be a valid US mobile phone number to which a
-     * verification text message will be sent. (E.164 format)
-     */
-    mobile_number?: string | null;
-
-    /**
-     * An array of regions in which the organization operates.
-     */
-    regions_of_operation?: Array<
-      'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
-    > | null;
-
-    /**
-     * The legal name of the organization as registered with the IRS or other relevant
-     * authorities. For some applications, this will be matched against government
-     * records and should include all punctuation and everything else as well.
-     */
-    registered_name?: string | null;
-
-    /**
-     * For publicly traded companies, this is the exchange on which the company's stock
-     * is traded.
-     */
-    stock_exchange?:
-      | 'amex'
-      | 'amx'
-      | 'asx'
-      | 'b3'
-      | 'bme'
-      | 'bse'
-      | 'fra'
-      | 'icex'
-      | 'jpx'
-      | 'jse'
-      | 'krx'
-      | 'lon'
-      | 'nasdaq'
-      | 'none'
-      | 'nyse'
-      | 'nse'
-      | 'omx'
-      | 'other'
-      | 'sehk'
-      | 'sgx'
-      | 'sse'
-      | 'sto'
-      | 'swx'
-      | 'szse'
-      | 'tsx'
-      | 'twse'
-      | 'vse'
-      | null;
-
-    /**
-     * For publicly traded companies, the ticker symbol for the company's stock
-     */
-    stock_symbol?: string | null;
-
-    /**
-     * The type of organization
-     */
-    type?:
-      | 'co_op'
-      | 'government'
-      | 'llc'
-      | 'non_profit'
-      | 'partnership'
-      | 'private_corporation'
-      | 'public_corporation'
-      | 'sole_proprietor'
-      | null;
-
-    /**
-     * The URL of the website for this organization. The website should be publicly
-     * available, clearly reflect the organization's purpose, and the URL should start
-     * with `https://`
-     */
-    website?: string | null;
-  }
-
-  export namespace Organization {
-    /**
-     * The address of the organization's headquarters.
-     */
-    export interface Address {
-      /**
-       * The two character ISO 3166 country code. If none is provided, the organization's
-       * country code will be used.
-       */
-      country?: string | null;
-
-      /**
-       * The first line of the address, typically the number and street name
-       */
-      line1?: string | null;
-
-      /**
-       * The second line of the address if needed, typically an apartment or suite number
-       */
-      line2?: string | null;
-
-      /**
-       * The city or locality
-       */
-      locality?: string | null;
-
-      /**
-       * The name to which any mail should be addressed. If none is provided, this will
-       * default to the organization's registered_name
-       */
-      name?: string | null;
-
-      /**
-       * The postal code
-       */
-      postal_code?: string | null;
-
-      /**
-       * The state or region
-       */
-      region?: string | null;
-    }
-
-    /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
-     */
-    export interface Contact {
-      /**
-       * An email address at which the individual can be reached. Typically an email
-       * using the same domain name as the website URL will be preferred (e.g. with a
-       * website domain of `https://dtprecisionauto.com`, an email like
-       * `dom@dtprecisionauto.com` will be preferred over one like
-       * `dom@anothergarage.com` or `dom.toretto@gmail.com`)
-       */
-      email?: string | null;
-
-      /**
-       * The first name (or given name) of the individual
-       */
-      first_name?: string | null;
-
-      /**
-       * The last name (or family name) of the individual
-       */
-      last_name?: string | null;
-
-      /**
-       * A phone number at which the individual can be reached (E.164 format)
-       */
-      phone_number?: string | null;
-
-      /**
-       * The job title of the individual.
-       */
-      title?: 'ceo' | 'cfo' | 'director' | 'gm' | 'vp' | 'general_counsel' | 'other' | null;
-
-      /**
-       * If `other` is provided for the `title` field, this field should be used to
-       * provide the title of the individual
-       */
-      title_other?: string | null;
-    }
-  }
 }
 
 export interface AccountRetrieveStatusParams {
@@ -1210,11 +766,13 @@ export interface AccountRetrieveStatusParams {
 
 export declare namespace Accounts {
   export {
+    type Account as Account,
+    type AccountParams as AccountParams,
     type AccountStatus as AccountStatus,
-    type AccountCreateResponse as AccountCreateResponse,
-    type AccountUpdateResponse as AccountUpdateResponse,
-    type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
+    type Organization as Organization,
+    type OrganizationParams as OrganizationParams,
+    type AccountCreateParams as AccountCreateParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 }

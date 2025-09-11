@@ -8,14 +8,17 @@ Types:
 
 Types:
 
+- <code><a href="./src/resources/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountParams</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountStatus</a></code>
-- <code><a href="./src/resources/accounts.ts">AccountCreateResponse</a></code>
-- <code><a href="./src/resources/accounts.ts">AccountUpdateResponse</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountUpdateParams</a></code>
+- <code><a href="./src/resources/accounts.ts">Organization</a></code>
+- <code><a href="./src/resources/accounts.ts">OrganizationParams</a></code>
 
 Methods:
 
-- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> AccountCreateResponse</code>
-- <code title="patch /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(id, { ...params }) -> AccountUpdateResponse</code>
+- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> Account</code>
+- <code title="patch /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(id, { ...params }) -> Account</code>
 - <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/resources/accounts.ts">retrieveStatus</a>(accountID, { ...params }) -> AccountStatus</code>
 
 # Blasts

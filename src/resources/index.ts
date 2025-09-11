@@ -3,11 +3,13 @@
 export * from './shared';
 export {
   Accounts,
+  type Account,
+  type AccountParams,
   type AccountStatus,
-  type AccountCreateResponse,
-  type AccountUpdateResponse,
-  type AccountCreateParams,
   type AccountUpdateParams,
+  type Organization,
+  type OrganizationParams,
+  type AccountCreateParams,
   type AccountRetrieveStatusParams,
 } from './accounts';
 export { Blasts, type Blast, type BlastParams, type BlastCreateParams } from './blasts';
