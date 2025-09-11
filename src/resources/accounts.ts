@@ -40,12 +40,12 @@ export class Accounts extends APIResource {
    * @example
    * ```ts
    * const accountStatus = await client.accounts.retrieveStatus(
-   *   {},
+   *   'acct_01jpqjvfg9enpt7pyxd60pcmxj',
    * );
    * ```
    */
   retrieveStatus(
-    accountID: unknown,
+    accountID: string,
     query: AccountRetrieveStatusParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AccountStatus> {

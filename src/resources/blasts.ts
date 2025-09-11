@@ -12,10 +12,12 @@ export class Blasts extends APIResource {
    *
    * @example
    * ```ts
-   * const blast = await client.blasts.create({});
+   * const blast = await client.blasts.create(
+   *   'acct_01j9a43avnfqzbjfch6pygv1td',
+   * );
    * ```
    */
-  create(accountID: unknown, body: BlastCreateParams, options?: RequestOptions): APIPromise<Blast> {
+  create(accountID: string, body: BlastCreateParams, options?: RequestOptions): APIPromise<Blast> {
     return this._client.post(path`/accounts/${accountID}/blasts`, { body, ...options });
   }
 }

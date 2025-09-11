@@ -27,7 +27,7 @@ describe('resource verifications', () => {
 
   // Prism tests are disabled
   test.skip('check: only required params', async () => {
-    const responsePromise = client.verifications.check({}, { code: '123456' });
+    const responsePromise = client.verifications.check('vfn_01jayh15c2f2xamftg0xpyq1nj', { code: '123456' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -39,6 +39,6 @@ describe('resource verifications', () => {
 
   // Prism tests are disabled
   test.skip('check: required and optional params', async () => {
-    const response = await client.verifications.check({}, { code: '123456' });
+    const response = await client.verifications.check('vfn_01jayh15c2f2xamftg0xpyq1nj', { code: '123456' });
   });
 });

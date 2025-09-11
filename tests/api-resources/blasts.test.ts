@@ -10,7 +10,7 @@ const client = new Surge({
 describe('resource blasts', () => {
   // Prism tests are disabled
   test.skip('create', async () => {
-    const responsePromise = client.blasts.create({}, {});
+    const responsePromise = client.blasts.create('acct_01j9a43avnfqzbjfch6pygv1td', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

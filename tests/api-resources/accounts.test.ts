@@ -74,7 +74,7 @@ describe('resource accounts', () => {
 
   // Prism tests are disabled
   test.skip('retrieveStatus', async () => {
-    const responsePromise = client.accounts.retrieveStatus({});
+    const responsePromise = client.accounts.retrieveStatus('acct_01jpqjvfg9enpt7pyxd60pcmxj');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -89,7 +89,7 @@ describe('resource accounts', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.accounts.retrieveStatus(
-        {},
+        'acct_01jpqjvfg9enpt7pyxd60pcmxj',
         { capabilities: ['local_messaging'] },
         { path: '/_stainless_unknown_path' },
       ),
