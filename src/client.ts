@@ -94,6 +94,11 @@ export interface ClientOptions {
   apiKey?: string | undefined;
 
   /**
+   * Defaults to process.env['SURGE_WEBHOOK_SIGNING_SECRET'].
+   */
+  webhookSigningSecret?: string | null | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['SURGE_BASE_URL'].
@@ -167,6 +172,7 @@ export interface ClientOptions {
  */
 export class Surge {
   apiKey: string;
+  webhookSigningSecret: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -184,6 +190,7 @@ export class Surge {
    * API Client for interfacing with the Surge API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['SURGE_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.webhookSigningSecret=process.env['SURGE_WEBHOOK_SIGNING_SECRET'] ?? null]
    * @param {string} [opts.baseURL=process.env['SURGE_BASE_URL'] ?? https://api.surge.app] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -195,6 +202,7 @@ export class Surge {
   constructor({
     baseURL = readEnv('SURGE_BASE_URL'),
     apiKey = readEnv('SURGE_API_KEY'),
+    webhookSigningSecret = readEnv('SURGE_WEBHOOK_SIGNING_SECRET') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -205,6 +213,7 @@ export class Surge {
 
     const options: ClientOptions = {
       apiKey,
+      webhookSigningSecret,
       ...opts,
       baseURL: baseURL || `https://api.surge.app`,
     };
@@ -227,6 +236,7 @@ export class Surge {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.webhookSigningSecret = webhookSigningSecret;
   }
 
   /**
@@ -243,6 +253,7 @@ export class Surge {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      webhookSigningSecret: this.webhookSigningSecret,
       ...options,
     });
     return client;
