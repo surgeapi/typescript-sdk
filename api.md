@@ -108,3 +108,20 @@ Methods:
 
 - <code title="post /verifications">client.verifications.<a href="./src/resources/verifications.ts">create</a>({ ...params }) -> Verification</code>
 - <code title="post /verifications/{id}/checks">client.verifications.<a href="./src/resources/verifications.ts">check</a>(id, { ...params }) -> VerificationCheck</code>
+
+# Webhooks
+
+Types:
+
+- <code><a href="./src/resources/webhooks.ts">CallEndedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CampaignApprovedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ConversationCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MessageDeliveredWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MessageFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MessageReceivedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MessageSentWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
+
+Methods:
+
+- <code>client.webhooks.<a href="./src/resources/webhooks.ts">unwrap</a>(body) -> void</code>

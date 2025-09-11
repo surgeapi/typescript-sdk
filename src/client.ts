@@ -63,6 +63,17 @@ import {
   VerificationParams,
   Verifications,
 } from './resources/verifications';
+import {
+  CallEndedWebhookEvent,
+  CampaignApprovedWebhookEvent,
+  ConversationCreatedWebhookEvent,
+  MessageDeliveredWebhookEvent,
+  MessageFailedWebhookEvent,
+  MessageReceivedWebhookEvent,
+  MessageSentWebhookEvent,
+  UnwrapWebhookEvent,
+  Webhooks,
+} from './resources/webhooks';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -752,6 +763,7 @@ export class Surge {
   phoneNumbers: API.PhoneNumbers = new API.PhoneNumbers(this);
   users: API.Users = new API.Users(this);
   verifications: API.Verifications = new API.Verifications(this);
+  webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
 Surge.Accounts = Accounts;
@@ -762,6 +774,7 @@ Surge.Messages = Messages;
 Surge.PhoneNumbers = PhoneNumbers;
 Surge.Users = Users;
 Surge.Verifications = Verifications;
+Surge.Webhooks = Webhooks;
 
 export declare namespace Surge {
   export type RequestOptions = Opts.RequestOptions;
@@ -832,6 +845,18 @@ export declare namespace Surge {
     type VerificationCheckParams as VerificationCheckParams,
     type VerificationParams as VerificationParams,
     type VerificationCreateParams as VerificationCreateParams,
+  };
+
+  export {
+    Webhooks as Webhooks,
+    type CallEndedWebhookEvent as CallEndedWebhookEvent,
+    type CampaignApprovedWebhookEvent as CampaignApprovedWebhookEvent,
+    type ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent,
+    type MessageDeliveredWebhookEvent as MessageDeliveredWebhookEvent,
+    type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
+    type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
+    type MessageSentWebhookEvent as MessageSentWebhookEvent,
+    type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 
   export type Error = API.Error;

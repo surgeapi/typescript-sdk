@@ -47,3 +47,14 @@ export {
   type VerificationParams,
   type VerificationCreateParams,
 } from './verifications';
+export {
+  Webhooks,
+  type CallEndedWebhookEvent,
+  type CampaignApprovedWebhookEvent,
+  type ConversationCreatedWebhookEvent,
+  type MessageDeliveredWebhookEvent,
+  type MessageFailedWebhookEvent,
+  type MessageReceivedWebhookEvent,
+  type MessageSentWebhookEvent,
+  type UnwrapWebhookEvent,
+} from './webhooks';
