@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource contacts', () => {
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.contacts.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       phone_number: '+18015551234',
@@ -22,7 +22,7 @@ describe('resource contacts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.contacts.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       phone_number: '+18015551234',
@@ -33,7 +33,7 @@ describe('resource contacts', () => {
     });
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.contacts.retrieve('ctc_01j9dy8mdzfn3r0e8x1tbdrdrf');
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ describe('resource contacts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.contacts.update('ctc_01j9dy8mdzfn3r0e8x1tbdrdrf', {
       phone_number: '+18015551234',
@@ -59,7 +59,7 @@ describe('resource contacts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.contacts.update('ctc_01j9dy8mdzfn3r0e8x1tbdrdrf', {
       phone_number: '+18015551234',

@@ -26,12 +26,12 @@ export class Verifications extends APIResource {
    * @example
    * ```ts
    * const verificationCheck = await client.verifications.check(
-   *   'vfn_01jayh15c2f2xamftg0xpyq1nj',
+   *   {},
    *   { code: '123456' },
    * );
    * ```
    */
-  check(id: string, body: VerificationCheckParams, options?: RequestOptions): APIPromise<VerificationCheck> {
+  check(id: unknown, body: VerificationCheckParams, options?: RequestOptions): APIPromise<VerificationCheck> {
     return this._client.post(path`/verifications/${id}/checks`, { body, ...options });
   }
 }

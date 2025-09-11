@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource campaigns', () => {
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.campaigns.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       consent_flow:
@@ -33,7 +33,7 @@ describe('resource campaigns', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.campaigns.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       consent_flow:

@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource phoneNumbers', () => {
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('purchase', async () => {
     const responsePromise = client.phoneNumbers.purchase('acct_01j9a43avnfqzbjfch6pygv1td', {});
     const rawResponse = await responsePromise.asResponse();

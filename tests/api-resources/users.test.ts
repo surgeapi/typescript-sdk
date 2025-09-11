@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource users', () => {
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.users.create('acct_01j9a43avnfqzbjfch6pygv1td', { first_name: 'Brian' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.users.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       first_name: 'Brian',
@@ -30,7 +30,7 @@ describe('resource users', () => {
     });
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.users.retrieve('usr_01j9dwavghe1ttppewekjjkfrx');
     const rawResponse = await responsePromise.asResponse();
@@ -42,7 +42,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.users.update('usr_01j9dwavghe1ttppewekjjkfrx', { first_name: 'Brian' });
     const rawResponse = await responsePromise.asResponse();
@@ -54,7 +54,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.users.update('usr_01j9dwavghe1ttppewekjjkfrx', {
       first_name: 'Brian',
@@ -64,7 +64,7 @@ describe('resource users', () => {
     });
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('createToken', async () => {
     const responsePromise = client.users.createToken('usr_01jymgdfrpec2asc5m0z3a6fr9', {});
     const rawResponse = await responsePromise.asResponse();

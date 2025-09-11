@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource messages', () => {
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: { contact: { phone_number: '+18015551234' } },
@@ -22,7 +22,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: {

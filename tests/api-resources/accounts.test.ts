@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource accounts', () => {
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.accounts.create({ name: 'Account #2840 - DT Precision Auto' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.accounts.create({
       name: 'Account #2840 - DT Precision Auto',
@@ -60,7 +60,7 @@ describe('resource accounts', () => {
     });
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.accounts.update('acct_01jpqjvfg9enpt7pyxd60pcmxj', {});
     const rawResponse = await responsePromise.asResponse();
@@ -72,9 +72,9 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('retrieveStatus', async () => {
-    const responsePromise = client.accounts.retrieveStatus('acct_01jpqjvfg9enpt7pyxd60pcmxj');
+    const responsePromise = client.accounts.retrieveStatus({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,12 +84,12 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't support callbacks yet
+  // Prism tests are disabled
   test.skip('retrieveStatus: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.accounts.retrieveStatus(
-        'acct_01jpqjvfg9enpt7pyxd60pcmxj',
+        {},
         { capabilities: ['local_messaging'] },
         { path: '/_stainless_unknown_path' },
       ),
