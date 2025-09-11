@@ -7,7 +7,7 @@ import { path } from '../internal/utils/path';
 
 export class PhoneNumbers extends APIResource {
   /**
-   * Create a new phone number for the account. You can specify search criteria or
+   * Purchase a new phone number for the account. You can specify search criteria or
    * let the system select a random number.
    *
    * @example
