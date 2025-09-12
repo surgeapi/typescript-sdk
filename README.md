@@ -1,182 +1,388 @@
-# Surge TypeScript Library
+# Surge TypeScript API Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fsurgeapi%2Ftypescript-sdk)
-[![npm shield](https://img.shields.io/npm/v/@surgeapi/node)](https://www.npmjs.com/package/@surgeapi/node)
+[![NPM version](<https://img.shields.io/npm/v/@surgeapi/node.svg?label=npm%20(stable)>)](https://npmjs.org/package/@surgeapi/node) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@surgeapi/node)
 
-The Surge TypeScript library provides convenient access to the Surge API from TypeScript.
+This library provides convenient access to the Surge REST API from server-side TypeScript or JavaScript.
 
-## Documentation
+The REST API documentation can be found on [docs.surge.app](https://docs.surge.app). The full API of this library can be found in [api.md](api.md).
 
-API reference documentation is available [here](https://surge.app).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
 ```sh
-npm i -s @surgeapi/node
+npm install git+ssh://git@github.com:stainless-sdks/surge-typescript.git
 ```
 
-## Reference
-
-A full reference for this library is available [here](https://github.com/surgeapi/typescript-sdk/blob/HEAD/./reference.md).
+> [!NOTE]
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install @surgeapi/node`
 
 ## Usage
 
-Instantiate and use the client with the following:
+The full API of this library can be found in [api.md](api.md).
 
-```typescript
-import { SurgeClient } from "@surgeapi/node";
+<!-- prettier-ignore -->
+```js
+import Surge from '@surgeapi/node';
 
-const client = new SurgeClient({ token: "YOUR_TOKEN" });
-await client.messages.send("acct_01j9a43avnfqzbjfch6pygv1td", {
-    attachments: [
-        {
-            url: "https://toretto.family/coronas.gif",
-        },
-    ],
-    body: "Thought you could leave without saying goodbye?",
-    conversation: {
-        contact: {
-            first_name: "Dominic",
-            last_name: "Toretto",
-            phone_number: "+18015551234",
-        },
-    },
+const client = new Surge({
+  apiKey: process.env['SURGE_API_KEY'], // This is the default and can be omitted
 });
+
+const message = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+  conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+  attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+  body: 'Thought you could leave without saying goodbye?',
+});
+
+console.log(message.id);
 ```
 
-## Request And Response Types
+### Request & Response types
 
-The SDK exports all request and response types as TypeScript interfaces. Simply import them with the
-following namespace:
+This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:
 
-```typescript
-import { Surge } from "@surgeapi/node";
+<!-- prettier-ignore -->
+```ts
+import Surge from '@surgeapi/node';
 
-const request: Surge.CreateAccountRequest = {
-    ...
+const client = new Surge({
+  apiKey: process.env['SURGE_API_KEY'], // This is the default and can be omitted
+});
+
+const params: Surge.MessageCreateParams = {
+  conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+  attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+  body: 'Thought you could leave without saying goodbye?',
 };
+const message: Surge.Message = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', params);
 ```
 
-## Exception Handling
+Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
 
-When the API returns a non-success status code (4xx or 5xx response), a subclass of the following error
-will be thrown.
+## Handling errors
 
-```typescript
-import { SurgeError } from "@surgeapi/node";
+When the library is unable to connect to the API,
+or if the API returns a non-success status code (i.e., 4xx or 5xx response),
+a subclass of `APIError` will be thrown:
 
-try {
-    await client.messages.send(...);
-} catch (err) {
-    if (err instanceof SurgeError) {
-        console.log(err.statusCode);
-        console.log(err.message);
-        console.log(err.body);
-        console.log(err.rawResponse);
+<!-- prettier-ignore -->
+```ts
+const message = await client.messages
+  .create('acct_01j9a43avnfqzbjfch6pygv1td', {
+    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+    attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+    body: 'Thought you could leave without saying goodbye?',
+  })
+  .catch(async (err) => {
+    if (err instanceof Surge.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
     }
-}
+  });
 ```
 
-## Advanced
+Error codes are as follows:
 
-### Additional Headers
-
-If you would like to send additional headers as part of the request, use the `headers` request option.
-
-```typescript
-const response = await client.messages.send(..., {
-    headers: {
-        'X-Custom-Header': 'custom value'
-    }
-});
-```
+| Status Code | Error Type                 |
+| ----------- | -------------------------- |
+| 400         | `BadRequestError`          |
+| 401         | `AuthenticationError`      |
+| 403         | `PermissionDeniedError`    |
+| 404         | `NotFoundError`            |
+| 422         | `UnprocessableEntityError` |
+| 429         | `RateLimitError`           |
+| >=500       | `InternalServerError`      |
+| N/A         | `APIConnectionError`       |
 
 ### Retries
 
-The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
-as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
-retry limit (default: 2).
+Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
+Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,
+429 Rate Limit, and >=500 Internal errors will all be retried by default.
 
-A request is deemed retryable when any of the following HTTP status codes is returned:
+You can use the `maxRetries` option to configure or disable this:
 
-- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
-- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
-- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+<!-- prettier-ignore -->
+```js
+// Configure the default for all requests:
+const client = new Surge({
+  maxRetries: 0, // default is 2
+});
 
-Use the `maxRetries` request option to configure this behavior.
-
-```typescript
-const response = await client.messages.send(..., {
-    maxRetries: 0 // override maxRetries at the request level
+// Or, configure per-request:
+await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
+  maxRetries: 5,
 });
 ```
 
 ### Timeouts
 
-The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
+Requests time out after 1 minute by default. You can configure this with a `timeout` option:
 
-```typescript
-const response = await client.messages.send(..., {
-    timeoutInSeconds: 30 // override timeout to 30s
+<!-- prettier-ignore -->
+```ts
+// Configure the default for all requests:
+const client = new Surge({
+  timeout: 20 * 1000, // 20 seconds (default is 1 minute)
+});
+
+// Override per-request:
+await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
+  timeout: 5 * 1000,
 });
 ```
 
-### Aborting Requests
+On timeout, an `APIConnectionTimeoutError` is thrown.
 
-The SDK allows users to abort requests at any point by passing in an abort signal.
+Note that requests which time out will be [retried twice by default](#retries).
 
-```typescript
-const controller = new AbortController();
-const response = await client.messages.send(..., {
-    abortSignal: controller.signal
+## Advanced Usage
+
+### Accessing raw Response data (e.g., headers)
+
+The "raw" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return.
+This method returns as soon as the headers for a successful response are received and does not consume the response body, so you are free to write custom parsing or streaming logic.
+
+You can also use the `.withResponse()` method to get the raw `Response` along with the parsed data.
+Unlike `.asResponse()` this method consumes the body, returning once it is parsed.
+
+<!-- prettier-ignore -->
+```ts
+const client = new Surge();
+
+const response = await client.messages
+  .create('acct_01j9a43avnfqzbjfch6pygv1td', {
+    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+    attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+    body: 'Thought you could leave without saying goodbye?',
+  })
+  .asResponse();
+console.log(response.headers.get('X-My-Header'));
+console.log(response.statusText); // access the underlying Response object
+
+const { data: message, response: raw } = await client.messages
+  .create('acct_01j9a43avnfqzbjfch6pygv1td', {
+    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+    attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+    body: 'Thought you could leave without saying goodbye?',
+  })
+  .withResponse();
+console.log(raw.headers.get('X-My-Header'));
+console.log(message.id);
+```
+
+### Logging
+
+> [!IMPORTANT]
+> All log messages are intended for debugging only. The format and content of log messages
+> may change between releases.
+
+#### Log levels
+
+The log level can be configured in two ways:
+
+1. Via the `SURGE_LOG` environment variable
+2. Using the `logLevel` client option (overrides the environment variable if set)
+
+```ts
+import Surge from '@surgeapi/node';
+
+const client = new Surge({
+  logLevel: 'debug', // Show all log messages
 });
-controller.abort(); // aborts the request
 ```
 
-### Access Raw Response Data
+Available log levels, from most to least verbose:
 
-The SDK provides access to raw response data, including headers, through the `.withRawResponse()` method.
-The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
+- `'debug'` - Show debug messages, info, warnings, and errors
+- `'info'` - Show info messages, warnings, and errors
+- `'warn'` - Show warnings and errors (default)
+- `'error'` - Show only errors
+- `'off'` - Disable all logging
 
-```typescript
-const { data, rawResponse } = await client.messages.send(...).withRawResponse();
+At the `'debug'` level, all HTTP requests and responses are logged, including headers and bodies.
+Some authentication-related headers are redacted, but sensitive data in request and response bodies
+may still be visible.
 
-console.log(data);
-console.log(rawResponse.headers['X-My-Header']);
-```
+#### Custom logger
 
-### Runtime Compatibility
+By default, this library logs to `globalThis.console`. You can also provide a custom logger.
+Most logging libraries are supported, including [pino](https://www.npmjs.com/package/pino), [winston](https://www.npmjs.com/package/winston), [bunyan](https://www.npmjs.com/package/bunyan), [consola](https://www.npmjs.com/package/consola), [signale](https://www.npmjs.com/package/signale), and [@std/log](https://jsr.io/@std/log). If your logger doesn't work, please open an issue.
 
-The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK works in the following
-runtimes:
+When providing a custom logger, the `logLevel` option still controls which messages are emitted, messages
+below the configured level will not be sent to your logger.
 
-- Node.js 18+
-- Vercel
-- Cloudflare Workers
-- Deno v1.25+
-- Bun 1.0+
-- React Native
+```ts
+import Surge from '@surgeapi/node';
+import pino from 'pino';
 
-### Customizing Fetch Client
+const logger = pino();
 
-The SDK provides a way for you to customize the underlying HTTP client / Fetch function. If you're running in an
-unsupported environment, this provides a way for you to break glass and ensure the SDK works.
-
-```typescript
-import { SurgeClient } from "@surgeapi/node";
-
-const client = new SurgeClient({
-    ...
-    fetcher: // provide your implementation here
+const client = new Surge({
+  logger: logger.child({ name: 'Surge' }),
+  logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
+
+### Making custom/undocumented requests
+
+This library is typed for convenient access to the documented API. If you need to access undocumented
+endpoints, params, or response properties, the library can still be used.
+
+#### Undocumented endpoints
+
+To make requests to undocumented endpoints, you can use `client.get`, `client.post`, and other HTTP verbs.
+Options on the client, such as retries, will be respected when making these requests.
+
+```ts
+await client.post('/some/path', {
+  body: { some_prop: 'foo' },
+  query: { some_query_arg: 'bar' },
+});
+```
+
+#### Undocumented request params
+
+To make requests using undocumented parameters, you may use `// @ts-expect-error` on the undocumented
+parameter. This library doesn't validate at runtime that the request matches the type, so any extra values you
+send will be sent as-is.
+
+```ts
+client.messages.create({
+  // ...
+  // @ts-expect-error baz is not yet public
+  baz: 'undocumented option',
+});
+```
+
+For requests with the `GET` verb, any extra params will be in the query, all other requests will send the
+extra param in the body.
+
+If you want to explicitly send an extra argument, you can do so with the `query`, `body`, and `headers` request
+options.
+
+#### Undocumented response properties
+
+To access undocumented response properties, you may access the response object with `// @ts-expect-error` on
+the response object, or cast the response object to the requisite type. Like the request params, we do not
+validate or strip extra properties from the response from the API.
+
+### Customizing the fetch client
+
+By default, this library expects a global `fetch` function is defined.
+
+If you want to use a different `fetch` function, you can either polyfill the global:
+
+```ts
+import fetch from 'my-fetch';
+
+globalThis.fetch = fetch;
+```
+
+Or pass it to the client:
+
+```ts
+import Surge from '@surgeapi/node';
+import fetch from 'my-fetch';
+
+const client = new Surge({ fetch });
+```
+
+### Fetch options
+
+If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
+
+```ts
+import Surge from '@surgeapi/node';
+
+const client = new Surge({
+  fetchOptions: {
+    // `RequestInit` options
+  },
+});
+```
+
+#### Configuring proxies
+
+To modify proxy behavior, you can provide custom `fetchOptions` that add runtime-specific proxy
+options to requests:
+
+<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
+
+```ts
+import Surge from '@surgeapi/node';
+import * as undici from 'undici';
+
+const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
+const client = new Surge({
+  fetchOptions: {
+    dispatcher: proxyAgent,
+  },
+});
+```
+
+<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
+
+```ts
+import Surge from '@surgeapi/node';
+
+const client = new Surge({
+  fetchOptions: {
+    proxy: 'http://localhost:8888',
+  },
+});
+```
+
+<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
+
+```ts
+import Surge from 'npm:@surgeapi/node';
+
+const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
+const client = new Surge({
+  fetchOptions: {
+    client: httpClient,
+  },
+});
+```
+
+## Frequently Asked Questions
+
+## Semantic versioning
+
+This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
+
+1. Changes that only affect static types, without breaking runtime behavior.
+2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
+3. Changes that we do not expect to impact the vast majority of users in practice.
+
+We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
+
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/surge-typescript/issues) with questions, bugs, or suggestions.
+
+## Requirements
+
+TypeScript >= 4.9 is supported.
+
+The following runtimes are supported:
+
+- Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
+- Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
+- Deno v1.28.0 or higher.
+- Bun 1.0 or later.
+- Cloudflare Workers.
+- Vercel Edge Runtime.
+- Jest 28 or greater with the `"node"` environment (`"jsdom"` is not supported at this time).
+- Nitro v2.6 or greater.
+
+Note that React Native is not supported at this time.
+
+If you are interested in other runtime environments, please open or upvote an issue on GitHub.
 
 ## Contributing
 
-While we value open-source contributions to this SDK, this library is generated programmatically.
-Additions made directly to this library would have to be moved over to our generation code,
-otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
-a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
-an issue first to discuss with us!
-
-On the other hand, contributions to the README are always very welcome!
+See [the contributing documentation](./CONTRIBUTING.md).
