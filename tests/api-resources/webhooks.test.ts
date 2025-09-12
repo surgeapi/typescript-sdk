@@ -13,7 +13,7 @@ describe('resource webhooks', () => {
   test.skip('unwrap', async () => {
     const key = 'whsec_c2VjcmV0Cg==';
     const payload =
-      '{"account_id":"acct_01japd271aeatb7txrzr2xj8sg","data":{"id":"call_01jjnn7s0zfx5tdcsxjfy93et2","contact":{"id":"ctc_01ja88cboqffhswjx8zbak3ykk","phone_number":"+18015551234","email":"dom@toretto.family","first_name":"Dominic","last_name":"Toretto","metadata":{"car":"1970 Dodge Charger R/T"}},"duration":184,"initiated_at":"2025-03-31T21:01:37Z","status":"completed"},"type":"call.ended"}';
+      '{"account_id":"acct_01japd271aeatb7txrzr2xj8sg","data":{"id":"call_01jjnn7s0zfx5tdcsxjfy93et2","contact":{"id":"ctc_01ja88cboqffhswjx8zbak3ykk","phone_number":"+18015551234","email":"dom@toretto.family","first_name":"Dominic","last_name":"Toretto","metadata":{"car":"1970 Dodge Charger R/T"}},"duration":184,"initiated_at":"2025-03-31T21:01:37Z","status":"completed"},"timestamp":"2024-10-21T23:29:41Z","type":"call.ended"}';
     const msgID = '1';
     const timestamp = new Date();
     const wh = new Webhook(key);
