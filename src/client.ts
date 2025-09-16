@@ -795,10 +795,10 @@ export declare namespace Surge {
     type Account as Account,
     type AccountParams as AccountParams,
     type AccountStatus as AccountStatus,
-    type AccountUpdateParams as AccountUpdateParams,
     type Organization as Organization,
     type OrganizationParams as OrganizationParams,
     type AccountCreateParams as AccountCreateParams,
+    type AccountUpdateParams as AccountUpdateParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 
