@@ -6,10 +6,10 @@ export {
   type Account,
   type AccountParams,
   type AccountStatus,
-  type AccountUpdateParams,
   type Organization,
   type OrganizationParams,
   type AccountCreateParams,
+  type AccountUpdateParams,
   type AccountRetrieveStatusParams,
 } from './accounts';
 export { Blasts, type Blast, type BlastParams, type BlastCreateParams } from './blasts';

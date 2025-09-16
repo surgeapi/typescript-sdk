@@ -176,37 +176,6 @@ export namespace AccountStatus {
 }
 
 /**
- * Parameters for updating an existing account.
- */
-export interface AccountUpdateParams {
-  /**
-   * The name by which the people this account communicates with know it. If not
-   * provided, this will match the name field.
-   */
-  brand_name?: string;
-
-  /**
-   * The name of the account that will be visible for your internal organizational
-   * purposes. This will also be the default public-facing brand name unless you also
-   * set a `brand_name`, but otherwise the account name will never be displayed
-   * anywhere outside of Surge HQ, and may include your ID for the account or
-   * anything else that may help you.
-   */
-  name?: string;
-
-  /**
-   * Parameters describing the legal entity on whose behalf the account will be
-   * operated.
-   */
-  organization?: OrganizationParams;
-
-  /**
-   * The time zone for the account
-   */
-  time_zone?: string | null;
-}
-
-/**
  * The legal entity on whose behalf the account will be operated.
  */
 export interface Organization {
@@ -769,10 +738,10 @@ export declare namespace Accounts {
     type Account as Account,
     type AccountParams as AccountParams,
     type AccountStatus as AccountStatus,
-    type AccountUpdateParams as AccountUpdateParams,
     type Organization as Organization,
     type OrganizationParams as OrganizationParams,
     type AccountCreateParams as AccountCreateParams,
+    type AccountUpdateParams as AccountUpdateParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 }
