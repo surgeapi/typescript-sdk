@@ -101,41 +101,6 @@ export interface User {
 }
 
 /**
- * POST body for creating a user
- */
-export interface UserParams {
-  /**
-   * The user's first name.
-   */
-  first_name: string;
-
-  /**
-   * The user's last name.
-   */
-  last_name?: string;
-
-  /**
-   * Set of key-value pairs that will be stored with the object.
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * URL of a photo to be used as the user's avatar.
-   */
-  photo_url?: string;
-}
-
-/**
- * A request to create a token
- */
-export interface UserTokenParams {
-  /**
-   * For how many seconds the token should be accepted. Defaults to 15 minutes.
-   */
-  duration_seconds?: number;
-}
-
-/**
  * Response when token has been created successfully
  */
 export interface UserTokenResponse {
@@ -199,8 +164,6 @@ export interface UserCreateTokenParams {
 export declare namespace Users {
   export {
     type User as User,
-    type UserParams as UserParams,
-    type UserTokenParams as UserTokenParams,
     type UserTokenResponse as UserTokenResponse,
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,

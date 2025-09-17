@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as MessagesAPI from './messages';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -58,11 +57,8 @@ export namespace Blast {
   }
 }
 
-/**
- * Parameters for creating a Blast
- */
-export interface BlastParams {
-  attachments?: Array<MessagesAPI.AttachmentParams>;
+export interface BlastCreateParams {
+  attachments?: Array<BlastCreateParams.Attachment>;
 
   /**
    * The message body.
@@ -96,45 +92,18 @@ export interface BlastParams {
   to?: Array<string>;
 }
 
-export interface BlastCreateParams {
-  attachments?: Array<MessagesAPI.AttachmentParams>;
-
+export namespace BlastCreateParams {
   /**
-   * The message body.
+   * Params for creating an attachment
    */
-  body?: string;
-
-  /**
-   * @deprecated Deprecated. Use `to` instead.
-   */
-  contacts?: Array<string>;
-
-  /**
-   * Optional name for the blast.
-   */
-  name?: string;
-
-  /**
-   * @deprecated Deprecated. Use `to` instead.
-   */
-  segments?: Array<string>;
-
-  /**
-   * When to send the blast. If not provided, sends immediately.
-   */
-  send_at?: string;
-
-  /**
-   * List of recipients to whom the blast should be sent. This can be a combination
-   * of contact IDs, segment IDs, and phone numbers.
-   */
-  to?: Array<string>;
+  export interface Attachment {
+    /**
+     * The URL of the attachment.
+     */
+    url: string;
+  }
 }
 
 export declare namespace Blasts {
-  export {
-    type Blast as Blast,
-    type BlastParams as BlastParams,
-    type BlastCreateParams as BlastCreateParams,
-  };
+  export { type Blast as Blast, type BlastCreateParams as BlastCreateParams };
 }
