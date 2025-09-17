@@ -76,26 +76,6 @@ export interface VerificationCheck {
   verification?: Verification;
 }
 
-/**
- * Parameters for checking a Verification code
- */
-export interface VerificationCheckParams {
-  /**
-   * The Verification code that was received.
-   */
-  code: string;
-}
-
-/**
- * Parameters for creating a Verification
- */
-export interface VerificationParams {
-  /**
-   * The phone number to be verified. In E.164 format.
-   */
-  phone_number: string;
-}
-
 export interface VerificationCreateParams {
   /**
    * The phone number to be verified. In E.164 format.
@@ -114,8 +94,7 @@ export declare namespace Verifications {
   export {
     type Verification as Verification,
     type VerificationCheck as VerificationCheck,
-    type VerificationCheckParams as VerificationCheckParams,
-    type VerificationParams as VerificationParams,
     type VerificationCreateParams as VerificationCreateParams,
+    type VerificationCheckParams as VerificationCheckParams,
   };
 }
