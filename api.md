@@ -9,10 +9,8 @@ Types:
 Types:
 
 - <code><a href="./src/resources/accounts.ts">Account</a></code>
-- <code><a href="./src/resources/accounts.ts">AccountParams</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountStatus</a></code>
 - <code><a href="./src/resources/accounts.ts">Organization</a></code>
-- <code><a href="./src/resources/accounts.ts">OrganizationParams</a></code>
 
 Methods:
 
@@ -25,7 +23,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/blasts.ts">Blast</a></code>
-- <code><a href="./src/resources/blasts.ts">BlastParams</a></code>
 
 Methods:
 
@@ -36,7 +33,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/campaigns.ts">Campaign</a></code>
-- <code><a href="./src/resources/campaigns.ts">CampaignParams</a></code>
 
 Methods:
 
@@ -47,7 +43,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/contacts.ts">Contact</a></code>
-- <code><a href="./src/resources/contacts.ts">ContactParams</a></code>
 
 Methods:
 
@@ -59,9 +54,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/messages.ts">AttachmentParams</a></code>
 - <code><a href="./src/resources/messages.ts">Message</a></code>
-- <code><a href="./src/resources/messages.ts">MessageParams</a></code>
 
 Methods:
 
@@ -72,7 +65,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/phone-numbers.ts">PhoneNumber</a></code>
-- <code><a href="./src/resources/phone-numbers.ts">PhoneNumberPurchaseParams</a></code>
 
 Methods:
 
@@ -83,8 +75,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/users.ts">User</a></code>
-- <code><a href="./src/resources/users.ts">UserParams</a></code>
-- <code><a href="./src/resources/users.ts">UserTokenParams</a></code>
 - <code><a href="./src/resources/users.ts">UserTokenResponse</a></code>
 
 Methods:
@@ -100,8 +90,6 @@ Types:
 
 - <code><a href="./src/resources/verifications.ts">Verification</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationCheck</a></code>
-- <code><a href="./src/resources/verifications.ts">VerificationCheckParams</a></code>
-- <code><a href="./src/resources/verifications.ts">VerificationParams</a></code>
 
 Methods:
 

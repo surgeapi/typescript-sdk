@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as MessagesAPI from './messages';
 import * as ContactsAPI from './contacts';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -50,16 +49,6 @@ export class Messages extends APIResource {
   create(accountID: string, body: MessageCreateParams, options?: RequestOptions): APIPromise<Message> {
     return this._client.post(path`/accounts/${accountID}/messages`, { body, ...options });
   }
-}
-
-/**
- * Params for creating an attachment
- */
-export interface AttachmentParams {
-  /**
-   * The URL of the attachment.
-   */
-  url: string;
 }
 
 /**
@@ -148,89 +137,6 @@ export namespace Message {
   }
 }
 
-/**
- * Payload for creating a message. Either an attachment or the body must be given.
- * You can specify the recipient either using the 'conversation' parameter or the
- * 'to'/'from' parameters, but not both.
- */
-export type MessageParams = MessageParams.MessageParamsWithConversation | MessageParams.SimpleMessageParams;
-
-export namespace MessageParams {
-  /**
-   * Create a message while including parameters for the conversation in which the
-   * message should be sent.
-   */
-  export interface MessageParamsWithConversation {
-    /**
-     * Params for selecting or creating a new conversation. Either the id or the
-     * Contact must be given.
-     */
-    conversation: MessageParamsWithConversation.Conversation;
-
-    attachments?: Array<MessagesAPI.AttachmentParams>;
-
-    /**
-     * The message body.
-     */
-    body?: string;
-
-    /**
-     * An optional datetime for scheduling message up to a couple of months in the
-     * future.
-     */
-    send_at?: string;
-  }
-
-  export namespace MessageParamsWithConversation {
-    /**
-     * Params for selecting or creating a new conversation. Either the id or the
-     * Contact must be given.
-     */
-    export interface Conversation {
-      /**
-       * Parameters for creating a contact
-       */
-      contact: ContactsAPI.ContactParams;
-
-      /**
-       * The phone number from which to send the message. This can be either the phone
-       * number in E.164 format or a Surge phone number id.
-       */
-      phone_number?: string;
-    }
-  }
-
-  /**
-   * Create a basic message by specifying just the to/from phone numbers.
-   */
-  export interface SimpleMessageParams {
-    /**
-     * The recipient's phone number in E.164 format. Cannot be used together with
-     * 'conversation'.
-     */
-    to: string;
-
-    attachments?: Array<MessagesAPI.AttachmentParams>;
-
-    /**
-     * The message body.
-     */
-    body?: string;
-
-    /**
-     * The sender's phone number in E.164 format or phone number ID. If omitted, uses
-     * the account's default phone number. Cannot be used together with 'conversation'.
-     */
-    from?: string;
-
-    /**
-     * An optional datetime for scheduling message up to a couple of months in the
-     * future.
-     */
-    send_at?: string;
-  }
-}
-
 export type MessageCreateParams =
   | MessageCreateParams.MessageParamsWithConversation
   | MessageCreateParams.SimpleMessageParams;
@@ -243,7 +149,7 @@ export declare namespace MessageCreateParams {
      */
     conversation: MessageParamsWithConversation.Conversation;
 
-    attachments?: Array<AttachmentParams>;
+    attachments?: Array<MessageParamsWithConversation.Attachment>;
 
     /**
      * The message body.
@@ -266,13 +172,55 @@ export declare namespace MessageCreateParams {
       /**
        * Parameters for creating a contact
        */
-      contact: ContactsAPI.ContactParams;
+      contact: Conversation.Contact;
 
       /**
        * The phone number from which to send the message. This can be either the phone
        * number in E.164 format or a Surge phone number id.
        */
       phone_number?: string;
+    }
+
+    export namespace Conversation {
+      /**
+       * Parameters for creating a contact
+       */
+      export interface Contact {
+        /**
+         * The contact's phone number in E.164 format.
+         */
+        phone_number: string;
+
+        /**
+         * The contact's email address.
+         */
+        email?: string;
+
+        /**
+         * The contact's first name.
+         */
+        first_name?: string;
+
+        /**
+         * The contact's last name.
+         */
+        last_name?: string;
+
+        /**
+         * Set of key-value pairs that will be stored with the object.
+         */
+        metadata?: { [key: string]: string };
+      }
+    }
+
+    /**
+     * Params for creating an attachment
+     */
+    export interface Attachment {
+      /**
+       * The URL of the attachment.
+       */
+      url: string;
     }
   }
 
@@ -283,7 +231,7 @@ export declare namespace MessageCreateParams {
      */
     to: string;
 
-    attachments?: Array<AttachmentParams>;
+    attachments?: Array<SimpleMessageParams.Attachment>;
 
     /**
      * The message body.
@@ -302,13 +250,20 @@ export declare namespace MessageCreateParams {
      */
     send_at?: string;
   }
+
+  export namespace SimpleMessageParams {
+    /**
+     * Params for creating an attachment
+     */
+    export interface Attachment {
+      /**
+       * The URL of the attachment.
+       */
+      url: string;
+    }
+  }
 }
 
 export declare namespace Messages {
-  export {
-    type AttachmentParams as AttachmentParams,
-    type Message as Message,
-    type MessageParams as MessageParams,
-    type MessageCreateParams as MessageCreateParams,
-  };
+  export { type Message as Message, type MessageCreateParams as MessageCreateParams };
 }
