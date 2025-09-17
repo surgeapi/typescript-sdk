@@ -951,6 +951,9 @@ export namespace AccountUpdateParams {
 }
 
 export interface AccountRetrieveStatusParams {
+  /**
+   * capabilities about which to check the status
+   */
   capabilities?: Array<'local_messaging'>;
 }
 
