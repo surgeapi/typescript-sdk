@@ -4,10 +4,12 @@ export * from './shared';
 export {
   Accounts,
   type Account,
+  type AccountParams,
   type AccountStatus,
-  type Organization,
-  type AccountCreateParams,
   type AccountUpdateParams,
+  type Organization,
+  type OrganizationParams,
+  type AccountCreateParams,
   type AccountRetrieveStatusParams,
 } from './accounts';
 export { Blasts, type Blast, type BlastCreateParams } from './blasts';
