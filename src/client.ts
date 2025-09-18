@@ -20,13 +20,11 @@ import { APIPromise } from './core/api-promise';
 import {
   Account,
   AccountCreateParams,
-  AccountParams,
   AccountRetrieveStatusParams,
   AccountStatus,
   AccountUpdateParams,
   Accounts,
   Organization,
-  OrganizationParams,
 } from './resources/accounts';
 import { Blast, BlastCreateParams, Blasts } from './resources/blasts';
 import { Campaign, CampaignCreateParams, Campaigns } from './resources/campaigns';
@@ -778,12 +776,10 @@ export declare namespace Surge {
   export {
     Accounts as Accounts,
     type Account as Account,
-    type AccountParams as AccountParams,
     type AccountStatus as AccountStatus,
-    type AccountUpdateParams as AccountUpdateParams,
     type Organization as Organization,
-    type OrganizationParams as OrganizationParams,
     type AccountCreateParams as AccountCreateParams,
+    type AccountUpdateParams as AccountUpdateParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 

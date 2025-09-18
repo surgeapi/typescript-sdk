@@ -9,11 +9,8 @@ Types:
 Types:
 
 - <code><a href="./src/resources/accounts.ts">Account</a></code>
-- <code><a href="./src/resources/accounts.ts">AccountParams</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountStatus</a></code>
-- <code><a href="./src/resources/accounts.ts">AccountUpdateParams</a></code>
 - <code><a href="./src/resources/accounts.ts">Organization</a></code>
-- <code><a href="./src/resources/accounts.ts">OrganizationParams</a></code>
 
 Methods:
 
