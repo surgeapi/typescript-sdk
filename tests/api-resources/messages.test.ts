@@ -28,10 +28,10 @@ describe('resource messages', () => {
       conversation: {
         contact: {
           phone_number: '+18015551234',
-          email: 'dev@stainless.com',
+          email: 'dom@toretto.family',
           first_name: 'Dominic',
           last_name: 'Toretto',
-          metadata: { foo: 'string' },
+          metadata: { car: '1970 Dodge Charger R/T' },
         },
         phone_number: '+18015556789',
       },
