@@ -122,6 +122,74 @@ export namespace CampaignApprovedWebhookEvent {
   }
 }
 
+export interface ContactOptedInWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: ContactOptedInWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `contact.opted_in` for this event.
+   */
+  type: 'contact.opted_in';
+}
+
+export namespace ContactOptedInWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the contact
+     */
+    id: string;
+  }
+}
+
+export interface ContactOptedOutWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: ContactOptedOutWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `contact.opted_out` for this event.
+   */
+  type: 'contact.opted_out';
+}
+
+export namespace ContactOptedOutWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the contact
+     */
+    id: string;
+  }
+}
+
 export interface ConversationCreatedWebhookEvent {
   /**
    * The ID of the account in which this event occurred
@@ -546,6 +614,8 @@ export namespace MessageSentWebhookEvent {
 export type UnwrapWebhookEvent =
   | CallEndedWebhookEvent
   | CampaignApprovedWebhookEvent
+  | ContactOptedInWebhookEvent
+  | ContactOptedOutWebhookEvent
   | ConversationCreatedWebhookEvent
   | MessageDeliveredWebhookEvent
   | MessageFailedWebhookEvent
@@ -556,6 +626,8 @@ export declare namespace Webhooks {
   export {
     type CallEndedWebhookEvent as CallEndedWebhookEvent,
     type CampaignApprovedWebhookEvent as CampaignApprovedWebhookEvent,
+    type ContactOptedInWebhookEvent as ContactOptedInWebhookEvent,
+    type ContactOptedOutWebhookEvent as ContactOptedOutWebhookEvent,
     type ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent,
     type MessageDeliveredWebhookEvent as MessageDeliveredWebhookEvent,
     type MessageFailedWebhookEvent as MessageFailedWebhookEvent,

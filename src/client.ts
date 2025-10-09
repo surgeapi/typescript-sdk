@@ -49,6 +49,8 @@ import {
 import {
   CallEndedWebhookEvent,
   CampaignApprovedWebhookEvent,
+  ContactOptedInWebhookEvent,
+  ContactOptedOutWebhookEvent,
   ConversationCreatedWebhookEvent,
   MessageDeliveredWebhookEvent,
   MessageFailedWebhookEvent,
@@ -827,6 +829,8 @@ export declare namespace Surge {
     Webhooks as Webhooks,
     type CallEndedWebhookEvent as CallEndedWebhookEvent,
     type CampaignApprovedWebhookEvent as CampaignApprovedWebhookEvent,
+    type ContactOptedInWebhookEvent as ContactOptedInWebhookEvent,
+    type ContactOptedOutWebhookEvent as ContactOptedOutWebhookEvent,
     type ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent,
     type MessageDeliveredWebhookEvent as MessageDeliveredWebhookEvent,
     type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
