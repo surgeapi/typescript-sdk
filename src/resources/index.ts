@@ -34,6 +34,8 @@ export {
   Webhooks,
   type CallEndedWebhookEvent,
   type CampaignApprovedWebhookEvent,
+  type ContactOptedInWebhookEvent,
+  type ContactOptedOutWebhookEvent,
   type ConversationCreatedWebhookEvent,
   type MessageDeliveredWebhookEvent,
   type MessageFailedWebhookEvent,
