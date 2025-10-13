@@ -432,8 +432,11 @@ export namespace AccountCreateParams {
     address?: Organization.Address;
 
     /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
+     * An object representing an individual who can be contacted if Surge or our
+     * carrier partners have any questions about the business. If you are registering
+     * on behalf of your customer, this must be a contact from your customer's company
+     * rather than your own. The individual will likely never be contacted unless there
+     * are issues with spam.
      */
     contact?: Organization.Contact | null;
 
@@ -629,8 +632,11 @@ export namespace AccountCreateParams {
     }
 
     /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
+     * An object representing an individual who can be contacted if Surge or our
+     * carrier partners have any questions about the business. If you are registering
+     * on behalf of your customer, this must be a contact from your customer's company
+     * rather than your own. The individual will likely never be contacted unless there
+     * are issues with spam.
      */
     export interface Contact {
       /**
@@ -638,7 +644,8 @@ export namespace AccountCreateParams {
        * using the same domain name as the website URL will be preferred (e.g. with a
        * website domain of `https://dtprecisionauto.com`, an email like
        * `dom@dtprecisionauto.com` will be preferred over one like
-       * `dom@anothergarage.com` or `dom.toretto@gmail.com`)
+       * `dom@anothergarage.com` or `dom.toretto@gmail.com`. `dtprecisionauto@gmail.com`
+       * would also be acceptable, but not preferred)
        */
       email?: string | null;
 
@@ -711,8 +718,11 @@ export namespace AccountUpdateParams {
     address?: Organization.Address;
 
     /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
+     * An object representing an individual who can be contacted if Surge or our
+     * carrier partners have any questions about the business. If you are registering
+     * on behalf of your customer, this must be a contact from your customer's company
+     * rather than your own. The individual will likely never be contacted unless there
+     * are issues with spam.
      */
     contact?: Organization.Contact | null;
 
@@ -908,8 +918,11 @@ export namespace AccountUpdateParams {
     }
 
     /**
-     * An object representing an individual who can be contacted if the carriers have
-     * any questions about the business.
+     * An object representing an individual who can be contacted if Surge or our
+     * carrier partners have any questions about the business. If you are registering
+     * on behalf of your customer, this must be a contact from your customer's company
+     * rather than your own. The individual will likely never be contacted unless there
+     * are issues with spam.
      */
     export interface Contact {
       /**
@@ -917,7 +930,8 @@ export namespace AccountUpdateParams {
        * using the same domain name as the website URL will be preferred (e.g. with a
        * website domain of `https://dtprecisionauto.com`, an email like
        * `dom@dtprecisionauto.com` will be preferred over one like
-       * `dom@anothergarage.com` or `dom.toretto@gmail.com`)
+       * `dom@anothergarage.com` or `dom.toretto@gmail.com`. `dtprecisionauto@gmail.com`
+       * would also be acceptable, but not preferred)
        */
       email?: string | null;
 
