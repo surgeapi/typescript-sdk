@@ -39,15 +39,18 @@ export class Messages extends APIResource {
    * const message = await client.messages.create(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    *   {
-   *     conversation: {
-   *       contact: { phone_number: '+18015551234' },
+   *     params: {
+   *       conversation: {
+   *         contact: { phone_number: '+18015551234' },
+   *       },
    *     },
    *   },
    * );
    * ```
    */
-  create(accountID: string, body: MessageCreateParams, options?: RequestOptions): APIPromise<Message> {
-    return this._client.post(path`/accounts/${accountID}/messages`, { body, ...options });
+  create(accountID: string, params: MessageCreateParams, options?: RequestOptions): APIPromise<Message> {
+    const { params } = params;
+    return this._client.post(path`/accounts/${accountID}/messages`, { body: params, ...options });
   }
 }
 
@@ -137,11 +140,20 @@ export namespace Message {
   }
 }
 
-export type MessageCreateParams =
-  | MessageCreateParams.MessageParamsWithConversation
-  | MessageCreateParams.SimpleMessageParams;
+export interface MessageCreateParams {
+  /**
+   * Payload for creating a message. Either an attachment or the body must be given.
+   * You can specify the recipient either using the 'conversation' parameter or the
+   * 'to'/'from' parameters, but not both.
+   */
+  params: MessageCreateParams.MessageParamsWithConversation | MessageCreateParams.SimpleMessageParams;
+}
 
-export declare namespace MessageCreateParams {
+export namespace MessageCreateParams {
+  /**
+   * Create a message while including parameters for the conversation in which the
+   * message should be sent.
+   */
   export interface MessageParamsWithConversation {
     /**
      * Params for selecting or creating a new conversation. Either the id or the
@@ -224,6 +236,9 @@ export declare namespace MessageCreateParams {
     }
   }
 
+  /**
+   * Create a basic message by specifying just the to/from phone numbers.
+   */
   export interface SimpleMessageParams {
     /**
      * The recipient's phone number in E.164 format. Cannot be used together with

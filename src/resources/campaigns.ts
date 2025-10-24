@@ -14,28 +14,32 @@ export class Campaigns extends APIResource {
    * const campaign = await client.campaigns.create(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
    *   {
-   *     consent_flow:
-   *       'When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.',
-   *     description:
-   *       'This phone number will send auto maintenance notifications to end users that have opted in. It will also be used for responding to customer inquiries and sending some marketing offers.',
-   *     message_samples: [
-   *       'You are now opted in to receive repair notifications from DT Precision Auto. Frequency varies. Msg&data rates apply. Reply STOP to opt out.',
-   *       "You're lucky that hundred shot of NOS didn't blow the welds on the intake!",
-   *       'Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij',
-   *     ],
-   *     privacy_policy_url: 'https://fastauto.shop/sms-privacy',
-   *     use_cases: [
-   *       'account_notification',
-   *       'customer_care',
-   *       'marketing',
-   *     ],
-   *     volume: 'high',
+   *     params: {
+   *       consent_flow:
+   *         'When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.',
+   *       description:
+   *         'This phone number will send auto maintenance notifications to end users that have opted in. It will also be used for responding to customer inquiries and sending some marketing offers.',
+   *       message_samples: [
+   *         'You are now opted in to receive repair notifications from DT Precision Auto. Frequency varies. Msg&data rates apply. Reply STOP to opt out.',
+   *         "You're lucky that hundred shot of NOS didn't blow the welds on the intake!",
+   *         'Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij',
+   *       ],
+   *       privacy_policy_url:
+   *         'https://fastauto.shop/sms-privacy',
+   *       use_cases: [
+   *         'account_notification',
+   *         'customer_care',
+   *         'marketing',
+   *       ],
+   *       volume: 'high',
+   *     },
    *   },
    * );
    * ```
    */
-  create(accountID: string, body: CampaignCreateParams, options?: RequestOptions): APIPromise<Campaign> {
-    return this._client.post(path`/accounts/${accountID}/campaigns`, { body, ...options });
+  create(accountID: string, params: CampaignCreateParams, options?: RequestOptions): APIPromise<Campaign> {
+    const { params } = params;
+    return this._client.post(path`/accounts/${accountID}/campaigns`, { body: params, ...options });
   }
 }
 
@@ -167,11 +171,18 @@ export interface Campaign {
   terms_and_conditions_url?: string;
 }
 
-export type CampaignCreateParams =
-  | CampaignCreateParams.StandardCampaignParams
-  | CampaignCreateParams.ExternalCampaignParams;
+export interface CampaignCreateParams {
+  /**
+   * Parameters for creating a new campaign. Either provide full campaign details or
+   * import using a TCR ID.
+   */
+  params: CampaignCreateParams.StandardCampaignParams | CampaignCreateParams.ExternalCampaignParams;
+}
 
-export declare namespace CampaignCreateParams {
+export namespace CampaignCreateParams {
+  /**
+   * Full campaign details for standard registration through Surge
+   */
   export interface StandardCampaignParams {
     /**
      * A string explaining the method through which end users will opt in to receive
@@ -291,6 +302,9 @@ export declare namespace CampaignCreateParams {
     terms_and_conditions_url?: string;
   }
 
+  /**
+   * Import an externally registered campaign from The Campaign Registry (TCR)
+   */
   export interface ExternalCampaignParams {
     /**
      * The Campaign Registry (TCR) ID for the externally registered campaign
