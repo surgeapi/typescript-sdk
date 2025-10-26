@@ -29,7 +29,7 @@ import {
 import { Blast, BlastCreateParams, Blasts } from './resources/blasts';
 import { Campaign, CampaignCreateParams, CampaignParams, Campaigns } from './resources/campaigns';
 import { Contact, ContactCreateParams, ContactUpdateParams, Contacts } from './resources/contacts';
-import { Message, MessageCreateParams, Messages } from './resources/messages';
+import { Message, MessageCreateParams, MessageParams, Messages } from './resources/messages';
 import { PhoneNumber, PhoneNumberPurchaseParams, PhoneNumbers } from './resources/phone-numbers';
 import {
   User,
@@ -801,7 +801,12 @@ export declare namespace Surge {
     type ContactUpdateParams as ContactUpdateParams,
   };
 
-  export { Messages as Messages, type Message as Message, type MessageCreateParams as MessageCreateParams };
+  export {
+    Messages as Messages,
+    type Message as Message,
+    type MessageParams as MessageParams,
+    type MessageCreateParams as MessageCreateParams,
+  };
 
   export {
     PhoneNumbers as PhoneNumbers,

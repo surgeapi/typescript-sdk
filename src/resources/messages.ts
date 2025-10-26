@@ -140,16 +140,14 @@ export namespace Message {
   }
 }
 
-export interface MessageCreateParams {
-  /**
-   * Payload for creating a message. Either an attachment or the body must be given.
-   * You can specify the recipient either using the 'conversation' parameter or the
-   * 'to'/'from' parameters, but not both.
-   */
-  params: MessageCreateParams.MessageParamsWithConversation | MessageCreateParams.SimpleMessageParams;
-}
+/**
+ * Payload for creating a message. Either an attachment or the body must be given.
+ * You can specify the recipient either using the 'conversation' parameter or the
+ * 'to'/'from' parameters, but not both.
+ */
+export type MessageParams = MessageParams.MessageParamsWithConversation | MessageParams.SimpleMessageParams;
 
-export namespace MessageCreateParams {
+export namespace MessageParams {
   /**
    * Create a message while including parameters for the conversation in which the
    * message should be sent.
@@ -279,6 +277,19 @@ export namespace MessageCreateParams {
   }
 }
 
+export interface MessageCreateParams {
+  /**
+   * Payload for creating a message. Either an attachment or the body must be given.
+   * You can specify the recipient either using the 'conversation' parameter or the
+   * 'to'/'from' parameters, but not both.
+   */
+  params: MessageParams;
+}
+
 export declare namespace Messages {
-  export { type Message as Message, type MessageCreateParams as MessageCreateParams };
+  export {
+    type Message as Message,
+    type MessageParams as MessageParams,
+    type MessageCreateParams as MessageCreateParams,
+  };
 }
