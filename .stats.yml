@@ -1,4 +1,4 @@
 configured_endpoints: 16
 openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/surge%2Fsurge-348a62d13ca5f93ca39237bf19ac23041cc08a3c56640263674e343aa54d5d25.yml
 openapi_spec_hash: 7ee9cca5cb8d3dc625dbdf2d7f85d733
-config_hash: fed866afbb5285dadf0d5e5ba6bd477a
+config_hash: 6683fa52b05142889ce2ba96efa9bd39
