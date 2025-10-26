@@ -33,7 +33,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/campaigns.ts">Campaign</a></code>
-- <code><a href="./src/resources/campaigns.ts">CampaignParams</a></code>
 
 Methods:
 
@@ -56,7 +55,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/messages.ts">Message</a></code>
-- <code><a href="./src/resources/messages.ts">MessageParams</a></code>
 
 Methods:
 
