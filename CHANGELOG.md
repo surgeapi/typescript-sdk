@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.27.1 (2025-10-31)
+
+Full Changelog: [v0.27.0...v0.27.1](https://github.com/surgeapi/typescript-sdk/compare/v0.27.0...v0.27.1)
+
+### Features
+
+* **api:** create externally registered campaigns ([fd962d4](https://github.com/surgeapi/typescript-sdk/commit/fd962d4c7e49290a10ff956efd808540bdacd76b))
+
+
+### Documentation
+
+* **api:** add context around organization contacts ([cf40475](https://github.com/surgeapi/typescript-sdk/commit/cf40475f7d9e807089a17a8547e33c9f2c997e3d))
+
 ## 0.27.0 (2025-10-09)
 
 Full Changelog: [v0.26.0...v0.27.0](https://github.com/surgeapi/typescript-sdk/compare/v0.26.0...v0.27.0)
