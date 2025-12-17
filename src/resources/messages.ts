@@ -49,6 +49,20 @@ export class Messages extends APIResource {
   create(accountID: string, body: MessageCreateParams, options?: RequestOptions): APIPromise<Message> {
     return this._client.post(path`/accounts/${accountID}/messages`, { body, ...options });
   }
+
+  /**
+   * Retrieves a Message object.
+   *
+   * @example
+   * ```ts
+   * const message = await client.messages.retrieve(
+   *   'msg_01j9e0m1m6fc38gsv2vkfqgzz2',
+   * );
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Message> {
+    return this._client.get(path`/messages/${id}`, options);
+  }
 }
 
 /**
