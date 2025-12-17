@@ -59,6 +59,7 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/resources/messages.ts">create</a>(accountID, { ...params }) -> Message</code>
+- <code title="get /messages/{id}">client.messages.<a href="./src/resources/messages.ts">retrieve</a>(id) -> Message</code>
 
 # PhoneNumbers
 

@@ -40,4 +40,16 @@ describe('resource messages', () => {
       send_at: '2019-12-27T18:11:19.117Z',
     });
   });
+
+  // Prism tests are disabled
+  test.skip('retrieve', async () => {
+    const responsePromise = client.messages.retrieve('msg_01j9e0m1m6fc38gsv2vkfqgzz2');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
 });
