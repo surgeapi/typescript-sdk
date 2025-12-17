@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.28.0 (2025-12-17)
+
+Full Changelog: [v0.27.1...v0.28.0](https://github.com/surgeapi/typescript-sdk/compare/v0.27.1...v0.28.0)
+
+### Features
+
+* **api:** add retrieve message endpoint ([c509ca6](https://github.com/surgeapi/typescript-sdk/commit/c509ca64d1dbe90b77312d44623ff04271390fad))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([b5f1f18](https://github.com/surgeapi/typescript-sdk/commit/b5f1f18d508eeba43f8320918d205909894ac234))
+* **mcp:** return correct lines on typescript errors ([2a149b9](https://github.com/surgeapi/typescript-sdk/commit/2a149b9b1cc8f3e0f04880ff8b12f86788e06c58))
+
+
+### Chores
+
+* **client:** fix logger property type ([780b54f](https://github.com/surgeapi/typescript-sdk/commit/780b54f68c402549e9a771277b1fe3ba14793074))
+* **internal:** codegen related update ([feee4b6](https://github.com/surgeapi/typescript-sdk/commit/feee4b6fd34bebab13f6fced79a7073580c1a8ed))
+* **internal:** codegen related update ([b4a9266](https://github.com/surgeapi/typescript-sdk/commit/b4a926644b207faa30ab8f81bc5c9800b5013571))
+* **internal:** upgrade eslint ([de3f7eb](https://github.com/surgeapi/typescript-sdk/commit/de3f7eb8f293bd33299bc38a42abe8e4e061f880))
+
 ## 0.27.1 (2025-10-31)
 
 Full Changelog: [v0.27.0...v0.27.1](https://github.com/surgeapi/typescript-sdk/compare/v0.27.0...v0.27.1)
