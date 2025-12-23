@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.29.0 (2025-12-23)
+
+Full Changelog: [v0.28.0...v0.29.0](https://github.com/surgeapi/typescript-sdk/compare/v0.28.0...v0.29.0)
+
+### Features
+
+* **workflow:** use different package manager ([5f68e64](https://github.com/surgeapi/typescript-sdk/commit/5f68e643a888ec7680ba92ed550b6ac27728eec6))
+
 ## 0.28.0 (2025-12-17)
 
 Full Changelog: [v0.27.1...v0.28.0](https://github.com/surgeapi/typescript-sdk/compare/v0.27.1...v0.28.0)
