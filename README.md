@@ -27,7 +27,13 @@ const client = new Surge({
 });
 
 const message = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
-  conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+  conversation: {
+    contact: {
+      first_name: 'Dom',
+      last_name: 'Toretto',
+      phone_number: '+13235556439',
+    },
+  },
   attachments: [{ url: 'https://toretto.family/coronas.gif' }],
   body: 'Thought you could leave without saying goodbye?',
 });
@@ -48,11 +54,20 @@ const client = new Surge({
 });
 
 const params: Surge.MessageCreateParams = {
-  conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+  conversation: {
+    contact: {
+      first_name: 'Dom',
+      last_name: 'Toretto',
+      phone_number: '+13235556439',
+    },
+  },
   attachments: [{ url: 'https://toretto.family/coronas.gif' }],
   body: 'Thought you could leave without saying goodbye?',
 };
-const message: Surge.Message = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', params);
+const message: Surge.Message = await client.messages.create(
+  'acct_01j9a43avnfqzbjfch6pygv1td',
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -67,7 +82,13 @@ a subclass of `APIError` will be thrown:
 ```ts
 const message = await client.messages
   .create('acct_01j9a43avnfqzbjfch6pygv1td', {
-    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+    conversation: {
+      contact: {
+        first_name: 'Dom',
+        last_name: 'Toretto',
+        phone_number: '+13235556439',
+      },
+    },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
   })
@@ -111,7 +132,15 @@ const client = new Surge({
 });
 
 // Or, configure per-request:
-await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
+await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+  conversation: { contact: {
+  first_name: 'Dom',
+  last_name: 'Toretto',
+  phone_number: '+13235556439',
+} },
+  attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+  body: 'Thought you could leave without saying goodbye?',
+}, {
   maxRetries: 5,
 });
 ```
@@ -128,7 +157,15 @@ const client = new Surge({
 });
 
 // Override per-request:
-await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } }, attachments: [{ url: 'https://toretto.family/coronas.gif' }], body: 'Thought you could leave without saying goodbye?' }, {
+await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+  conversation: { contact: {
+  first_name: 'Dom',
+  last_name: 'Toretto',
+  phone_number: '+13235556439',
+} },
+  attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+  body: 'Thought you could leave without saying goodbye?',
+}, {
   timeout: 5 * 1000,
 });
 ```
@@ -153,7 +190,13 @@ const client = new Surge();
 
 const response = await client.messages
   .create('acct_01j9a43avnfqzbjfch6pygv1td', {
-    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+    conversation: {
+      contact: {
+        first_name: 'Dom',
+        last_name: 'Toretto',
+        phone_number: '+13235556439',
+      },
+    },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
   })
@@ -163,7 +206,13 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: message, response: raw } = await client.messages
   .create('acct_01j9a43avnfqzbjfch6pygv1td', {
-    conversation: { contact: { first_name: 'Dom', last_name: 'Toretto', phone_number: '+13235556439' } },
+    conversation: {
+      contact: {
+        first_name: 'Dom',
+        last_name: 'Toretto',
+        phone_number: '+13235556439',
+      },
+    },
     attachments: [{ url: 'https://toretto.family/coronas.gif' }],
     body: 'Thought you could leave without saying goodbye?',
   })
