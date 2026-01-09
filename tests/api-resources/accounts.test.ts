@@ -73,6 +73,18 @@ describe('resource accounts', () => {
   });
 
   // Prism tests are disabled
+  test.skip('archive', async () => {
+    const responsePromise = client.accounts.archive('acct_01jpqjvfg9enpt7pyxd60pcmxj');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('retrieveStatus', async () => {
     const responsePromise = client.accounts.retrieveStatus('acct_01jpqjvfg9enpt7pyxd60pcmxj');
     const rawResponse = await responsePromise.asResponse();
