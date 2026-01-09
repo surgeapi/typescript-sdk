@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.30.0 (2026-01-09)
+
+Full Changelog: [v0.29.0...v0.30.0](https://github.com/surgeapi/typescript-sdk/compare/v0.29.0...v0.30.0)
+
+### Features
+
+* **api:** add archive account endpoint ([5a64f17](https://github.com/surgeapi/typescript-sdk/commit/5a64f17e4a45321bfd5a323c74e8e282d1261573))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([380fc6a](https://github.com/surgeapi/typescript-sdk/commit/380fc6aad1b8f7db7a33f69d2f3b3f1c67a8d660))
+* **internal:** codegen related update ([2ce62f4](https://github.com/surgeapi/typescript-sdk/commit/2ce62f495b4dc205f1b88fc28c1f884a4abaaec3))
+
 ## 0.29.0 (2025-12-23)
 
 Full Changelog: [v0.28.0...v0.29.0](https://github.com/surgeapi/typescript-sdk/compare/v0.28.0...v0.29.0)
