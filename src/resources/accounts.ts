@@ -35,6 +35,29 @@ export class Accounts extends APIResource {
   }
 
   /**
+   * Archives an account and releases all associated resources.
+   *
+   * **Warning**: This action will:
+   *
+   * - Release all phone numbers associated with the account
+   * - Deactivate all campaigns
+   * - Make the account unusable for sending messages
+   *
+   * This operation is irreversible. If you need to send SMS in the future, you will
+   * need to re-register new phone numbers and campaigns.
+   *
+   * @example
+   * ```ts
+   * const account = await client.accounts.archive(
+   *   'acct_01jpqjvfg9enpt7pyxd60pcmxj',
+   * );
+   * ```
+   */
+  archive(id: string, options?: RequestOptions): APIPromise<Account> {
+    return this._client.delete(path`/accounts/${id}`, options);
+  }
+
+  /**
    * Check an account's status and capabilities
    *
    * @example
