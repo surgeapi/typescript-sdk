@@ -51,6 +51,24 @@ export class Users extends APIResource {
   }
 
   /**
+   * Deletes a user.
+   *
+   * Once a user has been deleted, they will no longer be permitted to access any of
+   * the embedded components. Attempting to access a deleted user will return a 404
+   * Not Found error.
+   *
+   * @example
+   * ```ts
+   * const user = await client.users.delete(
+   *   'usr_01j9dwavghe1ttppewekjjkfrx',
+   * );
+   * ```
+   */
+  delete(id: string, options?: RequestOptions): APIPromise<User> {
+    return this._client.delete(path`/users/${id}`, options);
+  }
+
+  /**
    * Provides a mechanism for having Surge create a signed token for embeds instead
    * of signing with your own signing key.
    *

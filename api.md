@@ -84,6 +84,7 @@ Methods:
 - <code title="post /accounts/{account_id}/users">client.users.<a href="./src/resources/users.ts">create</a>(accountID, { ...params }) -> User</code>
 - <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id) -> User</code>
 - <code title="patch /users/{id}">client.users.<a href="./src/resources/users.ts">update</a>(id, { ...params }) -> User</code>
+- <code title="delete /users/{id}">client.users.<a href="./src/resources/users.ts">delete</a>(id) -> User</code>
 - <code title="post /users/{user_id}/tokens">client.users.<a href="./src/resources/users.ts">createToken</a>(userID, { ...params }) -> UserTokenResponse</code>
 
 # Verifications
