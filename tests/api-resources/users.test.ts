@@ -65,6 +65,18 @@ describe('resource users', () => {
   });
 
   // Prism tests are disabled
+  test.skip('delete', async () => {
+    const responsePromise = client.users.delete('usr_01j9dwavghe1ttppewekjjkfrx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('createToken', async () => {
     const responsePromise = client.users.createToken('usr_01jymgdfrpec2asc5m0z3a6fr9', {});
     const rawResponse = await responsePromise.asResponse();
