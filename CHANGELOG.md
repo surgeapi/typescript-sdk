@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.31.0 (2026-01-15)
+
+Full Changelog: [v0.30.0...v0.31.0](https://github.com/surgeapi/typescript-sdk/compare/v0.30.0...v0.31.0)
+
+### Features
+
+* **api:** add delete user endpoint ([b565f99](https://github.com/surgeapi/typescript-sdk/commit/b565f99de604c7717beadd72ef4b25f0029825a6))
+
+
+### Bug Fixes
+
+* **publish:** remove extraneous npm copy from package ([65ff1d9](https://github.com/surgeapi/typescript-sdk/commit/65ff1d9f13f2115727f7a301495e9173af5afe47))
+
+
+### Chores
+
+* **internal:** upgrade babel, qs, js-yaml ([266e661](https://github.com/surgeapi/typescript-sdk/commit/266e66175df664bf3be1ddd6d52399229588b961))
+
 ## 0.30.0 (2026-01-09)
 
 Full Changelog: [v0.29.0...v0.30.0](https://github.com/surgeapi/typescript-sdk/compare/v0.29.0...v0.30.0)
