@@ -37,6 +37,7 @@ export {
   type ContactOptedInWebhookEvent,
   type ContactOptedOutWebhookEvent,
   type ConversationCreatedWebhookEvent,
+  type LinkFollowedWebhookEvent,
   type MessageDeliveredWebhookEvent,
   type MessageFailedWebhookEvent,
   type MessageReceivedWebhookEvent,
