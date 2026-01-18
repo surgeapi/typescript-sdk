@@ -108,6 +108,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">ContactOptedInWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ContactOptedOutWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ConversationCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">LinkFollowedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MessageDeliveredWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MessageFailedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MessageReceivedWebhookEvent</a></code>
