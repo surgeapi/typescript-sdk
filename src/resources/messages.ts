@@ -85,6 +85,11 @@ export interface Message {
    * A conversation with a Contact
    */
   conversation?: Message.Conversation;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
 }
 
 export namespace Message {
@@ -169,6 +174,11 @@ export declare namespace MessageCreateParams {
      * The message body.
      */
     body?: string;
+
+    /**
+     * Set of key-value pairs that will be stored with the object.
+     */
+    metadata?: { [key: string]: string };
 
     /**
      * An optional datetime for scheduling message up to a couple of months in the
@@ -257,6 +267,11 @@ export declare namespace MessageCreateParams {
      * the account's default phone number. Cannot be used together with 'conversation'.
      */
     from?: string;
+
+    /**
+     * Set of key-value pairs that will be stored with the object.
+     */
+    metadata?: { [key: string]: string };
 
     /**
      * An optional datetime for scheduling message up to a couple of months in the

@@ -25,7 +25,7 @@ describe('resource users', () => {
     const response = await client.users.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       first_name: 'Brian',
       last_name: "O'Conner",
-      metadata: { email: 'boconner@toretti.family', user_id: 'string' },
+      metadata: { email: 'boconner@toretti.family', user_id: '1234' },
       photo_url: 'https://toretti.family/people/brian.jpg',
     });
   });
@@ -59,7 +59,7 @@ describe('resource users', () => {
     const response = await client.users.update('usr_01j9dwavghe1ttppewekjjkfrx', {
       first_name: 'Brian',
       last_name: "O'Conner",
-      metadata: { email: 'boconner@toretti.family', user_id: 'string' },
+      metadata: { email: 'boconner@toretti.family', user_id: '1234' },
       photo_url: 'https://toretti.family/people/brian.jpg',
     });
   });
