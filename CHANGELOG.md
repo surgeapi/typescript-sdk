@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.32.0 (2026-01-18)
+
+Full Changelog: [v0.31.0...v0.32.0](https://github.com/surgeapi/typescript-sdk/compare/v0.31.0...v0.32.0)
+
+### Features
+
+* **api:** api update ([930eb14](https://github.com/surgeapi/typescript-sdk/commit/930eb14d21292eb58a143c3b41deaf5812705679))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([d98256c](https://github.com/surgeapi/typescript-sdk/commit/d98256cdad1038111d1e3131a23f4da16515d743))
+* **internal:** update lock file ([0f650cb](https://github.com/surgeapi/typescript-sdk/commit/0f650cb964a888ce12ed9f1be7a200dae04fa39d))
+* **internal:** upgrade brace-expansion and @babel/helpers ([9ef97a4](https://github.com/surgeapi/typescript-sdk/commit/9ef97a4e89f11d90649b49ac927202920c0fbc0a))
+
 ## 0.31.0 (2026-01-15)
 
 Full Changelog: [v0.30.0...v0.31.0](https://github.com/surgeapi/typescript-sdk/compare/v0.30.0...v0.31.0)
