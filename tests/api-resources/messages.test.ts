@@ -37,6 +37,7 @@ describe('resource messages', () => {
       },
       attachments: [{ url: 'https://toretto.family/coronas.gif' }],
       body: 'body',
+      metadata: { foo: 'string' },
       send_at: '2019-12-27T18:11:19.117Z',
     });
   });
