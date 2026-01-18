@@ -234,6 +234,50 @@ export namespace ConversationCreatedWebhookEvent {
   }
 }
 
+export interface LinkFollowedWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: LinkFollowedWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `link.followed` for this event.
+   */
+  type: 'link.followed';
+}
+
+export namespace LinkFollowedWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the link
+     */
+    id: string;
+
+    /**
+     * The unique identifier for the message that contained the link
+     */
+    message_id: string;
+
+    /**
+     * The original URL that was shortened
+     */
+    url: string;
+  }
+}
+
 export interface MessageDeliveredWebhookEvent {
   /**
    * The ID of the account in which this event occurred
@@ -617,6 +661,7 @@ export type UnwrapWebhookEvent =
   | ContactOptedInWebhookEvent
   | ContactOptedOutWebhookEvent
   | ConversationCreatedWebhookEvent
+  | LinkFollowedWebhookEvent
   | MessageDeliveredWebhookEvent
   | MessageFailedWebhookEvent
   | MessageReceivedWebhookEvent
@@ -629,6 +674,7 @@ export declare namespace Webhooks {
     type ContactOptedInWebhookEvent as ContactOptedInWebhookEvent,
     type ContactOptedOutWebhookEvent as ContactOptedOutWebhookEvent,
     type ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent,
+    type LinkFollowedWebhookEvent as LinkFollowedWebhookEvent,
     type MessageDeliveredWebhookEvent as MessageDeliveredWebhookEvent,
     type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
     type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
