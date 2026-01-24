@@ -77,6 +77,12 @@ export interface Message {
   attachments?: Array<Message.Attachment>;
 
   /**
+   * The ID of the blast this message belongs to, if any. This can be used to
+   * attribute messages back to a specific blast.
+   */
+  blast_id?: string;
+
+  /**
    * The message body.
    */
   body?: string;
