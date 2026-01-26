@@ -71,6 +71,13 @@ export interface BlastCreateParams {
   contacts?: Array<string>;
 
   /**
+   * The phone number from which to send the blast. This can be either the phone
+   * number in E.164 format or a Surge phone number id. If not provided, the
+   * account's default phone number is used.
+   */
+  from?: string;
+
+  /**
    * Optional name for the blast.
    */
   name?: string;
