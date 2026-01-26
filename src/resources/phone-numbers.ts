@@ -43,7 +43,7 @@ export interface PhoneNumber {
   /**
    * Whether the phone number is local, toll-free, or short code
    */
-  type: 'local' | 'toll_free';
+  type: 'local' | 'short_code' | 'toll_free';
 }
 
 export interface PhoneNumberPurchaseParams {
