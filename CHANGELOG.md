@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.34.0 (2026-01-26)
+
+Full Changelog: [v0.33.0...v0.34.0](https://github.com/surgeapi/typescript-sdk/compare/v0.33.0...v0.34.0)
+
+### Features
+
+* **api:** api update ([e8a05ca](https://github.com/surgeapi/typescript-sdk/commit/e8a05ca5310c79c0c1ceb00790f839067db8c3eb))
+* **api:** api update ([830808e](https://github.com/surgeapi/typescript-sdk/commit/830808e0bc681b298194b30af7b181c58d97cba9))
+* **api:** api update ([b3b428f](https://github.com/surgeapi/typescript-sdk/commit/b3b428f0cd7db5bfbb1076079484a453c8ee08a4))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([b37d1d3](https://github.com/surgeapi/typescript-sdk/commit/b37d1d35b3321e6997247aff060d540c93057426))
+
 ## 0.33.0 (2026-01-18)
 
 Full Changelog: [v0.32.0...v0.33.0](https://github.com/surgeapi/typescript-sdk/compare/v0.32.0...v0.33.0)
