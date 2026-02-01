@@ -85,7 +85,7 @@ export interface Message {
   /**
    * The message body.
    */
-  body?: string;
+  body?: string | null;
 
   /**
    * A conversation with a Contact
