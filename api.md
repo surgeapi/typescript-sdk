@@ -67,9 +67,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/phone-numbers.ts">PhoneNumber</a></code>
+- <code><a href="./src/resources/phone-numbers.ts">PhoneNumberListResponse</a></code>
 
 Methods:
 
+- <code title="get /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">list</a>(accountID, { ...params }) -> PhoneNumberListResponse</code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">purchase</a>(accountID, { ...params }) -> PhoneNumber</code>
 
 # Users
