@@ -30,7 +30,13 @@ import { Blast, BlastCreateParams, Blasts } from './resources/blasts';
 import { Campaign, CampaignCreateParams, Campaigns } from './resources/campaigns';
 import { Contact, ContactCreateParams, ContactUpdateParams, Contacts } from './resources/contacts';
 import { Message, MessageCreateParams, Messages } from './resources/messages';
-import { PhoneNumber, PhoneNumberPurchaseParams, PhoneNumbers } from './resources/phone-numbers';
+import {
+  PhoneNumber,
+  PhoneNumberListParams,
+  PhoneNumberListResponse,
+  PhoneNumberPurchaseParams,
+  PhoneNumbers,
+} from './resources/phone-numbers';
 import {
   User,
   UserCreateParams,
@@ -806,6 +812,8 @@ export declare namespace Surge {
   export {
     PhoneNumbers as PhoneNumbers,
     type PhoneNumber as PhoneNumber,
+    type PhoneNumberListResponse as PhoneNumberListResponse,
+    type PhoneNumberListParams as PhoneNumberListParams,
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
 
