@@ -63,6 +63,24 @@ export class Messages extends APIResource {
   retrieve(id: string, options?: RequestOptions): APIPromise<Message> {
     return this._client.get(path`/messages/${id}`, options);
   }
+
+  /**
+   * List all messages for an account with cursor-based pagination.
+   *
+   * @example
+   * ```ts
+   * const messages = await client.messages.list(
+   *   'acct_01j9a43avnfqzbjfch6pygv1td',
+   * );
+   * ```
+   */
+  list(
+    accountID: string,
+    query: MessageListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<MessageListResponse> {
+    return this._client.get(path`/accounts/${accountID}/messages`, { query, ...options });
+  }
 }
 
 /**
@@ -159,6 +177,38 @@ export namespace Message {
        */
       type: 'local' | 'toll_free' | 'short_code' | 'demo';
     }
+  }
+}
+
+/**
+ * A paginated list of messages
+ */
+export interface MessageListResponse {
+  /**
+   * The list of messages
+   */
+  data: Array<Message>;
+
+  /**
+   * Cursor-based pagination information
+   */
+  pagination: MessageListResponse.Pagination;
+}
+
+export namespace MessageListResponse {
+  /**
+   * Cursor-based pagination information
+   */
+  export interface Pagination {
+    /**
+     * Cursor for the next page of results. Null if there is no next page.
+     */
+    next_cursor?: string | null;
+
+    /**
+     * Cursor for the previous page of results. Null if there is no previous page.
+     */
+    previous_cursor?: string | null;
   }
 }
 
@@ -299,6 +349,24 @@ export declare namespace MessageCreateParams {
   }
 }
 
+export interface MessageListParams {
+  /**
+   * Cursor for forward pagination. Use the next_cursor from a previous response.
+   */
+  after?: string;
+
+  /**
+   * Cursor for backward pagination. Use the previous_cursor from a previous
+   * response.
+   */
+  before?: string;
+}
+
 export declare namespace Messages {
-  export { type Message as Message, type MessageCreateParams as MessageCreateParams };
+  export {
+    type Message as Message,
+    type MessageListResponse as MessageListResponse,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageListParams as MessageListParams,
+  };
 }
