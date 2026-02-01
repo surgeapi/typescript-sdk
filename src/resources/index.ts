@@ -12,7 +12,14 @@ export {
 } from './accounts';
 export { Blasts, type Blast, type BlastCreateParams } from './blasts';
 export { Campaigns, type Campaign, type CampaignCreateParams } from './campaigns';
-export { Contacts, type Contact, type ContactCreateParams, type ContactUpdateParams } from './contacts';
+export {
+  Contacts,
+  type Contact,
+  type ContactListResponse,
+  type ContactCreateParams,
+  type ContactUpdateParams,
+  type ContactListParams,
+} from './contacts';
 export {
   Messages,
   type Message,

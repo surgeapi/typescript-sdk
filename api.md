@@ -44,12 +44,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/contacts.ts">Contact</a></code>
+- <code><a href="./src/resources/contacts.ts">ContactListResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/resources/contacts.ts">create</a>(accountID, { ...params }) -> Contact</code>
 - <code title="get /contacts/{id}">client.contacts.<a href="./src/resources/contacts.ts">retrieve</a>(id) -> Contact</code>
 - <code title="patch /contacts/{id}">client.contacts.<a href="./src/resources/contacts.ts">update</a>(id, { ...params }) -> Contact</code>
+- <code title="get /accounts/{account_id}/contacts">client.contacts.<a href="./src/resources/contacts.ts">list</a>(accountID, { ...params }) -> ContactListResponse</code>
 
 # Messages
 
