@@ -35,7 +35,7 @@ export interface Blast {
   /**
    * The message body.
    */
-  body?: string;
+  body?: string | null;
 
   /**
    * Optional name for the blast.
@@ -63,7 +63,7 @@ export interface BlastCreateParams {
   /**
    * The message body.
    */
-  body?: string;
+  body?: string | null;
 
   /**
    * @deprecated Deprecated. Use `to` instead.

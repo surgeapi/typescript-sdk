@@ -313,7 +313,7 @@ export namespace MessageDeliveredWebhookEvent {
     /**
      * The content of the message
      */
-    body: string;
+    body: string | null;
 
     /**
      * The conversation this message belongs to
@@ -412,7 +412,7 @@ export namespace MessageFailedWebhookEvent {
     /**
      * The content of the message
      */
-    body: string;
+    body: string | null;
 
     /**
      * The conversation this message belongs to
@@ -516,7 +516,7 @@ export namespace MessageReceivedWebhookEvent {
     /**
      * The content of the message
      */
-    body: string;
+    body: string | null;
 
     /**
      * The conversation this message belongs to
@@ -615,7 +615,7 @@ export namespace MessageSentWebhookEvent {
     /**
      * The content of the message
      */
-    body: string;
+    body: string | null;
 
     /**
      * The conversation this message belongs to
