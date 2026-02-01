@@ -50,6 +50,24 @@ export class Contacts extends APIResource {
   update(id: string, body: ContactUpdateParams, options?: RequestOptions): APIPromise<Contact> {
     return this._client.patch(path`/contacts/${id}`, { body, ...options });
   }
+
+  /**
+   * List all contacts for an account with cursor-based pagination.
+   *
+   * @example
+   * ```ts
+   * const contacts = await client.contacts.list(
+   *   'acct_01j9a43avnfqzbjfch6pygv1td',
+   * );
+   * ```
+   */
+  list(
+    accountID: string,
+    query: ContactListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ContactListResponse> {
+    return this._client.get(path`/accounts/${accountID}/contacts`, { query, ...options });
+  }
 }
 
 /**
@@ -85,6 +103,38 @@ export interface Contact {
    * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
+}
+
+/**
+ * A paginated list of contacts
+ */
+export interface ContactListResponse {
+  /**
+   * The list of contacts
+   */
+  data: Array<Contact>;
+
+  /**
+   * Cursor-based pagination information
+   */
+  pagination: ContactListResponse.Pagination;
+}
+
+export namespace ContactListResponse {
+  /**
+   * Cursor-based pagination information
+   */
+  export interface Pagination {
+    /**
+     * Cursor for the next page of results. Null if there is no next page.
+     */
+    next_cursor?: string | null;
+
+    /**
+     * Cursor for the previous page of results. Null if there is no previous page.
+     */
+    previous_cursor?: string | null;
+  }
 }
 
 export interface ContactCreateParams {
@@ -141,10 +191,25 @@ export interface ContactUpdateParams {
   metadata?: { [key: string]: string };
 }
 
+export interface ContactListParams {
+  /**
+   * Cursor for forward pagination. Use the next_cursor from a previous response.
+   */
+  after?: string;
+
+  /**
+   * Cursor for backward pagination. Use the previous_cursor from a previous
+   * response.
+   */
+  before?: string;
+}
+
 export declare namespace Contacts {
   export {
     type Contact as Contact,
+    type ContactListResponse as ContactListResponse,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
+    type ContactListParams as ContactListParams,
   };
 }

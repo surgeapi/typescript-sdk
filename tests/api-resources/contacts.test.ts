@@ -69,4 +69,28 @@ describe('resource contacts', () => {
       metadata: { car: '1970 Dodge Charger R/T' },
     });
   });
+
+  // Prism tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.contacts.list('acct_01j9a43avnfqzbjfch6pygv1td');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.contacts.list(
+        'acct_01j9a43avnfqzbjfch6pygv1td',
+        { after: 'after', before: 'before' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Surge.NotFoundError);
+  });
 });
