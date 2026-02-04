@@ -14,6 +14,8 @@ import * as Opts from './internal/request-options';
 import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import { AbstractPage, type CursorParams, CursorResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -32,23 +34,23 @@ import {
   Contact,
   ContactCreateParams,
   ContactListParams,
-  ContactListResponse,
   ContactUpdateParams,
   Contacts,
+  ContactsCursor,
 } from './resources/contacts';
 import {
   Message,
   MessageCreateParams,
   MessageListParams,
-  MessageListResponse,
   Messages,
+  MessagesCursor,
 } from './resources/messages';
 import {
   PhoneNumber,
   PhoneNumberListParams,
-  PhoneNumberListResponse,
   PhoneNumberPurchaseParams,
   PhoneNumbers,
+  PhoneNumbersCursor,
 } from './resources/phone-numbers';
 import {
   User,
@@ -539,6 +541,25 @@ export class Surge {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Surge, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -796,6 +817,9 @@ Surge.Webhooks = Webhooks;
 export declare namespace Surge {
   export type RequestOptions = Opts.RequestOptions;
 
+  export import Cursor = Pagination.Cursor;
+  export { type CursorParams as CursorParams, type CursorResponse as CursorResponse };
+
   export {
     Accounts as Accounts,
     type Account as Account,
@@ -817,7 +841,7 @@ export declare namespace Surge {
   export {
     Contacts as Contacts,
     type Contact as Contact,
-    type ContactListResponse as ContactListResponse,
+    type ContactsCursor as ContactsCursor,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
     type ContactListParams as ContactListParams,
@@ -826,7 +850,7 @@ export declare namespace Surge {
   export {
     Messages as Messages,
     type Message as Message,
-    type MessageListResponse as MessageListResponse,
+    type MessagesCursor as MessagesCursor,
     type MessageCreateParams as MessageCreateParams,
     type MessageListParams as MessageListParams,
   };
@@ -834,7 +858,7 @@ export declare namespace Surge {
   export {
     PhoneNumbers as PhoneNumbers,
     type PhoneNumber as PhoneNumber,
-    type PhoneNumberListResponse as PhoneNumberListResponse,
+    type PhoneNumbersCursor as PhoneNumbersCursor,
     type PhoneNumberListParams as PhoneNumberListParams,
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
