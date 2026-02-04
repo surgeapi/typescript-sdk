@@ -15,24 +15,24 @@ export { Campaigns, type Campaign, type CampaignCreateParams } from './campaigns
 export {
   Contacts,
   type Contact,
-  type ContactListResponse,
   type ContactCreateParams,
   type ContactUpdateParams,
   type ContactListParams,
+  type ContactsCursor,
 } from './contacts';
 export {
   Messages,
   type Message,
-  type MessageListResponse,
   type MessageCreateParams,
   type MessageListParams,
+  type MessagesCursor,
 } from './messages';
 export {
   PhoneNumbers,
   type PhoneNumber,
-  type PhoneNumberListResponse,
   type PhoneNumberListParams,
   type PhoneNumberPurchaseParams,
+  type PhoneNumbersCursor,
 } from './phone-numbers';
 export {
   Users,
