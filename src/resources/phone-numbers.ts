@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { Cursor, type CursorParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -11,17 +12,23 @@ export class PhoneNumbers extends APIResource {
    *
    * @example
    * ```ts
-   * const phoneNumbers = await client.phoneNumbers.list(
+   * // Automatically fetches more pages as needed.
+   * for await (const phoneNumber of client.phoneNumbers.list(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
-   * );
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   list(
     accountID: string,
     query: PhoneNumberListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PhoneNumberListResponse> {
-    return this._client.get(path`/accounts/${accountID}/phone_numbers`, { query, ...options });
+  ): PagePromise<PhoneNumbersCursor, PhoneNumber> {
+    return this._client.getAPIList(path`/accounts/${accountID}/phone_numbers`, Cursor<PhoneNumber>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -44,6 +51,8 @@ export class PhoneNumbers extends APIResource {
   }
 }
 
+export type PhoneNumbersCursor = Cursor<PhoneNumber>;
+
 /**
  * A phone number that can be used to send and receive messages and calls
  */
@@ -64,50 +73,7 @@ export interface PhoneNumber {
   type: 'local' | 'short_code' | 'toll_free';
 }
 
-/**
- * A paginated list of phone numbers
- */
-export interface PhoneNumberListResponse {
-  /**
-   * The list of phone numbers
-   */
-  data: Array<PhoneNumber>;
-
-  /**
-   * Cursor-based pagination information
-   */
-  pagination: PhoneNumberListResponse.Pagination;
-}
-
-export namespace PhoneNumberListResponse {
-  /**
-   * Cursor-based pagination information
-   */
-  export interface Pagination {
-    /**
-     * Cursor for the next page of results. Null if there is no next page.
-     */
-    next_cursor?: string | null;
-
-    /**
-     * Cursor for the previous page of results. Null if there is no previous page.
-     */
-    previous_cursor?: string | null;
-  }
-}
-
-export interface PhoneNumberListParams {
-  /**
-   * Cursor for forward pagination. Use the next_cursor from a previous response.
-   */
-  after?: string;
-
-  /**
-   * Cursor for backward pagination. Use the previous_cursor from a previous
-   * response.
-   */
-  before?: string;
-}
+export interface PhoneNumberListParams extends CursorParams {}
 
 export interface PhoneNumberPurchaseParams {
   /**
@@ -138,7 +104,7 @@ export interface PhoneNumberPurchaseParams {
 export declare namespace PhoneNumbers {
   export {
     type PhoneNumber as PhoneNumber,
-    type PhoneNumberListResponse as PhoneNumberListResponse,
+    type PhoneNumbersCursor as PhoneNumbersCursor,
     type PhoneNumberListParams as PhoneNumberListParams,
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };

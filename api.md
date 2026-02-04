@@ -44,38 +44,35 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/contacts.ts">Contact</a></code>
-- <code><a href="./src/resources/contacts.ts">ContactListResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/resources/contacts.ts">create</a>(accountID, { ...params }) -> Contact</code>
 - <code title="get /contacts/{id}">client.contacts.<a href="./src/resources/contacts.ts">retrieve</a>(id) -> Contact</code>
 - <code title="patch /contacts/{id}">client.contacts.<a href="./src/resources/contacts.ts">update</a>(id, { ...params }) -> Contact</code>
-- <code title="get /accounts/{account_id}/contacts">client.contacts.<a href="./src/resources/contacts.ts">list</a>(accountID, { ...params }) -> ContactListResponse</code>
+- <code title="get /accounts/{account_id}/contacts">client.contacts.<a href="./src/resources/contacts.ts">list</a>(accountID, { ...params }) -> ContactsCursor</code>
 
 # Messages
 
 Types:
 
 - <code><a href="./src/resources/messages.ts">Message</a></code>
-- <code><a href="./src/resources/messages.ts">MessageListResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/resources/messages.ts">create</a>(accountID, { ...params }) -> Message</code>
 - <code title="get /messages/{id}">client.messages.<a href="./src/resources/messages.ts">retrieve</a>(id) -> Message</code>
-- <code title="get /accounts/{account_id}/messages">client.messages.<a href="./src/resources/messages.ts">list</a>(accountID, { ...params }) -> MessageListResponse</code>
+- <code title="get /accounts/{account_id}/messages">client.messages.<a href="./src/resources/messages.ts">list</a>(accountID, { ...params }) -> MessagesCursor</code>
 
 # PhoneNumbers
 
 Types:
 
 - <code><a href="./src/resources/phone-numbers.ts">PhoneNumber</a></code>
-- <code><a href="./src/resources/phone-numbers.ts">PhoneNumberListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">list</a>(accountID, { ...params }) -> PhoneNumberListResponse</code>
+- <code title="get /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">list</a>(accountID, { ...params }) -> PhoneNumbersCursor</code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">purchase</a>(accountID, { ...params }) -> PhoneNumber</code>
 
 # Users

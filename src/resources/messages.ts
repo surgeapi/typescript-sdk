@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import * as ContactsAPI from './contacts';
 import { APIPromise } from '../core/api-promise';
+import { Cursor, type CursorParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -69,19 +70,27 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const messages = await client.messages.list(
+   * // Automatically fetches more pages as needed.
+   * for await (const message of client.messages.list(
    *   'acct_01j9a43avnfqzbjfch6pygv1td',
-   * );
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   list(
     accountID: string,
     query: MessageListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MessageListResponse> {
-    return this._client.get(path`/accounts/${accountID}/messages`, { query, ...options });
+  ): PagePromise<MessagesCursor, Message> {
+    return this._client.getAPIList(path`/accounts/${accountID}/messages`, Cursor<Message>, {
+      query,
+      ...options,
+    });
   }
 }
+
+export type MessagesCursor = Cursor<Message>;
 
 /**
  * A Message is a communication sent to a Contact.
@@ -177,38 +186,6 @@ export namespace Message {
        */
       type: 'local' | 'toll_free' | 'short_code' | 'demo';
     }
-  }
-}
-
-/**
- * A paginated list of messages
- */
-export interface MessageListResponse {
-  /**
-   * The list of messages
-   */
-  data: Array<Message>;
-
-  /**
-   * Cursor-based pagination information
-   */
-  pagination: MessageListResponse.Pagination;
-}
-
-export namespace MessageListResponse {
-  /**
-   * Cursor-based pagination information
-   */
-  export interface Pagination {
-    /**
-     * Cursor for the next page of results. Null if there is no next page.
-     */
-    next_cursor?: string | null;
-
-    /**
-     * Cursor for the previous page of results. Null if there is no previous page.
-     */
-    previous_cursor?: string | null;
   }
 }
 
@@ -349,23 +326,12 @@ export declare namespace MessageCreateParams {
   }
 }
 
-export interface MessageListParams {
-  /**
-   * Cursor for forward pagination. Use the next_cursor from a previous response.
-   */
-  after?: string;
-
-  /**
-   * Cursor for backward pagination. Use the previous_cursor from a previous
-   * response.
-   */
-  before?: string;
-}
+export interface MessageListParams extends CursorParams {}
 
 export declare namespace Messages {
   export {
     type Message as Message,
-    type MessageListResponse as MessageListResponse,
+    type MessagesCursor as MessagesCursor,
     type MessageCreateParams as MessageCreateParams,
     type MessageListParams as MessageListParams,
   };
