@@ -66,7 +66,7 @@ export interface BlastCreateParams {
   body?: string | null;
 
   /**
-   * @deprecated Deprecated. Use `to` instead.
+   * @deprecated Use `to` to specify recipients instead.
    */
   contacts?: Array<string>;
 
@@ -83,7 +83,7 @@ export interface BlastCreateParams {
   name?: string;
 
   /**
-   * @deprecated Deprecated. Use `to` instead.
+   * @deprecated Use `to` to specify recipients instead.
    */
   segments?: Array<string>;
 
