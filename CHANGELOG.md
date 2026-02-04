@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.35.0 (2026-02-04)
+
+Full Changelog: [v0.34.0...v0.35.0](https://github.com/surgeapi/typescript-sdk/compare/v0.34.0...v0.35.0)
+
+### Features
+
+* **api:** add list contacts endpoint ([b1735b2](https://github.com/surgeapi/typescript-sdk/commit/b1735b242628f7ebd72a7cad8b92d54109909210))
+* **api:** add list messages endpoint ([0d27a84](https://github.com/surgeapi/typescript-sdk/commit/0d27a848d8a1ed194066ff6e25ceaf2860116e2a))
+* **api:** add list phone numbers endpoint ([df05cbb](https://github.com/surgeapi/typescript-sdk/commit/df05cbbfd67681d87ccc9eb0ade1a06fee692808))
+* **sdk:** add deprecation messages ([e0404d1](https://github.com/surgeapi/typescript-sdk/commit/e0404d1c701998c3840a7eafb275f7088d32a23c))
+* **sdks:** set up pagination ([afb53cc](https://github.com/surgeapi/typescript-sdk/commit/afb53cc8b298418f355ac9c4ef26b91c1b8ba308))
+
+
+### Bug Fixes
+
+* **api:** make message body nullable ([3909f09](https://github.com/surgeapi/typescript-sdk/commit/3909f09fdb4a8c2cf0ca4da4862d274281e585af))
+* **client:** avoid memory leak with abort signals ([24a434f](https://github.com/surgeapi/typescript-sdk/commit/24a434faaec0abd5326462ace9bc2d38e7c694cb))
+
+
+### Chores
+
+* **client:** do not parse responses with empty content-length ([64dce72](https://github.com/surgeapi/typescript-sdk/commit/64dce72ec3009a6580dc6cd5f24b8ce46420b4fa))
+
 ## 0.34.0 (2026-01-26)
 
 Full Changelog: [v0.33.0...v0.34.0](https://github.com/surgeapi/typescript-sdk/compare/v0.33.0...v0.34.0)
