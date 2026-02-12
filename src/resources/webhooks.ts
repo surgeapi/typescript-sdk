@@ -679,6 +679,96 @@ export namespace MessageSentWebhookEvent {
   }
 }
 
+export interface VoicemailReceivedWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: VoicemailReceivedWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `voicemail.received` for this event.
+   */
+  type: 'voicemail.received';
+}
+
+export namespace VoicemailReceivedWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the voicemail
+     */
+    id: string;
+
+    /**
+     * The call that resulted in this voicemail
+     */
+    call: Data.Call;
+
+    /**
+     * The duration of the voicemail in seconds
+     */
+    duration: number;
+
+    /**
+     * The unique identifier for the recording
+     */
+    recording_id: string;
+  }
+
+  export namespace Data {
+    /**
+     * The call that resulted in this voicemail
+     */
+    export interface Call {
+      /**
+       * The unique identifier for the call
+       */
+      id: string;
+
+      /**
+       * A contact who has consented to receive messages
+       */
+      contact: ContactsAPI.Contact;
+
+      /**
+       * The duration of the call in seconds
+       */
+      duration: number;
+
+      /**
+       * When the call was initiated
+       */
+      initiated_at: string;
+
+      /**
+       * The status of the call
+       */
+      status:
+        | 'busy'
+        | 'canceled'
+        | 'completed'
+        | 'failed'
+        | 'in_progress'
+        | 'missed'
+        | 'no_answer'
+        | 'queued'
+        | 'ringing';
+    }
+  }
+}
+
 export type UnwrapWebhookEvent =
   | CallEndedWebhookEvent
   | CampaignApprovedWebhookEvent
@@ -689,7 +779,8 @@ export type UnwrapWebhookEvent =
   | MessageDeliveredWebhookEvent
   | MessageFailedWebhookEvent
   | MessageReceivedWebhookEvent
-  | MessageSentWebhookEvent;
+  | MessageSentWebhookEvent
+  | VoicemailReceivedWebhookEvent;
 
 export declare namespace Webhooks {
   export {
@@ -703,6 +794,7 @@ export declare namespace Webhooks {
     type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
     type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
     type MessageSentWebhookEvent as MessageSentWebhookEvent,
+    type VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 }
