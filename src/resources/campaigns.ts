@@ -95,6 +95,11 @@ export interface Campaign {
   privacy_policy_url: string;
 
   /**
+   * The current status of the campaign.
+   */
+  status: 'active' | 'canceled' | 'created' | 'deactivated' | 'in_review' | 'pending' | 'rejected';
+
+  /**
    * A list containing 1-5 types of messages that will be sent with this campaign.
    *
    * The following use cases are typically available to all brands:
