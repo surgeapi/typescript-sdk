@@ -61,5 +61,6 @@ export {
   type MessageFailedWebhookEvent,
   type MessageReceivedWebhookEvent,
   type MessageSentWebhookEvent,
+  type VoicemailReceivedWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';
