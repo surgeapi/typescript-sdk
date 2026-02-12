@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.36.1 (2026-02-12)
+
+Full Changelog: [v0.36.0...v0.36.1](https://github.com/surgeapi/typescript-sdk/compare/v0.36.0...v0.36.1)
+
+### Chores
+
+* **internal:** avoid type checking errors with ts-reset ([8d3ef5d](https://github.com/surgeapi/typescript-sdk/commit/8d3ef5dfb1dabb33e94b38ab30aff38bf5cb7b0c))
+
 ## 0.36.0 (2026-02-12)
 
 Full Changelog: [v0.35.0...v0.36.0](https://github.com/surgeapi/typescript-sdk/compare/v0.35.0...v0.36.0)
