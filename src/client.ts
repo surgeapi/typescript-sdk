@@ -79,6 +79,7 @@ import {
   MessageReceivedWebhookEvent,
   MessageSentWebhookEvent,
   UnwrapWebhookEvent,
+  VoicemailReceivedWebhookEvent,
   Webhooks,
 } from './resources/webhooks';
 import { type Fetch } from './internal/builtin-types';
@@ -903,6 +904,7 @@ export declare namespace Surge {
     type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
     type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
     type MessageSentWebhookEvent as MessageSentWebhookEvent,
+    type VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 
