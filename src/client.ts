@@ -52,6 +52,7 @@ import {
   PhoneNumbers,
   PhoneNumbersCursor,
 } from './resources/phone-numbers';
+import { RecordingGetFileResponse, Recordings } from './resources/recordings';
 import {
   User,
   UserCreateParams,
@@ -811,6 +812,7 @@ export class Surge {
   contacts: API.Contacts = new API.Contacts(this);
   messages: API.Messages = new API.Messages(this);
   phoneNumbers: API.PhoneNumbers = new API.PhoneNumbers(this);
+  recordings: API.Recordings = new API.Recordings(this);
   users: API.Users = new API.Users(this);
   verifications: API.Verifications = new API.Verifications(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
@@ -822,6 +824,7 @@ Surge.Campaigns = Campaigns;
 Surge.Contacts = Contacts;
 Surge.Messages = Messages;
 Surge.PhoneNumbers = PhoneNumbers;
+Surge.Recordings = Recordings;
 Surge.Users = Users;
 Surge.Verifications = Verifications;
 Surge.Webhooks = Webhooks;
@@ -874,6 +877,8 @@ export declare namespace Surge {
     type PhoneNumberListParams as PhoneNumberListParams,
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
+
+  export { Recordings as Recordings, type RecordingGetFileResponse as RecordingGetFileResponse };
 
   export {
     Users as Users,

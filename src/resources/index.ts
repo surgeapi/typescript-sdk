@@ -34,6 +34,7 @@ export {
   type PhoneNumberPurchaseParams,
   type PhoneNumbersCursor,
 } from './phone-numbers';
+export { Recordings, type RecordingGetFileResponse } from './recordings';
 export {
   Users,
   type User,
