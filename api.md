@@ -127,6 +127,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">MessageFailedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MessageReceivedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MessageSentWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">RecordingCompletedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">VoicemailReceivedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 

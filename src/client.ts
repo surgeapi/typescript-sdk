@@ -79,6 +79,7 @@ import {
   MessageFailedWebhookEvent,
   MessageReceivedWebhookEvent,
   MessageSentWebhookEvent,
+  RecordingCompletedWebhookEvent,
   UnwrapWebhookEvent,
   VoicemailReceivedWebhookEvent,
   Webhooks,
@@ -909,6 +910,7 @@ export declare namespace Surge {
     type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
     type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
     type MessageSentWebhookEvent as MessageSentWebhookEvent,
+    type RecordingCompletedWebhookEvent as RecordingCompletedWebhookEvent,
     type VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
