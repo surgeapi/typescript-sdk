@@ -75,6 +75,16 @@ Methods:
 - <code title="get /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">list</a>(accountID, { ...params }) -> PhoneNumbersCursor</code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">purchase</a>(accountID, { ...params }) -> PhoneNumber</code>
 
+# Recordings
+
+Types:
+
+- <code><a href="./src/resources/recordings.ts">RecordingGetFileResponse</a></code>
+
+Methods:
+
+- <code title="get /recordings/{recording_id}/file">client.recordings.<a href="./src/resources/recordings.ts">getFile</a>(recordingID) -> RecordingGetFileResponse</code>
+
 # Users
 
 Types:
