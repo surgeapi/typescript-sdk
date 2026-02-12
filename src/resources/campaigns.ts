@@ -37,6 +37,20 @@ export class Campaigns extends APIResource {
   create(accountID: string, body: CampaignCreateParams, options?: RequestOptions): APIPromise<Campaign> {
     return this._client.post(path`/accounts/${accountID}/campaigns`, { body, ...options });
   }
+
+  /**
+   * Retrieves a Campaign object.
+   *
+   * @example
+   * ```ts
+   * const campaign = await client.campaigns.retrieve(
+   *   'cpn_01k0qczvhbet4azgn5xm2ccfst',
+   * );
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Campaign> {
+    return this._client.get(path`/campaigns/${id}`, options);
+  }
 }
 
 /**
