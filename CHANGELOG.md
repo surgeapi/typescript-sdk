@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.36.0 (2026-02-12)
+
+Full Changelog: [v0.35.0...v0.36.0](https://github.com/surgeapi/typescript-sdk/compare/v0.35.0...v0.36.0)
+
+### Features
+
+* **api:** add campaign.status field ([2c369b7](https://github.com/surgeapi/typescript-sdk/commit/2c369b7fb0c4365bb26eb2175e7a4ecebe05bfaf))
+* **api:** add get campaign endpoint ([270553a](https://github.com/surgeapi/typescript-sdk/commit/270553acba25ae2059aff69a145f639a8f7847fe))
+* **api:** add recording.completed webhook ([c4f2338](https://github.com/surgeapi/typescript-sdk/commit/c4f2338a62f36133389eda7b61109c8d5e7bed74))
+* **api:** add voicemail.received webhook ([a72f1e7](https://github.com/surgeapi/typescript-sdk/commit/a72f1e78a624efbf0308452ef8e1bf3da6535edb))
+* **api:** get recording file ([32de38d](https://github.com/surgeapi/typescript-sdk/commit/32de38daf5d207805acf1986e069c37f69c87d04))
+
+
+### Bug Fixes
+
+* **api:** make message.blast_id nullable ([1487aa6](https://github.com/surgeapi/typescript-sdk/commit/1487aa6f142b03e21c6b0e1e2e3ef6dcba6c70ef))
+* **client:** avoid removing abort listener too early ([8305e3e](https://github.com/surgeapi/typescript-sdk/commit/8305e3e57be0e60753031505fc0c1aba60215e4f))
+
+
+### Chores
+
+* **client:** restructure abort controller binding ([47ef386](https://github.com/surgeapi/typescript-sdk/commit/47ef386b42eec12f97ad1df09d81eb7f24b9a4f5))
+* **internal:** fix pagination internals not accepting option promises ([4fa1a59](https://github.com/surgeapi/typescript-sdk/commit/4fa1a5903594cb7d14cfb0653d45f604fe133741))
+* **internal:** upgrade pnpm ([5547521](https://github.com/surgeapi/typescript-sdk/commit/5547521a4a824fc589945ba67d6b06a35daa654f))
+
 ## 0.35.0 (2026-02-04)
 
 Full Changelog: [v0.34.0...v0.35.0](https://github.com/surgeapi/typescript-sdk/compare/v0.34.0...v0.35.0)
