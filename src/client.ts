@@ -52,7 +52,7 @@ import {
   PhoneNumbers,
   PhoneNumbersCursor,
 } from './resources/phone-numbers';
-import { RecordingGetFileResponse, Recordings } from './resources/recordings';
+import { RecordingDeleteResponse, RecordingGetFileResponse, Recordings } from './resources/recordings';
 import {
   User,
   UserCreateParams,
@@ -887,7 +887,11 @@ export declare namespace Surge {
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
 
-  export { Recordings as Recordings, type RecordingGetFileResponse as RecordingGetFileResponse };
+  export {
+    Recordings as Recordings,
+    type RecordingDeleteResponse as RecordingDeleteResponse,
+    type RecordingGetFileResponse as RecordingGetFileResponse,
+  };
 
   export {
     Users as Users,

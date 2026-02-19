@@ -80,10 +80,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/recordings.ts">RecordingDeleteResponse</a></code>
 - <code><a href="./src/resources/recordings.ts">RecordingGetFileResponse</a></code>
 
 Methods:
 
+- <code title="delete /recordings/{id}">client.recordings.<a href="./src/resources/recordings.ts">delete</a>(id) -> RecordingDeleteResponse</code>
 - <code title="get /recordings/{recording_id}/file">client.recordings.<a href="./src/resources/recordings.ts">getFile</a>(recordingID) -> RecordingGetFileResponse</code>
 
 # Users
