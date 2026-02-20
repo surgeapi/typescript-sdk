@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource messages', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: { contact: { phone_number: '+18015551234' } },
@@ -22,7 +22,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       conversation: {
@@ -42,7 +42,7 @@ describe('resource messages', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.messages.retrieve('msg_01j9e0m1m6fc38gsv2vkfqgzz2');
     const rawResponse = await responsePromise.asResponse();
@@ -54,7 +54,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.messages.list('acct_01j9a43avnfqzbjfch6pygv1td');
     const rawResponse = await responsePromise.asResponse();
@@ -66,7 +66,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

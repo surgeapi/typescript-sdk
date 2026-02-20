@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource recordings', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.recordings.delete('rec_01kfyc9dgdec1avkgs7tng8htg');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource recordings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism doesn't properly handle redirects
+  // Mock server doesn't properly handle redirects
   test.skip('getFile', async () => {
     const responsePromise = client.recordings.getFile('rec_01kfyc9dgdec1avkgs7tng8htg');
     const rawResponse = await responsePromise.asResponse();

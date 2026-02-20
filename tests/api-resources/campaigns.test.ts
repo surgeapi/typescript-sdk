@@ -8,7 +8,7 @@ const client = new Surge({
 });
 
 describe('resource campaigns', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.campaigns.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       consent_flow:
@@ -33,7 +33,7 @@ describe('resource campaigns', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.campaigns.create('acct_01j9a43avnfqzbjfch6pygv1td', {
       consent_flow:
@@ -54,7 +54,7 @@ describe('resource campaigns', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.campaigns.retrieve('cpn_01k0qczvhbet4azgn5xm2ccfst');
     const rawResponse = await responsePromise.asResponse();
