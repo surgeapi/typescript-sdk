@@ -20,7 +20,7 @@ describe('resource recordings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server doesn't properly handle redirects
+  // Mock server tests are disabled
   test.skip('getFile', async () => {
     const responsePromise = client.recordings.getFile('rec_01kfyc9dgdec1avkgs7tng8htg');
     const rawResponse = await responsePromise.asResponse();
