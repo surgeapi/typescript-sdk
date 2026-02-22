@@ -39,6 +39,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">create</a>(accountID, { ...params }) -> Campaign</code>
 - <code title="get /campaigns/{id}">client.campaigns.<a href="./src/resources/campaigns.ts">retrieve</a>(id) -> Campaign</code>
+- <code title="get /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">list</a>(accountID, { ...params }) -> CampaignsCursor</code>
 
 # Contacts
 

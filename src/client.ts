@@ -29,7 +29,13 @@ import {
   Organization,
 } from './resources/accounts';
 import { Blast, BlastCreateParams, Blasts } from './resources/blasts';
-import { Campaign, CampaignCreateParams, Campaigns } from './resources/campaigns';
+import {
+  Campaign,
+  CampaignCreateParams,
+  CampaignListParams,
+  Campaigns,
+  CampaignsCursor,
+} from './resources/campaigns';
 import {
   Contact,
   ContactCreateParams,
@@ -859,7 +865,9 @@ export declare namespace Surge {
   export {
     Campaigns as Campaigns,
     type Campaign as Campaign,
+    type CampaignsCursor as CampaignsCursor,
     type CampaignCreateParams as CampaignCreateParams,
+    type CampaignListParams as CampaignListParams,
   };
 
   export {

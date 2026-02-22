@@ -11,7 +11,13 @@ export {
   type AccountRetrieveStatusParams,
 } from './accounts';
 export { Blasts, type Blast, type BlastCreateParams } from './blasts';
-export { Campaigns, type Campaign, type CampaignCreateParams } from './campaigns';
+export {
+  Campaigns,
+  type Campaign,
+  type CampaignCreateParams,
+  type CampaignListParams,
+  type CampaignsCursor,
+} from './campaigns';
 export {
   Contacts,
   type Contact,
