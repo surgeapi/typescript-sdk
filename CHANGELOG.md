@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.37.0 (2026-02-22)
+
+Full Changelog: [v0.36.0...v0.37.0](https://github.com/surgeapi/typescript-sdk/compare/v0.36.0...v0.37.0)
+
+### Features
+
+* **api:** add list campaigns endpoint ([5614fc8](https://github.com/surgeapi/typescript-sdk/commit/5614fc87eba67997a5df1e594700036449868304))
+* **api:** add metadata to message webhooks ([cde02dd](https://github.com/surgeapi/typescript-sdk/commit/cde02ddaff2ad62f2aebfb7a83103af7a03cf398))
+* **api:** delete recording endpoint ([09fabb7](https://github.com/surgeapi/typescript-sdk/commit/09fabb73e4a9184b59204b8fa7061fff65323e44))
+* **api:** make attachment type an enum ([9919c39](https://github.com/surgeapi/typescript-sdk/commit/9919c392aeba8b09f97bbd881ffdedca64915431))
+
+
+### Chores
+
+* **internal/client:** fix form-urlencoded requests ([b37d281](https://github.com/surgeapi/typescript-sdk/commit/b37d28146f2085d9c2af7355a1ab76ba23d961cc))
+* **internal:** avoid type checking errors with ts-reset ([8d3ef5d](https://github.com/surgeapi/typescript-sdk/commit/8d3ef5dfb1dabb33e94b38ab30aff38bf5cb7b0c))
+* **internal:** remove mock server code ([596fb1b](https://github.com/surgeapi/typescript-sdk/commit/596fb1b08188ce719f2e2cff56ba06f071579036))
+* **test:** update skip reason message ([1a1aaa7](https://github.com/surgeapi/typescript-sdk/commit/1a1aaa7d08065ecc730cb442417f635f670313ff))
+* update mock server docs ([414877f](https://github.com/surgeapi/typescript-sdk/commit/414877f94341e4ea0ac1518079aa9e2a693bb41c))
+
 ## 0.36.0 (2026-02-12)
 
 Full Changelog: [v0.35.0...v0.36.0](https://github.com/surgeapi/typescript-sdk/compare/v0.35.0...v0.36.0)
