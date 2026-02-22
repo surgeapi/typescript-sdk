@@ -326,6 +326,11 @@ export namespace MessageDeliveredWebhookEvent {
     delivered_at: string;
 
     /**
+     * Set of key-value pairs that will be stored with the object.
+     */
+    metadata: { [key: string]: string };
+
+    /**
      * Attachments included with the message
      */
     attachments?: Array<Data.Attachment>;
@@ -430,6 +435,11 @@ export namespace MessageFailedWebhookEvent {
     failure_reason: string;
 
     /**
+     * Set of key-value pairs that will be stored with the object.
+     */
+    metadata: { [key: string]: string };
+
+    /**
      * Attachments included with the message
      */
     attachments?: Array<Data.Attachment>;
@@ -522,6 +532,11 @@ export namespace MessageReceivedWebhookEvent {
      * The conversation this message belongs to
      */
     conversation: Data.Conversation;
+
+    /**
+     * Set of key-value pairs that will be stored with the object.
+     */
+    metadata: { [key: string]: string };
 
     /**
      * When the message was received
@@ -621,6 +636,11 @@ export namespace MessageSentWebhookEvent {
      * The conversation this message belongs to
      */
     conversation: Data.Conversation;
+
+    /**
+     * Set of key-value pairs that will be stored with the object.
+     */
+    metadata: { [key: string]: string };
 
     /**
      * When the message was sent
