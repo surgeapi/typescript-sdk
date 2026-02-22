@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { Cursor, type CursorParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -51,7 +52,33 @@ export class Campaigns extends APIResource {
   retrieve(id: string, options?: RequestOptions): APIPromise<Campaign> {
     return this._client.get(path`/campaigns/${id}`, options);
   }
+
+  /**
+   * List all campaigns for an account with cursor-based pagination.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const campaign of client.campaigns.list(
+   *   'acct_01j9a43avnfqzbjfch6pygv1td',
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    accountID: string,
+    query: CampaignListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CampaignsCursor, Campaign> {
+    return this._client.getAPIList(path`/accounts/${accountID}/campaigns`, Cursor<Campaign>, {
+      query,
+      ...options,
+    });
+  }
 }
+
+export type CampaignsCursor = Cursor<Campaign>;
 
 /**
  * A campaign represents the context in which one or more of your phone numbers
@@ -318,6 +345,13 @@ export declare namespace CampaignCreateParams {
   }
 }
 
+export interface CampaignListParams extends CursorParams {}
+
 export declare namespace Campaigns {
-  export { type Campaign as Campaign, type CampaignCreateParams as CampaignCreateParams };
+  export {
+    type Campaign as Campaign,
+    type CampaignsCursor as CampaignsCursor,
+    type CampaignCreateParams as CampaignCreateParams,
+    type CampaignListParams as CampaignListParams,
+  };
 }
