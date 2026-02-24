@@ -60,7 +60,7 @@ $ yarn link @surgeapi/node
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @surgeapi/node
+$ pnpm link --global @surgeapi/node
 ```
 
 ## Running tests
