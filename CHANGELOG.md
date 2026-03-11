@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.38.0 (2026-03-11)
+
+Full Changelog: [v0.37.0...v0.38.0](https://github.com/surgeapi/typescript-sdk/compare/v0.37.0...v0.38.0)
+
+### Features
+
+* **api:** add campaign ID to phone numbers ([fbfc91d](https://github.com/surgeapi/typescript-sdk/commit/fbfc91d3d13ae995cb9025591933501297317d84))
+* **api:** add phoneNumberAttachedToCampaign webhook ([b0acec3](https://github.com/surgeapi/typescript-sdk/commit/b0acec3da486b2bfc41e1d9d2340e01e714cdffb))
+* **api:** remove 'pending' campaign status ([7a012af](https://github.com/surgeapi/typescript-sdk/commit/7a012af21ca07505670c50b7cad77f5cbdc526df))
+* **api:** rename segments to audiences ([a1836b2](https://github.com/surgeapi/typescript-sdk/commit/a1836b2a54ab2fdf5566c05c0abf8d2e00f63acf))
+
+
+### Bug Fixes
+
+* **client:** preserve URL params already embedded in path ([8b03bf0](https://github.com/surgeapi/typescript-sdk/commit/8b03bf0b7a96bfc42f27b52b0b696d8bbc2ee314))
+* **docs/contributing:** correct pnpm link command ([771f9f9](https://github.com/surgeapi/typescript-sdk/commit/771f9f9f2f30e2dc7d7a62029ad735cdc94af4a2))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([f3db35b](https://github.com/surgeapi/typescript-sdk/commit/f3db35b00dfe0a4ed4b8c8e7fd995987d056dcea))
+* **internal:** codegen related update ([8f11247](https://github.com/surgeapi/typescript-sdk/commit/8f11247eb199aaf9a3764463d76250bc6396fa67))
+* **internal:** move stringifyQuery implementation to internal function ([ce28ec8](https://github.com/surgeapi/typescript-sdk/commit/ce28ec8d95ce007228d9a2f671ed3536283d455b))
+* **internal:** update dependencies to address dependabot vulnerabilities ([8b57ad8](https://github.com/surgeapi/typescript-sdk/commit/8b57ad83298ca6a9fce1e33472219543ac3a88e8))
+* **internal:** upgrade pnpm version ([05df2dd](https://github.com/surgeapi/typescript-sdk/commit/05df2dd4362224e0fbc52ede6727e97662ca982c))
+* **tests:** update webhook tests ([da5a323](https://github.com/surgeapi/typescript-sdk/commit/da5a323a139ef929c927bc8e41efcc73a5943577))
+
 ## 0.37.0 (2026-02-22)
 
 Full Changelog: [v0.36.0...v0.37.0](https://github.com/surgeapi/typescript-sdk/compare/v0.36.0...v0.37.0)
