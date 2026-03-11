@@ -63,6 +63,11 @@ export interface PhoneNumber {
   id: string;
 
   /**
+   * The unique identifier of the campaign this phone number is attached to, if any
+   */
+  campaign_id: string | null;
+
+  /**
    * The phone number in E.164 format
    */
   number: string;
