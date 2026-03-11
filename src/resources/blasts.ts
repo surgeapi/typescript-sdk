@@ -83,7 +83,8 @@ export interface BlastCreateParams {
   name?: string;
 
   /**
-   * @deprecated Use `to` to specify recipients instead.
+   * @deprecated Use `to` with audience IDs (`aud_...`) to specify audience
+   * recipients instead.
    */
   segments?: Array<string>;
 
@@ -94,7 +95,7 @@ export interface BlastCreateParams {
 
   /**
    * List of recipients to whom the blast should be sent. This can be a combination
-   * of contact IDs, segment IDs, and phone numbers.
+   * of contact IDs, audience IDs, and phone numbers.
    */
   to?: Array<string>;
 }
