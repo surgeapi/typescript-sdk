@@ -699,6 +699,56 @@ export namespace MessageSentWebhookEvent {
   }
 }
 
+export interface PhoneNumberAttachedToCampaignWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: PhoneNumberAttachedToCampaignWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `phone_number.attached_to_campaign` for this
+   * event.
+   */
+  type: 'phone_number.attached_to_campaign';
+}
+
+export namespace PhoneNumberAttachedToCampaignWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the phone number
+     */
+    id: string;
+
+    /**
+     * The unique identifier of the campaign this phone number is attached to
+     */
+    campaign_id: string;
+
+    /**
+     * The phone number in E.164 format
+     */
+    number: string;
+
+    /**
+     * Whether the phone number is local, toll-free, or short code
+     */
+    type: 'local' | 'short_code' | 'toll_free';
+  }
+}
+
 export interface RecordingCompletedWebhookEvent {
   /**
    * The ID of the account in which this event occurred
@@ -885,6 +935,7 @@ export type UnwrapWebhookEvent =
   | MessageFailedWebhookEvent
   | MessageReceivedWebhookEvent
   | MessageSentWebhookEvent
+  | PhoneNumberAttachedToCampaignWebhookEvent
   | RecordingCompletedWebhookEvent
   | VoicemailReceivedWebhookEvent;
 
@@ -900,6 +951,7 @@ export declare namespace Webhooks {
     type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
     type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
     type MessageSentWebhookEvent as MessageSentWebhookEvent,
+    type PhoneNumberAttachedToCampaignWebhookEvent as PhoneNumberAttachedToCampaignWebhookEvent,
     type RecordingCompletedWebhookEvent as RecordingCompletedWebhookEvent,
     type VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
