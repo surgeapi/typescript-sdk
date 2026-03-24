@@ -9,6 +9,42 @@ const client = new Surge({
 
 describe('resource recordings', () => {
   // Mock server tests are disabled
+  test.skip('retrieve', async () => {
+    const responsePromise = client.recordings.retrieve('rec_01kfyc9dgdec1avkgs7tng8htg');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.recordings.list('acct_01j9a43avnfqzbjfch6pygv1td');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.recordings.list(
+        'acct_01j9a43avnfqzbjfch6pygv1td',
+        { after: 'after', before: 'before' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Surge.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.recordings.delete('rec_01kfyc9dgdec1avkgs7tng8htg');
     const rawResponse = await responsePromise.asResponse();

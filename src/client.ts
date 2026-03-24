@@ -58,7 +58,15 @@ import {
   PhoneNumbers,
   PhoneNumbersCursor,
 } from './resources/phone-numbers';
-import { RecordingDeleteResponse, RecordingGetFileResponse, Recordings } from './resources/recordings';
+import {
+  RecordingDeleteResponse,
+  RecordingGetFileResponse,
+  RecordingListParams,
+  RecordingListResponse,
+  RecordingListResponsesCursor,
+  RecordingRetrieveResponse,
+  Recordings,
+} from './resources/recordings';
 import {
   User,
   UserCreateParams,
@@ -899,8 +907,12 @@ export declare namespace Surge {
 
   export {
     Recordings as Recordings,
+    type RecordingRetrieveResponse as RecordingRetrieveResponse,
+    type RecordingListResponse as RecordingListResponse,
     type RecordingDeleteResponse as RecordingDeleteResponse,
     type RecordingGetFileResponse as RecordingGetFileResponse,
+    type RecordingListResponsesCursor as RecordingListResponsesCursor,
+    type RecordingListParams as RecordingListParams,
   };
 
   export {

@@ -40,7 +40,15 @@ export {
   type PhoneNumberPurchaseParams,
   type PhoneNumbersCursor,
 } from './phone-numbers';
-export { Recordings, type RecordingDeleteResponse, type RecordingGetFileResponse } from './recordings';
+export {
+  Recordings,
+  type RecordingRetrieveResponse,
+  type RecordingListResponse,
+  type RecordingDeleteResponse,
+  type RecordingGetFileResponse,
+  type RecordingListParams,
+  type RecordingListResponsesCursor,
+} from './recordings';
 export {
   Users,
   type User,
