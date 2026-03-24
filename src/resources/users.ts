@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { Cursor, type CursorParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -51,6 +52,27 @@ export class Users extends APIResource {
   }
 
   /**
+   * List all users for an account with cursor-based pagination.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const user of client.users.list(
+   *   'acct_01j9a43avnfqzbjfch6pygv1td',
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    accountID: string,
+    query: UserListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<UsersCursor, User> {
+    return this._client.getAPIList(path`/accounts/${accountID}/users`, Cursor<User>, { query, ...options });
+  }
+
+  /**
    * Deletes a user.
    *
    * Once a user has been deleted, they will no longer be permitted to access any of
@@ -87,6 +109,8 @@ export class Users extends APIResource {
     return this._client.post(path`/users/${userID}/tokens`, { body, ...options });
   }
 }
+
+export type UsersCursor = Cursor<User>;
 
 /**
  * A user of the app
@@ -172,6 +196,8 @@ export interface UserUpdateParams {
   photo_url?: string;
 }
 
+export interface UserListParams extends CursorParams {}
+
 export interface UserCreateTokenParams {
   /**
    * For how many seconds the token should be accepted. Defaults to 15 minutes.
@@ -183,8 +209,10 @@ export declare namespace Users {
   export {
     type User as User,
     type UserTokenResponse as UserTokenResponse,
+    type UsersCursor as UsersCursor,
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
+    type UserListParams as UserListParams,
     type UserCreateTokenParams as UserCreateTokenParams,
   };
 }
