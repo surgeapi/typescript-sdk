@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.39.0 (2026-03-24)
+
+Full Changelog: [v0.38.0...v0.39.0](https://github.com/surgeapi/typescript-sdk/compare/v0.38.0...v0.39.0)
+
+### Features
+
+* **api:** get and list recordings endpoints ([357cbef](https://github.com/surgeapi/typescript-sdk/commit/357cbefe4821349983257205dedab826e2cb4880))
+* **api:** list users endpoint ([5484dbd](https://github.com/surgeapi/typescript-sdk/commit/5484dbd74b032c8c52a79e73844b65270b96171d))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([4e141ca](https://github.com/surgeapi/typescript-sdk/commit/4e141ca416de88f46a14b771f69e73981105eebc))
+* **internal:** update gitignore ([1eaa77f](https://github.com/surgeapi/typescript-sdk/commit/1eaa77f4de561203d4dea2fb0a234722156814a2))
+
 ## 0.38.0 (2026-03-11)
 
 Full Changelog: [v0.37.0...v0.38.0](https://github.com/surgeapi/typescript-sdk/compare/v0.37.0...v0.38.0)
