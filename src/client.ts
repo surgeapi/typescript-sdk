@@ -71,9 +71,11 @@ import {
   User,
   UserCreateParams,
   UserCreateTokenParams,
+  UserListParams,
   UserTokenResponse,
   UserUpdateParams,
   Users,
+  UsersCursor,
 } from './resources/users';
 import {
   Verification,
@@ -919,8 +921,10 @@ export declare namespace Surge {
     Users as Users,
     type User as User,
     type UserTokenResponse as UserTokenResponse,
+    type UsersCursor as UsersCursor,
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
+    type UserListParams as UserListParams,
     type UserCreateTokenParams as UserCreateTokenParams,
   };
 

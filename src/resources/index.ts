@@ -55,7 +55,9 @@ export {
   type UserTokenResponse,
   type UserCreateParams,
   type UserUpdateParams,
+  type UserListParams,
   type UserCreateTokenParams,
+  type UsersCursor,
 } from './users';
 export {
   Verifications,
