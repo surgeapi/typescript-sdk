@@ -249,8 +249,8 @@ export interface Organization {
     | null;
 
   /**
-   * For sole proprietors, this must be a valid US mobile phone number to which a
-   * verification text message will be sent. (E.164 format)
+   * For sole proprietors, this must be a valid US or Canadian mobile phone number to
+   * which a verification text message will be sent. (E.164 format)
    */
   mobile_number: string | null;
 
@@ -531,8 +531,8 @@ export namespace AccountCreateParams {
       | null;
 
     /**
-     * For sole proprietors, this must be a valid US mobile phone number to which a
-     * verification text message will be sent. (E.164 format)
+     * For sole proprietors, this must be a valid US or Canadian mobile phone number to
+     * which a verification text message will be sent. (E.164 format)
      */
     mobile_number?: string | null;
 
@@ -817,8 +817,8 @@ export namespace AccountUpdateParams {
       | null;
 
     /**
-     * For sole proprietors, this must be a valid US mobile phone number to which a
-     * verification text message will be sent. (E.164 format)
+     * For sole proprietors, this must be a valid US or Canadian mobile phone number to
+     * which a verification text message will be sent. (E.164 format)
      */
     mobile_number?: string | null;
 
