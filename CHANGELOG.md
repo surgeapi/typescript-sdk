@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.40.0 (2026-04-01)
+
+Full Changelog: [v0.39.0...v0.40.0](https://github.com/surgeapi/typescript-sdk/compare/v0.39.0...v0.40.0)
+
+### Features
+
+* **api:** add a contact to an audience ([9aa9979](https://github.com/surgeapi/typescript-sdk/commit/9aa9979c931cc38b1ac917d418d6bfa3d5ccc426))
+* **api:** allow canadian organizations ([9680a6f](https://github.com/surgeapi/typescript-sdk/commit/9680a6f3517734b513703bdadf289db224172009))
+* **api:** list contacts in audiences ([fe50e54](https://github.com/surgeapi/typescript-sdk/commit/fe50e548db4d6681bbb2f5711ac4e90f2b78d07d))
+
+
+### Bug Fixes
+
+* **internal:** gitignore generated `oidc` dir ([276cf14](https://github.com/surgeapi/typescript-sdk/commit/276cf14ed715525045283c9b737086ade6264623))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([d43afd6](https://github.com/surgeapi/typescript-sdk/commit/d43afd6c4a684879216bf8b26fb44d939e60480a))
+
+
+### Documentation
+
+* **api:** allow Canadian mobile number ([ea34fbd](https://github.com/surgeapi/typescript-sdk/commit/ea34fbd82bfd043e743b8a86c08a92c41a1a3361))
+
 ## 0.39.0 (2026-03-24)
 
 Full Changelog: [v0.38.0...v0.39.0](https://github.com/surgeapi/typescript-sdk/compare/v0.38.0...v0.39.0)
