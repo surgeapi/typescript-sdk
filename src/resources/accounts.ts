@@ -198,16 +198,16 @@ export interface Organization {
 
   /**
    * The value of the identifier whose type is specified in the identifier_type
-   * field. Typically this will be an EIN, and can be formatted with or without the
-   * hyphen.
+   * field. For EIN, can be formatted with or without the hyphen. For CBN, must be
+   * exactly 9 digits.
    */
   identifier: string | null;
 
   /**
-   * The type of identifier being provided for the organization. Support for more
-   * values will be added in the future.
+   * The type of identifier being provided for the organization. Use "ein" for US
+   * businesses or "cbn" for Canadian businesses.
    */
-  identifier_type: 'ein' | null;
+  identifier_type: 'ein' | 'cbn' | null;
 
   /**
    * The industry in which the organization operates.
@@ -480,16 +480,16 @@ export namespace AccountCreateParams {
 
     /**
      * The value of the identifier whose type is specified in the identifier_type
-     * field. Typically this will be an EIN, and can be formatted with or without the
-     * hyphen.
+     * field. For EIN, can be formatted with or without the hyphen. For CBN, must be
+     * exactly 9 digits.
      */
     identifier?: string | null;
 
     /**
-     * The type of identifier being provided for the organization. Support for more
-     * values will be added in the future.
+     * The type of identifier being provided for the organization. Use "ein" for US
+     * businesses or "cbn" for Canadian businesses.
      */
-    identifier_type?: 'ein' | null;
+    identifier_type?: 'ein' | 'cbn' | null;
 
     /**
      * The industry in which the organization operates.
@@ -766,16 +766,16 @@ export namespace AccountUpdateParams {
 
     /**
      * The value of the identifier whose type is specified in the identifier_type
-     * field. Typically this will be an EIN, and can be formatted with or without the
-     * hyphen.
+     * field. For EIN, can be formatted with or without the hyphen. For CBN, must be
+     * exactly 9 digits.
      */
     identifier?: string | null;
 
     /**
-     * The type of identifier being provided for the organization. Support for more
-     * values will be added in the future.
+     * The type of identifier being provided for the organization. Use "ein" for US
+     * businesses or "cbn" for Canadian businesses.
      */
-    identifier_type?: 'ein' | null;
+    identifier_type?: 'ein' | 'cbn' | null;
 
     /**
      * The industry in which the organization operates.
