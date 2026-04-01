@@ -28,7 +28,7 @@ import {
   Accounts,
   Organization,
 } from './resources/accounts';
-import { AudienceListContactsParams, Audiences } from './resources/audiences';
+import { AudienceAddContactParams, AudienceListContactsParams, Audiences } from './resources/audiences';
 import { Blast, BlastCreateParams, Blasts } from './resources/blasts';
 import {
   Campaign,
@@ -875,7 +875,11 @@ export declare namespace Surge {
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 
-  export { Audiences as Audiences, type AudienceListContactsParams as AudienceListContactsParams };
+  export {
+    Audiences as Audiences,
+    type AudienceAddContactParams as AudienceAddContactParams,
+    type AudienceListContactsParams as AudienceListContactsParams,
+  };
 
   export { Blasts as Blasts, type Blast as Blast, type BlastCreateParams as BlastCreateParams };
 

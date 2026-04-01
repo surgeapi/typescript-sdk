@@ -10,7 +10,7 @@ export {
   type AccountUpdateParams,
   type AccountRetrieveStatusParams,
 } from './accounts';
-export { Audiences, type AudienceListContactsParams } from './audiences';
+export { Audiences, type AudienceAddContactParams, type AudienceListContactsParams } from './audiences';
 export { Blasts, type Blast, type BlastCreateParams } from './blasts';
 export {
   Campaigns,
