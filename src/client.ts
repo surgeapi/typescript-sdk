@@ -28,6 +28,7 @@ import {
   Accounts,
   Organization,
 } from './resources/accounts';
+import { AudienceListContactsParams, Audiences } from './resources/audiences';
 import { Blast, BlastCreateParams, Blasts } from './resources/blasts';
 import {
   Campaign,
@@ -834,6 +835,7 @@ export class Surge {
   static toFile = Uploads.toFile;
 
   accounts: API.Accounts = new API.Accounts(this);
+  audiences: API.Audiences = new API.Audiences(this);
   blasts: API.Blasts = new API.Blasts(this);
   campaigns: API.Campaigns = new API.Campaigns(this);
   contacts: API.Contacts = new API.Contacts(this);
@@ -846,6 +848,7 @@ export class Surge {
 }
 
 Surge.Accounts = Accounts;
+Surge.Audiences = Audiences;
 Surge.Blasts = Blasts;
 Surge.Campaigns = Campaigns;
 Surge.Contacts = Contacts;
@@ -871,6 +874,8 @@ export declare namespace Surge {
     type AccountUpdateParams as AccountUpdateParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
+
+  export { Audiences as Audiences, type AudienceListContactsParams as AudienceListContactsParams };
 
   export { Blasts as Blasts, type Blast as Blast, type BlastCreateParams as BlastCreateParams };
 

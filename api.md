@@ -19,6 +19,12 @@ Methods:
 - <code title="delete /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">archive</a>(id) -> Account</code>
 - <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/resources/accounts.ts">retrieveStatus</a>(accountID, { ...params }) -> AccountStatus</code>
 
+# Audiences
+
+Methods:
+
+- <code title="get /audiences/{audience_id}/contacts">client.audiences.<a href="./src/resources/audiences.ts">listContacts</a>(audienceID, { ...params }) -> ContactsCursor</code>
+
 # Blasts
 
 Types:
