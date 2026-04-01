@@ -23,6 +23,7 @@ Methods:
 
 Methods:
 
+- <code title="post /audiences/{audience_id}/contacts">client.audiences.<a href="./src/resources/audiences.ts">addContact</a>(audienceID, { ...params }) -> Contact</code>
 - <code title="get /audiences/{audience_id}/contacts">client.audiences.<a href="./src/resources/audiences.ts">listContacts</a>(audienceID, { ...params }) -> ContactsCursor</code>
 
 # Blasts
