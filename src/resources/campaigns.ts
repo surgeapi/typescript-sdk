@@ -25,6 +25,8 @@ export class Campaigns extends APIResource {
    *       'Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij',
    *     ],
    *     privacy_policy_url: 'https://fastauto.shop/sms-privacy',
+   *     terms_and_conditions_url:
+   *       'https://fastauto.shop/terms-and-conditions',
    *     use_cases: [
    *       'account_notification',
    *       'customer_care',
@@ -252,6 +254,14 @@ export declare namespace CampaignCreateParams {
     privacy_policy_url: string;
 
     /**
+     * The URL of the terms and conditions presented to end users when they opt in to
+     * messaging. These terms and conditions may be shared among all of a platform's
+     * customers if they're the terms that are presented to end users when they opt in
+     * to messaging.
+     */
+    terms_and_conditions_url: string;
+
+    /**
      * A list containing 1-5 types of messages that will be sent with this campaign.
      *
      * The following use cases are typically available to all brands:
@@ -327,14 +337,6 @@ export declare namespace CampaignCreateParams {
      * to disable automatic link shortening.
      */
     link_sample?: string;
-
-    /**
-     * The URL of the terms and conditions presented to end users when they opt in to
-     * messaging. These terms and conditions may be shared among all of a platform's
-     * customers if they're the terms that are presented to end users when they opt in
-     * to messaging.
-     */
-    terms_and_conditions_url?: string;
   }
 
   export interface ExternalCampaignParams {
