@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.41.0 (2026-04-06)
+
+Full Changelog: [v0.40.0...v0.41.0](https://github.com/surgeapi/typescript-sdk/compare/v0.40.0...v0.41.0)
+
+### Features
+
+* **api:** create an audience ([ec27aee](https://github.com/surgeapi/typescript-sdk/commit/ec27aeec7a95fcd535c45b71a2dd9a1384540aa1))
+* **api:** require terms_and_conditions_url for campaigns ([9e7e811](https://github.com/surgeapi/typescript-sdk/commit/9e7e811997f6e1ec4a6e87d7d9953760d22199e4))
+* **api:** update a campaign ([21ad3e3](https://github.com/surgeapi/typescript-sdk/commit/21ad3e32faa05f20bd8b15e99008bc20387d999f))
+
 ## 0.40.0 (2026-04-01)
 
 Full Changelog: [v0.39.0...v0.40.0](https://github.com/surgeapi/typescript-sdk/compare/v0.39.0...v0.40.0)
