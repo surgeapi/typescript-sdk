@@ -9,6 +9,25 @@ const client = new Surge({
 
 describe('resource audiences', () => {
   // Mock server tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.audiences.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+      name: 'The Family',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.audiences.create('acct_01j9a43avnfqzbjfch6pygv1td', { name: 'The Family' });
+  });
+
+  // Mock server tests are disabled
   test.skip('addContact: only required params', async () => {
     const responsePromise = client.audiences.addContact('aud_01j9a43avnfqzbjfch6pygv1td', {
       id: 'ctc_01j9dy8mdzfn3r0e8x1tbdrdrf',
