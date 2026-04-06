@@ -10,6 +10,25 @@ import { path } from '../internal/utils/path';
 
 export class Audiences extends APIResource {
   /**
+   * Creates a new audience.
+   *
+   * @example
+   * ```ts
+   * const audience = await client.audiences.create(
+   *   'acct_01j9a43avnfqzbjfch6pygv1td',
+   *   { name: 'The Family' },
+   * );
+   * ```
+   */
+  create(
+    accountID: string,
+    body: AudienceCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<AudienceCreateResponse> {
+    return this._client.post(path`/accounts/${accountID}/audiences`, { body, ...options });
+  }
+
+  /**
    * Adds an existing contact to a manual audience.
    *
    * @example
@@ -54,6 +73,28 @@ export class Audiences extends APIResource {
   }
 }
 
+/**
+ * A group of contacts used for targeting messages.
+ */
+export interface AudienceCreateResponse {
+  /**
+   * Unique identifier for the object.
+   */
+  id: string;
+
+  /**
+   * A name to identify this Audience. This name will only be visible within Surge.
+   */
+  name: string;
+}
+
+export interface AudienceCreateParams {
+  /**
+   * The audience name.
+   */
+  name: string;
+}
+
 export interface AudienceAddContactParams {
   /**
    * The ID of the contact to add. The contact must belong to the same account as the
@@ -66,6 +107,8 @@ export interface AudienceListContactsParams extends CursorParams {}
 
 export declare namespace Audiences {
   export {
+    type AudienceCreateResponse as AudienceCreateResponse,
+    type AudienceCreateParams as AudienceCreateParams,
     type AudienceAddContactParams as AudienceAddContactParams,
     type AudienceListContactsParams as AudienceListContactsParams,
   };
