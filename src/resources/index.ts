@@ -16,6 +16,7 @@ export {
   Campaigns,
   type Campaign,
   type CampaignCreateParams,
+  type CampaignUpdateParams,
   type CampaignListParams,
   type CampaignsCursor,
 } from './campaigns';
