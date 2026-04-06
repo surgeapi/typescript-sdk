@@ -34,6 +34,7 @@ import {
   Campaign,
   CampaignCreateParams,
   CampaignListParams,
+  CampaignUpdateParams,
   Campaigns,
   CampaignsCursor,
 } from './resources/campaigns';
@@ -888,6 +889,7 @@ export declare namespace Surge {
     type Campaign as Campaign,
     type CampaignsCursor as CampaignsCursor,
     type CampaignCreateParams as CampaignCreateParams,
+    type CampaignUpdateParams as CampaignUpdateParams,
     type CampaignListParams as CampaignListParams,
   };
 
