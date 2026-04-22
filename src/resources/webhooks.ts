@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import * as ContactsAPI from './contacts';
+import * as MessagesAPI from './messages';
 import * as PhoneNumbersAPI from './phone-numbers';
 import { Webhook } from 'standardwebhooks';
 
@@ -267,9 +268,14 @@ export namespace LinkFollowedWebhookEvent {
     id: string;
 
     /**
-     * The unique identifier for the message that contained the link
+     * A Message is a communication sent to a Contact.
      */
-    message_id: string;
+    message: MessagesAPI.Message | null;
+
+    /**
+     * @deprecated Use `message.id` instead.
+     */
+    message_id: string | null;
 
     /**
      * The original URL that was shortened
