@@ -177,6 +177,11 @@ export namespace Message {
       id: string;
 
       /**
+       * A human-readable name for the phone number
+       */
+      name: string | null;
+
+      /**
        * The canonical format of the phone number.
        */
       number: string;

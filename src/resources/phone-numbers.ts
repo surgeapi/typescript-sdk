@@ -68,6 +68,11 @@ export interface PhoneNumber {
   campaign_id: string | null;
 
   /**
+   * A human-readable name for the phone number
+   */
+  name: string | null;
+
+  /**
    * The phone number in E.164 format
    */
   number: string;
@@ -98,6 +103,12 @@ export interface PhoneNumberPurchaseParams {
    * provided without type, type will be inferred as 'local'.
    */
   longitude?: number;
+
+  /**
+   * A human-readable name for the phone number. If not provided, defaults to the
+   * formatted phone number.
+   */
+  name?: string;
 
   /**
    * Whether the phone number is local or toll-free. Can be omitted if area_code or
