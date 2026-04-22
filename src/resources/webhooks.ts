@@ -744,6 +744,11 @@ export namespace PhoneNumberAttachedToCampaignWebhookEvent {
     campaign_id: string;
 
     /**
+     * A human-readable name for the phone number
+     */
+    name: string | null;
+
+    /**
      * The phone number in E.164 format
      */
     number: string;
