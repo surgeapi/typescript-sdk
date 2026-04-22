@@ -19,6 +19,16 @@ Methods:
 - <code title="delete /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">archive</a>(id) -> Account</code>
 - <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/resources/accounts.ts">retrieveStatus</a>(accountID, { ...params }) -> AccountStatus</code>
 
+# Attachments
+
+Types:
+
+- <code><a href="./src/resources/attachments.ts">AttachmentGetFileResponse</a></code>
+
+Methods:
+
+- <code title="get /attachments/{attachment_id}/file">client.attachments.<a href="./src/resources/attachments.ts">getFile</a>(attachmentID) -> AttachmentGetFileResponse</code>
+
 # Audiences
 
 Types:

@@ -28,6 +28,7 @@ import {
   Accounts,
   Organization,
 } from './resources/accounts';
+import { AttachmentGetFileResponse, Attachments } from './resources/attachments';
 import {
   AudienceAddContactParams,
   AudienceCreateParams,
@@ -842,6 +843,7 @@ export class Surge {
   static toFile = Uploads.toFile;
 
   accounts: API.Accounts = new API.Accounts(this);
+  attachments: API.Attachments = new API.Attachments(this);
   audiences: API.Audiences = new API.Audiences(this);
   blasts: API.Blasts = new API.Blasts(this);
   campaigns: API.Campaigns = new API.Campaigns(this);
@@ -855,6 +857,7 @@ export class Surge {
 }
 
 Surge.Accounts = Accounts;
+Surge.Attachments = Attachments;
 Surge.Audiences = Audiences;
 Surge.Blasts = Blasts;
 Surge.Campaigns = Campaigns;
@@ -881,6 +884,8 @@ export declare namespace Surge {
     type AccountUpdateParams as AccountUpdateParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
+
+  export { Attachments as Attachments, type AttachmentGetFileResponse as AttachmentGetFileResponse };
 
   export {
     Audiences as Audiences,
