@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.42.0 (2026-04-22)
+
+Full Changelog: [v0.41.0...v0.42.0](https://github.com/surgeapi/typescript-sdk/compare/v0.41.0...v0.42.0)
+
+### Features
+
+* **api:** add endpoint to get attachment file ([6636b33](https://github.com/surgeapi/typescript-sdk/commit/6636b337325ccc874349d45049f7bef9a04ca0cc))
+* **api:** add message to link.followed events ([6a69ef9](https://github.com/surgeapi/typescript-sdk/commit/6a69ef98173cd025bca7d6293a590619d06b5f8b))
+* **api:** add name to phone numbers ([4e31910](https://github.com/surgeapi/typescript-sdk/commit/4e3191045c222c0600f026fd39eaa8eeec8995a2))
+
+
+### Chores
+
+* **internal:** codegen related update ([b4a2fc6](https://github.com/surgeapi/typescript-sdk/commit/b4a2fc67e8e364fe4ea807c9cc9953740cc27783))
+
 ## 0.41.0 (2026-04-06)
 
 Full Changelog: [v0.40.0...v0.41.0](https://github.com/surgeapi/typescript-sdk/compare/v0.40.0...v0.41.0)
