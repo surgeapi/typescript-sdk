@@ -10,6 +10,7 @@ export {
   type AccountUpdateParams,
   type AccountRetrieveStatusParams,
 } from './accounts';
+export { Attachments, type AttachmentGetFileResponse } from './attachments';
 export {
   Audiences,
   type AudienceCreateResponse,
