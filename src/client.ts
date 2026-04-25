@@ -19,108 +19,23 @@ import { AbstractPage, type CursorParams, CursorResponse } from './core/paginati
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  Account,
-  AccountCreateParams,
-  AccountRetrieveStatusParams,
-  AccountStatus,
-  AccountUpdateParams,
-  Accounts,
-  Organization,
-} from './resources/accounts';
+import { Account, AccountCreateParams, AccountRetrieveStatusParams, AccountStatus, AccountUpdateParams, Accounts, Organization } from './resources/accounts';
 import { AttachmentGetFileResponse, Attachments } from './resources/attachments';
-import {
-  AudienceAddContactParams,
-  AudienceCreateParams,
-  AudienceCreateResponse,
-  AudienceListContactsParams,
-  Audiences,
-} from './resources/audiences';
+import { AudienceAddContactParams, AudienceCreateParams, AudienceCreateResponse, AudienceListContactsParams, Audiences } from './resources/audiences';
 import { Blast, BlastCreateParams, Blasts } from './resources/blasts';
-import {
-  Campaign,
-  CampaignCreateParams,
-  CampaignListParams,
-  CampaignUpdateParams,
-  Campaigns,
-  CampaignsCursor,
-} from './resources/campaigns';
-import {
-  Contact,
-  ContactCreateParams,
-  ContactListParams,
-  ContactUpdateParams,
-  Contacts,
-  ContactsCursor,
-} from './resources/contacts';
-import {
-  Message,
-  MessageCreateParams,
-  MessageListParams,
-  Messages,
-  MessagesCursor,
-} from './resources/messages';
-import {
-  PhoneNumber,
-  PhoneNumberListParams,
-  PhoneNumberPurchaseParams,
-  PhoneNumbers,
-  PhoneNumbersCursor,
-} from './resources/phone-numbers';
-import {
-  RecordingDeleteResponse,
-  RecordingGetFileResponse,
-  RecordingListParams,
-  RecordingListResponse,
-  RecordingListResponsesCursor,
-  RecordingRetrieveResponse,
-  Recordings,
-} from './resources/recordings';
-import {
-  User,
-  UserCreateParams,
-  UserCreateTokenParams,
-  UserListParams,
-  UserTokenResponse,
-  UserUpdateParams,
-  Users,
-  UsersCursor,
-} from './resources/users';
-import {
-  Verification,
-  VerificationCheck,
-  VerificationCheckParams,
-  VerificationCreateParams,
-  Verifications,
-} from './resources/verifications';
-import {
-  CallEndedWebhookEvent,
-  CampaignApprovedWebhookEvent,
-  ContactOptedInWebhookEvent,
-  ContactOptedOutWebhookEvent,
-  ConversationCreatedWebhookEvent,
-  LinkFollowedWebhookEvent,
-  MessageDeliveredWebhookEvent,
-  MessageFailedWebhookEvent,
-  MessageReceivedWebhookEvent,
-  MessageSentWebhookEvent,
-  PhoneNumberAttachedToCampaignWebhookEvent,
-  RecordingCompletedWebhookEvent,
-  UnwrapWebhookEvent,
-  VoicemailReceivedWebhookEvent,
-  Webhooks,
-} from './resources/webhooks';
+import { Campaign, CampaignCreateParams, CampaignListParams, CampaignUpdateParams, Campaigns, CampaignsCursor } from './resources/campaigns';
+import { Contact, ContactCreateParams, ContactListParams, ContactUpdateParams, Contacts, ContactsCursor } from './resources/contacts';
+import { Message, MessageCreateParams, MessageListParams, Messages, MessagesCursor } from './resources/messages';
+import { PhoneNumber, PhoneNumberListParams, PhoneNumberPurchaseParams, PhoneNumbers, PhoneNumbersCursor } from './resources/phone-numbers';
+import { RecordingDeleteResponse, RecordingGetFileResponse, RecordingListParams, RecordingListResponse, RecordingListResponsesCursor, RecordingRetrieveResponse, Recordings } from './resources/recordings';
+import { User, UserCreateParams, UserCreateTokenParams, UserListParams, UserTokenResponse, UserUpdateParams, Users, UsersCursor } from './resources/users';
+import { Verification, VerificationCheck, VerificationCheckParams, VerificationCreateParams, Verifications } from './resources/verifications';
+import { CallEndedWebhookEvent, CampaignApprovedWebhookEvent, ContactOptedInWebhookEvent, ContactOptedOutWebhookEvent, ConversationCreatedWebhookEvent, LinkFollowedWebhookEvent, MessageDeliveredWebhookEvent, MessageFailedWebhookEvent, MessageReceivedWebhookEvent, MessageSentWebhookEvent, PhoneNumberAttachedToCampaignWebhookEvent, RecordingCompletedWebhookEvent, UnwrapWebhookEvent, VoicemailReceivedWebhookEvent, Webhooks } from './resources/webhooks';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import { readEnv } from './internal/utils/env';
-import {
-  type LogLevel,
-  type Logger,
-  formatRequestDetails,
-  loggerFor,
-  parseLogLevel,
-} from './internal/utils/log';
+import { type LogLevel, type Logger, formatRequestDetails, loggerFor, parseLogLevel } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
@@ -204,7 +119,7 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Surge API.
+ * API Client for interfacing with the Surge API. 
  */
 export class Surge {
   apiKey: string;
@@ -243,7 +158,7 @@ export class Surge {
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.SurgeError(
-        "The SURGE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Surge client with an apiKey option, like new Surge({ apiKey: 'My API Key' }).",
+        'The SURGE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Surge client with an apiKey option, like new Surge({ apiKey: \'My API Key\' }).'
       );
     }
 
@@ -260,10 +175,7 @@ export class Surge {
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
-    this.logLevel =
-      parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('SURGE_LOG'), "process.env['SURGE_LOG']", this) ??
-      defaultLogLevel;
+    this.logLevel = parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ?? parseLogLevel(readEnv('SURGE_LOG'), 'process.env[\'SURGE_LOG\']', this) ?? defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
     this.fetch = options.fetch ?? Shims.getDefaultFetch();
@@ -290,7 +202,7 @@ export class Surge {
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
       webhookSigningSecret: this.webhookSigningSecret,
-      ...options,
+      ...options
     });
     return client;
   }
@@ -303,7 +215,7 @@ export class Surge {
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
-    return this._options.defaultQuery;
+    return this._options.defaultQuery
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
@@ -335,11 +247,7 @@ export class Surge {
     return Errors.APIError.generate(status, error, message, headers);
   }
 
-  buildURL(
-    path: string,
-    query: Record<string, unknown> | null | undefined,
-    defaultBaseURL?: string | undefined,
-  ): string {
+  buildURL(path: string, query: Record<string, unknown> | null | undefined, defaultBaseURL?: string | undefined): string {
     const baseURL = (!this.#baseURLOverridden() && defaultBaseURL) || this.baseURL;
     const url =
       isAbsoluteURL(path) ?
@@ -427,9 +335,7 @@ export class Surge {
 
     await this.prepareOptions(options);
 
-    const { req, url, timeout } = await this.buildRequest(options, {
-      retryCount: maxRetries - retriesRemaining,
-    });
+    const { req, url, timeout } = await this.buildRequest(options, { retryCount: maxRetries - retriesRemaining });
 
     await this.prepareRequest(req, { url, options });
 
@@ -438,16 +344,7 @@ export class Surge {
     const retryLogStr = retryOfRequestLogID === undefined ? '' : `, retryOf: ${retryOfRequestLogID}`;
     const startTime = Date.now();
 
-    loggerFor(this).debug(
-      `[${requestLogID}] sending request`,
-      formatRequestDetails({
-        retryOfRequestLogID,
-        method: options.method,
-        url,
-        options,
-        headers: req.headers,
-      }),
-    );
+    loggerFor(this).debug(`[${requestLogID}] sending request`, formatRequestDetails({ retryOfRequestLogID, method: options.method, url, options, headers: req.headers }));
 
     if (options.signal?.aborted) {
       throw new Errors.APIUserAbortError();
@@ -466,45 +363,21 @@ export class Surge {
       // deno throws "TypeError: error sending request for url (https://example/): client error (Connect): tcp connect error: Operation timed out (os error 60): Operation timed out (os error 60)"
       // undici throws "TypeError: fetch failed" with cause "ConnectTimeoutError: Connect Timeout Error (attempted address: example:443, timeout: 1ms)"
       // others do not provide enough information to distinguish timeouts from other connection errors
-      const isTimeout =
-        isAbortError(response) ||
-        /timed? ?out/i.test(String(response) + ('cause' in response ? String(response.cause) : ''));
+      const isTimeout = isAbortError(response) || /timed? ?out/i.test(String(response) + ('cause' in response ? String(response.cause) : ''))
       if (retriesRemaining) {
-        loggerFor(this).info(
-          `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - ${retryMessage}`,
-        );
-        loggerFor(this).debug(
-          `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (${retryMessage})`,
-          formatRequestDetails({
-            retryOfRequestLogID,
-            url,
-            durationMs: headersTime - startTime,
-            message: response.message,
-          }),
-        );
+        loggerFor(this).info(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - ${retryMessage}`)
+        loggerFor(this).debug(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url, durationMs: headersTime - startTime, message: response.message }));
         return this.retryRequest(options, retriesRemaining, retryOfRequestLogID ?? requestLogID);
       }
-      loggerFor(this).info(
-        `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - error; no more retries left`,
-      );
-      loggerFor(this).debug(
-        `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (error; no more retries left)`,
-        formatRequestDetails({
-          retryOfRequestLogID,
-          url,
-          durationMs: headersTime - startTime,
-          message: response.message,
-        }),
-      );
+      loggerFor(this).info(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - error; no more retries left`)
+      loggerFor(this).debug(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (error; no more retries left)`, formatRequestDetails({ retryOfRequestLogID, url, durationMs: headersTime - startTime, message: response.message }));
       if (isTimeout) {
         throw new Errors.APIConnectionTimeoutError();
       }
       throw new Errors.APIConnectionError({ cause: response });
     }
 
-    const responseInfo = `[${requestLogID}${retryLogStr}] ${req.method} ${url} ${
-      response.ok ? 'succeeded' : 'failed'
-    } with status ${response.status} in ${headersTime - startTime}ms`;
+    const responseInfo = `[${requestLogID}${retryLogStr}] ${req.method} ${url} ${response.ok ? 'succeeded' : 'failed'} with status ${response.status} in ${headersTime - startTime}ms`;
 
     if (!response.ok) {
       const shouldRetry = await this.shouldRetry(response);
@@ -513,60 +386,27 @@ export class Surge {
 
         // We don't need the body of this response.
         await Shims.CancelReadableStream(response.body);
-        loggerFor(this).info(`${responseInfo} - ${retryMessage}`);
-        loggerFor(this).debug(
-          `[${requestLogID}] response error (${retryMessage})`,
-          formatRequestDetails({
-            retryOfRequestLogID,
-            url: response.url,
-            status: response.status,
-            headers: response.headers,
-            durationMs: headersTime - startTime,
-          }),
-        );
-        return this.retryRequest(
-          options,
-          retriesRemaining,
-          retryOfRequestLogID ?? requestLogID,
-          response.headers,
-        );
+        loggerFor(this).info(`${responseInfo} - ${retryMessage}`)
+        loggerFor(this).debug(`[${requestLogID}] response error (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, durationMs: headersTime - startTime }));
+        return this.retryRequest(options, retriesRemaining, retryOfRequestLogID ?? requestLogID, response.headers);
       }
 
       const retryMessage = shouldRetry ? `error; no more retries left` : `error; not retryable`;
 
-      loggerFor(this).info(`${responseInfo} - ${retryMessage}`);
+      loggerFor(this).info(`${responseInfo} - ${retryMessage}`)
 
       const errText = await response.text().catch((err: any) => castToError(err).message);
       const errJSON = safeJSON(errText) as any;
       const errMessage = errJSON ? undefined : errText;
 
-      loggerFor(this).debug(
-        `[${requestLogID}] response error (${retryMessage})`,
-        formatRequestDetails({
-          retryOfRequestLogID,
-          url: response.url,
-          status: response.status,
-          headers: response.headers,
-          message: errMessage,
-          durationMs: Date.now() - startTime,
-        }),
-      );
+      loggerFor(this).debug(`[${requestLogID}] response error (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, message: errMessage, durationMs: Date.now() - startTime }));
 
       const err = this.makeStatusError(response.status, errJSON, errMessage, response.headers);
       throw err;
     }
 
-    loggerFor(this).info(responseInfo);
-    loggerFor(this).debug(
-      `[${requestLogID}] response start`,
-      formatRequestDetails({
-        retryOfRequestLogID,
-        url: response.url,
-        status: response.status,
-        headers: response.headers,
-        durationMs: headersTime - startTime,
-      }),
-    );
+    loggerFor(this).info(responseInfo)
+    loggerFor(this).debug(`[${requestLogID}] response start`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, durationMs: headersTime - startTime }));
 
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
@@ -584,10 +424,7 @@ export class Surge {
     );
   }
 
-  requestAPIList<
-    Item = unknown,
-    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
-  >(
+  requestAPIList<Item = unknown, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
     Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
     options: PromiseOrValue<FinalRequestOptions>,
   ): Pagination.PagePromise<PageClass, Item> {
@@ -607,9 +444,7 @@ export class Surge {
 
     const timeout = setTimeout(abort, ms);
 
-    const isReadableBody =
-      ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) ||
-      (typeof options.body === 'object' && options.body !== null && Symbol.asyncIterator in options.body);
+    const isReadableBody = ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) || (typeof options.body === "object" && options.body !== null && Symbol.asyncIterator in options.body);
 
     const fetchOptions: RequestInit = {
       signal: controller.signal as any,
@@ -624,6 +459,7 @@ export class Surge {
     }
 
     try {
+
       // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
       return await this.fetch.call(undefined, url, fetchOptions);
     } finally {
@@ -724,12 +560,11 @@ export class Surge {
     const req: FinalizedRequestInit = {
       method,
       headers: reqHeaders,
-      ...(options.signal && { signal: options.signal }),
-      ...((globalThis as any).ReadableStream &&
-        body instanceof (globalThis as any).ReadableStream && { duplex: 'half' }),
+      ...(options.signal && { signal: options.signal}),
+      ...((globalThis as any).ReadableStream && body instanceof (globalThis as any).ReadableStream && { duplex: "half" }),
       ...(body && { body }),
-      ...((this.fetchOptions as any) ?? {}),
-      ...((options.fetchOptions as any) ?? {}),
+      ...(this.fetchOptions as any ?? {}),
+      ...(options.fetchOptions as any ?? {}),
     };
 
     return { req, url, timeout: options.timeout };
@@ -754,17 +589,15 @@ export class Surge {
 
     const headers = buildHeaders([
       idempotencyHeaders,
-      {
-        Accept: 'application/json',
-        'User-Agent': this.getUserAgent(),
-        'X-Stainless-Retry-Count': String(retryCount),
-        ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
-        ...getPlatformHeaders(),
-      },
+      {Accept: 'application/json',
+      'User-Agent': this.getUserAgent(),
+      'X-Stainless-Retry-Count': String(retryCount),
+      ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
+      ...getPlatformHeaders()},
       await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
-      options.headers,
+      options.headers
     ]);
 
     this.validateHeaders(headers);
@@ -791,9 +624,11 @@ export class Surge {
       ArrayBuffer.isView(body) ||
       body instanceof ArrayBuffer ||
       body instanceof DataView ||
-      (typeof body === 'string' &&
+      (
+        typeof body === 'string' &&
         // Preserve legacy string encoding behavior for now
-        headers.values.has('content-type')) ||
+        headers.values.has('content-type')
+      ) ||
       // `Blob` is superset of `File`
       ((globalThis as any).Blob && body instanceof (globalThis as any).Blob) ||
       // `FormData` -> `multipart/form-data`
@@ -824,7 +659,7 @@ export class Surge {
   }
 
   static Surge = this;
-  static DEFAULT_TIMEOUT = 60000; // 1 minute
+  static DEFAULT_TIMEOUT = 60000 // 1 minute
 
   static SurgeError = Errors.SurgeError;
   static APIError = Errors.APIError;
@@ -870,113 +705,123 @@ Surge.Verifications = Verifications;
 Surge.Webhooks = Webhooks;
 
 export declare namespace Surge {
-  export type RequestOptions = Opts.RequestOptions;
+      export type RequestOptions = Opts.RequestOptions;
 
-  export import Cursor = Pagination.Cursor;
-  export { type CursorParams as CursorParams, type CursorResponse as CursorResponse };
+      export import Cursor = Pagination.Cursor;
+export {
+  type CursorParams as CursorParams,
+  type CursorResponse as CursorResponse
+};
 
-  export {
-    Accounts as Accounts,
-    type Account as Account,
-    type AccountStatus as AccountStatus,
-    type Organization as Organization,
-    type AccountCreateParams as AccountCreateParams,
-    type AccountUpdateParams as AccountUpdateParams,
-    type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
-  };
+export {
+  Accounts as Accounts,
+  type Account as Account,
+  type AccountStatus as AccountStatus,
+  type Organization as Organization,
+  type AccountCreateParams as AccountCreateParams,
+  type AccountUpdateParams as AccountUpdateParams,
+  type AccountRetrieveStatusParams as AccountRetrieveStatusParams
+};
 
-  export { Attachments as Attachments, type AttachmentGetFileResponse as AttachmentGetFileResponse };
+export {
+  Attachments as Attachments,
+  type AttachmentGetFileResponse as AttachmentGetFileResponse
+};
 
-  export {
-    Audiences as Audiences,
-    type AudienceCreateResponse as AudienceCreateResponse,
-    type AudienceCreateParams as AudienceCreateParams,
-    type AudienceAddContactParams as AudienceAddContactParams,
-    type AudienceListContactsParams as AudienceListContactsParams,
-  };
+export {
+  Audiences as Audiences,
+  type AudienceCreateResponse as AudienceCreateResponse,
+  type AudienceCreateParams as AudienceCreateParams,
+  type AudienceAddContactParams as AudienceAddContactParams,
+  type AudienceListContactsParams as AudienceListContactsParams
+};
 
-  export { Blasts as Blasts, type Blast as Blast, type BlastCreateParams as BlastCreateParams };
+export {
+  Blasts as Blasts,
+  type Blast as Blast,
+  type BlastCreateParams as BlastCreateParams
+};
 
-  export {
-    Campaigns as Campaigns,
-    type Campaign as Campaign,
-    type CampaignsCursor as CampaignsCursor,
-    type CampaignCreateParams as CampaignCreateParams,
-    type CampaignUpdateParams as CampaignUpdateParams,
-    type CampaignListParams as CampaignListParams,
-  };
+export {
+  Campaigns as Campaigns,
+  type Campaign as Campaign,
+  type CampaignsCursor as CampaignsCursor,
+  type CampaignCreateParams as CampaignCreateParams,
+  type CampaignUpdateParams as CampaignUpdateParams,
+  type CampaignListParams as CampaignListParams
+};
 
-  export {
-    Contacts as Contacts,
-    type Contact as Contact,
-    type ContactsCursor as ContactsCursor,
-    type ContactCreateParams as ContactCreateParams,
-    type ContactUpdateParams as ContactUpdateParams,
-    type ContactListParams as ContactListParams,
-  };
+export {
+  Contacts as Contacts,
+  type Contact as Contact,
+  type ContactsCursor as ContactsCursor,
+  type ContactCreateParams as ContactCreateParams,
+  type ContactUpdateParams as ContactUpdateParams,
+  type ContactListParams as ContactListParams
+};
 
-  export {
-    Messages as Messages,
-    type Message as Message,
-    type MessagesCursor as MessagesCursor,
-    type MessageCreateParams as MessageCreateParams,
-    type MessageListParams as MessageListParams,
-  };
+export {
+  Messages as Messages,
+  type Message as Message,
+  type MessagesCursor as MessagesCursor,
+  type MessageCreateParams as MessageCreateParams,
+  type MessageListParams as MessageListParams
+};
 
-  export {
-    PhoneNumbers as PhoneNumbers,
-    type PhoneNumber as PhoneNumber,
-    type PhoneNumbersCursor as PhoneNumbersCursor,
-    type PhoneNumberListParams as PhoneNumberListParams,
-    type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
-  };
+export {
+  PhoneNumbers as PhoneNumbers,
+  type PhoneNumber as PhoneNumber,
+  type PhoneNumbersCursor as PhoneNumbersCursor,
+  type PhoneNumberListParams as PhoneNumberListParams,
+  type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams
+};
 
-  export {
-    Recordings as Recordings,
-    type RecordingRetrieveResponse as RecordingRetrieveResponse,
-    type RecordingListResponse as RecordingListResponse,
-    type RecordingDeleteResponse as RecordingDeleteResponse,
-    type RecordingGetFileResponse as RecordingGetFileResponse,
-    type RecordingListResponsesCursor as RecordingListResponsesCursor,
-    type RecordingListParams as RecordingListParams,
-  };
+export {
+  Recordings as Recordings,
+  type RecordingRetrieveResponse as RecordingRetrieveResponse,
+  type RecordingListResponse as RecordingListResponse,
+  type RecordingDeleteResponse as RecordingDeleteResponse,
+  type RecordingGetFileResponse as RecordingGetFileResponse,
+  type RecordingListResponsesCursor as RecordingListResponsesCursor,
+  type RecordingListParams as RecordingListParams
+};
 
-  export {
-    Users as Users,
-    type User as User,
-    type UserTokenResponse as UserTokenResponse,
-    type UsersCursor as UsersCursor,
-    type UserCreateParams as UserCreateParams,
-    type UserUpdateParams as UserUpdateParams,
-    type UserListParams as UserListParams,
-    type UserCreateTokenParams as UserCreateTokenParams,
-  };
+export {
+  Users as Users,
+  type User as User,
+  type UserTokenResponse as UserTokenResponse,
+  type UsersCursor as UsersCursor,
+  type UserCreateParams as UserCreateParams,
+  type UserUpdateParams as UserUpdateParams,
+  type UserListParams as UserListParams,
+  type UserCreateTokenParams as UserCreateTokenParams
+};
 
-  export {
-    Verifications as Verifications,
-    type Verification as Verification,
-    type VerificationCheck as VerificationCheck,
-    type VerificationCreateParams as VerificationCreateParams,
-    type VerificationCheckParams as VerificationCheckParams,
-  };
+export {
+  Verifications as Verifications,
+  type Verification as Verification,
+  type VerificationCheck as VerificationCheck,
+  type VerificationCreateParams as VerificationCreateParams,
+  type VerificationCheckParams as VerificationCheckParams
+};
 
-  export {
-    Webhooks as Webhooks,
-    type CallEndedWebhookEvent as CallEndedWebhookEvent,
-    type CampaignApprovedWebhookEvent as CampaignApprovedWebhookEvent,
-    type ContactOptedInWebhookEvent as ContactOptedInWebhookEvent,
-    type ContactOptedOutWebhookEvent as ContactOptedOutWebhookEvent,
-    type ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent,
-    type LinkFollowedWebhookEvent as LinkFollowedWebhookEvent,
-    type MessageDeliveredWebhookEvent as MessageDeliveredWebhookEvent,
-    type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
-    type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
-    type MessageSentWebhookEvent as MessageSentWebhookEvent,
-    type PhoneNumberAttachedToCampaignWebhookEvent as PhoneNumberAttachedToCampaignWebhookEvent,
-    type RecordingCompletedWebhookEvent as RecordingCompletedWebhookEvent,
-    type VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent,
-    type UnwrapWebhookEvent as UnwrapWebhookEvent,
-  };
+export {
+  Webhooks as Webhooks,
+  type CallEndedWebhookEvent as CallEndedWebhookEvent,
+  type CampaignApprovedWebhookEvent as CampaignApprovedWebhookEvent,
+  type ContactOptedInWebhookEvent as ContactOptedInWebhookEvent,
+  type ContactOptedOutWebhookEvent as ContactOptedOutWebhookEvent,
+  type ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent,
+  type LinkFollowedWebhookEvent as LinkFollowedWebhookEvent,
+  type MessageDeliveredWebhookEvent as MessageDeliveredWebhookEvent,
+  type MessageFailedWebhookEvent as MessageFailedWebhookEvent,
+  type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
+  type MessageSentWebhookEvent as MessageSentWebhookEvent,
+  type PhoneNumberAttachedToCampaignWebhookEvent as PhoneNumberAttachedToCampaignWebhookEvent,
+  type RecordingCompletedWebhookEvent as RecordingCompletedWebhookEvent,
+  type VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent,
+  type UnwrapWebhookEvent as UnwrapWebhookEvent
+};
 
-  export type Error = API.Error;
-}
+export type Error = API.Error;
+    }
