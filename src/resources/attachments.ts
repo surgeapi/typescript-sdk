@@ -34,5 +34,7 @@ export interface AttachmentGetFileResponse {
 }
 
 export declare namespace Attachments {
-  export { type AttachmentGetFileResponse as AttachmentGetFileResponse };
+  export {
+    type AttachmentGetFileResponse as AttachmentGetFileResponse
+  };
 }

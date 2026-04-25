@@ -65,19 +65,12 @@ export class Contacts extends APIResource {
    * }
    * ```
    */
-  list(
-    accountID: string,
-    query: ContactListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<ContactsCursor, Contact> {
-    return this._client.getAPIList(path`/accounts/${accountID}/contacts`, Cursor<Contact>, {
-      query,
-      ...options,
-    });
+  list(accountID: string, query: ContactListParams | null | undefined = {}, options?: RequestOptions): PagePromise<ContactsCursor, Contact> {
+    return this._client.getAPIList(path`/accounts/${accountID}/contacts`, Cursor<Contact>, { query, ...options });
   }
 }
 
-export type ContactsCursor = Cursor<Contact>;
+export type ContactsCursor = Cursor<Contact>
 
 /**
  * A contact who has consented to receive messages
@@ -168,7 +161,8 @@ export interface ContactUpdateParams {
   metadata?: { [key: string]: string };
 }
 
-export interface ContactListParams extends CursorParams {}
+export interface ContactListParams extends CursorParams {
+}
 
 export declare namespace Contacts {
   export {
@@ -176,6 +170,6 @@ export declare namespace Contacts {
     type ContactsCursor as ContactsCursor,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
-    type ContactListParams as ContactListParams,
+    type ContactListParams as ContactListParams
   };
 }

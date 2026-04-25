@@ -7,10 +7,7 @@ import * as PhoneNumbersAPI from './phone-numbers';
 import { Webhook } from 'standardwebhooks';
 
 export class Webhooks extends APIResource {
-  unwrap(
-    body: string,
-    { headers, key }: { headers: Record<string, string>; key?: string },
-  ): UnwrapWebhookEvent {
+  unwrap(body: string, { headers, key }: { headers: Record<string, string>; key?: string }): UnwrapWebhookEvent {
     if (headers !== undefined) {
       const keyStr: string | null = key === undefined ? this._client.webhookSigningSecret : key;
       if (keyStr === null) throw new Error('Webhook key must not be null in order to unwrap');
@@ -71,16 +68,7 @@ export namespace CallEndedWebhookEvent {
     /**
      * The status of the call
      */
-    status:
-      | 'busy'
-      | 'canceled'
-      | 'completed'
-      | 'failed'
-      | 'in_progress'
-      | 'missed'
-      | 'no_answer'
-      | 'queued'
-      | 'ringing';
+    status: 'busy' | 'canceled' | 'completed' | 'failed' | 'in_progress' | 'missed' | 'no_answer' | 'queued' | 'ringing';
   }
 }
 
@@ -831,16 +819,7 @@ export namespace RecordingCompletedWebhookEvent {
       /**
        * The status of the call
        */
-      status:
-        | 'busy'
-        | 'canceled'
-        | 'completed'
-        | 'failed'
-        | 'in_progress'
-        | 'missed'
-        | 'no_answer'
-        | 'queued'
-        | 'ringing';
+      status: 'busy' | 'canceled' | 'completed' | 'failed' | 'in_progress' | 'missed' | 'no_answer' | 'queued' | 'ringing';
     }
   }
 }
@@ -921,34 +900,12 @@ export namespace VoicemailReceivedWebhookEvent {
       /**
        * The status of the call
        */
-      status:
-        | 'busy'
-        | 'canceled'
-        | 'completed'
-        | 'failed'
-        | 'in_progress'
-        | 'missed'
-        | 'no_answer'
-        | 'queued'
-        | 'ringing';
+      status: 'busy' | 'canceled' | 'completed' | 'failed' | 'in_progress' | 'missed' | 'no_answer' | 'queued' | 'ringing';
     }
   }
 }
 
-export type UnwrapWebhookEvent =
-  | CallEndedWebhookEvent
-  | CampaignApprovedWebhookEvent
-  | ContactOptedInWebhookEvent
-  | ContactOptedOutWebhookEvent
-  | ConversationCreatedWebhookEvent
-  | LinkFollowedWebhookEvent
-  | MessageDeliveredWebhookEvent
-  | MessageFailedWebhookEvent
-  | MessageReceivedWebhookEvent
-  | MessageSentWebhookEvent
-  | PhoneNumberAttachedToCampaignWebhookEvent
-  | RecordingCompletedWebhookEvent
-  | VoicemailReceivedWebhookEvent;
+export type UnwrapWebhookEvent = CallEndedWebhookEvent | CampaignApprovedWebhookEvent | ContactOptedInWebhookEvent | ContactOptedOutWebhookEvent | ConversationCreatedWebhookEvent | LinkFollowedWebhookEvent | MessageDeliveredWebhookEvent | MessageFailedWebhookEvent | MessageReceivedWebhookEvent | MessageSentWebhookEvent | PhoneNumberAttachedToCampaignWebhookEvent | RecordingCompletedWebhookEvent | VoicemailReceivedWebhookEvent
 
 export declare namespace Webhooks {
   export {
@@ -965,6 +922,6 @@ export declare namespace Webhooks {
     type PhoneNumberAttachedToCampaignWebhookEvent as PhoneNumberAttachedToCampaignWebhookEvent,
     type RecordingCompletedWebhookEvent as RecordingCompletedWebhookEvent,
     type VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent,
-    type UnwrapWebhookEvent as UnwrapWebhookEvent,
+    type UnwrapWebhookEvent as UnwrapWebhookEvent
   };
 }

@@ -95,6 +95,6 @@ export declare namespace Verifications {
     type Verification as Verification,
     type VerificationCheck as VerificationCheck,
     type VerificationCreateParams as VerificationCreateParams,
-    type VerificationCheckParams as VerificationCheckParams,
+    type VerificationCheckParams as VerificationCheckParams
   };
 }

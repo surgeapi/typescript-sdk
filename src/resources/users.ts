@@ -64,11 +64,7 @@ export class Users extends APIResource {
    * }
    * ```
    */
-  list(
-    accountID: string,
-    query: UserListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<UsersCursor, User> {
+  list(accountID: string, query: UserListParams | null | undefined = {}, options?: RequestOptions): PagePromise<UsersCursor, User> {
     return this._client.getAPIList(path`/accounts/${accountID}/users`, Cursor<User>, { query, ...options });
   }
 
@@ -101,16 +97,12 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  createToken(
-    userID: string,
-    body: UserCreateTokenParams,
-    options?: RequestOptions,
-  ): APIPromise<UserTokenResponse> {
+  createToken(userID: string, body: UserCreateTokenParams, options?: RequestOptions): APIPromise<UserTokenResponse> {
     return this._client.post(path`/users/${userID}/tokens`, { body, ...options });
   }
 }
 
-export type UsersCursor = Cursor<User>;
+export type UsersCursor = Cursor<User>
 
 /**
  * A user of the app
@@ -196,7 +188,8 @@ export interface UserUpdateParams {
   photo_url?: string;
 }
 
-export interface UserListParams extends CursorParams {}
+export interface UserListParams extends CursorParams {
+}
 
 export interface UserCreateTokenParams {
   /**
@@ -213,6 +206,6 @@ export declare namespace Users {
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
-    type UserCreateTokenParams as UserCreateTokenParams,
+    type UserCreateTokenParams as UserCreateTokenParams
   };
 }
