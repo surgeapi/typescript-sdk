@@ -78,19 +78,12 @@ export class Messages extends APIResource {
    * }
    * ```
    */
-  list(
-    accountID: string,
-    query: MessageListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<MessagesCursor, Message> {
-    return this._client.getAPIList(path`/accounts/${accountID}/messages`, Cursor<Message>, {
-      query,
-      ...options,
-    });
+  list(accountID: string, query: MessageListParams | null | undefined = {}, options?: RequestOptions): PagePromise<MessagesCursor, Message> {
+    return this._client.getAPIList(path`/accounts/${accountID}/messages`, Cursor<Message>, { query, ...options });
   }
 }
 
-export type MessagesCursor = Cursor<Message>;
+export type MessagesCursor = Cursor<Message>
 
 /**
  * A Message is a communication sent to a Contact.
@@ -194,9 +187,7 @@ export namespace Message {
   }
 }
 
-export type MessageCreateParams =
-  | MessageCreateParams.MessageParamsWithConversation
-  | MessageCreateParams.SimpleMessageParams;
+export type MessageCreateParams = MessageCreateParams.MessageParamsWithConversation | MessageCreateParams.SimpleMessageParams
 
 export declare namespace MessageCreateParams {
   export interface MessageParamsWithConversation {
@@ -331,13 +322,14 @@ export declare namespace MessageCreateParams {
   }
 }
 
-export interface MessageListParams extends CursorParams {}
+export interface MessageListParams extends CursorParams {
+}
 
 export declare namespace Messages {
   export {
     type Message as Message,
     type MessagesCursor as MessagesCursor,
     type MessageCreateParams as MessageCreateParams,
-    type MessageListParams as MessageListParams,
+    type MessageListParams as MessageListParams
   };
 }

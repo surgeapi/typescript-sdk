@@ -67,11 +67,7 @@ export class Accounts extends APIResource {
    * );
    * ```
    */
-  retrieveStatus(
-    accountID: string,
-    query: AccountRetrieveStatusParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AccountStatus> {
+  retrieveStatus(accountID: string, query: AccountRetrieveStatusParams | null | undefined = {}, options?: RequestOptions): APIPromise<AccountStatus> {
     return this._client.get(path`/accounts/${accountID}/status`, { query, ...options });
   }
 }
@@ -212,41 +208,7 @@ export interface Organization {
   /**
    * The industry in which the organization operates.
    */
-  industry:
-    | 'agriculture'
-    | 'automotive'
-    | 'banking'
-    | 'construction'
-    | 'consumer'
-    | 'education'
-    | 'electronics'
-    | 'energy'
-    | 'engineering'
-    | 'fast_moving_consumer_goods'
-    | 'financial'
-    | 'fintech'
-    | 'food_and_beverage'
-    | 'government'
-    | 'healthcare'
-    | 'hospitality'
-    | 'insurance'
-    | 'jewelry'
-    | 'legal'
-    | 'manufacturing'
-    | 'media'
-    | 'not_for_profit'
-    | 'oil_and_gas'
-    | 'online'
-    | 'professional_services'
-    | 'raw_materials'
-    | 'real_estate'
-    | 'religion'
-    | 'retail'
-    | 'technology'
-    | 'telecommunications'
-    | 'transportation'
-    | 'travel'
-    | null;
+  industry: 'agriculture' | 'automotive' | 'banking' | 'construction' | 'consumer' | 'education' | 'electronics' | 'energy' | 'engineering' | 'fast_moving_consumer_goods' | 'financial' | 'fintech' | 'food_and_beverage' | 'government' | 'healthcare' | 'hospitality' | 'insurance' | 'jewelry' | 'legal' | 'manufacturing' | 'media' | 'not_for_profit' | 'oil_and_gas' | 'online' | 'professional_services' | 'raw_materials' | 'real_estate' | 'religion' | 'retail' | 'technology' | 'telecommunications' | 'transportation' | 'travel' | null;
 
   /**
    * For sole proprietors, this must be a valid US or Canadian mobile phone number to
@@ -257,9 +219,7 @@ export interface Organization {
   /**
    * An array of regions in which the organization operates.
    */
-  regions_of_operation: Array<
-    'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
-  > | null;
+  regions_of_operation: Array<'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'> | null;
 
   /**
    * The legal name of the organization as registered with the IRS or other relevant
@@ -272,35 +232,7 @@ export interface Organization {
    * For publicly traded companies, this is the exchange on which the company's stock
    * is traded.
    */
-  stock_exchange:
-    | 'amex'
-    | 'amx'
-    | 'asx'
-    | 'b3'
-    | 'bme'
-    | 'bse'
-    | 'fra'
-    | 'icex'
-    | 'jpx'
-    | 'jse'
-    | 'krx'
-    | 'lon'
-    | 'nasdaq'
-    | 'none'
-    | 'nyse'
-    | 'nse'
-    | 'omx'
-    | 'other'
-    | 'sehk'
-    | 'sgx'
-    | 'sse'
-    | 'sto'
-    | 'swx'
-    | 'szse'
-    | 'tsx'
-    | 'twse'
-    | 'vse'
-    | null;
+  stock_exchange: 'amex' | 'amx' | 'asx' | 'b3' | 'bme' | 'bse' | 'fra' | 'icex' | 'jpx' | 'jse' | 'krx' | 'lon' | 'nasdaq' | 'none' | 'nyse' | 'nse' | 'omx' | 'other' | 'sehk' | 'sgx' | 'sse' | 'sto' | 'swx' | 'szse' | 'tsx' | 'twse' | 'vse' | null;
 
   /**
    * For publicly traded companies, the ticker symbol for the company's stock
@@ -310,16 +242,7 @@ export interface Organization {
   /**
    * The type of organization
    */
-  type:
-    | 'co_op'
-    | 'government'
-    | 'llc'
-    | 'non_profit'
-    | 'partnership'
-    | 'private_corporation'
-    | 'public_corporation'
-    | 'sole_proprietor'
-    | null;
+  type: 'co_op' | 'government' | 'llc' | 'non_profit' | 'partnership' | 'private_corporation' | 'public_corporation' | 'sole_proprietor' | null;
 
   /**
    * The URL of the website for this organization. The website should be publicly
@@ -494,41 +417,7 @@ export namespace AccountCreateParams {
     /**
      * The industry in which the organization operates.
      */
-    industry?:
-      | 'agriculture'
-      | 'automotive'
-      | 'banking'
-      | 'construction'
-      | 'consumer'
-      | 'education'
-      | 'electronics'
-      | 'energy'
-      | 'engineering'
-      | 'fast_moving_consumer_goods'
-      | 'financial'
-      | 'fintech'
-      | 'food_and_beverage'
-      | 'government'
-      | 'healthcare'
-      | 'hospitality'
-      | 'insurance'
-      | 'jewelry'
-      | 'legal'
-      | 'manufacturing'
-      | 'media'
-      | 'not_for_profit'
-      | 'oil_and_gas'
-      | 'online'
-      | 'professional_services'
-      | 'raw_materials'
-      | 'real_estate'
-      | 'religion'
-      | 'retail'
-      | 'technology'
-      | 'telecommunications'
-      | 'transportation'
-      | 'travel'
-      | null;
+    industry?: 'agriculture' | 'automotive' | 'banking' | 'construction' | 'consumer' | 'education' | 'electronics' | 'energy' | 'engineering' | 'fast_moving_consumer_goods' | 'financial' | 'fintech' | 'food_and_beverage' | 'government' | 'healthcare' | 'hospitality' | 'insurance' | 'jewelry' | 'legal' | 'manufacturing' | 'media' | 'not_for_profit' | 'oil_and_gas' | 'online' | 'professional_services' | 'raw_materials' | 'real_estate' | 'religion' | 'retail' | 'technology' | 'telecommunications' | 'transportation' | 'travel' | null;
 
     /**
      * For sole proprietors, this must be a valid US or Canadian mobile phone number to
@@ -539,9 +428,7 @@ export namespace AccountCreateParams {
     /**
      * An array of regions in which the organization operates.
      */
-    regions_of_operation?: Array<
-      'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
-    > | null;
+    regions_of_operation?: Array<'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'> | null;
 
     /**
      * The legal name of the organization as registered with the IRS or other relevant
@@ -554,35 +441,7 @@ export namespace AccountCreateParams {
      * For publicly traded companies, this is the exchange on which the company's stock
      * is traded.
      */
-    stock_exchange?:
-      | 'amex'
-      | 'amx'
-      | 'asx'
-      | 'b3'
-      | 'bme'
-      | 'bse'
-      | 'fra'
-      | 'icex'
-      | 'jpx'
-      | 'jse'
-      | 'krx'
-      | 'lon'
-      | 'nasdaq'
-      | 'none'
-      | 'nyse'
-      | 'nse'
-      | 'omx'
-      | 'other'
-      | 'sehk'
-      | 'sgx'
-      | 'sse'
-      | 'sto'
-      | 'swx'
-      | 'szse'
-      | 'tsx'
-      | 'twse'
-      | 'vse'
-      | null;
+    stock_exchange?: 'amex' | 'amx' | 'asx' | 'b3' | 'bme' | 'bse' | 'fra' | 'icex' | 'jpx' | 'jse' | 'krx' | 'lon' | 'nasdaq' | 'none' | 'nyse' | 'nse' | 'omx' | 'other' | 'sehk' | 'sgx' | 'sse' | 'sto' | 'swx' | 'szse' | 'tsx' | 'twse' | 'vse' | null;
 
     /**
      * For publicly traded companies, the ticker symbol for the company's stock
@@ -592,16 +451,7 @@ export namespace AccountCreateParams {
     /**
      * The type of organization
      */
-    type?:
-      | 'co_op'
-      | 'government'
-      | 'llc'
-      | 'non_profit'
-      | 'partnership'
-      | 'private_corporation'
-      | 'public_corporation'
-      | 'sole_proprietor'
-      | null;
+    type?: 'co_op' | 'government' | 'llc' | 'non_profit' | 'partnership' | 'private_corporation' | 'public_corporation' | 'sole_proprietor' | null;
 
     /**
      * The URL of the website for this organization. The website should be publicly
@@ -780,41 +630,7 @@ export namespace AccountUpdateParams {
     /**
      * The industry in which the organization operates.
      */
-    industry?:
-      | 'agriculture'
-      | 'automotive'
-      | 'banking'
-      | 'construction'
-      | 'consumer'
-      | 'education'
-      | 'electronics'
-      | 'energy'
-      | 'engineering'
-      | 'fast_moving_consumer_goods'
-      | 'financial'
-      | 'fintech'
-      | 'food_and_beverage'
-      | 'government'
-      | 'healthcare'
-      | 'hospitality'
-      | 'insurance'
-      | 'jewelry'
-      | 'legal'
-      | 'manufacturing'
-      | 'media'
-      | 'not_for_profit'
-      | 'oil_and_gas'
-      | 'online'
-      | 'professional_services'
-      | 'raw_materials'
-      | 'real_estate'
-      | 'religion'
-      | 'retail'
-      | 'technology'
-      | 'telecommunications'
-      | 'transportation'
-      | 'travel'
-      | null;
+    industry?: 'agriculture' | 'automotive' | 'banking' | 'construction' | 'consumer' | 'education' | 'electronics' | 'energy' | 'engineering' | 'fast_moving_consumer_goods' | 'financial' | 'fintech' | 'food_and_beverage' | 'government' | 'healthcare' | 'hospitality' | 'insurance' | 'jewelry' | 'legal' | 'manufacturing' | 'media' | 'not_for_profit' | 'oil_and_gas' | 'online' | 'professional_services' | 'raw_materials' | 'real_estate' | 'religion' | 'retail' | 'technology' | 'telecommunications' | 'transportation' | 'travel' | null;
 
     /**
      * For sole proprietors, this must be a valid US or Canadian mobile phone number to
@@ -825,9 +641,7 @@ export namespace AccountUpdateParams {
     /**
      * An array of regions in which the organization operates.
      */
-    regions_of_operation?: Array<
-      'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'
-    > | null;
+    regions_of_operation?: Array<'africa' | 'asia' | 'australia' | 'europe' | 'latin_america' | 'usa_and_canada'> | null;
 
     /**
      * The legal name of the organization as registered with the IRS or other relevant
@@ -840,35 +654,7 @@ export namespace AccountUpdateParams {
      * For publicly traded companies, this is the exchange on which the company's stock
      * is traded.
      */
-    stock_exchange?:
-      | 'amex'
-      | 'amx'
-      | 'asx'
-      | 'b3'
-      | 'bme'
-      | 'bse'
-      | 'fra'
-      | 'icex'
-      | 'jpx'
-      | 'jse'
-      | 'krx'
-      | 'lon'
-      | 'nasdaq'
-      | 'none'
-      | 'nyse'
-      | 'nse'
-      | 'omx'
-      | 'other'
-      | 'sehk'
-      | 'sgx'
-      | 'sse'
-      | 'sto'
-      | 'swx'
-      | 'szse'
-      | 'tsx'
-      | 'twse'
-      | 'vse'
-      | null;
+    stock_exchange?: 'amex' | 'amx' | 'asx' | 'b3' | 'bme' | 'bse' | 'fra' | 'icex' | 'jpx' | 'jse' | 'krx' | 'lon' | 'nasdaq' | 'none' | 'nyse' | 'nse' | 'omx' | 'other' | 'sehk' | 'sgx' | 'sse' | 'sto' | 'swx' | 'szse' | 'tsx' | 'twse' | 'vse' | null;
 
     /**
      * For publicly traded companies, the ticker symbol for the company's stock
@@ -878,16 +664,7 @@ export namespace AccountUpdateParams {
     /**
      * The type of organization
      */
-    type?:
-      | 'co_op'
-      | 'government'
-      | 'llc'
-      | 'non_profit'
-      | 'partnership'
-      | 'private_corporation'
-      | 'public_corporation'
-      | 'sole_proprietor'
-      | null;
+    type?: 'co_op' | 'government' | 'llc' | 'non_profit' | 'partnership' | 'private_corporation' | 'public_corporation' | 'sole_proprietor' | null;
 
     /**
      * The URL of the website for this organization. The website should be publicly
@@ -1001,6 +778,6 @@ export declare namespace Accounts {
     type Organization as Organization,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
-    type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
+    type AccountRetrieveStatusParams as AccountRetrieveStatusParams
   };
 }
