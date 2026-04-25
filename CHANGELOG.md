@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.42.1 (2026-04-25)
+
+Full Changelog: [v0.42.0...v0.42.1](https://github.com/surgeapi/typescript-sdk/compare/v0.42.0...v0.42.1)
+
+### Chores
+
+* **formatter:** run prettier and eslint separately ([c840d0e](https://github.com/surgeapi/typescript-sdk/commit/c840d0eeb98ce1744afb7236c2fa1367e7ab0cd0))
+* **internal:** more robust bootstrap script ([0be5930](https://github.com/surgeapi/typescript-sdk/commit/0be59301e72f405d1ab022fdfb774ee5ec6c734a))
+
 ## 0.42.0 (2026-04-22)
 
 Full Changelog: [v0.41.0...v0.42.0](https://github.com/surgeapi/typescript-sdk/compare/v0.41.0...v0.42.0)
