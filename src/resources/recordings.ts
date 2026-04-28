@@ -36,8 +36,15 @@ export class Recordings extends APIResource {
    * }
    * ```
    */
-  list(accountID: string, query: RecordingListParams | null | undefined = {}, options?: RequestOptions): PagePromise<RecordingListResponsesCursor, RecordingListResponse> {
-    return this._client.getAPIList(path`/accounts/${accountID}/recordings`, Cursor<RecordingListResponse>, { query, ...options });
+  list(
+    accountID: string,
+    query: RecordingListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<RecordingListResponsesCursor, RecordingListResponse> {
+    return this._client.getAPIList(path`/accounts/${accountID}/recordings`, Cursor<RecordingListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -71,7 +78,7 @@ export class Recordings extends APIResource {
   }
 }
 
-export type RecordingListResponsesCursor = Cursor<RecordingListResponse>
+export type RecordingListResponsesCursor = Cursor<RecordingListResponse>;
 
 /**
  * A call recording
@@ -121,7 +128,16 @@ export namespace RecordingRetrieveResponse {
     /**
      * The status of the call
      */
-    status: 'busy' | 'canceled' | 'completed' | 'failed' | 'in_progress' | 'missed' | 'no_answer' | 'queued' | 'ringing';
+    status:
+      | 'busy'
+      | 'canceled'
+      | 'completed'
+      | 'failed'
+      | 'in_progress'
+      | 'missed'
+      | 'no_answer'
+      | 'queued'
+      | 'ringing';
   }
 }
 
@@ -173,7 +189,16 @@ export namespace RecordingListResponse {
     /**
      * The status of the call
      */
-    status: 'busy' | 'canceled' | 'completed' | 'failed' | 'in_progress' | 'missed' | 'no_answer' | 'queued' | 'ringing';
+    status:
+      | 'busy'
+      | 'canceled'
+      | 'completed'
+      | 'failed'
+      | 'in_progress'
+      | 'missed'
+      | 'no_answer'
+      | 'queued'
+      | 'ringing';
   }
 }
 
@@ -225,7 +250,16 @@ export namespace RecordingDeleteResponse {
     /**
      * The status of the call
      */
-    status: 'busy' | 'canceled' | 'completed' | 'failed' | 'in_progress' | 'missed' | 'no_answer' | 'queued' | 'ringing';
+    status:
+      | 'busy'
+      | 'canceled'
+      | 'completed'
+      | 'failed'
+      | 'in_progress'
+      | 'missed'
+      | 'no_answer'
+      | 'queued'
+      | 'ringing';
   }
 }
 
@@ -239,8 +273,7 @@ export interface RecordingGetFileResponse {
   error: Shared.Error;
 }
 
-export interface RecordingListParams extends CursorParams {
-}
+export interface RecordingListParams extends CursorParams {}
 
 export declare namespace Recordings {
   export {
@@ -249,6 +282,6 @@ export declare namespace Recordings {
     type RecordingDeleteResponse as RecordingDeleteResponse,
     type RecordingGetFileResponse as RecordingGetFileResponse,
     type RecordingListResponsesCursor as RecordingListResponsesCursor,
-    type RecordingListParams as RecordingListParams
+    type RecordingListParams as RecordingListParams,
   };
 }
