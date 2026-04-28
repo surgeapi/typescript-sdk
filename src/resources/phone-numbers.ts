@@ -20,8 +20,15 @@ export class PhoneNumbers extends APIResource {
    * }
    * ```
    */
-  list(accountID: string, query: PhoneNumberListParams | null | undefined = {}, options?: RequestOptions): PagePromise<PhoneNumbersCursor, PhoneNumber> {
-    return this._client.getAPIList(path`/accounts/${accountID}/phone_numbers`, Cursor<PhoneNumber>, { query, ...options });
+  list(
+    accountID: string,
+    query: PhoneNumberListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PhoneNumbersCursor, PhoneNumber> {
+    return this._client.getAPIList(path`/accounts/${accountID}/phone_numbers`, Cursor<PhoneNumber>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -35,12 +42,16 @@ export class PhoneNumbers extends APIResource {
    * );
    * ```
    */
-  purchase(accountID: string, body: PhoneNumberPurchaseParams, options?: RequestOptions): APIPromise<PhoneNumber> {
+  purchase(
+    accountID: string,
+    body: PhoneNumberPurchaseParams,
+    options?: RequestOptions,
+  ): APIPromise<PhoneNumber> {
     return this._client.post(path`/accounts/${accountID}/phone_numbers`, { body, ...options });
   }
 }
 
-export type PhoneNumbersCursor = Cursor<PhoneNumber>
+export type PhoneNumbersCursor = Cursor<PhoneNumber>;
 
 /**
  * A phone number that can be used to send and receive messages and calls
@@ -72,8 +83,7 @@ export interface PhoneNumber {
   type: 'local' | 'short_code' | 'toll_free';
 }
 
-export interface PhoneNumberListParams extends CursorParams {
-}
+export interface PhoneNumberListParams extends CursorParams {}
 
 export interface PhoneNumberPurchaseParams {
   /**
@@ -112,6 +122,6 @@ export declare namespace PhoneNumbers {
     type PhoneNumber as PhoneNumber,
     type PhoneNumbersCursor as PhoneNumbersCursor,
     type PhoneNumberListParams as PhoneNumberListParams,
-    type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams
+    type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
 }

@@ -20,7 +20,11 @@ export class Audiences extends APIResource {
    * );
    * ```
    */
-  create(accountID: string, body: AudienceCreateParams, options?: RequestOptions): APIPromise<AudienceCreateResponse> {
+  create(
+    accountID: string,
+    body: AudienceCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<AudienceCreateResponse> {
     return this._client.post(path`/accounts/${accountID}/audiences`, { body, ...options });
   }
 
@@ -35,7 +39,11 @@ export class Audiences extends APIResource {
    * );
    * ```
    */
-  addContact(audienceID: string, body: AudienceAddContactParams, options?: RequestOptions): APIPromise<ContactsAPI.Contact> {
+  addContact(
+    audienceID: string,
+    body: AudienceAddContactParams,
+    options?: RequestOptions,
+  ): APIPromise<ContactsAPI.Contact> {
     return this._client.post(path`/audiences/${audienceID}/contacts`, { body, ...options });
   }
 
@@ -53,8 +61,15 @@ export class Audiences extends APIResource {
    * }
    * ```
    */
-  listContacts(audienceID: string, query: AudienceListContactsParams | null | undefined = {}, options?: RequestOptions): PagePromise<ContactsCursor, ContactsAPI.Contact> {
-    return this._client.getAPIList(path`/audiences/${audienceID}/contacts`, Cursor<ContactsAPI.Contact>, { query, ...options });
+  listContacts(
+    audienceID: string,
+    query: AudienceListContactsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ContactsCursor, ContactsAPI.Contact> {
+    return this._client.getAPIList(path`/audiences/${audienceID}/contacts`, Cursor<ContactsAPI.Contact>, {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -88,16 +103,15 @@ export interface AudienceAddContactParams {
   id: string;
 }
 
-export interface AudienceListContactsParams extends CursorParams {
-}
+export interface AudienceListContactsParams extends CursorParams {}
 
 export declare namespace Audiences {
   export {
     type AudienceCreateResponse as AudienceCreateResponse,
     type AudienceCreateParams as AudienceCreateParams,
     type AudienceAddContactParams as AudienceAddContactParams,
-    type AudienceListContactsParams as AudienceListContactsParams
+    type AudienceListContactsParams as AudienceListContactsParams,
   };
 }
 
-export { type ContactsCursor }
+export { type ContactsCursor };

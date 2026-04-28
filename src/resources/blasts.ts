@@ -113,8 +113,5 @@ export namespace BlastCreateParams {
 }
 
 export declare namespace Blasts {
-  export {
-    type Blast as Blast,
-    type BlastCreateParams as BlastCreateParams
-  };
+  export { type Blast as Blast, type BlastCreateParams as BlastCreateParams };
 }
