@@ -105,12 +105,19 @@ export class Campaigns extends APIResource {
    * }
    * ```
    */
-  list(accountID: string, query: CampaignListParams | null | undefined = {}, options?: RequestOptions): PagePromise<CampaignsCursor, Campaign> {
-    return this._client.getAPIList(path`/accounts/${accountID}/campaigns`, Cursor<Campaign>, { query, ...options });
+  list(
+    accountID: string,
+    query: CampaignListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CampaignsCursor, Campaign> {
+    return this._client.getAPIList(path`/accounts/${accountID}/campaigns`, Cursor<Campaign>, {
+      query,
+      ...options,
+    });
   }
 }
 
-export type CampaignsCursor = Cursor<Campaign>
+export type CampaignsCursor = Cursor<Campaign>;
 
 /**
  * A campaign represents the context in which one or more of your phone numbers
@@ -200,7 +207,18 @@ export interface Campaign {
    *
    * For access to special use cases not shown here, reach out to support@surge.app.
    */
-  use_cases: Array<'account_notification' | 'customer_care' | 'delivery_notification' | 'fraud_alert' | 'higher_education' | 'marketing' | 'polling_voting' | 'public_service_announcement' | 'security_alert' | 'two_factor_authentication'>;
+  use_cases: Array<
+    | 'account_notification'
+    | 'customer_care'
+    | 'delivery_notification'
+    | 'fraud_alert'
+    | 'higher_education'
+    | 'marketing'
+    | 'polling_voting'
+    | 'public_service_announcement'
+    | 'security_alert'
+    | 'two_factor_authentication'
+  >;
 
   /**
    * This will be one of the following:
@@ -234,7 +252,9 @@ export interface Campaign {
   terms_and_conditions_url?: string;
 }
 
-export type CampaignCreateParams = CampaignCreateParams.StandardCampaignParams | CampaignCreateParams.ExternalCampaignParams
+export type CampaignCreateParams =
+  | CampaignCreateParams.StandardCampaignParams
+  | CampaignCreateParams.ExternalCampaignParams;
 
 export declare namespace CampaignCreateParams {
   export interface StandardCampaignParams {
@@ -306,7 +326,18 @@ export declare namespace CampaignCreateParams {
      *
      * For access to special use cases not shown here, reach out to support@surge.app.
      */
-    use_cases: Array<'account_notification' | 'customer_care' | 'delivery_notification' | 'fraud_alert' | 'higher_education' | 'marketing' | 'polling_voting' | 'public_service_announcement' | 'security_alert' | 'two_factor_authentication'>;
+    use_cases: Array<
+      | 'account_notification'
+      | 'customer_care'
+      | 'delivery_notification'
+      | 'fraud_alert'
+      | 'higher_education'
+      | 'marketing'
+      | 'polling_voting'
+      | 'public_service_announcement'
+      | 'security_alert'
+      | 'two_factor_authentication'
+    >;
 
     /**
      * This will be one of the following:
@@ -353,7 +384,9 @@ export declare namespace CampaignCreateParams {
   }
 }
 
-export type CampaignUpdateParams = CampaignUpdateParams.StandardCampaignParams | CampaignUpdateParams.ExternalCampaignParams
+export type CampaignUpdateParams =
+  | CampaignUpdateParams.StandardCampaignParams
+  | CampaignUpdateParams.ExternalCampaignParams;
 
 export declare namespace CampaignUpdateParams {
   export interface StandardCampaignParams {
@@ -425,7 +458,18 @@ export declare namespace CampaignUpdateParams {
      *
      * For access to special use cases not shown here, reach out to support@surge.app.
      */
-    use_cases: Array<'account_notification' | 'customer_care' | 'delivery_notification' | 'fraud_alert' | 'higher_education' | 'marketing' | 'polling_voting' | 'public_service_announcement' | 'security_alert' | 'two_factor_authentication'>;
+    use_cases: Array<
+      | 'account_notification'
+      | 'customer_care'
+      | 'delivery_notification'
+      | 'fraud_alert'
+      | 'higher_education'
+      | 'marketing'
+      | 'polling_voting'
+      | 'public_service_announcement'
+      | 'security_alert'
+      | 'two_factor_authentication'
+    >;
 
     /**
      * This will be one of the following:
@@ -472,8 +516,7 @@ export declare namespace CampaignUpdateParams {
   }
 }
 
-export interface CampaignListParams extends CursorParams {
-}
+export interface CampaignListParams extends CursorParams {}
 
 export declare namespace Campaigns {
   export {
@@ -481,6 +524,6 @@ export declare namespace Campaigns {
     type CampaignsCursor as CampaignsCursor,
     type CampaignCreateParams as CampaignCreateParams,
     type CampaignUpdateParams as CampaignUpdateParams,
-    type CampaignListParams as CampaignListParams
+    type CampaignListParams as CampaignListParams,
   };
 }

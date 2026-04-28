@@ -2,12 +2,17 @@
 
 import Surge from '@surgeapi/node';
 
-const client = new Surge({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Surge({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource messages', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', { conversation: { contact: { phone_number: '+18015551234' } } });
+    const responsePromise = client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+      conversation: { contact: { phone_number: '+18015551234' } },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,21 +25,21 @@ describe('resource messages', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.messages.create('acct_01j9a43avnfqzbjfch6pygv1td', {
-    conversation: {
-    contact: {
-    phone_number: '+18015551234',
-    email: 'dom@toretto.family',
-    first_name: 'Dominic',
-    last_name: 'Toretto',
-    metadata: { car: '1970 Dodge Charger R/T' },
-  },
-    phone_number: '+18015556789',
-  },
-    attachments: [{ url: 'https://toretto.family/coronas.gif' }],
-    body: 'body',
-    metadata: { foo: 'string' },
-    send_at: '2019-12-27T18:11:19.117Z',
-  });
+      conversation: {
+        contact: {
+          phone_number: '+18015551234',
+          email: 'dom@toretto.family',
+          first_name: 'Dominic',
+          last_name: 'Toretto',
+          metadata: { car: '1970 Dodge Charger R/T' },
+        },
+        phone_number: '+18015556789',
+      },
+      attachments: [{ url: 'https://toretto.family/coronas.gif' }],
+      body: 'body',
+      metadata: { foo: 'string' },
+      send_at: '2019-12-27T18:11:19.117Z',
+    });
   });
 
   // Mock server tests are disabled
@@ -64,8 +69,12 @@ describe('resource messages', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.messages.list('acct_01j9a43avnfqzbjfch6pygv1td', { after: 'after', before: 'before' }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Surge.NotFoundError);
+    await expect(
+      client.messages.list(
+        'acct_01j9a43avnfqzbjfch6pygv1td',
+        { after: 'after', before: 'before' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Surge.NotFoundError);
   });
 });
