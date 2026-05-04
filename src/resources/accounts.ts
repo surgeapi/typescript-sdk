@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { Cursor, type CursorParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -32,6 +33,24 @@ export class Accounts extends APIResource {
    */
   update(id: string, body: AccountUpdateParams, options?: RequestOptions): APIPromise<Account> {
     return this._client.patch(path`/accounts/${id}`, { body, ...options });
+  }
+
+  /**
+   * List all accounts for the calling platform with cursor-based pagination.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const account of client.accounts.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: AccountListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<AccountsCursor, Account> {
+    return this._client.getAPIList('/accounts', Cursor<Account>, { query, ...options });
   }
 
   /**
@@ -75,6 +94,8 @@ export class Accounts extends APIResource {
     return this._client.get(path`/accounts/${accountID}/status`, { query, ...options });
   }
 }
+
+export type AccountsCursor = Cursor<Account>;
 
 /**
  * Response containing account information.
@@ -987,6 +1008,8 @@ export namespace AccountUpdateParams {
   }
 }
 
+export interface AccountListParams extends CursorParams {}
+
 export interface AccountRetrieveStatusParams {
   /**
    * capabilities about which to check the status
@@ -999,8 +1022,10 @@ export declare namespace Accounts {
     type Account as Account,
     type AccountStatus as AccountStatus,
     type Organization as Organization,
+    type AccountsCursor as AccountsCursor,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
+    type AccountListParams as AccountListParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 }
