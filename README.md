@@ -180,22 +180,22 @@ List methods in the Surge API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllContacts(params) {
-  const allContacts = [];
+async function fetchAllAccounts(params) {
+  const allAccounts = [];
   // Automatically fetches more pages as needed.
-  for await (const contact of client.audiences.listContacts('aud_01j9a43avnfqzbjfch6pygv1td')) {
-    allContacts.push(contact);
+  for await (const account of client.accounts.list()) {
+    allAccounts.push(account);
   }
-  return allContacts;
+  return allAccounts;
 }
 ```
 
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.audiences.listContacts('aud_01j9a43avnfqzbjfch6pygv1td');
-for (const contact of page.data) {
-  console.log(contact);
+let page = await client.accounts.list();
+for (const account of page.data) {
+  console.log(account);
 }
 
 // Convenience methods are provided for manually paginating:

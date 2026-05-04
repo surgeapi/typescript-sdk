@@ -8,7 +8,9 @@ export {
   type Organization,
   type AccountCreateParams,
   type AccountUpdateParams,
+  type AccountListParams,
   type AccountRetrieveStatusParams,
+  type AccountsCursor,
 } from './accounts';
 export { Attachments, type AttachmentGetFileResponse } from './attachments';
 export {

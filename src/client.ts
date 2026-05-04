@@ -22,10 +22,12 @@ import { APIPromise } from './core/api-promise';
 import {
   Account,
   AccountCreateParams,
+  AccountListParams,
   AccountRetrieveStatusParams,
   AccountStatus,
   AccountUpdateParams,
   Accounts,
+  AccountsCursor,
   Organization,
 } from './resources/accounts';
 import { AttachmentGetFileResponse, Attachments } from './resources/attachments';
@@ -892,8 +894,10 @@ export declare namespace Surge {
     type Account as Account,
     type AccountStatus as AccountStatus,
     type Organization as Organization,
+    type AccountsCursor as AccountsCursor,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
+    type AccountListParams as AccountListParams,
     type AccountRetrieveStatusParams as AccountRetrieveStatusParams,
   };
 
