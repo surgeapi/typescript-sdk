@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.43.1 (2026-05-13)
+
+Full Changelog: [v0.43.0...v0.43.1](https://github.com/surgeapi/typescript-sdk/compare/v0.43.0...v0.43.1)
+
+### Chores
+
+* redact api-key headers in debug logs ([92544ab](https://github.com/surgeapi/typescript-sdk/commit/92544ab804ac14a334f0a8f536c62ab114b1d7b4))
+
 ## 0.43.0 (2026-05-04)
 
 Full Changelog: [v0.42.0...v0.43.0](https://github.com/surgeapi/typescript-sdk/compare/v0.42.0...v0.43.0)
