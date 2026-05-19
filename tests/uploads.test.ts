@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from '@surgeapi/node/internal/to-file';
 import { toFile } from '@surgeapi/node/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
