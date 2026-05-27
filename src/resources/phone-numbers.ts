@@ -49,6 +49,20 @@ export class PhoneNumbers extends APIResource {
   ): APIPromise<PhoneNumber> {
     return this._client.post(path`/accounts/${accountID}/phone_numbers`, { body, ...options });
   }
+
+  /**
+   * Releases a phone number from the account.
+   *
+   * @example
+   * ```ts
+   * const phoneNumber = await client.phoneNumbers.release(
+   *   'pn_01j9a43avnfqzbjfch6pygv1td',
+   * );
+   * ```
+   */
+  release(id: string, options?: RequestOptions): APIPromise<PhoneNumber> {
+    return this._client.delete(path`/phone_numbers/${id}`, options);
+  }
 }
 
 export type PhoneNumbersCursor = Cursor<PhoneNumber>;
