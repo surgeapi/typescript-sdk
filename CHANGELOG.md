@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.44.0 (2026-05-27)
+
+Full Changelog: [v0.43.0...v0.44.0](https://github.com/surgeapi/typescript-sdk/compare/v0.43.0...v0.44.0)
+
+### Features
+
+* **api:** release phone numbers ([fb28ceb](https://github.com/surgeapi/typescript-sdk/commit/fb28cebf5249388d48c6bc7e84962b3a65592ae2))
+
+
+### Bug Fixes
+
+* **typescript:** upgrade tsc-multi so that it works with Node 26 ([b410400](https://github.com/surgeapi/typescript-sdk/commit/b41040037e0dad9ede8fc335e187bb467e849d6f))
+
+
+### Chores
+
+* redact api-key headers in debug logs ([92544ab](https://github.com/surgeapi/typescript-sdk/commit/92544ab804ac14a334f0a8f536c62ab114b1d7b4))
+* **tests:** remove redundant File import ([8547d17](https://github.com/surgeapi/typescript-sdk/commit/8547d170a7cd785e9b693bb8f76c0100c0186f0d))
+
 ## 0.43.0 (2026-05-04)
 
 Full Changelog: [v0.42.0...v0.43.0](https://github.com/surgeapi/typescript-sdk/compare/v0.42.0...v0.43.0)
