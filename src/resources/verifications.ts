@@ -7,17 +7,23 @@ import { path } from '../internal/utils/path';
 
 export class Verifications extends APIResource {
   /**
-   * Creates a new Verification and sends the code to the given phone number.
+   * Creates a new Verification for an account and sends the code to the given phone
+   * number.
    *
    * @example
    * ```ts
-   * const verification = await client.verifications.create({
-   *   phone_number: '+18015551234',
-   * });
+   * const verification = await client.verifications.create(
+   *   'acct_01j9a43avnfqzbjfch6pygv1td',
+   *   { phone_number: '+18015551234' },
+   * );
    * ```
    */
-  create(body: VerificationCreateParams, options?: RequestOptions): APIPromise<Verification> {
-    return this._client.post('/verifications', { body, ...options });
+  create(
+    accountID: string,
+    body: VerificationCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<Verification> {
+    return this._client.post(path`/accounts/${accountID}/verifications`, { body, ...options });
   }
 
   /**
