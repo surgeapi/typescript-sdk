@@ -10,7 +10,9 @@ const client = new Surge({
 describe('resource verifications', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.verifications.create({ phone_number: '+18015551234' });
+    const responsePromise = client.verifications.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+      phone_number: '+18015551234',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +24,9 @@ describe('resource verifications', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.verifications.create({ phone_number: '+18015551234' });
+    const response = await client.verifications.create('acct_01j9a43avnfqzbjfch6pygv1td', {
+      phone_number: '+18015551234',
+    });
   });
 
   // Mock server tests are disabled

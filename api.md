@@ -143,7 +143,7 @@ Types:
 
 Methods:
 
-- <code title="post /verifications">client.verifications.<a href="./src/resources/verifications.ts">create</a>({ ...params }) -> Verification</code>
+- <code title="post /accounts/{account_id}/verifications">client.verifications.<a href="./src/resources/verifications.ts">create</a>(accountID, { ...params }) -> Verification</code>
 - <code title="post /verifications/{id}/checks">client.verifications.<a href="./src/resources/verifications.ts">check</a>(id, { ...params }) -> VerificationCheck</code>
 
 # Webhooks
