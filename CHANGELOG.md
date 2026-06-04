@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.45.0 (2026-06-04)
+
+Full Changelog: [v0.44.0...v0.45.0](https://github.com/surgeapi/typescript-sdk/compare/v0.44.0...v0.45.0)
+
+### Features
+
+* **api:** use account-scoped verifications endpoint ([34bf26d](https://github.com/surgeapi/typescript-sdk/commit/34bf26d50a591c0f782f0cf080577f28dff26763))
+
 ## 0.44.0 (2026-05-27)
 
 Full Changelog: [v0.43.0...v0.44.0](https://github.com/surgeapi/typescript-sdk/compare/v0.43.0...v0.44.0)
