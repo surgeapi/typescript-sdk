@@ -47,6 +47,7 @@ export {
 export {
   PhoneNumbers,
   type PhoneNumber,
+  type PhoneNumberUpdateParams,
   type PhoneNumberListParams,
   type PhoneNumberPurchaseParams,
   type PhoneNumbersCursor,

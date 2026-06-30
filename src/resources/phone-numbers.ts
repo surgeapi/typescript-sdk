@@ -8,6 +8,20 @@ import { path } from '../internal/utils/path';
 
 export class PhoneNumbers extends APIResource {
   /**
+   * Updates a phone number's details.
+   *
+   * @example
+   * ```ts
+   * const phoneNumber = await client.phoneNumbers.update(
+   *   'pn_01jsjwe4d9fx3tpymgtg958d9w',
+   * );
+   * ```
+   */
+  update(id: string, body: PhoneNumberUpdateParams, options?: RequestOptions): APIPromise<PhoneNumber> {
+    return this._client.patch(path`/phone_numbers/${id}`, { body, ...options });
+  }
+
+  /**
    * List all phone numbers for an account with cursor-based pagination.
    *
    * @example
@@ -97,6 +111,18 @@ export interface PhoneNumber {
   type: 'local' | 'short_code' | 'toll_free';
 }
 
+export interface PhoneNumberUpdateParams {
+  /**
+   * Campaign ID to attach this number to (`cpn_...`).
+   */
+  campaign_id?: string;
+
+  /**
+   * A human-readable name for the phone number.
+   */
+  name?: string;
+}
+
 export interface PhoneNumberListParams extends CursorParams {}
 
 export interface PhoneNumberPurchaseParams {
@@ -135,6 +161,7 @@ export declare namespace PhoneNumbers {
   export {
     type PhoneNumber as PhoneNumber,
     type PhoneNumbersCursor as PhoneNumbersCursor,
+    type PhoneNumberUpdateParams as PhoneNumberUpdateParams,
     type PhoneNumberListParams as PhoneNumberListParams,
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };

@@ -66,6 +66,7 @@ import {
   PhoneNumber,
   PhoneNumberListParams,
   PhoneNumberPurchaseParams,
+  PhoneNumberUpdateParams,
   PhoneNumbers,
   PhoneNumbersCursor,
 } from './resources/phone-numbers';
@@ -951,6 +952,7 @@ export declare namespace Surge {
     PhoneNumbers as PhoneNumbers,
     type PhoneNumber as PhoneNumber,
     type PhoneNumbersCursor as PhoneNumbersCursor,
+    type PhoneNumberUpdateParams as PhoneNumberUpdateParams,
     type PhoneNumberListParams as PhoneNumberListParams,
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
