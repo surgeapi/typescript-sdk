@@ -39,6 +39,7 @@ describe('resource messages', () => {
       body: 'body',
       metadata: { foo: 'string' },
       send_at: '2019-12-27T18:11:19.117Z',
+      settings: { link_shortening: 'enabled' },
     });
   });
 
