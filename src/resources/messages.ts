@@ -35,6 +35,10 @@ export class Messages extends APIResource {
    * `conversation` field, and `conversation.phone_number` should be specified
    * instead.
    *
+   * Optionally, you can pass a `settings` object to override account-level settings
+   * for this message. Currently the only supported setting is `link_shortening`,
+   * which accepts `"enabled"` or `"disabled"`.
+   *
    * @example
    * ```ts
    * const message = await client.messages.create(
@@ -223,6 +227,11 @@ export declare namespace MessageCreateParams {
      * future.
      */
     send_at?: string;
+
+    /**
+     * Per-message setting overrides.
+     */
+    settings?: MessageParamsWithConversation.Settings;
   }
 
   export namespace MessageParamsWithConversation {
@@ -284,6 +293,16 @@ export declare namespace MessageCreateParams {
        */
       url: string;
     }
+
+    /**
+     * Per-message setting overrides.
+     */
+    export interface Settings {
+      /**
+       * Override link shortening for this message.
+       */
+      link_shortening?: 'enabled' | 'disabled';
+    }
   }
 
   export interface SimpleMessageParams {
@@ -316,6 +335,11 @@ export declare namespace MessageCreateParams {
      * future.
      */
     send_at?: string;
+
+    /**
+     * Per-message setting overrides.
+     */
+    settings?: SimpleMessageParams.Settings;
   }
 
   export namespace SimpleMessageParams {
@@ -327,6 +351,16 @@ export declare namespace MessageCreateParams {
        * The URL of the attachment.
        */
       url: string;
+    }
+
+    /**
+     * Per-message setting overrides.
+     */
+    export interface Settings {
+      /**
+       * Override link shortening for this message.
+       */
+      link_shortening?: 'enabled' | 'disabled';
     }
   }
 }
