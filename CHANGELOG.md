@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.46.0 (2026-06-30)
+
+Full Changelog: [v0.45.0...v0.46.0](https://github.com/surgeapi/typescript-sdk/compare/v0.45.0...v0.46.0)
+
+### Features
+
+* **api:** add contact to attachment types ([7bd4448](https://github.com/surgeapi/typescript-sdk/commit/7bd44482823e2755912de8479bb1589d362fb56e))
+* **api:** add message settings ([c4e0d57](https://github.com/surgeapi/typescript-sdk/commit/c4e0d577f5a10b3ad332e48af5a0ebe2ab2ea0d1))
+* **api:** add update phone number endpoint ([3c21db5](https://github.com/surgeapi/typescript-sdk/commit/3c21db59c6bd51d76776d20edef3384db0ba5121))
+
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([3afe2a5](https://github.com/surgeapi/typescript-sdk/commit/3afe2a5959cd50134d1cde3e64f18e361fea1d24))
+
 ## 0.45.0 (2026-06-04)
 
 Full Changelog: [v0.44.0...v0.45.0](https://github.com/surgeapi/typescript-sdk/compare/v0.44.0...v0.45.0)
