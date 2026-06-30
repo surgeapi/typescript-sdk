@@ -9,6 +9,18 @@ const client = new Surge({
 
 describe('resource phoneNumbers', () => {
   // Mock server tests are disabled
+  test.skip('update', async () => {
+    const responsePromise = client.phoneNumbers.update('pn_01jsjwe4d9fx3tpymgtg958d9w', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.phoneNumbers.list('acct_01j9a43avnfqzbjfch6pygv1td');
     const rawResponse = await responsePromise.asResponse();
