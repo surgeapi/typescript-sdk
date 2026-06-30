@@ -138,7 +138,7 @@ export namespace Message {
     /**
      * The type of attachment.
      */
-    type?: 'file' | 'image' | 'link' | 'video';
+    type?: 'file' | 'image' | 'link' | 'contact' | 'video';
 
     /**
      * The URL of the attachment.

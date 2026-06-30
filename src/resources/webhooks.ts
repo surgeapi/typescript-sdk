@@ -378,7 +378,7 @@ export namespace MessageDeliveredWebhookEvent {
       /**
        * The type of attachment
        */
-      type: 'file' | 'image' | 'link' | 'video';
+      type: 'file' | 'image' | 'link' | 'contact' | 'video';
 
       /**
        * The URL where the attachment can be downloaded
@@ -487,7 +487,7 @@ export namespace MessageFailedWebhookEvent {
       /**
        * The type of attachment
        */
-      type: 'file' | 'image' | 'link' | 'video';
+      type: 'file' | 'image' | 'link' | 'contact' | 'video';
 
       /**
        * The URL to download the attachment
@@ -591,7 +591,7 @@ export namespace MessageReceivedWebhookEvent {
       /**
        * The type of attachment
        */
-      type: 'file' | 'image' | 'link' | 'video';
+      type: 'file' | 'image' | 'link' | 'contact' | 'video';
 
       /**
        * The URL to download the attachment
@@ -695,7 +695,7 @@ export namespace MessageSentWebhookEvent {
       /**
        * The type of attachment
        */
-      type: 'file' | 'image' | 'link' | 'video';
+      type: 'file' | 'image' | 'link' | 'contact' | 'video';
 
       /**
        * The URL to download the attachment
