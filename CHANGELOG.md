@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.47.0 (2026-07-06)
+
+Full Changelog: [v0.46.0...v0.47.0](https://github.com/surgeapi/typescript-sdk/compare/v0.46.0...v0.47.0)
+
+### Features
+
+* **api:** add phone numbers to call webhooks ([886558a](https://github.com/surgeapi/typescript-sdk/commit/886558a3e364066037df9e9981a4a29473f66c14))
+
 ## 0.46.0 (2026-06-30)
 
 Full Changelog: [v0.45.0...v0.46.0](https://github.com/surgeapi/typescript-sdk/compare/v0.45.0...v0.46.0)
