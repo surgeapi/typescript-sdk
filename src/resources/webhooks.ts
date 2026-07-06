@@ -81,6 +81,21 @@ export namespace CallEndedWebhookEvent {
       | 'no_answer'
       | 'queued'
       | 'ringing';
+
+    /**
+     * The E.164 phone number of the caller
+     */
+    from?: string | null;
+
+    /**
+     * The Surge phone number ID (e.g. pn\_...)
+     */
+    phone_number_id?: string | null;
+
+    /**
+     * The E.164 phone number of the callee
+     */
+    to?: string | null;
   }
 }
 
@@ -841,6 +856,21 @@ export namespace RecordingCompletedWebhookEvent {
         | 'no_answer'
         | 'queued'
         | 'ringing';
+
+      /**
+       * The E.164 phone number of the caller
+       */
+      from?: string | null;
+
+      /**
+       * The Surge phone number ID (e.g. pn\_...)
+       */
+      phone_number_id?: string | null;
+
+      /**
+       * The E.164 phone number of the callee
+       */
+      to?: string | null;
     }
   }
 }
@@ -931,6 +961,21 @@ export namespace VoicemailReceivedWebhookEvent {
         | 'no_answer'
         | 'queued'
         | 'ringing';
+
+      /**
+       * The E.164 phone number of the caller
+       */
+      from?: string | null;
+
+      /**
+       * The Surge phone number ID (e.g. pn\_...)
+       */
+      phone_number_id?: string | null;
+
+      /**
+       * The E.164 phone number of the callee
+       */
+      to?: string | null;
     }
   }
 }
