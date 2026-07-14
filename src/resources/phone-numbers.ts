@@ -88,8 +88,10 @@ export class PhoneNumbers extends APIResource {
   }
 
   /**
-   * Purchase a new phone number for the account. You can specify search criteria or
-   * let the system select a random number.
+   * Purchase a new phone number for the account. You can specify an exact phone
+   * number, search criteria, or let the system select a random number.
+   *
+   * When `phone_number` is provided, all other search parameters are ignored.
    *
    * @example
    * ```ts
@@ -252,6 +254,12 @@ export interface PhoneNumberPurchaseParams {
    * formatted phone number.
    */
   name?: string;
+
+  /**
+   * The exact phone number to purchase in E.164 format. When provided, all other
+   * search parameters are ignored.
+   */
+  phone_number?: string;
 
   /**
    * Whether the phone number is local or toll-free. Can be omitted if area_code or
