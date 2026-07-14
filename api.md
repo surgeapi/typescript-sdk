@@ -98,6 +98,7 @@ Types:
 
 Methods:
 
+- <code title="get /phone_numbers/{id}">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">retrieve</a>(id) -> PhoneNumber</code>
 - <code title="patch /phone_numbers/{id}">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">update</a>(id, { ...params }) -> PhoneNumber</code>
 - <code title="get /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">list</a>(accountID, { ...params }) -> PhoneNumbersCursor</code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">purchase</a>(accountID, { ...params }) -> PhoneNumber</code>
