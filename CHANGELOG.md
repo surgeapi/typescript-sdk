@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.48.0 (2026-07-14)
+
+Full Changelog: [v0.47.0...v0.48.0](https://github.com/surgeapi/typescript-sdk/compare/v0.47.0...v0.48.0)
+
+### Features
+
+* **api:** add campaign to phone numbers ([69a0b47](https://github.com/surgeapi/typescript-sdk/commit/69a0b472cfa86a590c43ad41df7c81715bcac2ce))
+* **api:** add list available phone numbers endpoint ([c01d81f](https://github.com/surgeapi/typescript-sdk/commit/c01d81f6f536d14edd988f3176c7183ec2fcd1ed))
+* **api:** add phone number field to purchase endpoint ([6a03f21](https://github.com/surgeapi/typescript-sdk/commit/6a03f21ca88b10eb83a6421a35662a5e76c93ab6))
+* **api:** add retrieve phone number endpoint ([32e02a1](https://github.com/surgeapi/typescript-sdk/commit/32e02a197763df736f1311af3445866f313a716c))
+
+
+### Bug Fixes
+
+* **ci:** bump @arethetypeswrong/cli to ^0.18.0 and run CI workflows on Node 24 ([ae75255](https://github.com/surgeapi/typescript-sdk/commit/ae75255bf475c98d35c6e2c27182349d69c27b7b))
+
 ## 0.47.0 (2026-07-06)
 
 Full Changelog: [v0.46.0...v0.47.0](https://github.com/surgeapi/typescript-sdk/compare/v0.46.0...v0.47.0)
