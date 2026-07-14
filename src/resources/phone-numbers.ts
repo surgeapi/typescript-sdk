@@ -60,6 +60,34 @@ export class PhoneNumbers extends APIResource {
   }
 
   /**
+   * Browse purchasable phone numbers from Surge inventory before buying.
+   *
+   * Pagination cursors are always null for now.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const phoneNumberListAvailableNumbersResponse of client.phoneNumbers.listAvailableNumbers(
+   *   'acct_01j9a43avnfqzbjfch6pygv1td',
+   *   { type: 'local' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  listAvailableNumbers(
+    accountID: string,
+    query: PhoneNumberListAvailableNumbersParams,
+    options?: RequestOptions,
+  ): PagePromise<PhoneNumberListAvailableNumbersResponsesCursor, PhoneNumberListAvailableNumbersResponse> {
+    return this._client.getAPIList(
+      path`/accounts/${accountID}/available_phone_numbers`,
+      Cursor<PhoneNumberListAvailableNumbersResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
    * Purchase a new phone number for the account. You can specify search criteria or
    * let the system select a random number.
    *
@@ -94,6 +122,8 @@ export class PhoneNumbers extends APIResource {
 }
 
 export type PhoneNumbersCursor = Cursor<PhoneNumber>;
+
+export type PhoneNumberListAvailableNumbersResponsesCursor = Cursor<PhoneNumberListAvailableNumbersResponse>;
 
 /**
  * A phone number that can be used to send and receive messages and calls
@@ -147,6 +177,26 @@ export namespace PhoneNumber {
   }
 }
 
+/**
+ * A phone number available for purchase from Surge inventory
+ */
+export interface PhoneNumberListAvailableNumbersResponse {
+  /**
+   * ISO country code for the phone number
+   */
+  country: 'US' | 'CA';
+
+  /**
+   * The phone number in E.164 format
+   */
+  number: string;
+
+  /**
+   * Whether the phone number is local or toll-free
+   */
+  type: 'local' | 'toll_free';
+}
+
 export interface PhoneNumberUpdateParams {
   /**
    * Campaign ID to attach this number to (`cpn_...`).
@@ -160,6 +210,23 @@ export interface PhoneNumberUpdateParams {
 }
 
 export interface PhoneNumberListParams extends CursorParams {}
+
+export interface PhoneNumberListAvailableNumbersParams extends CursorParams {
+  /**
+   * Whether to search for local or toll-free numbers.
+   */
+  type: 'local' | 'toll_free';
+
+  /**
+   * Filter by 3-digit area code.
+   */
+  area_code?: string;
+
+  /**
+   * ISO country code to search in.
+   */
+  country?: 'US' | 'CA';
+}
 
 export interface PhoneNumberPurchaseParams {
   /**
@@ -196,9 +263,12 @@ export interface PhoneNumberPurchaseParams {
 export declare namespace PhoneNumbers {
   export {
     type PhoneNumber as PhoneNumber,
+    type PhoneNumberListAvailableNumbersResponse as PhoneNumberListAvailableNumbersResponse,
     type PhoneNumbersCursor as PhoneNumbersCursor,
+    type PhoneNumberListAvailableNumbersResponsesCursor as PhoneNumberListAvailableNumbersResponsesCursor,
     type PhoneNumberUpdateParams as PhoneNumberUpdateParams,
     type PhoneNumberListParams as PhoneNumberListParams,
+    type PhoneNumberListAvailableNumbersParams as PhoneNumberListAvailableNumbersParams,
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
 }
