@@ -91,7 +91,12 @@ export interface PhoneNumber {
   id: string;
 
   /**
-   * The unique identifier of the campaign this phone number is attached to, if any
+   * Campaign attachment details for a domestic local phone number
+   */
+  campaign: PhoneNumber.Campaign | null;
+
+  /**
+   * @deprecated Use `campaign.id` instead.
    */
   campaign_id: string | null;
 
@@ -109,6 +114,23 @@ export interface PhoneNumber {
    * Whether the phone number is local, toll-free, or short code
    */
   type: 'local' | 'short_code' | 'toll_free';
+}
+
+export namespace PhoneNumber {
+  /**
+   * Campaign attachment details for a domestic local phone number
+   */
+  export interface Campaign {
+    /**
+     * The unique identifier of the campaign this phone number is attached to
+     */
+    id: string;
+
+    /**
+     * The current campaign attachment status for this phone number.
+     */
+    attachment_status: 'attached' | 'attachment_pending' | 'detached' | 'detachment_pending';
+  }
 }
 
 export interface PhoneNumberUpdateParams {
