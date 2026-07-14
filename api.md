@@ -95,12 +95,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/phone-numbers.ts">PhoneNumber</a></code>
+- <code><a href="./src/resources/phone-numbers.ts">PhoneNumberListAvailableNumbersResponse</a></code>
 
 Methods:
 
 - <code title="get /phone_numbers/{id}">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">retrieve</a>(id) -> PhoneNumber</code>
 - <code title="patch /phone_numbers/{id}">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">update</a>(id, { ...params }) -> PhoneNumber</code>
 - <code title="get /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">list</a>(accountID, { ...params }) -> PhoneNumbersCursor</code>
+- <code title="get /accounts/{account_id}/available_phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">listAvailableNumbers</a>(accountID, { ...params }) -> PhoneNumberListAvailableNumbersResponsesCursor</code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">purchase</a>(accountID, { ...params }) -> PhoneNumber</code>
 - <code title="delete /phone_numbers/{id}">client.phoneNumbers.<a href="./src/resources/phone-numbers.ts">release</a>(id) -> PhoneNumber</code>
 

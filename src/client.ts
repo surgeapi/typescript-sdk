@@ -64,6 +64,9 @@ import {
 } from './resources/messages';
 import {
   PhoneNumber,
+  PhoneNumberListAvailableNumbersParams,
+  PhoneNumberListAvailableNumbersResponse,
+  PhoneNumberListAvailableNumbersResponsesCursor,
   PhoneNumberListParams,
   PhoneNumberPurchaseParams,
   PhoneNumberUpdateParams,
@@ -951,9 +954,12 @@ export declare namespace Surge {
   export {
     PhoneNumbers as PhoneNumbers,
     type PhoneNumber as PhoneNumber,
+    type PhoneNumberListAvailableNumbersResponse as PhoneNumberListAvailableNumbersResponse,
     type PhoneNumbersCursor as PhoneNumbersCursor,
+    type PhoneNumberListAvailableNumbersResponsesCursor as PhoneNumberListAvailableNumbersResponsesCursor,
     type PhoneNumberUpdateParams as PhoneNumberUpdateParams,
     type PhoneNumberListParams as PhoneNumberListParams,
+    type PhoneNumberListAvailableNumbersParams as PhoneNumberListAvailableNumbersParams,
     type PhoneNumberPurchaseParams as PhoneNumberPurchaseParams,
   };
 

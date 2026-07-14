@@ -57,6 +57,31 @@ describe('resource phoneNumbers', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('listAvailableNumbers: only required params', async () => {
+    const responsePromise = client.phoneNumbers.listAvailableNumbers('acct_01j9a43avnfqzbjfch6pygv1td', {
+      type: 'local',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listAvailableNumbers: required and optional params', async () => {
+    const response = await client.phoneNumbers.listAvailableNumbers('acct_01j9a43avnfqzbjfch6pygv1td', {
+      type: 'local',
+      after: 'after',
+      area_code: '801',
+      before: 'before',
+      country: 'US',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('purchase', async () => {
     const responsePromise = client.phoneNumbers.purchase('acct_01j9a43avnfqzbjfch6pygv1td', {});
     const rawResponse = await responsePromise.asResponse();
