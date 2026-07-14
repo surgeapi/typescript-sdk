@@ -47,10 +47,13 @@ export {
 export {
   PhoneNumbers,
   type PhoneNumber,
+  type PhoneNumberListAvailableNumbersResponse,
   type PhoneNumberUpdateParams,
   type PhoneNumberListParams,
+  type PhoneNumberListAvailableNumbersParams,
   type PhoneNumberPurchaseParams,
   type PhoneNumbersCursor,
+  type PhoneNumberListAvailableNumbersResponsesCursor,
 } from './phone-numbers';
 export {
   Recordings,
