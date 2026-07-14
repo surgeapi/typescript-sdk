@@ -8,6 +8,20 @@ import { path } from '../internal/utils/path';
 
 export class PhoneNumbers extends APIResource {
   /**
+   * Retrieves a PhoneNumber object.
+   *
+   * @example
+   * ```ts
+   * const phoneNumber = await client.phoneNumbers.retrieve(
+   *   'pn_01jsjwe4d9fx3tpymgtg958d9w',
+   * );
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<PhoneNumber> {
+    return this._client.get(path`/phone_numbers/${id}`, options);
+  }
+
+  /**
    * Updates a phone number's details.
    *
    * @example
