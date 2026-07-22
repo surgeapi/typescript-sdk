@@ -115,6 +115,24 @@ export class Campaigns extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Enqueues an SMS OTP for a sole proprietor brand awaiting identity verification.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.campaigns.resendBrandVerificationMessage(
+   *     'acct_01j9a43avnfqzbjfch6pygv1td',
+   *   );
+   * ```
+   */
+  resendBrandVerificationMessage(
+    accountID: string,
+    options?: RequestOptions,
+  ): APIPromise<CampaignResendBrandVerificationMessageResponse> {
+    return this._client.post(path`/accounts/${accountID}/brand_verification_messages`, options);
+  }
 }
 
 export type CampaignsCursor = Cursor<Campaign>;
@@ -250,6 +268,16 @@ export interface Campaign {
    * to messaging.
    */
   terms_and_conditions_url?: string;
+}
+
+/**
+ * Response when a brand verification OTP send has been enqueued
+ */
+export interface CampaignResendBrandVerificationMessageResponse {
+  /**
+   * Indicates the OTP send job was enqueued successfully.
+   */
+  status: 'enqueued';
 }
 
 export type CampaignCreateParams =
@@ -521,6 +549,7 @@ export interface CampaignListParams extends CursorParams {}
 export declare namespace Campaigns {
   export {
     type Campaign as Campaign,
+    type CampaignResendBrandVerificationMessageResponse as CampaignResendBrandVerificationMessageResponse,
     type CampaignsCursor as CampaignsCursor,
     type CampaignCreateParams as CampaignCreateParams,
     type CampaignUpdateParams as CampaignUpdateParams,

@@ -57,6 +57,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/campaigns.ts">Campaign</a></code>
+- <code><a href="./src/resources/campaigns.ts">CampaignResendBrandVerificationMessageResponse</a></code>
 
 Methods:
 
@@ -64,6 +65,7 @@ Methods:
 - <code title="get /campaigns/{id}">client.campaigns.<a href="./src/resources/campaigns.ts">retrieve</a>(id) -> Campaign</code>
 - <code title="patch /campaigns/{id}">client.campaigns.<a href="./src/resources/campaigns.ts">update</a>(id, { ...params }) -> Campaign</code>
 - <code title="get /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/resources/campaigns.ts">list</a>(accountID, { ...params }) -> CampaignsCursor</code>
+- <code title="post /accounts/{account_id}/brand_verification_messages">client.campaigns.<a href="./src/resources/campaigns.ts">resendBrandVerificationMessage</a>(accountID) -> CampaignResendBrandVerificationMessageResponse</code>
 
 # Contacts
 

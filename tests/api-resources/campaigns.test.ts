@@ -137,4 +137,18 @@ describe('resource campaigns', () => {
       ),
     ).rejects.toThrow(Surge.NotFoundError);
   });
+
+  // Mock server tests are disabled
+  test.skip('resendBrandVerificationMessage', async () => {
+    const responsePromise = client.campaigns.resendBrandVerificationMessage(
+      'acct_01j9a43avnfqzbjfch6pygv1td',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
 });
