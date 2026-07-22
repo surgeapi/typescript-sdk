@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.49.0 (2026-07-22)
+
+Full Changelog: [v0.48.0...v0.49.0](https://github.com/surgeapi/typescript-sdk/compare/v0.48.0...v0.49.0)
+
+### Features
+
+* **api:** add resend brand verification message endpoint ([c0f2571](https://github.com/surgeapi/typescript-sdk/commit/c0f25713cc54cd308a134ff74c9aa187fa47d60e))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([2e9b3a5](https://github.com/surgeapi/typescript-sdk/commit/2e9b3a5102a41bd31914999048ad41a5fdd7d5ed))
+
 ## 0.48.0 (2026-07-14)
 
 Full Changelog: [v0.47.0...v0.48.0](https://github.com/surgeapi/typescript-sdk/compare/v0.47.0...v0.48.0)
