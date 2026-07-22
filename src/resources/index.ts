@@ -24,6 +24,7 @@ export { Blasts, type Blast, type BlastCreateParams } from './blasts';
 export {
   Campaigns,
   type Campaign,
+  type CampaignResendBrandVerificationMessageResponse,
   type CampaignCreateParams,
   type CampaignUpdateParams,
   type CampaignListParams,

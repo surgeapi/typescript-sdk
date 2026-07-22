@@ -43,6 +43,7 @@ import {
   Campaign,
   CampaignCreateParams,
   CampaignListParams,
+  CampaignResendBrandVerificationMessageResponse,
   CampaignUpdateParams,
   Campaigns,
   CampaignsCursor,
@@ -928,6 +929,7 @@ export declare namespace Surge {
   export {
     Campaigns as Campaigns,
     type Campaign as Campaign,
+    type CampaignResendBrandVerificationMessageResponse as CampaignResendBrandVerificationMessageResponse,
     type CampaignsCursor as CampaignsCursor,
     type CampaignCreateParams as CampaignCreateParams,
     type CampaignUpdateParams as CampaignUpdateParams,
