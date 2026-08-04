@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.50.0 (2026-08-04)
+
+Full Changelog: [v0.49.0...v0.50.0](https://github.com/surgeapi/typescript-sdk/compare/v0.49.0...v0.50.0)
+
+### Features
+
+* **api:** add get account endpoint ([1a11b1f](https://github.com/surgeapi/typescript-sdk/commit/1a11b1ff65b3d30db987557bea2b62b35d193b39))
+* **api:** remove campaign rejected status ([81d8f5f](https://github.com/surgeapi/typescript-sdk/commit/81d8f5f1fa131a86e206aeb01d941d9ea8ee6e7e))
+
 ## 0.49.0 (2026-07-22)
 
 Full Changelog: [v0.48.0...v0.49.0](https://github.com/surgeapi/typescript-sdk/compare/v0.48.0...v0.49.0)
