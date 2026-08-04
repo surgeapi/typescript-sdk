@@ -15,6 +15,7 @@ Types:
 Methods:
 
 - <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> Account</code>
+- <code title="get /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">retrieve</a>(id) -> Account</code>
 - <code title="patch /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(id, { ...params }) -> Account</code>
 - <code title="get /accounts">client.accounts.<a href="./src/resources/accounts.ts">list</a>({ ...params }) -> AccountsCursor</code>
 - <code title="delete /accounts/{id}">client.accounts.<a href="./src/resources/accounts.ts">archive</a>(id) -> Account</code>

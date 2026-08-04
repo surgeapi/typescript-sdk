@@ -22,6 +22,20 @@ export class Accounts extends APIResource {
   }
 
   /**
+   * Retrieves an Account object.
+   *
+   * @example
+   * ```ts
+   * const account = await client.accounts.retrieve(
+   *   'acct_01jpqjvfg9enpt7pyxd60pcmxj',
+   * );
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Account> {
+    return this._client.get(path`/accounts/${id}`, options);
+  }
+
+  /**
    * Updates an Account
    *
    * @example
