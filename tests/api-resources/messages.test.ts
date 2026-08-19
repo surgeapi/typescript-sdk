@@ -32,6 +32,7 @@ describe('resource messages', () => {
           first_name: 'Dominic',
           last_name: 'Toretto',
           metadata: { car: '1970 Dodge Charger R/T' },
+          outbound_disabled: false,
         },
         phone_number: '+18015556789',
       },
