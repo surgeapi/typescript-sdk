@@ -234,15 +234,17 @@ export interface Organization {
   /**
    * The value of the identifier whose type is specified in the identifier_type
    * field. For EIN, can be formatted with or without the hyphen. For CBN, must be
-   * exactly 9 digits.
+   * exactly 9 digits. For VAT, provide only the numeric portion, between 2 and 20
+   * digits.
    */
   identifier: string | null;
 
   /**
    * The type of identifier being provided for the organization. Use "ein" for US
-   * businesses or "cbn" for Canadian businesses.
+   * organizations, "cbn" for Canadian organizations, or "vat" for supported
+   * international organizations.
    */
-  identifier_type: 'ein' | 'cbn' | null;
+  identifier_type: 'ein' | 'cbn' | 'vat' | null;
 
   /**
    * The industry in which the organization operates.
@@ -516,15 +518,17 @@ export namespace AccountCreateParams {
     /**
      * The value of the identifier whose type is specified in the identifier_type
      * field. For EIN, can be formatted with or without the hyphen. For CBN, must be
-     * exactly 9 digits.
+     * exactly 9 digits. For VAT, provide only the numeric portion, between 2 and 20
+     * digits.
      */
     identifier?: string | null;
 
     /**
      * The type of identifier being provided for the organization. Use "ein" for US
-     * businesses or "cbn" for Canadian businesses.
+     * organizations, "cbn" for Canadian organizations, or "vat" for supported
+     * international organizations.
      */
-    identifier_type?: 'ein' | 'cbn' | null;
+    identifier_type?: 'ein' | 'cbn' | 'vat' | null;
 
     /**
      * The industry in which the organization operates.
@@ -802,15 +806,17 @@ export namespace AccountUpdateParams {
     /**
      * The value of the identifier whose type is specified in the identifier_type
      * field. For EIN, can be formatted with or without the hyphen. For CBN, must be
-     * exactly 9 digits.
+     * exactly 9 digits. For VAT, provide only the numeric portion, between 2 and 20
+     * digits.
      */
     identifier?: string | null;
 
     /**
      * The type of identifier being provided for the organization. Use "ein" for US
-     * businesses or "cbn" for Canadian businesses.
+     * organizations, "cbn" for Canadian organizations, or "vat" for supported
+     * international organizations.
      */
-    identifier_type?: 'ein' | 'cbn' | null;
+    identifier_type?: 'ein' | 'cbn' | 'vat' | null;
 
     /**
      * The industry in which the organization operates.
