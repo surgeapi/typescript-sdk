@@ -112,6 +112,11 @@ export interface Contact {
    * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
+
+  /**
+   * Whether outbound messaging has been manually disabled for the contact.
+   */
+  outbound_disabled?: boolean;
 }
 
 export interface ContactCreateParams {
@@ -139,6 +144,11 @@ export interface ContactCreateParams {
    * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
+
+  /**
+   * Whether outbound messaging should be manually disabled for the contact.
+   */
+  outbound_disabled?: boolean;
 }
 
 export interface ContactUpdateParams {
@@ -166,6 +176,11 @@ export interface ContactUpdateParams {
    * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
+
+  /**
+   * Whether outbound messaging should be manually disabled for the contact.
+   */
+  outbound_disabled?: boolean;
 }
 
 export interface ContactListParams extends CursorParams {}

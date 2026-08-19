@@ -30,6 +30,7 @@ describe('resource contacts', () => {
       first_name: 'Dominic',
       last_name: 'Toretto',
       metadata: { car: '1970 Dodge Charger R/T' },
+      outbound_disabled: false,
     });
   });
 
@@ -67,6 +68,7 @@ describe('resource contacts', () => {
       first_name: 'Dominic',
       last_name: 'Toretto',
       metadata: { car: '1970 Dodge Charger R/T' },
+      outbound_disabled: false,
     });
   });
 

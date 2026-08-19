@@ -281,6 +281,11 @@ export declare namespace MessageCreateParams {
          * Set of key-value pairs that will be stored with the object.
          */
         metadata?: { [key: string]: string };
+
+        /**
+         * Whether outbound messaging should be manually disabled for the contact.
+         */
+        outbound_disabled?: boolean;
       }
     }
 
