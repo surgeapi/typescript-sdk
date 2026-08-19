@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.51.0 (2026-08-19)
+
+Full Changelog: [v0.50.0...v0.51.0](https://github.com/surgeapi/typescript-sdk/compare/v0.50.0...v0.51.0)
+
+### Features
+
+* **api:** allow non us/canadian organizations ([6497261](https://github.com/surgeapi/typescript-sdk/commit/6497261c0bea9ef0bb4473900816b210bf0c491e))
+* **api:** disable outbound for contacts ([cdfbcc7](https://github.com/surgeapi/typescript-sdk/commit/cdfbcc76499a411c1461657e4bdeb5ce9adb6d1c))
+
 ## 0.50.0 (2026-08-04)
 
 Full Changelog: [v0.49.0...v0.50.0](https://github.com/surgeapi/typescript-sdk/compare/v0.49.0...v0.50.0)
