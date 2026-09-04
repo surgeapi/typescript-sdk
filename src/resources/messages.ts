@@ -127,6 +127,11 @@ export interface Message {
    * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
+
+  /**
+   * The current status of the message.
+   */
+  status?: 'pending' | 'received' | 'sent' | 'delivered' | 'failed';
 }
 
 export namespace Message {
