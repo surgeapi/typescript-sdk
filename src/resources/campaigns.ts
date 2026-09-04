@@ -253,11 +253,10 @@ export interface Campaign {
   volume: 'high' | 'low';
 
   /**
-   * A sample link that might be sent by this campaign. If links from other domains
-   * are sent through this campaign, they are much more likely to be filtered by the
-   * carriers. If link shortening is enabled for the account, the link shortener URL
-   * will be used instead of what is provided. Reach out to support if you would like
-   * to disable automatic link shortening.
+   * A sample link that might be sent by this campaign. This is required when
+   * `includes` contains `links`. Provide the same URL or domain that the campaign
+   * will use in production. If links from other domains are sent through this
+   * campaign, they are much more likely to be filtered by the carriers.
    */
   link_sample?: string;
 
