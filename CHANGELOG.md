@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.52.0 (2026-09-04)
+
+Full Changelog: [v0.51.0...v0.52.0](https://github.com/surgeapi/typescript-sdk/compare/v0.51.0...v0.52.0)
+
+### Features
+
+* **api:** add status to messages ([ce1df63](https://github.com/surgeapi/typescript-sdk/commit/ce1df63b918bec389a9bc13d362566c8d1a2fd52))
+* **api:** add toll free messaging capability to accounts ([781d9ec](https://github.com/surgeapi/typescript-sdk/commit/781d9eca3cd37adce9fed2a21940f84a3eda280f))
+* **api:** phone number imported webhook event ([f588905](https://github.com/surgeapi/typescript-sdk/commit/f5889055ad74f6c8dc15f9b31a64d450ff32125b))
+
+
+### Documentation
+
+* **api:** add note about links in messages for campaigns ([9868095](https://github.com/surgeapi/typescript-sdk/commit/9868095c8fc76dc40711ab922a4767b338298bc8))
+* **api:** add note about links in messages for campaigns (continued) ([953aa7a](https://github.com/surgeapi/typescript-sdk/commit/953aa7ace90ac89e75ff7ff09b367b842979cf40))
+
 ## 0.51.0 (2026-08-19)
 
 Full Changelog: [v0.50.0...v0.51.0](https://github.com/surgeapi/typescript-sdk/compare/v0.50.0...v0.51.0)
