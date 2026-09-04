@@ -1034,7 +1034,7 @@ export interface AccountRetrieveStatusParams {
   /**
    * capabilities about which to check the status
    */
-  capabilities?: Array<'local_messaging'>;
+  capabilities?: Array<'local_messaging' | 'toll_free_messaging'>;
 }
 
 export declare namespace Accounts {
