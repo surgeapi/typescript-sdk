@@ -195,7 +195,7 @@ export interface Campaign {
   /**
    * The current status of the campaign.
    */
-  status: 'active' | 'canceled' | 'created' | 'deactivated' | 'in_review';
+  status: 'active' | 'canceled' | 'rejected' | 'created' | 'deactivated' | 'in_review';
 
   /**
    * A list containing 1-5 types of messages that will be sent with this campaign.

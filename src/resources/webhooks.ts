@@ -352,6 +352,11 @@ export namespace MessageDeliveredWebhookEvent {
     metadata: { [key: string]: string };
 
     /**
+     * The message status represented by this event
+     */
+    status: 'delivered';
+
+    /**
      * Attachments included with the message
      */
     attachments?: Array<Data.Attachment>;
@@ -461,6 +466,11 @@ export namespace MessageFailedWebhookEvent {
     metadata: { [key: string]: string };
 
     /**
+     * The message status represented by this event
+     */
+    status: 'failed';
+
+    /**
      * Attachments included with the message
      */
     attachments?: Array<Data.Attachment>;
@@ -565,6 +575,11 @@ export namespace MessageReceivedWebhookEvent {
     received_at: string;
 
     /**
+     * The message status represented by this event
+     */
+    status: 'received';
+
+    /**
      * Attachments included with the message
      */
     attachments?: Array<Data.Attachment>;
@@ -667,6 +682,11 @@ export namespace MessageSentWebhookEvent {
      * When the message was sent
      */
     sent_at: string;
+
+    /**
+     * The message status represented by this event
+     */
+    status: 'sent';
 
     /**
      * Attachments included with the message
