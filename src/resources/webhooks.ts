@@ -817,6 +817,82 @@ export namespace PhoneNumberAttachedToCampaignWebhookEvent {
   }
 }
 
+export interface PhoneNumberImportedWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: PhoneNumberImportedWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `phone_number.imported` for this event.
+   */
+  type: 'phone_number.imported';
+}
+
+export namespace PhoneNumberImportedWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the phone number
+     */
+    id: string;
+
+    /**
+     * Campaign attachment details for a domestic local phone number
+     */
+    campaign: Data.Campaign | null;
+
+    /**
+     * @deprecated Use `campaign.id` instead.
+     */
+    campaign_id: string | null;
+
+    /**
+     * A human-readable name for the phone number
+     */
+    name: string | null;
+
+    /**
+     * The phone number in E.164 format
+     */
+    number: string;
+
+    /**
+     * Whether the phone number is local, toll-free, or short code
+     */
+    type: 'local' | 'short_code' | 'toll_free';
+  }
+
+  export namespace Data {
+    /**
+     * Campaign attachment details for a domestic local phone number
+     */
+    export interface Campaign {
+      /**
+       * The unique identifier of the campaign this phone number is attached to
+       */
+      id: string;
+
+      /**
+       * The current campaign attachment status for this phone number.
+       */
+      attachment_status: 'attached' | 'attachment_pending' | 'detached' | 'detachment_pending';
+    }
+  }
+}
+
 export interface RecordingCompletedWebhookEvent {
   /**
    * The ID of the account in which this event occurred
@@ -1034,6 +1110,7 @@ export type UnwrapWebhookEvent =
   | MessageReceivedWebhookEvent
   | MessageSentWebhookEvent
   | PhoneNumberAttachedToCampaignWebhookEvent
+  | PhoneNumberImportedWebhookEvent
   | RecordingCompletedWebhookEvent
   | VoicemailReceivedWebhookEvent;
 
@@ -1050,6 +1127,7 @@ export declare namespace Webhooks {
     type MessageReceivedWebhookEvent as MessageReceivedWebhookEvent,
     type MessageSentWebhookEvent as MessageSentWebhookEvent,
     type PhoneNumberAttachedToCampaignWebhookEvent as PhoneNumberAttachedToCampaignWebhookEvent,
+    type PhoneNumberImportedWebhookEvent as PhoneNumberImportedWebhookEvent,
     type RecordingCompletedWebhookEvent as RecordingCompletedWebhookEvent,
     type VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,

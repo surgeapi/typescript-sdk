@@ -95,6 +95,7 @@ export {
   type MessageReceivedWebhookEvent,
   type MessageSentWebhookEvent,
   type PhoneNumberAttachedToCampaignWebhookEvent,
+  type PhoneNumberImportedWebhookEvent,
   type RecordingCompletedWebhookEvent,
   type VoicemailReceivedWebhookEvent,
   type UnwrapWebhookEvent,
