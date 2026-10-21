@@ -10,6 +10,7 @@ on:
 
 jobs:
   publish:
+    if: github.repository == 'surgeapi/typescript-sdk'
     name: publish
     runs-on: ubuntu-latest
     permissions:
