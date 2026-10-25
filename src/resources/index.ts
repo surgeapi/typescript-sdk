@@ -66,6 +66,15 @@ export {
   type RecordingListResponsesCursor,
 } from './recordings';
 export {
+  TollFreeCampaigns,
+  type TollFreeCampaign,
+  type TollFreeCampaignConsentFlow,
+  type TollFreeCampaignCreateParams,
+  type TollFreeCampaignUpdateParams,
+  type TollFreeCampaignListParams,
+  type TollFreeCampaignsCursor,
+} from './toll-free-campaigns';
+export {
   Users,
   type User,
   type UserTokenResponse,
@@ -86,6 +95,9 @@ export {
   Webhooks,
   type CallEndedWebhookEvent,
   type CampaignApprovedWebhookEvent,
+  type CampaignRejectedWebhookEvent,
+  type CampaignSubmittedWebhookEvent,
+  type CampaignWarningWebhookEvent,
   type ContactOptedInWebhookEvent,
   type ContactOptedOutWebhookEvent,
   type ConversationCreatedWebhookEvent,

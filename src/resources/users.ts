@@ -203,6 +203,14 @@ export interface UserCreateTokenParams {
    * For how many seconds the token should be accepted. Defaults to 15 minutes.
    */
   duration_seconds?: number;
+
+  /**
+   * Restrict the token to viewing embedded conversations and unread counts. Sending
+   * messages, changing read state, editing contacts, and calling are disabled.
+   * Defaults to false. Preserve this value when refreshing the token; changing
+   * access mode requires reloading the embed.
+   */
+  read_only?: boolean;
 }
 
 export declare namespace Users {

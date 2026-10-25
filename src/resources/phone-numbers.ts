@@ -147,6 +147,11 @@ export interface PhoneNumber {
   campaign_id: string | null;
 
   /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata: { [key: string]: string };
+
+  /**
    * A human-readable name for the phone number
    */
   name: string | null;
@@ -206,6 +211,11 @@ export interface PhoneNumberUpdateParams {
   campaign_id?: string;
 
   /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
+
+  /**
    * A human-readable name for the phone number.
    */
   name?: string;
@@ -248,6 +258,11 @@ export interface PhoneNumberPurchaseParams {
    * provided without type, type will be inferred as 'local'.
    */
   longitude?: number;
+
+  /**
+   * Set of key-value pairs that will be stored with the object.
+   */
+  metadata?: { [key: string]: string };
 
   /**
    * A human-readable name for the phone number. If not provided, defaults to the

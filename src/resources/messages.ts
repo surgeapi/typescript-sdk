@@ -124,6 +124,11 @@ export interface Message {
   conversation?: Message.Conversation;
 
   /**
+   * The reason the message failed, or null if no failure reason is set.
+   */
+  failure_reason?: string | null;
+
+  /**
    * Set of key-value pairs that will be stored with the object.
    */
   metadata?: { [key: string]: string };
@@ -184,6 +189,11 @@ export namespace Message {
        * Unique identifier for the phone number
        */
       id: string;
+
+      /**
+       * Set of key-value pairs that will be stored with the object.
+       */
+      metadata: { [key: string]: string };
 
       /**
        * A human-readable name for the phone number

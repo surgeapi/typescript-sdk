@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class Accounts extends APIResource {
   /**
-   * Creates a new Account within the calling Platform.
+   * Creates a new Account.
    *
    * @example
    * ```ts
@@ -50,7 +50,7 @@ export class Accounts extends APIResource {
   }
 
   /**
-   * List all accounts for the calling platform with cursor-based pagination.
+   * List all accounts with cursor-based pagination.
    *
    * @example
    * ```ts
