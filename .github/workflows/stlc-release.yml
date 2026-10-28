@@ -1,0 +1,78 @@
+name: Release SDK
+
+# The reviewed release PR is the shipping approval; do not add auto-merge.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type process-reviewed-releases for manual recovery.
+        required: true
+        type: string
+
+concurrency:
+  group: stlc-release-please
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    if: >-
+      github.repository == 'surgeapi/typescript-sdk' &&
+      github.ref == 'refs/heads/main' &&
+      vars.STLC_RELEASES_ENABLED == 'true' &&
+      (github.event_name == 'push' || inputs.confirmation == 'process-reviewed-releases')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: stlc-production-release
+    steps:
+      - name: Check out the SDK without credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Read the pinned release tool lockfile
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: googleapis/release-please-action
+          ref: 5c625bfb5d1ff62eadeeb3772007f7f66fdcf071
+          path: .stlc-release-tool
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24.15.0'
+      - name: Install the locked public release library before minting the App token
+        run: |
+          mv .stlc-release-tool "$RUNNER_TEMP/stlc-release-tool"
+          npm ci --omit=dev --ignore-scripts --no-audit --no-fund --prefix "$RUNNER_TEMP/stlc-release-tool"
+          cp .github/scripts/stlc-release.cjs .github/scripts/stlc-version-pr.cjs "$RUNNER_TEMP/stlc-release-tool/"
+      - name: Mint a release token for this production repository only
+        id: app
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2
+        with:
+          app-id: ${{ vars.STLC_PRODUCTION_APP_ID }}
+          private-key: ${{ secrets.STLC_PRODUCTION_APP_PRIVATE_KEY }}
+          owner: surgeapi
+          repositories: typescript-sdk
+          permission-contents: write
+          permission-pull-requests: write
+      - name: Release human-reviewed merged version PRs
+        uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4.4.1; release-please 17.3.0
+        with:
+          token: ${{ steps.app.outputs.token }}
+          target-branch: main
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          # Upstream PR creation force-rewrites review branches. Use our normal
+          # push adapter below; the upstream action only creates releases.
+          skip-github-pull-request: true
+      - name: Open a version PR with a normal push
+        env:
+          SDK: typescript
+          RELEASES_ENABLED: ${{ vars.STLC_RELEASES_ENABLED }}
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+        run: node "$RUNNER_TEMP/stlc-release-tool/stlc-version-pr.cjs"
