@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.0](https://github.com/surgeapi/typescript-sdk/compare/v0.52.0...v0.53.0) (2026-10-29)
+
+
+### Features
+
+* update typescript SDK ([568d7ed](https://github.com/surgeapi/typescript-sdk/commit/568d7edb795e72fc413b9693015c50e3f0c59956))
+
 ## 0.52.0 (2026-09-04)
 
 Full Changelog: [v0.51.0...v0.52.0](https://github.com/surgeapi/typescript-sdk/compare/v0.51.0...v0.52.0)
