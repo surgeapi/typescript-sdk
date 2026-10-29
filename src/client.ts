@@ -84,6 +84,15 @@ import {
   Recordings,
 } from './resources/recordings';
 import {
+  TollFreeCampaign,
+  TollFreeCampaignConsentFlow,
+  TollFreeCampaignCreateParams,
+  TollFreeCampaignListParams,
+  TollFreeCampaignUpdateParams,
+  TollFreeCampaigns,
+  TollFreeCampaignsCursor,
+} from './resources/toll-free-campaigns';
+import {
   User,
   UserCreateParams,
   UserCreateTokenParams,
@@ -103,6 +112,9 @@ import {
 import {
   CallEndedWebhookEvent,
   CampaignApprovedWebhookEvent,
+  CampaignRejectedWebhookEvent,
+  CampaignSubmittedWebhookEvent,
+  CampaignWarningWebhookEvent,
   ContactOptedInWebhookEvent,
   ContactOptedOutWebhookEvent,
   ConversationCreatedWebhookEvent,
@@ -879,6 +891,7 @@ export class Surge {
   messages: API.Messages = new API.Messages(this);
   phoneNumbers: API.PhoneNumbers = new API.PhoneNumbers(this);
   recordings: API.Recordings = new API.Recordings(this);
+  tollFreeCampaigns: API.TollFreeCampaigns = new API.TollFreeCampaigns(this);
   users: API.Users = new API.Users(this);
   verifications: API.Verifications = new API.Verifications(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
@@ -893,6 +906,7 @@ Surge.Contacts = Contacts;
 Surge.Messages = Messages;
 Surge.PhoneNumbers = PhoneNumbers;
 Surge.Recordings = Recordings;
+Surge.TollFreeCampaigns = TollFreeCampaigns;
 Surge.Users = Users;
 Surge.Verifications = Verifications;
 Surge.Webhooks = Webhooks;
@@ -977,6 +991,16 @@ export declare namespace Surge {
   };
 
   export {
+    TollFreeCampaigns as TollFreeCampaigns,
+    type TollFreeCampaign as TollFreeCampaign,
+    type TollFreeCampaignConsentFlow as TollFreeCampaignConsentFlow,
+    type TollFreeCampaignsCursor as TollFreeCampaignsCursor,
+    type TollFreeCampaignCreateParams as TollFreeCampaignCreateParams,
+    type TollFreeCampaignUpdateParams as TollFreeCampaignUpdateParams,
+    type TollFreeCampaignListParams as TollFreeCampaignListParams,
+  };
+
+  export {
     Users as Users,
     type User as User,
     type UserTokenResponse as UserTokenResponse,
@@ -999,6 +1023,9 @@ export declare namespace Surge {
     Webhooks as Webhooks,
     type CallEndedWebhookEvent as CallEndedWebhookEvent,
     type CampaignApprovedWebhookEvent as CampaignApprovedWebhookEvent,
+    type CampaignRejectedWebhookEvent as CampaignRejectedWebhookEvent,
+    type CampaignSubmittedWebhookEvent as CampaignSubmittedWebhookEvent,
+    type CampaignWarningWebhookEvent as CampaignWarningWebhookEvent,
     type ContactOptedInWebhookEvent as ContactOptedInWebhookEvent,
     type ContactOptedOutWebhookEvent as ContactOptedOutWebhookEvent,
     type ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent,

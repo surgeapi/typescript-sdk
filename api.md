@@ -125,6 +125,20 @@ Methods:
 - <code title="delete /recordings/{id}">client.recordings.<a href="./src/resources/recordings.ts">delete</a>(id) -> RecordingDeleteResponse</code>
 - <code title="get /recordings/{recording_id}/file">client.recordings.<a href="./src/resources/recordings.ts">getFile</a>(recordingID) -> RecordingGetFileResponse</code>
 
+# TollFreeCampaigns
+
+Types:
+
+- <code><a href="./src/resources/toll-free-campaigns.ts">TollFreeCampaign</a></code>
+- <code><a href="./src/resources/toll-free-campaigns.ts">TollFreeCampaignConsentFlow</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/toll_free_campaigns">client.tollFreeCampaigns.<a href="./src/resources/toll-free-campaigns.ts">create</a>(accountID, { ...params }) -> TollFreeCampaign</code>
+- <code title="get /toll_free_campaigns/{campaign_id}">client.tollFreeCampaigns.<a href="./src/resources/toll-free-campaigns.ts">retrieve</a>(campaignID) -> TollFreeCampaign</code>
+- <code title="patch /toll_free_campaigns/{campaign_id}">client.tollFreeCampaigns.<a href="./src/resources/toll-free-campaigns.ts">update</a>(campaignID, { ...params }) -> TollFreeCampaign</code>
+- <code title="get /accounts/{account_id}/toll_free_campaigns">client.tollFreeCampaigns.<a href="./src/resources/toll-free-campaigns.ts">list</a>(accountID, { ...params }) -> TollFreeCampaignsCursor</code>
+
 # Users
 
 Types:
@@ -159,6 +173,9 @@ Types:
 
 - <code><a href="./src/resources/webhooks.ts">CallEndedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CampaignApprovedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CampaignRejectedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CampaignSubmittedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CampaignWarningWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ContactOptedInWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ContactOptedOutWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ConversationCreatedWebhookEvent</a></code>

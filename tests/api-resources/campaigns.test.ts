@@ -68,22 +68,8 @@ describe('resource campaigns', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.campaigns.update('cpn_01k0qczvhbet4azgn5xm2ccfst', {
-      consent_flow:
-        'When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.',
-      description:
-        'This phone number will send auto maintenance notifications to end users that have opted in. It will also be used for responding to customer inquiries and sending some marketing offers.',
-      message_samples: [
-        'You are now opted in to receive repair notifications from DT Precision Auto. Frequency varies. Msg&data rates apply. Reply STOP to opt out.',
-        "You're lucky that hundred shot of NOS didn't blow the welds on the intake!",
-        'Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij',
-      ],
-      privacy_policy_url: 'https://fastauto.shop/sms-privacy',
-      terms_and_conditions_url: 'https://fastauto.shop/terms-and-conditions',
-      use_cases: ['account_notification', 'customer_care', 'marketing'],
-      volume: 'high',
-    });
+  test.skip('update', async () => {
+    const responsePromise = client.campaigns.update('cpn_01k0qczvhbet4azgn5xm2ccfst');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -94,24 +80,25 @@ describe('resource campaigns', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: required and optional params', async () => {
-    const response = await client.campaigns.update('cpn_01k0qczvhbet4azgn5xm2ccfst', {
-      consent_flow:
-        'When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.',
-      description:
-        'This phone number will send auto maintenance notifications to end users that have opted in. It will also be used for responding to customer inquiries and sending some marketing offers.',
-      message_samples: [
-        'You are now opted in to receive repair notifications from DT Precision Auto. Frequency varies. Msg&data rates apply. Reply STOP to opt out.',
-        "You're lucky that hundred shot of NOS didn't blow the welds on the intake!",
-        'Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij',
-      ],
-      privacy_policy_url: 'https://fastauto.shop/sms-privacy',
-      terms_and_conditions_url: 'https://fastauto.shop/terms-and-conditions',
-      use_cases: ['account_notification', 'customer_care', 'marketing'],
-      volume: 'high',
-      includes: ['links', 'phone_numbers'],
-      link_sample: 'https://l.fastauto.shop/s034ij',
-    });
+  test.skip('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.campaigns.update(
+        'cpn_01k0qczvhbet4azgn5xm2ccfst',
+        {
+          consent_flow: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+          description: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+          includes: ['links'],
+          link_sample: 'https://example.com',
+          message_samples: ['xxxxxxxxxxxxxxxxxxxx', 'xxxxxxxxxxxxxxxxxxxx'],
+          privacy_policy_url: 'https://example.com',
+          terms_and_conditions_url: 'https://example.com',
+          use_cases: ['account_notification'],
+          volume: 'high',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Surge.NotFoundError);
   });
 
   // Mock server tests are disabled

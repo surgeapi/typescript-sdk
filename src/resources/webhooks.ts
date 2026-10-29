@@ -69,7 +69,8 @@ export namespace CallEndedWebhookEvent {
     initiated_at: string;
 
     /**
-     * The status of the call
+     * The status of the call. For inbound embedded-phone calls, `no_answer` means no
+     * embedded user answered, even if the caller reached voicemail.
      */
     status:
       | 'busy'
@@ -132,9 +133,191 @@ export namespace CampaignApprovedWebhookEvent {
     id: string;
 
     /**
+     * The ID of the account that owns this campaign
+     */
+    account_id: string;
+
+    /**
      * The status of the campaign. Will always be `active` for this event.
      */
     status: 'active';
+  }
+}
+
+export interface CampaignRejectedWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: CampaignRejectedWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `campaign.rejected` for this event.
+   */
+  type: 'campaign.rejected';
+}
+
+export namespace CampaignRejectedWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the campaign
+     */
+    id: string;
+
+    /**
+     * Customer-visible field-level registration feedback. Rejection events may include
+     * non-blocking warnings alongside changes-needed items.
+     */
+    feedback: Array<Data.Feedback>;
+
+    /**
+     * The public campaign status. Always `rejected` for this event.
+     */
+    status: 'rejected';
+  }
+
+  export namespace Data {
+    export interface Feedback {
+      /**
+       * The stable registration field key
+       */
+      field: string;
+
+      /**
+       * Actionable review feedback
+       */
+      message: string;
+
+      /**
+       * Whether the feedback blocks registration or is a non-blocking warning
+       */
+      outcome: 'changes_needed' | 'warning';
+
+      /**
+       * A suggested replacement value, or null when none is suggested
+       */
+      suggested_value: string | null;
+    }
+  }
+}
+
+export interface CampaignSubmittedWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: CampaignSubmittedWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `campaign.submitted` for this event.
+   */
+  type: 'campaign.submitted';
+}
+
+export namespace CampaignSubmittedWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the campaign
+     */
+    id: string;
+
+    /**
+     * The public campaign status. Always `in_review` for this event.
+     */
+    status: 'in_review';
+  }
+}
+
+export interface CampaignWarningWebhookEvent {
+  /**
+   * The ID of the account in which this event occurred
+   */
+  account_id: string;
+
+  /**
+   * The data associated with the event
+   */
+  data: CampaignWarningWebhookEvent.Data;
+
+  /**
+   * The timestamp when this event occurred, in ISO8601 format
+   */
+  timestamp: string;
+
+  /**
+   * The type of the event. Always `campaign.warning` for this event.
+   */
+  type: 'campaign.warning';
+}
+
+export namespace CampaignWarningWebhookEvent {
+  /**
+   * The data associated with the event
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the campaign
+     */
+    id: string;
+
+    /**
+     * Customer-visible field-level registration feedback. Rejection events may include
+     * non-blocking warnings alongside changes-needed items.
+     */
+    feedback: Array<Data.Feedback>;
+
+    /**
+     * The public campaign status. Always `in_review` for this event.
+     */
+    status: 'in_review';
+  }
+
+  export namespace Data {
+    export interface Feedback {
+      /**
+       * The stable registration field key
+       */
+      field: string;
+
+      /**
+       * Actionable review feedback
+       */
+      message: string;
+
+      /**
+       * Whether the feedback blocks registration or is a non-blocking warning
+       */
+      outcome: 'warning';
+
+      /**
+       * A suggested replacement value, or null when none is suggested
+       */
+      suggested_value: string | null;
+    }
   }
 }
 
@@ -347,6 +530,11 @@ export namespace MessageDeliveredWebhookEvent {
     delivered_at: string;
 
     /**
+     * The reason the message failed, or null if no failure reason is set
+     */
+    failure_reason: string | null;
+
+    /**
      * Set of key-value pairs that will be stored with the object.
      */
     metadata: { [key: string]: string };
@@ -456,9 +644,10 @@ export namespace MessageFailedWebhookEvent {
     failed_at: string;
 
     /**
-     * The reason the message failed to be delivered
+     * The reason the message failed to be delivered, or null if no failure reason is
+     * set
      */
-    failure_reason: string;
+    failure_reason: string | null;
 
     /**
      * Set of key-value pairs that will be stored with the object.
@@ -563,6 +752,11 @@ export namespace MessageReceivedWebhookEvent {
      * The conversation this message belongs to
      */
     conversation: Data.Conversation;
+
+    /**
+     * The reason the message failed, or null if no failure reason is set
+     */
+    failure_reason: string | null;
 
     /**
      * Set of key-value pairs that will be stored with the object.
@@ -672,6 +866,11 @@ export namespace MessageSentWebhookEvent {
      * The conversation this message belongs to
      */
     conversation: Data.Conversation;
+
+    /**
+     * The reason the message failed, or null if no failure reason is set
+     */
+    failure_reason: string | null;
 
     /**
      * Set of key-value pairs that will be stored with the object.
@@ -784,6 +983,11 @@ export namespace PhoneNumberAttachedToCampaignWebhookEvent {
     campaign_id: string;
 
     /**
+     * Set of key-value pairs that will be stored with the object.
+     */
+    metadata: { [key: string]: string };
+
+    /**
      * A human-readable name for the phone number
      */
     name: string | null;
@@ -858,6 +1062,11 @@ export namespace PhoneNumberImportedWebhookEvent {
      * @deprecated Use `campaign.id` instead.
      */
     campaign_id: string | null;
+
+    /**
+     * Set of key-value pairs that will be stored with the object.
+     */
+    metadata: { [key: string]: string };
 
     /**
      * A human-readable name for the phone number
@@ -1101,6 +1310,9 @@ export namespace VoicemailReceivedWebhookEvent {
 export type UnwrapWebhookEvent =
   | CallEndedWebhookEvent
   | CampaignApprovedWebhookEvent
+  | CampaignRejectedWebhookEvent
+  | CampaignSubmittedWebhookEvent
+  | CampaignWarningWebhookEvent
   | ContactOptedInWebhookEvent
   | ContactOptedOutWebhookEvent
   | ConversationCreatedWebhookEvent
@@ -1118,6 +1330,9 @@ export declare namespace Webhooks {
   export {
     type CallEndedWebhookEvent as CallEndedWebhookEvent,
     type CampaignApprovedWebhookEvent as CampaignApprovedWebhookEvent,
+    type CampaignRejectedWebhookEvent as CampaignRejectedWebhookEvent,
+    type CampaignSubmittedWebhookEvent as CampaignSubmittedWebhookEvent,
+    type CampaignWarningWebhookEvent as CampaignWarningWebhookEvent,
     type ContactOptedInWebhookEvent as ContactOptedInWebhookEvent,
     type ContactOptedOutWebhookEvent as ContactOptedOutWebhookEvent,
     type ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent,
