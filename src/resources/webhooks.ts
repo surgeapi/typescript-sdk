@@ -525,6 +525,14 @@ export namespace MessageDeliveredWebhookEvent {
     conversation: Data.Conversation;
 
     /**
+     * When the message was added to the conversation, in ISO8601 UTC format. For
+     * scheduled messages, this is the actual creation time, which may be later than
+     * the requested send_at. For imported messages, this is the original creation
+     * time.
+     */
+    created_at: string;
+
+    /**
      * When the message was delivered
      */
     delivered_at: string;
@@ -637,6 +645,14 @@ export namespace MessageFailedWebhookEvent {
      * The conversation this message belongs to
      */
     conversation: Data.Conversation;
+
+    /**
+     * When the message was added to the conversation, in ISO8601 UTC format. For
+     * scheduled messages, this is the actual creation time, which may be later than
+     * the requested send_at. For imported messages, this is the original creation
+     * time.
+     */
+    created_at: string;
 
     /**
      * When the message failed
@@ -754,6 +770,14 @@ export namespace MessageReceivedWebhookEvent {
     conversation: Data.Conversation;
 
     /**
+     * When the message was added to the conversation, in ISO8601 UTC format. For
+     * scheduled messages, this is the actual creation time, which may be later than
+     * the requested send_at. For imported messages, this is the original creation
+     * time.
+     */
+    created_at: string;
+
+    /**
      * The reason the message failed, or null if no failure reason is set
      */
     failure_reason: string | null;
@@ -866,6 +890,14 @@ export namespace MessageSentWebhookEvent {
      * The conversation this message belongs to
      */
     conversation: Data.Conversation;
+
+    /**
+     * When the message was added to the conversation, in ISO8601 UTC format. For
+     * scheduled messages, this is the actual creation time, which may be later than
+     * the requested send_at. For imported messages, this is the original creation
+     * time.
+     */
+    created_at: string;
 
     /**
      * The reason the message failed, or null if no failure reason is set

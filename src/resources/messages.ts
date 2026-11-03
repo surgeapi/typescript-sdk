@@ -101,6 +101,13 @@ export type MessagesCursor = Cursor<Message>;
  */
 export interface Message {
   /**
+   * When the message was added to the conversation, in ISO8601 UTC format. Null for
+   * scheduled messages until they are created. For imported messages, this is the
+   * original creation time.
+   */
+  created_at: string | null;
+
+  /**
    * Unique identifier for the object.
    */
   id?: string;
