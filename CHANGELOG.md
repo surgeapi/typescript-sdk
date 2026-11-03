@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.54.0](https://github.com/surgeapi/typescript-sdk/compare/v0.53.0...v0.54.0) (2026-11-03)
+
+
+### Features
+
+* **api:** add created_at to messages ([#84](https://github.com/surgeapi/typescript-sdk/issues/84)) ([82e49df](https://github.com/surgeapi/typescript-sdk/commit/82e49df62423b3d8b7c31d98a92d18c320fcbbc3))
+
 ## [0.53.0](https://github.com/surgeapi/typescript-sdk/compare/v0.52.0...v0.53.0) (2026-10-29)
 
 
